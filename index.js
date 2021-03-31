@@ -27,20 +27,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/' , (req, res) => {
-
-    pool.getConnection((err,con) => {
-        if (err) throw err;
-        // console.log(con)
-        con.query('SELECT * from leads', (err, result) => {
-            con.release()
-            if(!err){
-                // res.send(result)
-                res.render('index')
-            }else{
-                console.log(err)
-            }
-        })
-    })
+    res.render("index")
 })
 
 
