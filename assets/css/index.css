@@ -1,0 +1,492 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    font-family: "Helvetica Neue",sans-serif;
+    font-weight: lighter;
+}
+
+header {
+    width: 100%;
+    height:100vh;
+    background:linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 105%), url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.content {
+    width: 94%;
+    margin: 4em auto;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: justify;
+}
+
+
+.logo {
+    line-height: 60px;
+    position: fixed;
+    float: left;
+    margin: 20px 80px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    line-height: 60px;
+    z-index: 3;
+}
+
+nav ul {
+    line-height: 60px;
+    list-style: none;
+    background: rgba(0, 0, 0, 0);
+    overflow: hidden;
+    color: #fff;
+    padding: 0;
+    text-align: right;
+    margin: 0;
+    padding-right: 40px;
+    transition: 1s;
+}
+
+nav.black ul {
+    background: rgb(37, 36, 36);
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+.hamburger{
+    padding: 20px 150px;
+}
+
+.menu-icon {
+    line-height: 60px;
+    width: 100%;
+    background: #000;
+    text-align: right;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+
+@media(max-width: 786px) {
+
+    .logo {
+          position: fixed;
+          top: 0;
+          margin-top: 16px;
+    }
+
+    nav ul {
+          max-height: 0px;
+          background: #000;
+    }
+
+    nav.black ul {
+          background: #000;
+    }
+
+    .showing {
+          max-height: 34em;
+    }
+
+    nav ul li {
+          box-sizing: border-box;
+          width: 100%;
+          padding: 24px;
+          text-align: center;
+    }
+
+    .menu-icon {
+          display: block;
+    }
+
+    .main-container{
+        justify-content: center;
+        text-align:center;
+        /* margin-left:20px */
+    }
+
+}
+
+
+.bg-txt-header{
+    float: right;
+}
+
+
+.banner-container{
+    width:100%;
+    height:auto;
+    position: absolute;
+    top:12%;
+    padding-right: 20px; 
+    width:100%;
+}
+
+
+.bg-content{
+    
+    margin: 12%;
+    margin-top:1%;
+    float: right;
+    font-size:3rem;
+    color:#fff;
+    font-weight:bold;
+    margin-right:10%;
+    /* text-align: left; */
+}
+
+
+.form-control{
+    margin-bottom: 10px;
+}
+
+
+/* form session */
+.contact-form{
+    background: #fff;
+    /* margin: 0px 30%; */
+    width: 100%;
+    padding:20px 70px;
+    border-radius: 1rem;
+}
+.contact-form .form-control{
+    border-radius:.5rem;
+    border:2px solid #f69617;
+    font-weight:bold;
+    color:#fff
+}
+
+.contact-form .form-control input{
+    color:rgb(202, 196, 196)
+}
+
+.contact-form form{
+    padding: 5% 0%;
+}
+
+
+.second-div{
+    float:right;
+    text-align:left;
+}
+
+
+.btn{
+    margin-bottom:10%
+}
+
+
+.get-money{
+    padding-top:20px;
+    color:#f69617;
+    font-size:20px
+}
+
+.my-btn button{
+   color:white;
+    font-weight:bold;
+}
+
+.my-btn button:hover{
+    color:white
+ }
+ 
+
+.container{
+    width:100%;
+    width:auto;
+}
+
+
+/*HOME CARDS*/
+
+.card-head{
+
+    font-size:3.5rem;
+    margin-bottom:10%;
+    font-weight:bold;
+    padding:20px;
+    line-height: 55px;
+    text-align:center;
+    color:#f69617;
+}
+
+.m-container{
+    width:90%;
+    max-width:1200px;
+    margin: auto;
+}
+
+.home-cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    grid-gap: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+.home-cards img{
+    width:50%;
+    margin-bottom: 20px;
+    size: 35%;
+    text-align: center;
+    justify-content: center;
+    /* border-radius:30px; */
+}
+
+.home-cards h3{
+    margin-bottom: 5px;
+    text-align:center;
+    color:#f69617;
+    font-weight:bold
+}
+.home-cards p{
+  padding-top:10px
+}
+
+
+.home-cards a:hover{
+    margin-left: 10px;
+}
+
+
+
+@media(max-width:500px){
+    .home-cards{
+    grid-template-columns: repeat(1, 1fr);
+    }
+
+    .card-head{
+        width:100%;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    
+
+}
+
+/* grad session */
+
+.item-list{
+    display: flex;
+}
+
+.grad-img img{
+    width:100%;
+    height:auto;
+    /* border-radius:15%; */
+    /* box-shadow: 2px 2px 2px gray */
+}
+
+.grad-header{
+    color:#f69617;
+    font-size:3rem;
+    font-weight:bold;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+}
+
+
+.list-container{
+    margin-top: 20%;
+    margin-right:10%;
+    /* border-bottom:1px solid gray; */
+  
+}
+
+.item-list{
+    display:flex;
+    justify-content: space-between;
+    padding-right:10%;
+    border-bottom:1px solid rgb(200, 195, 195);
+    margin-bottom:15px
+    
+}
+
+.list-1{
+    font-size:120%;
+}
+
+.list-2{
+    font-size:120%;
+    font-weight:bold;
+    color:#f69617
+}
+
+.offer-container{
+    margin-top:8%;
+}
+.offer-container .off-txt{
+    font-size:20px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+}
+
+.off-logo{
+    font-size:50px;
+    color:#f69617
+}
+
+.ct{
+    padding-top:15px;
+    padding-left:20px;
+  
+}
+
+.file-container{
+    margin-bottom:10%;
+    margin-top:8%;
+}
+
+.ct a{
+    text-decoration:none;
+    font-weight:bold;
+    font-size:20px;
+    color:#f69617
+}
+
+
+
+/* media query session */
+@media (max-width: 575.98px) { 
+    .content-line{
+        font-size:30px;
+        text-align:center;
+    }
+    
+    .card-head{
+
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+
+    .grad-header{
+        font-size:30px;
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+
+    .bg-content{
+    
+        margin: 12%;
+        margin-top:15%;
+        float: right;
+        font-size:3rem;
+        color:#fff;
+        font-weight:bold;
+        margin-right:10%;
+        /* text-align: left; */
+    }
+
+    .offer-container .off-txt{
+        font-size:15px;
+        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+    }
+    
+ }
+
+
+ @media (max-width: 768px) { 
+    .content-line{
+        font-size:30px
+    }
+    
+    .card-head{
+
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+
+    .grad-header{
+        font-size:30px;
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+    .bg-content{
+    
+        margin: 12%;
+        margin-top:15%;
+        float: right;
+        font-size:3rem;
+        color:#fff;
+        font-weight:bold;
+        margin-right:10%;
+        /* text-align: left; */
+    }
+
+    .offer-container .off-txt{
+        font-size:15px;
+        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+    }
+ }
+
+ .hr-line{
+     margin:0% 0%;
+ }
+
+
+ /* mission session */
+.mission-txt{
+    margin-top:6%;
+    font-size:20px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+}
+
+.mission-txt-2{
+    font-size:20px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+}
+
+ 
+ @media (max-width: 1500px) { 
+    .content-line{
+        font-size:30px
+    }
+    
+    .card-head{
+
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+
+    .grad-header{
+        font-size:30px;
+        font-size:1.5rem;
+        line-height: 30px;
+    }
+
+    .bg-content{
+    
+        margin: 12%;
+        margin-top:15%;
+        float: right;
+        font-size:3rem;
+        color:#fff;
+        font-weight:bold;
+        margin-right:10%;
+        /* text-align: left; */
+    }
+
+    .offer-container .off-txt{
+        font-size:15px;
+        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+    }
+}
+
+
