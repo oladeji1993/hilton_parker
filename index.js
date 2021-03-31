@@ -5,14 +5,6 @@ const sql = require('mysql');
 require('dotenv').config()
 
 
-const pool = sql.createPool({
-    connectionLimit: 10,
-    host: process.env.HOST,
-    user: process.env.USER_NAME,
-    password: process.env.PASSWORD,
-    database: process.env.DB,
-})
-
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -34,6 +26,9 @@ app.get('/' , (req, res) => {
 
 const landingForm = require('./routes/landingform');
 app.use('/landingform', landingForm);
+
+const admin = require('./routes/admin');
+app.use('/admin', admin)
 
 
 app.listen(3000, function(){
