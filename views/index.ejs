@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en-us">
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,9 @@
       <link rel="stylesheet" href="/css/index.css">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-         <!-- font-awesome icon -->
+    <!-- font-awesome icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
    </head>
@@ -43,6 +44,15 @@
                   <div class="row">
                     <div class="form-container">
                         <div class="form-group">
+
+                            <input type="text" name="txtName" required class="form-control" placeholder="Full Name" value=""  />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="txtEmail" class="form-control mt-3" placeholder="Email Address" value=""  required/>
+                        </div>
+                        <div class="form-group">
+                        <input type="number" name="txtNumber" class="form-control mt-3" placeholder="Phone Number" value="" required />
+
                             <input type="text" name="name" class="form-control" placeholder="Name" value="" />
                         </div>
                         <div class="form-group">
@@ -50,12 +60,15 @@
                         </div>
                         <div class="form-group">
                         <input type="text" name="phone" class="form-control mt-3" placeholder="Phone Number" value="" />
+
                     </div>
                   </div>
                    </div>
                    
                <div class="d-grid col-12 my-btn">
-                <button class="btn btn-warning my-btn" type="submit">Apply Now</button>
+
+                <button type="submit" class="btn btn-warning my-btn" type="button">Apply Now</button>
+
               </div>
                </form>
              </div>
@@ -86,7 +99,7 @@
                     to put her plans into play.
                 </p>
             </div>
-  
+
             <div>
                 <img src="images/loans3-icon3.png">
                 <h3>Wait for ur money to <br> arrive</h3>
@@ -100,9 +113,17 @@
    </div>
 
 
+    <!-- hr -->
+      <div class="hr-line">
+        <div class="line"><hr></div>
+      </div>
+    <!-- end of hr -->
+
+
+
    <!--grad session -->
    <div>
-    <div style="margin-top:15%" class="m-container">
+    <div style="margin-top:0%" class="m-container">
       <div class="row">
         <div class="col-md-6 grad-img">
           <img src="images/loans3-lady2.png">
@@ -137,6 +158,10 @@
         </div>
       </div>
    </div>
+
+    <div class="hr-line">
+      <div class="line"><hr></div>
+    </div>
 
 
    <!-- details session -->
@@ -173,10 +198,10 @@
        </div>
 
        <div class="hr-line">
-         <div><hr></div>
+         <div class="line"><hr></div>
        </div>
 
-      <!-- our mission -->
+      <!-- our mission session -->
 
       <div class="m-container">
         <div class="row">
@@ -192,16 +217,92 @@
               </div>
 
               <div>
-                <div class="mission-txt-2"><b>Sed ultrices nisl velit, eu ornare est ullamcorper a. Nunc quis nibh magna.</b> Proin risus erat,
-                   fringilla vel purus sit amet, mattis porta enim. Duis fermentum faucibus est, sed vehicula velit sodales vitae. Mauris mollis
+                <div class="mission-txt-2">Proin risus erat, fringilla vel purus sit amet, mattis porta enim. Duis fermentum faucibus est, sed vehicula velit sodales vitae. Mauris mollis
                    lobortis turpis, eget accumsan ante aliquam quis. Nam ullamcorper rhoncus sem vitae tempus.
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6"></div>
+
+          <div class="col-md-6">
+            <div>
+              <div class="mission-header">You can Trust us</div>
+
+              <div>
+                <div class="mission-txt">Duis fermentum faucibus est, sed vehicula velit sodales vitae. Mauris mollis
+                   lobortis turpis, eget accumsan ante aliquam quis. Nam ullamcorper rhoncus sem vitae tempus.
+                </div>
+              </div>
+
+              <div>
+                <div class="mission-txt-2"><b>Proin risus erat,fringilla vel purus sit amet,</b> mattis porta enim. Duis fermentum faucibus est, sed vehicula velit sodales vitae. Mauris mollis
+                   lobortis turpis, eget accumsan ante aliquam quis. Nam ullamcorper rhoncus sem vitae tempus.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+      <!-- Testimonial session -->
+        <div class="container slider-containner">
+          <div class="row">
+            <div class="col-md-8 col-center m-auto">
+              <h2>Testimonials</h2>
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="item carousel-item active">
+                    <div class="img-box"><img src="/images/team4.jpg"></div>
+                    <p class="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum,
+                       deleniti nisi fugit assumenda id enim a cupiditate nesciunt quidem corporis.</p>
+                      <p class="overview">johm scort</p> 
+                  </div>
+
+                  <div class="item carousel-item">
+                    <div class="img-box"><img src="images/team3.jpg"></div>
+                    <p class="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum,
+                       deleniti nisi fugit assumenda id enim a cupiditate nesciunt quidem corporis.</p>
+                      <p class="overview">johm scort</p> 
+                  </div>
+
+                  <div class="item carousel-item">
+                    <div class="img-box"><img src="images/team1 small.jpg"></div>
+                    <p class="testimonial">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum,
+                       deleniti nisi fugit assumenda id enim a cupiditate nesciunt quidem corporis.</p>
+                      <p class="overview">johm scort</p> 
+                  </div>
+                </div>
+                <a class="carousel-control left carousel-control-prev" href="myCarousel" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                </a>
+
+                <a class="carousel-control right carousel-control-next" href="myCarousel" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- testimonial session -->
+
+
+      <!-- Apply session -->
+
+        <div class="apply-container">
+          <div class="apply">
+            <div class="cover-container">
+              <div class="apply-text">Quick & easy education for all</div>
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-warning" type="button">Button</button>
+                <!-- <button class="btn btn-primary" type="button">Button</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- end of apply session -->
     
 
       <script src="/javascript/index.js"></script>
