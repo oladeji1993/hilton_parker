@@ -4,6 +4,9 @@ const pool = require('../config/dbconfig');
 const joi = require('joi')
 const mailers = require('../config/mailers')
 const bcrypt = require('bcryptjs');
+const passport = require('passport')
+const initPassport = require('./config/passportConfig')
+
 
 
 const schema = joi.object({
@@ -72,6 +75,11 @@ function admin() {
 
     route.get('/login', (req, res) => {
         res.render('login')
+    })
+
+    route.post('/login', (req, res) => {
+        initPasport(passport, 
+            username => username.find)
     })
     return route
 }
