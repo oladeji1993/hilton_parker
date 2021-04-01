@@ -3,7 +3,7 @@ const route = express.Router();
 const pool = require('../config/dbconfig');
 const joi = require('joi')
 const mailers = require('../config/mailers')
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 
 const schema = joi.object({

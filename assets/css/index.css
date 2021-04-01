@@ -1,18 +1,15 @@
-html, body {
+
+body {
     margin: 0;
     padding: 0;
     width: 100%;
-}
-
-body {
-    font-family: "Helvetica Neue",sans-serif;
-    font-weight: lighter;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
 header {
     width: 100%;
-    height:100vh;
-    background:linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 105%), url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
+    height: 100vh;
+    background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
     background-size: cover;
 }
 
@@ -24,23 +21,27 @@ header {
     text-align: justify;
 }
 
-
 .logo {
     line-height: 60px;
     position: fixed;
     float: left;
-    margin: 20px 80px;
+    margin: 16px 46px;
+    /* padding-left: 140px; */
     color: #fff;
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 2px;
 }
 
+/* .menu-container{
+    margin: 0px 10%;
+} */
+
 nav {
     position: fixed;
     width: 100%;
     line-height: 60px;
-    z-index: 3;
+    z-index:1;
 }
 
 nav ul {
@@ -52,22 +53,23 @@ nav ul {
     padding: 0;
     text-align: right;
     margin: 0;
-    padding-right: 40px;
+    padding-right: 170px;
     transition: 1s;
 }
 
 nav.black ul {
-    background: rgb(37, 36, 36);
+    background: #0a0505;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 16px 40px;;
 }
 
 nav ul li a {
     text-decoration: none;
     color: #fff;
     font-size: 16px;
-}
-
-.hamburger{
-    padding: 20px 150px;
 }
 
 .menu-icon {
@@ -114,22 +116,11 @@ nav ul li a {
           display: block;
     }
 
-    .main-container{
-        justify-content: center;
-        text-align:center;
-        /* margin-left:20px */
-    }
-
-}
-
-
-.bg-txt-header{
-    float: right;
 }
 
 
 .banner-container{
-    width:100%;
+    width:80%;
     height:auto;
     position: absolute;
     top:12%;
@@ -137,6 +128,9 @@ nav ul li a {
     width:100%;
 }
 
+.content-line{
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+}
 
 .bg-content{
     
@@ -146,8 +140,6 @@ nav ul li a {
     font-size:3rem;
     color:#fff;
     font-weight:bold;
-    margin-right:10%;
-    /* text-align: left; */
 }
 
 
@@ -159,7 +151,6 @@ nav ul li a {
 /* form session */
 .contact-form{
     background: #fff;
-    /* margin: 0px 30%; */
     width: 100%;
     padding:20px 70px;
     border-radius: 1rem;
@@ -194,12 +185,15 @@ nav ul li a {
 .get-money{
     padding-top:20px;
     color:#f69617;
-    font-size:20px
+    font-size:20px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
 .my-btn button{
    color:white;
-    font-weight:bold;
+   font-weight:bold;
+   font-size:15px;
+   padding:10px;
 }
 
 .my-btn button:hover{
@@ -224,6 +218,7 @@ nav ul li a {
     line-height: 55px;
     text-align:center;
     color:#f69617;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
 .m-container{
@@ -237,7 +232,6 @@ nav ul li a {
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     grid-gap: 20px;
-    /* margin-bottom: 40px; */
     text-align: center;
     justify-content: center;
 }
@@ -252,6 +246,13 @@ nav ul li a {
 }
 
 .home-cards h3{
+    margin-bottom: 5px;
+    text-align:center;
+    color:#f69617;
+    font-weight:bold
+}
+
+.home-cards h4{
     margin-bottom: 5px;
     text-align:center;
     color:#f69617;
@@ -301,13 +302,14 @@ nav ul li a {
     font-size:3rem;
     font-weight:bold;
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
+
 }
 
 
 .list-container{
     margin-top: 20%;
     margin-right:10%;
-    /* border-bottom:1px solid gray; */
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
   
 }
 
@@ -332,10 +334,10 @@ nav ul li a {
 
 .offer-container{
     margin-top:8%;
+    line-height:40px
 }
 .offer-container .off-txt{
     font-size:20px;
-    font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
 .off-logo{
@@ -363,26 +365,33 @@ nav ul li a {
 
 
  .hr-line{
-    padding:0px 30px
+    padding:0px 30px;
+    color:#f69617;
+    /* height:20px */
  }
 
  .line{
      padding:6% 0%;
-     margin:0% 20%;
+     margin:0% 25%;
+     border:2px;
+     height: 12px;
  }
 
 
  /* mission session */
+
+ .mission-cont{
+    background: url("/images/mission.png") no-repeat 50% 50%;
+ }
 .mission-txt{
     margin-top:6%;
-    /* font-size: 15px; */
-    font-family: "Montserrat", Arial, Tahoma, sans-serif;
-    font-size:20px;
+    line-height:40px;
+    font-size:18px;
 }
 
 .mission-txt-2{
-    font-size:20px;
-    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+    font-size:18px;
+    line-height:40px;
     margin-top:5%;
 }
 
@@ -394,100 +403,69 @@ nav ul li a {
 
 /* testimony session */
 
-.slider-containner{
-    margin-top:5%
+
+.testimony{
+    padding-bottom:10%;
 }
-
-.row h2{
-    color:#333;
-    text-align: center;
-    font-weight: bold;
-    position: relative;
-    margin:30px 0px 60px;
-
+.col-center {
+	margin: 0 auto;
+	float: none !important;
 }
-
-
-.col-center{
-    margin: 0px auto;
-    float:none !important
-
-}
-
 .carousel {
-    margin: 50px auto;
-    padding: 0px 70px;
+	margin: 50px auto;
+	padding: 0 70px;
+}
+.carousel-item {
+	font-size: 18px;
+    text-align: center;
+	overflow: hidden;
+    min-height: 290px;
+}
+.carousel-item .img-box {
+	width: 135px;
+	height: 135px;
+	margin: 0 auto;
+	padding: 5px;
+	border: 1px solid #f69617;
+	border-radius: 50%;
+}
+.carousel .img-box img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-radius: 50%;
+}
+.carousel-item .testimonial {
+	padding: 30px 0 10px;
+}
+.carousel .overview {	
+	font-style: italic;
+}
+.carousel .overview b {
+	text-transform: uppercase;
+	color: #f69617;
 }
 
-.carousel-item{
-    color:#999;
-    font-size:14px;
-    text-align:center;
-    min-height: 290px ;
+h2 {
+	color: #333;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: "Roboto", sans-serif;
+	font-weight: bold;
+	position: relative;
+	margin: 30px 0 60px;
 }
-
-.carousel .item .img-box{
-    width:135px;
-    height:135px;
-    margin: 0px auto;
-    padding: 5px;
-    border:1px sold bisque;
-    border-radius:50%;
-
-}   
-
-
-.carousel .img-box img{
-    width:100%;
-    height:100%;
-    display: block;
-    border-radius: 50%;
+h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 3px;
+	background: #f69617;
+	left: 0;
+	right: 0;
+	bottom: -10px;
 }
-
-.carousel .testimonial{
-    padding: 30px 0 10px;
-
-}
-
-.carousel .overview{
-   font-style:italic 
-}
-
-.carousel .carousel-control{
-    width:40px;
-    height:40px;
-    margin-top:-20px;
-    top:50%;
-    background: none;
-}
-
-.carousel-control i{
-    font-size:60px;
-    line-height: 42px;
-    position:absolute;
-    display: inline-block;
-    color:black
-}
-
-.carousel .carousel-indicators{
-    bottom:-40px
-}
-
-.carousel-indicators li, .carousel-indicators li.active{
-    width:10px;
-    height:10px;
-    margin:1px 3px;
-    border-radius: 50%;
-}
-
-
-.carousel-indicators li{
-    background:#999;
-    border-color: transparent;
-
-}
-
-
 
 /* end of testimony session */
 
@@ -495,43 +473,96 @@ nav ul li a {
 
 /* apply session */
 
-    .apply-container{
-        width:100%;
-        max-width:1550px;
-        margin: auto; 
-        width: 100%;
-        height:50vh;
-        background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
-        background-size: cover;
-        border-radius:30px
-        /* padding-bottom:30% */
-    }
+.apply-container{
+    width:100%;
+    max-width:1550px;
+    margin: auto; 
+    width: 100%;
+    height:50vh;
+    background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    border-radius:30px;
+    text-align: center;
+    padding-bottom:5%
+}
 
-    .apply{
-        text-align:center;
-        /* margin-top:40% */
-        /* transform: translate(-50%, -50%) */
-    }
+.apply-btn{
+    text-align:center;
+    background-color: #f69617;
+    margin: 0% 40%;
+    padding:10px;
+    border-radius:5px;
+    color:white;
+    font-weight:bold;
+    font-size:20px;
+    cursor: pointer;
+
+}
+
+.btn{
+    padding:0% 30%;
+    width:100%
+}
+.cover-container{
+    padding-top:8%;
+  
+}
+
+.apply-text{
+    font-weight:bold;
+    font-size:50px;
+    color:white
+}
 
 
-    /* .apply{
-        margin-top:30%;
-    } */
-    .cover-container{
-        padding-top:12%;
-    }
-
-    .apply-text{
-        font-weight:bold;
-        font-size:50px;
-        color:white
-    }
-
-   
 
 /* apply session */
 
-/* media query session */
+
+
+ /* contact session */
+
+ .contact{
+    text-align:center;
+    margin-top:15%;
+ }
+
+ .number{
+    margin-top:3%;
+    font-size:40px;
+    font-weight:bold;
+    color:#f69617;
+
+ }
+
+ .contact-details{
+    margin-top:5%;
+    font-size:18px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif;
+ }
+
+ .contact-details-2{
+    margin-top:3%;
+    font-size:18px;
+    font-family: "Montserrat", Arial, Tahoma, sans-serif; 
+ }
+
+ .copyright{
+     margin-top:10%;
+     color:black;
+     padding:20px;
+     background:rgb(243, 240, 240)
+ }
+
+ .reserved{
+     padding:15px;
+     padding-bottom:8px;
+     font-size:18px;
+     color:black;
+ }
+
+
+ /* media query session */
 @media (max-width: 575.98px) { 
     .content-line{
         font-size:30px;
@@ -564,26 +595,42 @@ nav ul li a {
 
     .offer-container .off-txt{
         font-size:15px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
     }
 
 
     .mission-txt{
         margin-top:6%;
         /* font-size: 15px; */
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
-        font-size:12px;
+        font-size:18px;
     }
     
     .mission-txt-2{
-        font-size:12px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+        font-size:18px;
         margin-top:5%;
+    }
+
+
+    .apply-text{
+        font-weight:bold;
+        font-size:20px;
+        color:white
+    }
+
+    .apply-btn{
+        text-align:center;
+        background-color: #f69617;
+        margin: 0% 20%;
+        padding:10px;
+        border-radius:5px;
+        color:white;
+        font-weight:bold;
+        font-size:20px;
+        cursor: pointer;
+    
     }
     
     
  }
-
 
 
  @media (max-width: 768px) { 
@@ -615,23 +662,57 @@ nav ul li a {
     }
 
     .offer-container .off-txt{
-        font-size:15px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+        font-size:18px;
     }
 
 
     .mission-txt{
         margin-top:6%;
         /* font-size: 15px; */
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
-        font-size:12px;
+        font-size:20px;
     }
     
     .mission-txt-2{
-        font-size:12px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+        font-size:20px;
         margin-top:5%;
     }
+
+    .number{
+        margin-top:3%;
+        font-size:20px;
+        font-weight:bold;
+        color:#f69617;
+    
+    }
+
+    .number{
+        margin-top:3%;
+        font-size:18px;
+        font-weight:bold;
+        color:#fff;
+    
+    }
+
+    
+    .apply-text{
+        font-weight:bold;
+        font-size:30px;
+        color:white
+    }
+
+    .apply-btn{
+        text-align:center;
+        background-color: #f69617;
+        margin: 0% 40%;
+        padding:10px;
+        border-radius:5px;
+        color:white;
+        font-weight:bold;
+        font-size:20px;
+        cursor: pointer;
+    
+    }
+    
     
  }
 
@@ -666,23 +747,37 @@ nav ul li a {
     }
 
     .offer-container .off-txt{
-        font-size:15px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+        font-size:18px;
     }
 
     
     .mission-txt{
         margin-top:6%;
         /* font-size: 15px; */
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
-        font-size:12px;
+        font-size:18px;
     }
     
     .mission-txt-2{
-        font-size:12px;
-        font-family: "Montserrat", Arial, Tahoma, sans-serif;
+        font-size:18px;
         margin-top:5%;
     }
+
+    .number{
+        margin-top:3%;
+        font-size:18px;
+        font-weight:bold;
+        color:#f69617;
+    
+    }
+
+    
+    .apply-text{
+        margin-top:30px;
+        font-weight:bold;
+        font-size:40px;
+        color:#fff
+    }
+    
 }
 
 
