@@ -3,7 +3,7 @@ const route = express.Router();
 const pool = require('../config/dbconfig');
 const joi = require('joi')
 const mailers = require('../config/mailers')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 const schema = joi.object({
@@ -12,47 +12,66 @@ const schema = joi.object({
     email: joi.string().email({ minDomainSegments: 2, tlds: { allow:['com', 'net']}}).required()
 })
 
-const saltRounds = 10
 
 function admin() {
-    route.get('/register',  (req, res) => {
+    // GET /ADMIN/REGISTER ROUTE 
+    route.get('/register', (req,res) => {
         res.render('regAdmin')
-        }).post('/register', async (req, res) => {
+    })
+
+    // POST TO /ADMIN/REGISTER ROUTE 
+    route.post('/register', async(req, res) => {
         const params = req.body
+
+        // VALIDATE FORM ENTRY 
         const valid = await schema.validate({
             username:params.username,
             password: params.password,
             email: params.email
         })
+
+        // CHECK FOR ERROR 
         if (valid.error){
-            err = valid.error
-            console.log(err.details[0].message)
+            err = valid.error 
             res.send(err.details[0].message)
         }else{
-             bcrypt.genSalt(saltRounds, (err, salt) => {
-                 bcrypt.hash(valid.value.password, salt, (err, hash) => {
-                    const hashedPassword = hash
+            // HASH PASSWORD 
+            bcrypt.hash(valid.value.password, 12)
+            .then(hashedpassword => {
+                const {value} = valid
+                value.password = hashedpassword
+                
+                // CONNECT TO DB 
+                pool.getConnection((err, con) => {
+                    if(err) throw err;
+
+                    // CHECK IF EMAIL EXIST 
+                    con.query('SELECT * FROM admin WHERE email = ?', value.email, (err, result) => {
+                        if(!err){
+                            const st = result.length
+                            if(st == 0){
+                                con.query('INSERT INTO admin SET ?', value, (err, result) => {
+                                    con.release()
+                                    if(!err){
+                                        res.redirect('/login')
+                                    }else{
+                                        res.send(err)
+                                    }
+                                })
+                            }else{
+                                res.send('user already exist')
+                            }
+                        }else{
+                            res.send(err)
+                        }
+                    })
                 })
             })
-            // pool.getConnection((err, con) => {
-            //     if (err) throw err;
-        
-            //     con.query('INSERT INTO admin SET ?', valid.value, (err, result) => {
-            //         con.release()
-            //         if(!err){
-            //             mailers.newLead(params)
-            //             res.send(`user ${params.name} added to DB Successfully`)
-            //         }else{
-            //             console.log(err)
-            //         }
-            //     })
-            // })
-
-            console.log(hashedPassword)
         }
-        
-        
+    })
 
+    route.get('/login', (req, res) => {
+        res.render('login')
     })
     return route
 }

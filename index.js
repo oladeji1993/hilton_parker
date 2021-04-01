@@ -3,6 +3,9 @@ const path = require('path');
 const app = express();
 const sql = require('mysql');
 require('dotenv').config()
+const passport = require('passport')
+const initPasport = require('./config/passportConfig')
+
 
 
 app.use(express.json());
