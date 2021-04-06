@@ -4,10 +4,22 @@ const pool = require('../config/dbconfig');
 const joi = require('joi')
 const mailers = require('../config/mailers')
 const bcrypt = require('bcryptjs');
-const passport = require('passport')
-const initPassport = require('./config/passportConfig')
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
+const {promisify} = require('util')
 
 
+const checkpassword = async (password, hashed) => {
+    await bcrypt.compare(password, hashed, (err, res) => {
+        if(res){
+            console.log('res')
+            return 'res'
+        }else{
+            console.log('res2')
+            return 'res2'
+        }
+    })
+}
 
 const schema = joi.object({
     username: joi.string().alphanum().min(3).max(30).required(),
@@ -17,6 +29,10 @@ const schema = joi.object({
 
 
 function admin() {
+    route.get('/', (req,res) => {
+        res.send(req.cookie)
+    })
+
     // GET /ADMIN/REGISTER ROUTE 
     route.get('/register', (req,res) => {
         res.render('regAdmin')
@@ -56,7 +72,7 @@ function admin() {
                                 con.query('INSERT INTO admin SET ?', value, (err, result) => {
                                     con.release()
                                     if(!err){
-                                        res.redirect('/login')
+                                        res.redirect('/admin/login')
                                     }else{
                                         res.send(err)
                                     }
@@ -78,9 +94,32 @@ function admin() {
     })
 
     route.post('/login', (req, res) => {
-        initPasport(passport, 
-            username => username.find)
-    })
+        const userDetails = req.body
+        pool.getConnection((err, con) => {
+            if (err) res.redirect('/')
+            console.log(userDetails.password)
+            con.query('SELECT * FROM admin WHERE email = ?', userDetails.username, async (err, user) => {
+                console.log(userDetails.password)
+                con.release()
+                if(user.length > 0){
+                    // CHECK PASSWORD 
+                    console.log(user[0].password)
+                    console.log(`${user[0].password}, ${userDetails.password}`)
+                    
+                    const validPass = await checkpassword(userDetails.password, user[0].password)
+                    console.log(validPass)
+                    if (validPass == res){
+                       console.log('logged')
+                    }else{
+                        console.log('incorect dets')
+                    }
+
+                }else{
+                    res.send('user doesnt exist')
+                }
+            })
+        })
+        })
     return route
 }
 
