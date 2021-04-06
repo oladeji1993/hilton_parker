@@ -9,7 +9,7 @@ body {
 header {
     width: 100%;
     height: 100vh;
-    background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
+    background:linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 95%), url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
     background-size: cover;
 }
 
@@ -33,9 +33,9 @@ header {
     letter-spacing: 2px;
 }
 
-/* .menu-container{
-    margin: 0px 10%;
-} */
+.service{
+    margin:0 50%;
+}
 
 nav {
     position: fixed;
@@ -120,24 +120,20 @@ nav ul li a {
 
 
 .banner-container{
-    width:80%;
     height:auto;
     position: absolute;
-    top:10%;
-    padding-right: 50px; 
-    width:100%;
+    /* top:8%; */
+    /* padding-right: 50px;  */
+    width:80%;
 }
 
 .content-line{
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
-    
-    /* font-size: 3x`0px; */
 }
 
 .bg-content{
-    
-    margin: 12%;
-    margin-top:1%;
+    margin-right: 25%;
+    margin-top:16%;
     float: right;
     font-size:2.5rem;
     color:#fff;
@@ -153,8 +149,8 @@ nav ul li a {
 /* form session */
 .contact-form{
     background: #fff;
-    width: 100%;
-    padding:10px 20px;
+    /* width: 100%; */
+    padding:20px 20px;
     border-radius: 1rem;
 }
 .contact-form .form-control{
@@ -162,6 +158,18 @@ nav ul li a {
     border:2px solid #f69617;
     font-weight:bold;
     /* color:#fff */
+}
+
+.about-us{
+    text-align: center;
+}
+
+.about-container{
+    width:100%;
+    /* padding-right:90px; */
+    padding-top:30px;
+    /* text-align: center;
+    justify-content: center; */
 }
 
 .contact-form .form-control input{

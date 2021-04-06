@@ -56,3 +56,37 @@ label{
 .choice{
     margin-top:9.1%
 }
+
+.form-check-label{
+    font-size:15px
+}
+
+.checkbox{
+    font-size:20px;
+    font-weight:normal
+}
+
+.form-check-input{
+    margin-top:6px;
+}
+
+.submit-btn{
+    margin: 30px 0px
+}
+
+.submit-btn button{
+    padding: 10px 70px;
+    background-color:#fff;
+    border:2px solid #f69617;
+    /* border: hidden; */
+    color:#f69617;
+    text-transform: uppercase;
+    border-radius:25px
+}
+
+.submit-btn button:hover{
+    background-color:#f69617;
+    color:#fff
+}
+
+
