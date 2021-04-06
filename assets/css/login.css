@@ -5,18 +5,11 @@
 
 }
 
-
-
-
 .container{
     text-align: center;
     justify-content: center;
     align-items: center;
 }
-
-/* .container-background{
-    margin-top:80px;
-} */
 
 .container-background .welcome{
     font-size: 50px;
@@ -30,11 +23,12 @@
 
 }
 
-
-
+.login-div{
+    margin-top:20%
+}
 
 .header{
-     margin-top:90px;
+     margin-top:60px;
 }
 
 .input-field{
@@ -42,7 +36,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    margin:0% 15%
+    margin:0% 5%
 }
 
 .input-field{
@@ -64,20 +58,15 @@
     border-radius: 40px;
 }
 
-
-@media (max-width: 575.98px) {
-
-
-}
-@media (max-width: 768px) { 
-    /* .background img {
-        width:auto;
-        height:50%;
-    } */
+.submit-btn button{
+    padding: 10px 70px;
+    background-color:#f69617;
+    border: hidden;
+    color:white;
+    text-transform: uppercase;
+    border-radius:25px
 }
 
-
-@media (max-width: 1500px) { }
 
 
 
