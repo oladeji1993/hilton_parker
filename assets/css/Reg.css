@@ -1,0 +1,92 @@
+.container{
+    margin-top:20px;
+}
+
+
+.m-container{
+    
+    width:90%;
+    max-width:1200px;
+    margin: auto;
+}
+
+label{
+    font-weight:550
+}
+
+.header{
+    margin:60px;
+    text-align:center
+}
+
+.header .application{
+    font-size:35px;
+    color:#f69617;
+    font-weight:bold
+}
+
+.header p{
+    font-size:25px;
+    font-style: italic;
+}
+
+.condition{
+    font-style: italic;
+}
+
+.resident-details{
+    margin-top:50px
+}
+
+.en-container{
+    justify-content: center;
+    text-align: center;
+}
+
+.enrolment{
+    font-weight:bold;
+    color:#f69617;
+    font-size:25px;
+    text-decoration: underline;
+    padding-top: 15px;
+    padding-bottom:12px;
+
+}
+
+.choice{
+    margin-top:9.1%
+}
+
+.form-check-label{
+    font-size:15px
+}
+
+.checkbox{
+    font-size:20px;
+    font-weight:normal
+}
+
+.form-check-input{
+    margin-top:6px;
+}
+
+.submit-btn{
+    margin: 30px 0px
+}
+
+.submit-btn button{
+    padding: 10px 70px;
+    background-color:#fff;
+    border:2px solid #f69617;
+    /* border: hidden; */
+    color:#f69617;
+    text-transform: uppercase;
+    border-radius:25px
+}
+
+.submit-btn button:hover{
+    background-color:#f69617;
+    color:#fff
+}
+
+

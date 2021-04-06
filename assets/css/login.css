@@ -1,0 +1,123 @@
+*{
+    box-sizing: border-box;
+    margin:0px;
+    padding:0px;
+
+}
+
+.container{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-background .welcome{
+    font-size: 50px;
+    font-weight:bold;
+    color:#f69617;
+}
+
+.container-background img{
+    width:80%;
+    height:auto
+
+}
+
+.login-div{
+    margin-top:20%
+}
+
+.header{
+     margin-top:60px;
+}
+
+.input-field{
+    /* width:80%; */
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin:0% 5%
+}
+
+.input-field{
+    text-align:center;
+    justify-content: center;
+}
+
+.instruct{
+    font-style: italic;
+}
+
+.d-grid{
+    /* width:70%; */
+    margin-left:20%
+}
+
+.form-control{
+    padding:15px;
+    border-radius: 40px;
+}
+
+.submit-btn button{
+    padding: 10px 70px;
+    background-color:#f69617;
+    border: hidden;
+    color:white;
+    text-transform: uppercase;
+    border-radius:25px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

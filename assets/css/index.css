@@ -9,7 +9,7 @@ body {
 header {
     width: 100%;
     height: 100vh;
-    background: url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
+    background:linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 95%), url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
     background-size: cover;
 }
 
@@ -33,9 +33,9 @@ header {
     letter-spacing: 2px;
 }
 
-/* .menu-container{
-    margin: 0px 10%;
-} */
+.service{
+    margin:0 50%;
+}
 
 nav {
     position: fixed;
@@ -120,12 +120,11 @@ nav ul li a {
 
 
 .banner-container{
-    width:80%;
     height:auto;
     position: absolute;
-    top:12%;
-    padding-right: 20px; 
-    width:100%;
+    /* top:8%; */
+    /* padding-right: 50px;  */
+    width:80%;
 }
 
 .content-line{
@@ -133,11 +132,10 @@ nav ul li a {
 }
 
 .bg-content{
-    
-    margin: 12%;
-    margin-top:1%;
+    margin-right: 25%;
+    margin-top:16%;
     float: right;
-    font-size:3rem;
+    font-size:2.5rem;
     color:#fff;
     font-weight:bold;
 }
@@ -151,23 +149,36 @@ nav ul li a {
 /* form session */
 .contact-form{
     background: #fff;
-    width: 100%;
-    padding:20px 70px;
+    /* width: 100%; */
+    padding:20px 20px;
     border-radius: 1rem;
 }
 .contact-form .form-control{
     border-radius:.5rem;
     border:2px solid #f69617;
     font-weight:bold;
-    color:#fff
+    /* color:#fff */
+}
+
+.about-us{
+    text-align: center;
+}
+
+.about-container{
+    width:100%;
+    /* padding-right:90px; */
+    padding-top:30px;
+    /* text-align: center;
+    justify-content: center; */
 }
 
 .contact-form .form-control input{
-    color:rgb(202, 196, 196)
+    /* color:rgb(202, 196, 196) */
+    /* color:#000 */
 }
 
 .contact-form form{
-    padding: 5% 0%;
+    /* padding: 3% 0%; */
 }
 
 
@@ -178,12 +189,12 @@ nav ul li a {
 
 
 .btn{
-    margin-bottom:10%
+    margin-bottom:5%
 }
 
 
-.get-money{
-    padding-top:20px;
+.application{
+    padding-top:10px;
     color:#f69617;
     font-size:20px;
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
@@ -211,7 +222,7 @@ nav ul li a {
 
 .card-head{
 
-    font-size:3.5rem;
+    font-size:2.5rem;
     margin-bottom:10%;
     font-weight:bold;
     padding:20px;
@@ -231,7 +242,7 @@ nav ul li a {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    grid-gap: 20px;
+    grid-gap: 25px;
     text-align: center;
     justify-content: center;
 }
@@ -252,14 +263,15 @@ nav ul li a {
     font-weight:bold
 }
 
-.home-cards h4{
+.home-cards h5{
     margin-bottom: 5px;
     text-align:center;
     color:#f69617;
     font-weight:bold
 }
 .home-cards p{
-  padding-top:10px
+  padding-top:10px;
+  font-size:18px;
 }
 
 
@@ -299,7 +311,7 @@ nav ul li a {
 
 .grad-header{
     color:#f69617;
-    font-size:3rem;
+    font-size:1.5rem;
     font-weight:bold;
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
 
@@ -363,12 +375,6 @@ nav ul li a {
     color:#f69617
 }
 
-
- .hr-line{
-    padding:0px 30px;
-    color:#f69617;
-    /* height:20px */
- }
 
  .line{
      padding:6% 0%;
@@ -563,10 +569,16 @@ h2::after {
 
 
  /* media query session */
+
+ 
 @media (max-width: 575.98px) { 
     .content-line{
-        font-size:30px;
+        font-size:25px;
         text-align:center;
+    }
+
+    .banner-container{
+        padding-right: 0px; 
     }
     
     .card-head{
@@ -642,6 +654,10 @@ h2::after {
 
         font-size:1.5rem;
         line-height: 30px;
+    }
+
+    .banner-container{
+        padding-right: 0px; 
     }
 
     .grad-header{
@@ -728,6 +744,10 @@ h2::after {
         line-height: 30px;
     }
 
+    .banner-container{
+        padding-right: 0px; 
+    }
+
     .grad-header{
         font-size:30px;
         font-size:1.5rem;
@@ -737,7 +757,7 @@ h2::after {
     .bg-content{
     
         margin: 12%;
-        margin-top:15%;
+        margin-top:10%;
         float: right;
         font-size:3rem;
         color:#fff;
