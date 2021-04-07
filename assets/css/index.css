@@ -122,8 +122,6 @@ nav ul li a {
 .banner-container{
     height:auto;
     position: absolute;
-    /* top:8%; */
-    /* padding-right: 50px;  */
     width:80%;
 }
 
@@ -145,19 +143,31 @@ nav ul li a {
     margin-bottom: 10px;
 }
 
+.form-1{
+    display:flex;
+}
+
+.FG-1{
+    margin-right:10px;
+}
+
+.form-group input{
+    /* margin:3%; */
+    /* margin-right:20px; */
+}
+
 
 /* form session */
 .contact-form{
     background: #fff;
-    /* width: 100%; */
-    padding:20px 20px;
+    padding:20px 25px;
     border-radius: 1rem;
 }
 .contact-form .form-control{
     border-radius:.5rem;
     border:2px solid #f69617;
     font-weight:bold;
-    /* color:#fff */
+    font-size:18px
 }
 
 .about-us{
@@ -166,19 +176,16 @@ nav ul li a {
 
 .about-container{
     width:100%;
-    /* padding-right:90px; */
     padding-top:30px;
-    /* text-align: center;
-    justify-content: center; */
-}
-
-.contact-form .form-control input{
-    /* color:rgb(202, 196, 196) */
-    /* color:#000 */
 }
 
 .contact-form form{
     /* padding: 3% 0%; */
+}
+
+.form-container{
+    text-align: center;
+    justify-content: center;
 }
 
 
@@ -200,11 +207,16 @@ nav ul li a {
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
-.my-btn button{
+.my-btn{
    color:white;
    font-weight:bold;
    font-size:15px;
-   padding:10px;
+   padding:11px;
+   /* margin:0px 20px */
+}
+
+.my-btn button{
+    padding:8px;
 }
 
 .my-btn button:hover{
@@ -505,8 +517,8 @@ h2::after {
 
 }
 
-.btn{
-    padding:0% 30%;
+.my-btn{
+    /* padding:0% 30%; */
     width:100%
 }
 .cover-container{
@@ -573,16 +585,34 @@ h2::after {
  
 @media (max-width: 575.98px) { 
     .content-line{
-        font-size:25px;
+        font-size:22px;
         text-align:center;
+    }
+
+     .bg-content{
+        margin: 12%;
+        margin-top:30%;
+        float: right;
+        font-size:1.5rem;
+        color:#fff;
+        font-weight:bold;
+        margin-right:10%;
+    }  
+
+    .form-1{
+        display:block;
     }
 
     .banner-container{
         padding-right: 0px; 
     }
+
+    .col-12{
+        margin-top: 50px;
+    }
+
     
     .card-head{
-
         font-size:1.5rem;
         line-height: 30px;
     }
@@ -593,17 +623,6 @@ h2::after {
         line-height: 30px;
     }
 
-    .bg-content{
-    
-        margin: 12%;
-        margin-top:15%;
-        float: right;
-        font-size:3rem;
-        color:#fff;
-        font-weight:bold;
-        margin-right:10%;
-        /* text-align: left; */
-    }
 
     .offer-container .off-txt{
         font-size:15px;
@@ -640,6 +659,27 @@ h2::after {
         cursor: pointer;
     
     }
+
+    .my-btn button{
+        color:white;
+        font-weight:bold;
+        font-size:10px;
+        padding:8px;
+        /* padding:0px 20px; */
+    }
+
+    .application{
+        font-size:10px;
+        padding-top:0px
+    }
+     
+
+    .contact-form .form-control{
+        border-radius:.5rem;
+        border:2px solid #f69617;
+        font-weight:bold;
+        font-size:9px
+    }
     
     
  }
@@ -647,7 +687,8 @@ h2::after {
 
  @media (max-width: 768px) { 
     .content-line{
-        font-size:30px
+        font-size:22px;
+        text-align:center;
     }
     
     .card-head{
@@ -665,16 +706,8 @@ h2::after {
         font-size:1.5rem;
         line-height: 30px;
     }
-    .bg-content{
-    
-        margin: 12%;
-        margin-top:15%;
-        float: right;
-        font-size:3rem;
-        color:#fff;
-        font-weight:bold;
-        margin-right:10%;
-        /* text-align: left; */
+    .col-12{
+        margin-top:50px;
     }
 
     .offer-container .off-txt{
@@ -728,16 +761,19 @@ h2::after {
         cursor: pointer;
     
     }
-    
-    
  }
 
  
  @media (max-width: 1500px) { 
     .content-line{
-        font-size:30px
+        font-size:22px;
+        text-align:center;
     }
-    
+
+    .col-12{
+        margin-top:50px;
+    }
+
     .card-head{
 
         font-size:1.5rem;
