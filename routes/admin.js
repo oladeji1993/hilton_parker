@@ -2,38 +2,60 @@ const express = require('express');
 const route = express.Router();
 const pool = require('../config/dbconfig');
 const joi = require('joi')
-const mailers = require('../config/mailers')
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
-const authenticateAdmin =(req, res, next) => {
-    console.log('middleware')
-    if (req.cookies.authenticate){
-        req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-        next()
 
-    }else{
-        res.redirect('/login')
-    }
-}
 
 const schema = joi.object({
-    username: joi.string().alphanum().min(3).max(30).required(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-    email: joi.string().email({ minDomainSegments: 2, tlds: { allow:['com', 'net']}}).required()
+    firstname: joi.string().alphanum().min(3).max(30).required(),
+    lastname: joi.string().alphanum().min(3).max(30).required(),
+    password: joi.string().required(),
+    email: joi.string().email({ minDomainSegments: 2, tlds: { allow:['com']}}).required()
 })
 
 
 function admin() {
-    route.get('/',authenticateAdmin,  (req,res) => {
-        console.log(req.user.id)
-        res.send(req.session)
+
+    // route.get('/logout', (req, res) => {
+    //     console.log(req.cookies)
+    //     res.cookie('authentication','', {expiresIn: Date.now()})
+    //     res.redirect('/admin/login')
+    // })
+    route.get('/',  authenticateAdmin =(req, res, next) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+         }else{
+            res.redirect('admin/login')
+            }
+    },(req,res) => {
+        res.redirect('admin/dashboard') 
+    })
+
+    // GET ADMIN DASHBOARD 
+    route.get('/dashboard', (req, res, next) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            res.redirect('/admin/login')
+            }
+    }, (req, res) => {
+        res.send('Admin Dashboard Page')
     })
 
     // GET /ADMIN/REGISTER ROUTE 
-    route.get('/register', (req,res) => {
-        res.render('regAdmin')
+    route.get('/register', (req, res, next) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            res.redirect('/admin/dashboard')
+         }else{
+             next()
+            }
+    } , (req,res) => {
+        res.render('./admin/sign-up')
     })
 
     // POST TO /ADMIN/REGISTER ROUTE 
@@ -42,7 +64,8 @@ function admin() {
 
         // VALIDATE FORM ENTRY 
         const valid = await schema.validate({
-            username:params.username,
+            firstname:params.firstName,
+            lastname:params.lastName,
             password: params.password,
             email: params.email
         })
@@ -87,27 +110,36 @@ function admin() {
         }
     })
 
-    route.get('/login', (req, res) => {
-        res.render('login')
+    // GET ADMIN LOGIN
+    route.get('/login', authenticateAdmin =(req, res, next) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            res.redirect('/admin/dashboard')
+    
+        }else{
+            next()
+        }
+    }, (req, res) => {
+        res.render('./admin/login')
     })
 
+        // POST TO ADMIN LOGIN 
     route.post('/login', (req, res) => {
         const userDetails = req.body
         pool.getConnection((err, con) => {
             if (err) res.redirect('/')
             console.log(userDetails.password)
-            con.query('SELECT * FROM admin WHERE email = ?', userDetails.username, async (err, user) => {
+            con.query('SELECT * FROM admin WHERE email = ?', userDetails.email, async (err, user) => {
                 console.log(userDetails.password)
                 con.release()
                 if(user.length > 0){
                     // CHECK PASSWORD 
-                    console.log(user[0].password)
                     bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
                         if(response){
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                             res.cookie('authenticate', token, {maxAge: 3.24e+7}).redirect('/admin')
                         }else{
-                            console.log('incorect dets')
+                            res.redirect('/admin/login')
                         }
                     })
                     

@@ -22,7 +22,6 @@ app.set('view engine', 'ejs');
 
 app.get('/' , (req, res) => {
     res.render("index")
-    console.log('cookies', req.cookies)
 })
 
 
@@ -31,7 +30,7 @@ const landingForm = require('./routes/landingform');
 app.use('/landingform', landingForm);
 
 const admin = require('./routes/admin');
-app.use('/admin', admin)
+app.use('/admin',admin)
 
 
 app.listen(3000, function(){
