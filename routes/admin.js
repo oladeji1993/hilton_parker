@@ -6,19 +6,16 @@ const mailers = require('../config/mailers')
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
-const {promisify} = require('util')
 
+const authenticateAdmin =(req, res, next) => {
+    console.log('middleware')
+    if (req.cookies.authenticate){
+        req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+        next()
 
-const checkpassword = async (password, hashed) => {
-    await bcrypt.compare(password, hashed, (err, res) => {
-        if(res){
-            console.log('res')
-            return 'res'
-        }else{
-            console.log('res2')
-            return 'res2'
-        }
-    })
+    }else{
+        res.redirect('/login')
+    }
 }
 
 const schema = joi.object({
@@ -29,8 +26,9 @@ const schema = joi.object({
 
 
 function admin() {
-    route.get('/', (req,res) => {
-        res.send(req.cookie)
+    route.get('/',authenticateAdmin,  (req,res) => {
+        console.log(req.user.id)
+        res.send(req.session)
     })
 
     // GET /ADMIN/REGISTER ROUTE 
@@ -104,16 +102,15 @@ function admin() {
                 if(user.length > 0){
                     // CHECK PASSWORD 
                     console.log(user[0].password)
-                    console.log(`${user[0].password}, ${userDetails.password}`)
+                    bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
+                        if(response){
+                            const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
+                            res.cookie('authenticate', token, {maxAge: 3.24e+7}).redirect('/admin')
+                        }else{
+                            console.log('incorect dets')
+                        }
+                    })
                     
-                    const validPass = await checkpassword(userDetails.password, user[0].password)
-                    console.log(validPass)
-                    if (validPass == res){
-                       console.log('logged')
-                    }else{
-                        console.log('incorect dets')
-                    }
-
                 }else{
                     res.send('user doesnt exist')
                 }
