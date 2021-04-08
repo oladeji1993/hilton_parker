@@ -21,9 +21,10 @@ async function newLead(params) {
         to: 'collinswilson@softnoonng.com',
         text: `
             New Application (LEAD)
-            Name : ${params.name},
+            Name : ${params.firstname + ' ' + params.lastname},
             email: ${params.email},
             phone: ${params.phone}
+            Account Officer: ${params.accountofficer}
         `
     });
 
