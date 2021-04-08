@@ -114,3 +114,22 @@ body {
     margin:0px 10px;
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
+
+.submit-btn{
+  margin: 30px 0px
+}
+
+.submit-btn button{
+  padding: 10px 70px;
+  background-color:#fff;
+  border:3px solid #f69617;
+  /* border: hidden; */
+  color:#f69617;
+  text-transform: uppercase;
+  border-radius:25px
+}
+
+.submit-btn button:hover{
+  background-color:#f69617;
+  color:#fff
+}
