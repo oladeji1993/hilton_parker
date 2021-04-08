@@ -4,6 +4,7 @@ const pool = require('../config/dbconfig')
 const mailers = require('../services/mailers')
 
 
+
 function landingForm(){
     route.post('/', (req, res, next) => {
         pool.getConnection((err, con) => {
@@ -28,14 +29,16 @@ function landingForm(){
             if (err) throw err;
             con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                 const params = req.body
+                console.log(params)
                 params.accountofficer = admin[0].firstname + ' ' + admin[0].lastname
                 params.regdate = (new Date()).toLocaleDateString('en-US')
+                params.status = 'new'
                 con.query('INSERT INTO leads SET ?', params, (err, result) => {
                     con.release()
                     if(!err){
-                        mailers.newLead(params)
+                        // mailers.newLead(params)
                         console.log(`second place ${admin[0].email}`)
-                        res.send(`user ${params.firstname} added to DB Successfully`)
+                        res.render('./client/success')
                     }else{
                         console.log(err)
                     }

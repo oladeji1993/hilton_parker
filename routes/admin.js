@@ -41,9 +41,27 @@ function admin() {
             next()
         }else{
             res.redirect('/admin/login')
-            }
+            } 
     }, (req, res) => {
-        res.send('Admin Dashboard Page')
+        const id = req.user.id
+        pool.getConnection((err, con) => {
+            if (err) throw err;
+            con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
+                const accountofficer = admin[0].firstname + ' ' + admin[0].lastname
+                console.log(accountofficer)
+                con.query('SELECT * FROM leads WHERE status = "new" AND accountofficer = ?', accountofficer, (err, newLeads) => {
+                    console.log(newLeads)
+                    res.render('./admin/dashboard', {
+                        admin: admin,
+                        newLeads: newLeads
+                    })
+                })
+                // res.render('./admin/dashboard', {
+                //     admin: admin,
+                //     new: newLeads
+                // })
+            } )
+        })
     })
 
     // GET /ADMIN/REGISTER ROUTE 
@@ -137,7 +155,7 @@ function admin() {
                     bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
                         if(response){
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
-                            res.cookie('authenticate', token, {maxAge: 3.24e+7}).redirect('/admin')
+                            res.cookie('authenticate', token, {maxAge: 3000}).redirect('/admin')
                         }else{
                             res.redirect('/admin/login')
                         }
