@@ -1,0 +1,17 @@
+body{
+    padding:0px;
+    margin:0px;
+    box-sizing: border-box;
+    background:#f8f8f8;
+}
+
+.background{
+    background: #f69617;
+    color:#fff
+}
+
+
+.logo{
+    font-size:30px;
+    margin-left:50px;
+}
