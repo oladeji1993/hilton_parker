@@ -16,7 +16,7 @@ body{
 }
 
 .header{
-    margin-top:5%
+    margin-top:8%
 }
 
 .header-2{
@@ -69,4 +69,13 @@ body{
     font-weight:bold
 }
 
+tr{
+    cursor: pointer;
+}
+
+tbody a{
+    text-decoration: none;
+    display: block;
+    color:black
+}
 
