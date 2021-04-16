@@ -28,7 +28,7 @@ async function newLead(params) {
         `
     });
 
-    console.log('message sent')
+    console.log('message sent') 
 }
 
 module.exports = {newLead};
