@@ -71,7 +71,7 @@ label{
 }
 
 .submit-btn{
-    margin: 30px 0px
+    margin: 34px 0px
 }
 
 .submit-btn button{
@@ -88,5 +88,24 @@ label{
     background-color:#f69617;
     color:#fff
 }
+
+
+.submit-btn a{
+    /* margin-top:20%; */
+    padding: 10px 70px;
+    background-color:#fff;
+    border:2px solid #f69617;
+    /* border: hidden; */
+    color:#f69617;
+    text-transform: uppercase;
+    border-radius:25px;
+    text-decoration: none;
+}
+
+.submit-btn a:hover{
+    background-color:#f69617;
+    color:#fff
+}
+
 
 
