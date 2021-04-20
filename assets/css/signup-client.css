@@ -23,10 +23,6 @@
 
 }
 
-.login-div{
-    margin-top:20%
-}
-
 .header{
      margin-top:60px;
 }
@@ -49,28 +45,13 @@
 }
 
 .d-grid{
-    margin-left:20%;
+    /* width:70%; */
+    margin-left:20%
 }
 
 .form-control{
     padding:15px;
     border-radius: 40px;
-}
-
-.btn-forget{
-    display: flex;
-    justify-content: space-between;
-    margin:0px 5%
-}
-
-.forget-password a{
-    text-decoration: none;
-    color:black;
-    font-size: 16px;
-}
-
-.forget-password a:hover{
-    color:blue
 }
 
 .submit-btn button{

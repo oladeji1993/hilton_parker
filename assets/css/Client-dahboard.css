@@ -409,14 +409,18 @@ tr td:last-child{
 
 
 
-@media only screen and (max-width:960px) {
+@media only screen and (max-width:1200px) {
     .cards{
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
     .recent-grid{
         grid-template-columns: 60% 40%;
     }
 
+    .main-content header{
+        width: calc(100%);
+        left: 70px;
+    }
 
     
 
