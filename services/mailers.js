@@ -12,7 +12,7 @@ async function newLead(params) {
         secure: false,
         auth: {
             user: 'collinswilson@softnoonng.com',
-            pass: process.env.MAIL_PASSWORD
+            pass: process.env.MAIL_PASSWORD 
         },
     }));
 

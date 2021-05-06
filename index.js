@@ -55,6 +55,10 @@ app.use('/landingform', landingForm);
 const admin = require('./routes/admin');
 app.use('/admin',admin)
 
+const makePayment = require('./routes/payment');
+app.use('/pay', makePayment)
+
+
 const user = require('./routes/user')
 app.use('/user', user)
 
