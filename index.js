@@ -1,9 +1,33 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const app = express();
 const sql = require('mysql');
+const pool = require('./config/dbconfig');
+const flash = require('express-flash')
 require('dotenv').config()
-var cookiePasser = require('cookie-parser')
+const passport = require('passport');
+const cookiePasser = require('cookie-parser')
+
+app.use(session({ secret: process.env.TOKEN_SECRET }));
+app.use(cookiePasser(process.env.TOKEN_SECRET));
+app.use(flash());
+
+// PASSPORT AUTHENTICATION
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.serializeUser(function (user, done) {
+    console.log('serializing user:', user[0]);
+    done(null, user[0].id);
+});
+
+passport.deserializeUser(function (id, done) {
+    console.log('deserializing user:', id);
+    done(null,{id});
+});
+
 
 
 
@@ -11,7 +35,6 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
-app.use(cookiePasser({secret: process.env.TOKEN_SECRET}))
 
 
 app.use(express.static(path.join(__dirname, 'assets')))
@@ -32,6 +55,8 @@ app.use('/landingform', landingForm);
 const admin = require('./routes/admin');
 app.use('/admin',admin)
 
+const user = require('./routes/user')
+app.use('/user', user)
 
 app.listen(3000, function(){
     console.log('app running on port 3000')

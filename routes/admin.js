@@ -5,12 +5,14 @@ const joi = require('joi')
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
+flash = require('express-flash')
 
 
 
 const schema = joi.object({
     firstname: joi.string().alphanum().min(3).max(30).required(),
     lastname: joi.string().alphanum().min(3).max(30).required(),
+    phonenumber: joi.string().alphanum().min(3).max(30).required(),
     password: joi.string().required(),
     email: joi.string().email({ minDomainSegments: 2, tlds: { allow:['com']}}).required()
 })
@@ -84,6 +86,7 @@ function admin() {
         const valid = await schema.validate({
             firstname:params.firstName,
             lastname:params.lastName,
+            phonenumber:params.phonenumber,
             password: params.password,
             email: params.email
         })

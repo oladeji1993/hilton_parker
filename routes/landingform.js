@@ -2,6 +2,9 @@ const express = require('express');
 const route = express.Router();
 const pool = require('../config/dbconfig')
 const mailers = require('../services/mailers')
+const bcrypt = require('bcryptjs');
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 
 
 
@@ -33,12 +36,18 @@ function landingForm(){
                 params.accountofficer = admin[0].firstname + ' ' + admin[0].lastname
                 params.regdate = (new Date()).toLocaleDateString('en-US')
                 params.status = 'new'
-                con.query('INSERT INTO leads SET ?', params, (err, result) => {
+                con.query('INSERT INTO leads SET ?', params, async (err, result) => {
                     con.release()
                     if(!err){
-                        // mailers.newLead(params)
-                        console.log(`second place ${admin[0].email}`)
+                        // GENERATE DYNAMIC LINK TO CREATE PASSWORD
+                        const hashed = cryptr.encrypt(params.email);
+                        console.log(hashed)
+                        params.hash = hashed
+                        mailers.newLead(params)
+                        mailers.applied(params)
                         res.render('./client/success')
+                        // mailers.newLead(params)
+                        
                     }else{
                         console.log(err)
                     }
