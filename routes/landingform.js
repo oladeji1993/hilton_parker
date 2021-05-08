@@ -32,7 +32,6 @@ function landingForm(){
             if (err) throw err;
             con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                 const params = req.body
-                console.log(params)
                 params.accountofficer = admin[0].firstname + ' ' + admin[0].lastname
                 params.regdate = (new Date()).toLocaleDateString('en-US')
                 params.status = 'new'

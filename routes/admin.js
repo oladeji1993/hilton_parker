@@ -30,6 +30,7 @@ function admin() {
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
             next()
          }else{
+            req.flash('danger', 'You Must Login First', )
             res.redirect('admin/login')
             }
     },(req,res) => {
@@ -42,6 +43,7 @@ function admin() {
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
             next()
         }else{
+            req.flash('danger', 'You Must Login First', )
             res.redirect('/admin/login')
             } 
     }, (req, res) => {
@@ -58,10 +60,6 @@ function admin() {
                         newLeads: newLeads
                     })
                 })
-                // res.render('./admin/dashboard', {
-                //     admin: admin,
-                //     new: newLeads
-                // })
             } )
         })
     })
@@ -81,7 +79,6 @@ function admin() {
     // POST TO /ADMIN/REGISTER ROUTE 
     route.post('/register', async(req, res) => {
         const params = req.body
-
         // VALIDATE FORM ENTRY 
         const valid = await schema.validate({
             firstname:params.firstName,
@@ -90,7 +87,6 @@ function admin() {
             password: params.password,
             email: params.email
         })
-
         // CHECK FOR ERROR 
         if (valid.error){
             err = valid.error 
@@ -107,7 +103,8 @@ function admin() {
                     if(err) throw err;
 
                     // CHECK IF EMAIL EXIST 
-                    con.query('SELECT * FROM admin WHERE email = ?', value.email, (err, result) => {
+                        const email = value.email
+                        con.query('SELECT * FROM admin WHERE email = ?', [email], (err, result) => {
                         if(!err){
                             const st = result.length
                             if(st == 0){
@@ -120,7 +117,8 @@ function admin() {
                                     }
                                 })
                             }else{
-                                res.send('user already exist')
+                                req.flash('danger', 'Email already exists Login Insteads', )
+                                res.redirect('/admin/login')
                             }
                         }else{
                             res.send(err)

@@ -13,14 +13,14 @@ passport.use(new LocalStrategy({
     },
     (username, password, done) => {
         pool.getConnection((err, con) => {
-            con.query('SELECT * FROM leads WHERE email = ?', username, (err, user) => {
-                if(!user){
-                    return done(null, false, { message: 'Incorrect username.' })
+            con.query('SELECT * FROM leads WHERE email = ?', username, (err, result) => {
+                const user = result[0]
+                if(user){
+                    bcrypt.compare()
+                    return done(null, false, { message: 'Found User.' })
                 }else{
-                    
+                    return done(null, false, { message: 'Incorrect username.' })   
                 }
-
-                return done(null, user);
             })
         })
     }
@@ -35,7 +35,6 @@ function user() {
 
     route.get('/login',  (req, res) => {
         const message = req.flash()
-        console.log(message)
         res.render('./Client/login', {
             message
         })
@@ -58,14 +57,16 @@ function user() {
                 if (err) throw err;
                 if (result.length > 0) {
                     const email = user.email
-                    const password = user.password             
-                    const sql = "UPDATE leads SET password = ? WHERE email = ?" 
-                    con.query(sql, [password , email], (err, result) => {
-                        res.redirect('/user/dashboard')
+                    const password = user.password    
+                    bcrypt.hash(password, 12).then(hashed => {
+                        const sql = "UPDATE leads SET password = ? WHERE email = ?" 
+                        con.query(sql, [hashed, email], (err, result) => {
+                            req.flash('success', 'Password created Please Login ', )
+                            res.redirect('/user/login')
+                        })
                     })
                 } else{
-                    
-                    res.send(req.body)
+                    res.redirect('/')
                 }
 
             })
