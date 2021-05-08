@@ -147,9 +147,7 @@ function admin() {
         const userDetails = req.body
         pool.getConnection((err, con) => {
             if (err) res.redirect('/')
-            console.log(userDetails.password)
             con.query('SELECT * FROM admin WHERE email = ?', userDetails.email, async (err, user) => {
-                console.log(userDetails.password)
                 con.release()
                 if(user.length > 0){
                     // CHECK PASSWORD 
@@ -158,12 +156,14 @@ function admin() {
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                             res.cookie('authenticate', token, {maxAge: 3000}).redirect('/admin')
                         }else{
+                            req.flash('danger', 'Incorect Email or Password')
                             res.redirect('/admin/login')
                         }
                     })
                     
                 }else{
-                    res.send('user doesnt exist')
+                    req.flash('danger', 'Incorect Email or Password')
+                    res.redirect('/admin/login')
                 }
             })
         })

@@ -32,7 +32,7 @@ function landingForm(){
             if (err) throw err;
             con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                 const params = req.body
-                params.accountofficer = admin[0].firstname + ' ' + admin[0].lastname
+                params.accountofficer = admin[0].id
                 params.regdate = (new Date()).toLocaleDateString('en-US')
                 params.status = 'new'
                 con.query('INSERT INTO leads SET ?', params, async (err, result) => {
