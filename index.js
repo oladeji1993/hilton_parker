@@ -20,7 +20,7 @@ app.use(passport.session());
 
 passport.serializeUser(function (user, done) {
     console.log('serializing user:', user[0]);
-    done(null, user[0].id);
+    done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {

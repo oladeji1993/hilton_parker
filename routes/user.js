@@ -13,14 +13,20 @@ passport.use(new LocalStrategy({
     },
     (username, password, done) => {
         pool.getConnection((err, con) => {
-            con.query('SELECT * FROM leads WHERE email = ?', username, (err, user) => {
-                if(!user){
-                    return done(null, false, { message: 'Incorrect username.' })
-                }else{
+            con.query('SELECT * FROM leads WHERE email = ?', username, (err, result) => {
+                const user = result[0]
+                if(user){
+                    bcrypt.compare(password, user.password, (err, response) => {
+                        if (response) {
+                            return done(null, user )
+                        }else {
+                            return done(null, false, { message: 'Incorect Password.' })
+                        }
+                    })
                     
+                }else{
+                    return done(null, false, { message: 'Incorrect username.' })   
                 }
-
-                return done(null, user);
             })
         })
     }
@@ -29,16 +35,20 @@ passport.use(new LocalStrategy({
 function user() {
 
     route.get('/', (req, res) => {
-        res.send('in user')
+        res.redirect('/user/dashboard')
     })
     
 
     route.get('/login',  (req, res) => {
+        if(req.user){
+            res.redirect('/user/dashboard')
+        }
+        else{
         const message = req.flash()
-        console.log(message)
         res.render('./Client/login', {
             message
         })
+        }
     }
     )
 
@@ -58,14 +68,16 @@ function user() {
                 if (err) throw err;
                 if (result.length > 0) {
                     const email = user.email
-                    const password = user.password             
-                    const sql = "UPDATE leads SET password = ? WHERE email = ?" 
-                    con.query(sql, [password , email], (err, result) => {
-                        res.redirect('/user/dashboard')
+                    const password = user.password    
+                    bcrypt.hash(password, 12).then(hashed => {
+                        const sql = "UPDATE leads SET password = ? WHERE email = ?" 
+                        con.query(sql, [hashed, email], (err, result) => {
+                            req.flash('success', 'Password created Please Login ', )
+                            res.redirect('/user/login')
+                        })
                     })
                 } else{
-                    
-                    res.send(req.body)
+                    res.redirect('/')
                 }
 
             })
@@ -73,15 +85,27 @@ function user() {
     })
 
     route.get('/dashboard', (req, res) => {
-        console.log('in dashboard')
         if (req.user){
             const user = req.user
             pool.getConnection((err, con) => {
                 con.query('SELECT * FROM leads WHERE id = ?', user.id, (err, result) =>{
-                    res.render('./Client/dashboard', {
-                        user : result
+                    con.query('SELECT * FROM admin WHERE id = ?', result[0].accountofficer, (err, admin) => {
+                        con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
+                            console.log(result[0].accountofficer)
+                            console.log(allAdmins)
+                            res.render('./Client/dashboard', {
+                            user : result,
+                            admin: admin[0],
+                            allAdmin : allAdmins
+    
+                        })
+
+                        })
+                        
+                        
+                        
+                    
                     })
-                    console.log(result)
                 })
             })
         }else{
