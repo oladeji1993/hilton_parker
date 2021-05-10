@@ -42,7 +42,7 @@ async function applied(params) {
         port: 587,
         secure: false,
         auth: {
-            user: 'collinswilson@softnoonng.com',
+            user: 'collinswilson@softnoonng.com', 
             pass: process.env.MAIL_PASSWORD
         },
     }));

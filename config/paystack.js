@@ -1,6 +1,5 @@
 const payStack = (request) => {
     const MySecretKey = 'Bearer sk_test_d6a5ad6a0c260f17234aea24294251f67550f3b4';
-    // sk_test_xxxx to be replaced by your own secret key
    const initializePayment = (form, myCallBack) => {
 
     const options = {
