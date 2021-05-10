@@ -62,6 +62,10 @@ app.use('/pay', makePayment)
 const user = require('./routes/user')
 app.use('/user', user)
 
+
+const forgot_password = require('./routes/forgot-password')
+app.use('/forgot-password', forgot_password);
+
 app.listen(3000, function(){
     console.log('app running on port 3000')
 })
