@@ -40,7 +40,6 @@ function landingForm(){
                     if(!err){
                         // GENERATE DYNAMIC LINK TO CREATE PASSWORD
                         const hashed = cryptr.encrypt(params.email);
-                        console.log(hashed)
                         params.hash = hashed
                         mailers.newLead(params)
                         mailers.applied(params)

@@ -5,8 +5,23 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 const bcrypt = require('bcryptjs')
 const passport = require('passport');
-const multer = require('multer')
+const multer = require('multer');
+var path = require('path')
+// const upload = multer({ dest: 'uploads/' })
 const LocalStrategy = require('passport-local').Strategy;
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb, next) {
+        const date = Date.now()
+      cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
+    }
+    
+  })
+
+const upload = multer({ storage: storage })
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -53,6 +68,10 @@ function user() {
     }
     )
 
+    route.get('/logout', (req, res) => {
+        req.logout();
+        res.redirect('/')
+    })
     route.post('/login',
         passport.authenticate('local', { 
             successRedirect: '/user/dashboard',
@@ -135,9 +154,23 @@ function user() {
             res.redirect('/user/login')
         }
     })
-
-    route.post('/apply', (req, res) => {
+    var cpUpload = upload.fields([
+        { name: 'primaryschoolcert', maxCount: 1 }, 
+        { name: 'secondaryschoolcert', maxCount: 1}, 
+        { name: 'polythecniccert', maxCount: 1}, 
+        { name: 'universitycert', maxCount: 1},
+        { name: 'othercert', maxCount: 1}
+    ])
+    route.post('/apply', cpUpload,  (req, res) => {
         if(req.user){
+            const {
+                primaryschoolcert,
+                secondaryschoolcert,
+                polythecniccert,
+                universitycert,
+                othercert
+            } = req.files
+            console.log(primaryschoolcert)
             const params = Object.values(req.body)
             const user = req.user.id
             pool.getConnection((err, con) => {
@@ -177,7 +210,6 @@ function user() {
         const email = req.params.email
         try{
             const decryptedString = cryptr.decrypt(email);
-            console.log(decryptedString)
             pool.getConnection((err, con) => {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
