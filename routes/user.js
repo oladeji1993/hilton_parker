@@ -5,7 +5,23 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 const bcrypt = require('bcryptjs')
 const passport = require('passport');
+const multer = require('multer');
+var path = require('path')
+// const upload = multer({ dest: 'uploads/' })
 const LocalStrategy = require('passport-local').Strategy;
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb, next) {
+        const date = Date.now()
+      cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
+    }
+    
+  })
+
+const upload = multer({ storage: storage })
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -52,6 +68,10 @@ function user() {
     }
     )
 
+    route.get('/logout', (req, res) => {
+        req.logout();
+        res.redirect('/')
+    })
     route.post('/login',
         passport.authenticate('local', { 
             successRedirect: '/user/dashboard',
@@ -84,6 +104,11 @@ function user() {
         })
     })
 
+    var randomProperty = function (obj) {
+        var keys = Object.keys(obj);
+        return obj[keys[ keys.length * Math.random() << 0]];
+    };
+
     route.get('/dashboard', (req, res) => {
         if (req.user){
             const user = req.user
@@ -91,12 +116,11 @@ function user() {
                 con.query('SELECT * FROM leads WHERE id = ?', user.id, (err, result) =>{
                     con.query('SELECT * FROM admin WHERE id = ?', result[0].accountofficer, (err, admin) => {
                         con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
-                            console.log(result[0].accountofficer)
-                            console.log(allAdmins)
+                            const all = randomProperty(allAdmins)
                             res.render('./Client/dashboard', {
                             user : result,
                             admin: admin[0],
-                            allAdmin : allAdmins
+                            allAdmin : all
     
                         })
 
@@ -114,12 +138,78 @@ function user() {
         }
     })
 
+    route.get('/apply', (req, res ) => {
+        if(req.user){
+            const user = req.user.id
+            pool.getConnection((err, con) => {
+                con.query('SELECT * FROM leads WHERE id = ?', user, (err, result) => {
+                    res.render('./Client/Reg' , {
+                        user: result[0]
+                    })
+                })
+                
+            })
+        }else{
+            req.flash('danger', 'Sorry you need to Log-in first', )
+            res.redirect('/user/login')
+        }
+    })
+    var cpUpload = upload.fields([
+        { name: 'primaryschoolcert', maxCount: 1 }, 
+        { name: 'secondaryschoolcert', maxCount: 1}, 
+        { name: 'polythecniccert', maxCount: 1}, 
+        { name: 'universitycert', maxCount: 1},
+        { name: 'othercert', maxCount: 1}
+    ])
+    route.post('/apply', cpUpload,  (req, res) => {
+        if(req.user){
+            const {
+                primaryschoolcert,
+                secondaryschoolcert,
+                polythecniccert,
+                universitycert,
+                othercert
+            } = req.files
+            console.log(primaryschoolcert)
+            const params = Object.values(req.body)
+            const user = req.user.id
+            pool.getConnection((err, con) => {
+                const sql = ` UPDATE leads SET 
+                lastname = ?,
+                firstname = ?,
+                othername = ? ,
+                address = ? ,
+                dateofbirth = ? ,
+                email = ? ,
+                phonenumber = ?,
+                placeofbirth = ?,
+                gender = ?,
+                maritalstatus = ?,
+                program = ?,
+                course1 = ?,
+                course2 = ?,
+                course3 = ? 
+                WHERE id = ${user} 
+                `
+                console.log(req.body)
+                
+                con.query(sql, params, (err, result) => {
+                    console.log(result)
+                    res.redirect('/user/dashboard')
+                })
+                
+            })
+
+        }else{
+            req.flash('danger', 'Sorry you need to Log-in first', )
+            res.redirect('/user/login')
+        }
+    })
 
     route.get('/:email', (req, res) => {
         const email = req.params.email
         try{
             const decryptedString = cryptr.decrypt(email);
-            console.log(decryptedString)
             pool.getConnection((err, con) => {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {

@@ -30,7 +30,7 @@
                 </li>
 
                 <li>
-                    <a href="#"  title="Complete Application"><span><i class="fas fa-user-edit"></i></span> <span>Complete Application</span></a>
+                    <a href="/user/apply"><span><i class="fas fa-user-edit"></i></span> <span>Complete Application</span></a>
                 </li>
 
                 <li>
@@ -38,11 +38,11 @@
                 </li>
 
                 <li>
-                    <a href="/views/Client/contactus.html"  title="Contact Us"><span><i class="fas fa-envelope-open-text"></i></span> <span>Contact us</span></a>
+                    <a href="/contact"  title="Contact Us"><span><i class="fas fa-envelope-open-text"></i></span> <span>Contact us</span></a>
                 </li>
 
                 <li>
-                    <a href="#"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
+                    <a href="/user/logout"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
                 </li>
             </ul>
         </div>
@@ -217,29 +217,14 @@
                                         <img src="/images/team3.jpg" width="40px"
                                         height="40px"  alt="">
                                         <div>
-                                            <h4> <span><%= allAdmin[0].firstname %> <%= allAdmin[0].lastname %> </span> </h4>
-                                            <small><%=  allAdmin[0].phonenumber %> </small>
+                                            <h4> <span><%= allAdmin.firstname %> <%= allAdmin.lastname %> </span> </h4>
+                                            <small><%=  allAdmin.phonenumber %> </small>
                                         </div>
                                    </div>
                                    <div class="contact">
                                        <span><i class="fas fa-phone"></i></span>
                                    </div>
                                 </div>
-
-                                <div class="customer">
-                                    <div class="info">
-                                        <img src="/images/team3.jpg" width="40px"
-                                        height="40px"  alt="">
-                                        <div>
-                                            <h4> <span><%= allAdmin[1].firstname %> <%= allAdmin[1].lastname %> </span> </h4>
-                                            <small><%=  allAdmin[1].phonenumber %> </small>
-                                        </div>
-                                   </div>
-                                   <div class="contact">
-                                       <span><i class="fas fa-phone"></i></span>
-                                   </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
