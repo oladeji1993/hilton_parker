@@ -156,7 +156,7 @@ function admin() {
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                             res.cookie('authenticate', token, {maxAge: 3000}).redirect('/admin')
                         }else{
-                            req.flash('danger', 'Incorect Email or Password')
+                            req.flash('danger', 'Incorrect Email or Password')
                             res.redirect('/admin/login')
                         }
                     })
