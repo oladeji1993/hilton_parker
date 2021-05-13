@@ -22,8 +22,6 @@ const JWT_SECRET = process.env.TOKEN_SECRET;
 
 
 function forgot_password() {
-      // render forgot_password page
-  
 
 
     route.get('/',  (req, res) => {
@@ -43,12 +41,12 @@ function forgot_password() {
                 // console.log(result[0])
                 if (err) throw err;
                 if (result.length > 0) {
-                    const secret = JWT_SECRET;
+                    const secret = JWT_SECRET
                     const payload = {
                         email: result[0].email,
                         id: result[0].id
                     }
-                    const token = jwt.sign(payload, secret, {expiresIn: "10m"});
+                    const token = jwt.sign(payload, secret, {expiresIn: "20m"});
                     const link = `http://localhost:3000/forgot-password/${result[0].id}/${token}`  
                     console.log(link);
                     mailers.forgot_password(result, token);
@@ -69,21 +67,21 @@ function forgot_password() {
 
 
     route.get('/:id/:token', (req, res, next) =>{
-        const id = req.params.id;
         const token = req.params.token
 
         pool.getConnection((err, con) =>{
-            con.query( 'SELECT * FROM leads WHERE id=?', id, (err, result) =>{
-                if(id == result[0].id){
-
-                    const payload = jwt.verify(token, JWT_SECRET)
-                        if(payload){
-                           console.log("orrect tokn") 
-                        }else{
-                            console.log("inorrect tokn")
-                        }
-                    
+            con.query( 'SELECT * FROM leads', (err, result) =>{
+                if(result){
+                    const secret = JWT_SECRET
+                    const payload = jwt.verify(token, secret)
+                    if(payload){
+                        res.render("./Client/reset-password",)
+                    }else{
+                        console.log(err)
                     }
+                }else{
+                    console.log('i am not available')
+                }
             })
         }) 
     
@@ -99,42 +97,17 @@ function forgot_password() {
             if(err) throw err
             connection.query('SELECT * FROM leads WHERE id=?', id, (err, result) => {
                 if( id == result[0].id){
-                    console.log('correct id')
-                    res.send(id)
+                    bcrypt.hash(password, 12).then(hashed => {
+                    const sql = "UPDATE leads SET password = ? WHERE id = ?" 
+                    connection.query(sql, [hashed, id], (err, result) => {
+                    req.flash('warning', 'Password Updated successfully.', )
+                    res.redirect("/user/login",)
+                })
+            })
                 }else{
-                    console.log('incorect ifd')
-                    res.send(id)
+                    req.flash('danger', 'We could not find a match for this link', )
+                    res.redirect("/user/login",)
                 }
-
-                // const secret = JWT_SECRET + result[0].id;
-
-                // if(token) {
-                //     jwt.verify(token, secret, (error, decodedToken) => {
-                //          if(error) {
-                //             req.flash('danger', 'Invalid Password reset Link', )
-                //         }
-                //     })
-                //   }
-
-                // try {
-
-                //     if(!result[0].email) {
-                //         req.flash('danger', 'We could not find a match for this link', )
-                //         res.redirect("/user/login",)
-                //     }else{
-                //         bcrypt.hash(password, 12).then(hashed => {
-                //             const sql = "UPDATE leads SET password = ? WHERE id = ?" 
-                //             connection.query(sql, [hashed, id], (err, result) => {
-                //                 req.flash('warning', 'Password Updated successfully.', )
-                //                 res.redirect("/user/login",)
-                //             })
-                //         })
-                //     }
-
-                // } catch (error) {
-                //     console.log(error.message)
-                //     res.redirect("/forgot-password",)
-                // }
 
             })
         })
