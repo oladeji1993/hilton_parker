@@ -64,4 +64,34 @@ async function applied(params) {
     console.log('message sent') 
 }   
 
-module.exports = {newLead, applied};
+
+async function forgot_password(result, token) {
+    let transporter = nodemailer.createTransport(smtpTransport({
+        host: "webmail.softnoonng.com",
+        tls:{
+            rejectUnauthorized: false
+        },
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'collinswilson@softnoonng.com', 
+            pass: process.env.MAIL_PASSWORD
+        },
+    }));
+
+
+    let info = await transporter.sendMail({
+        from: '"HILTON PARKER" <collinswilson@softnoonng.com>',
+        to: `${result[0].email}`,
+        text: `
+            Your reset password mail is here
+            email: ${result[0].email},
+            Password reset Link : 'http://localhost:3000/forgot-password/${result[0].id}/${token}'
+        `
+    });
+
+    console.log('message sent') 
+}   
+
+
+module.exports = {newLead, applied, forgot_password};
