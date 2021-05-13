@@ -80,7 +80,7 @@ function forgot_password() {
                         console.log(err)
                     }
                 }else{
-                    console.log('i am not available')
+                    console.log('i am not availabl')
                 }
             })
         }) 
