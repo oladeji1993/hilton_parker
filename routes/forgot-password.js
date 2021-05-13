@@ -57,32 +57,6 @@ function forgot_password() {
                     res.redirect("/forgot-password")
                     // res.send("not available")
                 }
-      // render forgot_password page
-    route.get('/',(req, res) => {
-        res.render('./Client/recovery');
-    });
-
-    route.post('/', (req, res, next) =>{
-        const email = req.body.email;
-        pool.getConnection((err, connection) => {
-            if(err) throw err
-            console.log(`connected as id ${connection.threadId}`)
-            connection.query('SELECT * FROM leads WHERE email=?', email, (err, result) => {
-                if(email !== result[0].email){
-                    res.send("invalid Email")
-                }
-                // user exist, create one time link 
-                const secret = JWT_SECRET + result[0].password;
-                const payload = {
-                    email: result.email,
-                    id: result.id
-                }
-
-                const token = jwt.sign(payload, secret, {expiresIn: "10m"});
-                const link = `http://localhost:3000/forgot-password/${result[0].id}/${token}`  
-                console.log(link);
-                mailers.forgot_password(result, token);
-                res.send('Password reset link has been sent to your email...');
 
             })
         })
@@ -110,29 +84,6 @@ function forgot_password() {
                 }
             })
         }) 
-            const { id, token} = req.params;
-
-        pool.getConnection((err, connection) => {
-            if(err) throw err
-            connection.query('SELECT * FROM leads WHERE id=?', id, (err, result) => {
-                if( id != result[0].id){
-                    res.send('invalid')
-                    return;
-                }
-
-                const secret = JWT_SECRET + result[0].password
-                // console.log(secret);
-
-                try {
-                    const payload = jwt.verify(token, secret)
-                    res.render("./Client/reset-password", {email: result[0].email})
-
-                } catch (error) {
-                    res.redirect("/forgot-password",)
-                }
-
-            })
-        })
     
     })
 
@@ -156,38 +107,6 @@ function forgot_password() {
                 }else{
                     req.flash('danger', 'We could not find a match for this link', )
                     res.redirect("/user/login",)
-                if( id != result[0].id){
-                    res.send('invalid')
-                    return;
-                }
-
-                const secret = JWT_SECRET + result[0].password;
-
-                if(token) {
-                    jwt.verify(token, secret, (error, decodedToken) => {
-                         if(error) {
-                           res.send("error")
-                         }
-                    })
-                  }
-
-                try {
-
-                    if(!result[0]) {
-                        res.send('We could not find a match for this link');
-                    }else{
-                        bcrypt.hash(password, 12).then(hashed => {
-                            const sql = "UPDATE leads SET password = ? WHERE id = ?" 
-                            connection.query(sql, [hashed, id], (err, result) => {
-                                // res.send('password successfully changed')
-                                res.redirect("/user/login",)
-                            })
-                        })
-                    }
-
-                } catch (error) {
-                    console.log(error.message)
-                    res.redirect("/forgot-password",)
                 }
 
             })
