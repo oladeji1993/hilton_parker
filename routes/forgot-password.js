@@ -42,11 +42,9 @@ function forgot_password() {
                 if (err) throw err;
                 if (result.length > 0) {
                     const secret = JWT_SECRET
-                    const payload = {
-                        email: result[0].email,
-                        id: result[0].id
-                    }
-                    const token = jwt.sign(payload, secret, {expiresIn: "20m"});
+                    const payload =  result[0].email
+                    
+                    const token = jwt.sign(payload, secret);
                     const link = `http://localhost:3000/forgot-password/${result[0].id}/${token}`  
                     console.log(link);
                     mailers.forgot_password(result, token);
@@ -68,14 +66,16 @@ function forgot_password() {
 
     route.get('/:id/:token', (req, res, next) =>{
         const token = req.params.token
-
+        const message = req.flash 
         pool.getConnection((err, con) =>{
             con.query( 'SELECT * FROM leads', (err, result) =>{
                 if(result){
                     const secret = JWT_SECRET
                     const payload = jwt.verify(token, secret)
                     if(payload){
-                        res.render("./Client/reset-password",)
+                        res.render("./Client/reset-password", {
+                            message
+                        })
                     }else{
                         console.log(err)
                     }
