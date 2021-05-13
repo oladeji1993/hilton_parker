@@ -9,6 +9,8 @@ require('dotenv').config()
 const passport = require('passport');
 const cookiePasser = require('cookie-parser')
 
+// rubish comment
+
 app.use(session({ secret: process.env.TOKEN_SECRET }));
 app.use(cookiePasser(process.env.TOKEN_SECRET));
 app.use(flash());
