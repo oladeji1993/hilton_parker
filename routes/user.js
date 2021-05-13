@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs')
 const passport = require('passport');
 const multer = require('multer');
 var path = require('path')
-// const upload = multer({ dest: 'uploads/' })
 const LocalStrategy = require('passport-local').Strategy;
 
 const storage = multer.diskStorage({
@@ -15,7 +14,7 @@ const storage = multer.diskStorage({
       cb(null, './uploads')
     },
     filename: function (req, file, cb, next) {
-        const date = Date.now()
+        const date = new Date().getTime()
       cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
     }
     
@@ -79,12 +78,16 @@ function user() {
             failureFlash: true 
          })
     )
-
+    
+    route.get('/uploads', (req, res) => {
+        res.render('./Client/uploads')
+    })
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {
             if(err) throw err;
             con.query('SELECT * FROM leads WHERE email = ?', user.email, (err, result) => {
+                console.log(result)
                 if (err) throw err;
                 if (result.length > 0) {
                     const email = user.email
@@ -92,6 +95,7 @@ function user() {
                     bcrypt.hash(password, 12).then(hashed => {
                         const sql = "UPDATE leads SET password = ? WHERE email = ?" 
                         con.query(sql, [hashed, email], (err, result) => {
+                            console.log(result)
                             req.flash('success', 'Password created Please Login ', )
                             res.redirect('/user/login')
                         })
@@ -170,7 +174,6 @@ function user() {
                 universitycert,
                 othercert
             } = req.files
-            console.log(primaryschoolcert)
             const params = Object.values(req.body)
             const user = req.user.id
             pool.getConnection((err, con) => {
@@ -188,11 +191,30 @@ function user() {
                 program = ?,
                 course1 = ?,
                 course2 = ?,
-                course3 = ? 
+                course3 = ?,
+                primaryschoolname = ?,
+                primaryschoolyear = ?,
+                secondaryschoolname = ?,
+                secondaryschoolyear = ?,
+                polythecnicname = ?,
+                polythecnicyear = ?,
+                universityname = ?,
+                universityyear = ?,
+                primaryschoolcert = ?,
+                secondaryschoolcert = ?,
+                polythecniccert = ?,
+                universitycert = ?,
+                othercert = ?
                 WHERE id = ${user} 
                 `
                 console.log(req.body)
                 
+                params.push(primaryschoolcert[0].filename)
+                params.push(secondaryschoolcert[0].filename)
+                params.push(polythecniccert[0].filename)
+                params.push(universitycert[0].filename)
+                params.push(othercert[0].filename)
+                console.log(params)
                 con.query(sql, params, (err, result) => {
                     console.log(result)
                     res.redirect('/user/dashboard')

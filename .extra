@@ -1,0 +1,99 @@
+<table class="table">
+    <div class="en-container">
+        <div class="enrolment">EDUCATIONAL BACKGROUND</div>
+    </div>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">INSTITUTION NAME</th>
+        <th scope="col">YEAR GRADUATED</th>
+        <th scope="col">CREDENTIALS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">PRIMARY</th>
+        <td><input type="text" class="form-control"name="primaryschoolname" value="<%= user.primaryschoolname %>" > </td>
+        <td><input type="text" class="form-control" name="primaryschoolyear" value="<%= user.primaryschoolyear %>" ></td>
+        <% if (user.primaryschoolcert){ %>
+            <td>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-check fa-2x" style="color:green;"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="primaryschoolcert" style="border: 2px solid green;" value="submited" disabled>
+                  </div></td>
+        <%} else { %>
+        <td><input type="file" class="form-control" name="primaryschoolcert"></td>
+        <% } %>
+      </tr>
+      <tr>
+        <th scope="row">SECONDARY</th>
+        <td><input type="text" class="form-control" name="secondaryschoolname" value="<%= user.secondaryschoolname %>" ></td>
+        <td><input type="text" class="form-control" name="secondaryschoolyear" value="<%= user.secondaryschoolname %>" ></td>
+        <% if (user.primaryschoolcert){ %>
+            <td>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-check fa-2x" style="color:green;"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="primaryschoolcert" style="border: 2px solid green;" value="submited" disabled>
+                  </div></td>
+        <%} else { %>
+            <td><input type="file" class="form-control" name="secondaryschoolcert"> </td>
+        <% } %>
+       
+      </tr>
+      <tr>
+        <th scope="row">POLYTECHNIC</th>
+        <td><input type="text" class="form-control" name="polythecnicname" value="<%= user.polythecnicname %>" > </td>
+        <td><input type="text" class="form-control" name="polythecnicyear" value="<%= user.polythecnicyear %>" >  </td>
+        <% if (user.primaryschoolcert){ %>
+            <td>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-check fa-2x" style="color:green;"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="" style="border: 2px solid green;" value="submited" disabled>
+                    <input type="text" class="form-control hidden" name="polythecniccert" value="<%= user.polythecniccert %>" >
+                  </div></td>
+        <%} else { %>
+            <td><input type="file" class="form-control" name="polythecniccert"></td>
+        <% } %>
+      </tr>
+      <tr>
+        <th scope="row">UNIVERSITY</th>
+        <td><input type="text" class="form-control" name="universityname" value="<%= user.universityname %>" ></td>
+        <td><input type="text" class="form-control" name="universityyear" value="<%= user.universityyear %>" ></td>
+        <% if (user.universitycert){ %>
+            <td>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-check fa-2x" style="color:green;"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="" style="border: 2px solid green;" value="submited" disabled>
+                    <input type="text" class="form-control hidden" name="universitycert" value="<%= user.universitycert %>" >
+                  </div></td>
+        <%} else { %>
+            <td><input type="file" class="form-control" name="universitycert"></td>
+        <% } %>
+      </tr>
+      <tr>
+        <th scope="row">OTHER PROGRAM</th>
+        <td><input type="text" class="form-control" name="othername" value="<%= user.othername %>" ></td>
+        <td><input type="text" class="form-control" name="otheryear" value="<%= user.otheryear %>" ></td>
+        <% if (user.othercert){ %> 
+            <td>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-check fa-2x" style="color:green;"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="" style="border: 2px solid green;" value="submited" disabled>
+                    <input type="text" class="form-control hidden" name="othercert" value="<%= user.othercert %>" >
+                  </div></td>
+        <%} else { %>
+            <td><input type="file" class="form-control" name="othercert"></td>
+        <% } %>
+      </tr>
+    </tbody>
+</table>
