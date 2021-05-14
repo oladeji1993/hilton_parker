@@ -80,15 +80,40 @@ function user() {
     )
     
     route.get('/uploads', (req, res) => {
-        const userid = req.user.id
-        pool.getConnection((err, con) => {
+        if(req.user){
+            const userid = req.user.id
+            pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ?', userid, (err, user) => {
                 res.render('./Client/uploads', {
                     user: user[0]
                 })
             })
         })
+        }else{
+            req.flash('danger', 'You must login first')
+            res.redirect('/user/login')
+        }
         
+        
+    })
+
+    var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
+    route.post('/uploads', (req, res, next)  => {
+        if(req.user){
+            next()
+        }else{
+            res.render('error')
+        }
+    },cpUpload ,(req, res) => {
+        if(req.user){
+            const fields = req.body
+            console.log(fields)
+            console.log(req.files)
+            res.send(req.files)
+        }else{
+            res.render('error')
+        }
+
     })
     route.post('/set' , (req, res) => {
         const user = req.body
@@ -164,22 +189,9 @@ function user() {
             res.redirect('/user/login')
         }
     })
-    var cpUpload = upload.fields([
-        { name: 'primaryschoolcert', maxCount: 1 }, 
-        { name: 'secondaryschoolcert', maxCount: 1}, 
-        { name: 'polythecniccert', maxCount: 1}, 
-        { name: 'universitycert', maxCount: 1},
-        { name: 'othercert', maxCount: 1}
-    ])
-    route.post('/apply', cpUpload,  (req, res) => {
+    
+    route.post('/apply',  upload.none(),(req, res) => {
         if(req.user){
-            const {
-                primaryschoolcert,
-                secondaryschoolcert,
-                polythecniccert,
-                universitycert,
-                othercert
-            } = req.files
             const params = Object.values(req.body)
             const user = req.user.id
             pool.getConnection((err, con) => {
@@ -197,32 +209,11 @@ function user() {
                 program = ?,
                 course1 = ?,
                 course2 = ?,
-                course3 = ?,
-                primaryschoolname = ?,
-                primaryschoolyear = ?,
-                secondaryschoolname = ?,
-                secondaryschoolyear = ?,
-                polythecnicname = ?,
-                polythecnicyear = ?,
-                universityname = ?,
-                universityyear = ?,
-                primaryschoolcert = ?,
-                secondaryschoolcert = ?,
-                polythecniccert = ?,
-                universitycert = ?,
-                othercert = ?
+                course3 = ?
                 WHERE id = ${user} 
                 `
-                console.log(req.body)
                 
-                params.push(primaryschoolcert[0].filename)
-                params.push(secondaryschoolcert[0].filename)
-                params.push(polythecniccert[0].filename)
-                params.push(universitycert[0].filename)
-                params.push(othercert[0].filename)
-                console.log(params)
                 con.query(sql, params, (err, result) => {
-                    console.log(result)
                     res.redirect('/user/dashboard')
                 })
                 

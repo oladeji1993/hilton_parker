@@ -104,12 +104,12 @@
                       <div class="text-center color pt-1 font-italic" id="-message"> <small>NOTE: you can upload up to three(3) documents at once </small></div> 
                       <div class="container h-100 form-container" >
                           <div class="row h-100 justify-content-center align-items-center">
-                            <form class="col-12">
+                            <form class="col-12" action="/user/uploads" method="POST" enctype="multipart/form-data">
           
                               <div class="item-1">
                                 <div class="form-group m-3" id="doc1">
-                                  <label for="formGroupExampleInput">Document Name</label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder=" Example  (B.S.C Certificate)">
+                                  <label for="formGroupExampleInput">Document Name<small class="text-danger"> (required)</small> </label>
+                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document1" placeholder=" Example  (B.S.C Certificate)">
                                 </div>
                                 <div class="form-group m-3 ">
                                   <label for="formGroupExampleInput2">Select File</label>
@@ -117,12 +117,12 @@
                                   
                                 </div>
                               </div>
-                              <span class="text-danger m2" id="input-error-message">Invalid Format</span>
+                              <span class="text-danger m2" id="input-error-message">Invalid File Format (uplod only ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc'])</span>
                               
                               <div class="item-2">
                                 <div class="form-group m-3">
-                                  <label for="formGroupExampleInput">Document Name</label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example  (H.N.D Certificate)">
+                                  <label for="formGroupExampleInput">Document Name <small class="text-danger">(required)</small> </label>
+                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document2"placeholder="Example  (H.N.D Certificate)">
                                 </div>
                                 <div class="form-group m-3" id="doc2">
                                   <label for="formGroupExampleInput2">Select File</label>
@@ -133,17 +133,17 @@
           
                               <div class="item-3  ">
                                 <div class="form-group m-3 hidden">
-                                  <label for="formGroupExampleInput">Document Name</label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="  Example  (O.N.D Certificate)">
+                                  <label for="formGroupExampleInput">Document Name <small class="text-danger">(required)</small> </label>
+                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document3" placeholder="  Example  (O.N.D Certificate)">
                                 </div>
                                 <div class="form-group m-3 " id="doc1" >
                                   <label for="formGroupExampleInput2">Select File</label>
                                   <input type="file" name="document" class="form-control" id="file3">
                                 </div>
                               </div>
-                                <p id="count">3</p>
+                                <p id="count" class="d-none">3</p><hr>
                               <span class="btn btn-lg btn-outline-dark m-2 add-another"> <i class="fa fa-plus"></i>&nbsp;Add Another</span>
-                              <button type="submit" class="btn btn-lg btn-outline-success m-2"><i class="fab fa-telegram-plane"></i>&nbsp;Submit</button>
+                              <button type="submit" class="btn btn-lg btn-outline-success m-2" id="submit"><i class="fab fa-telegram-plane"></i>&nbsp;Submit</button>
                             </form>   
                             <div class="text-center text-danger pt-1 font-italic" id="eror-message"> <small> you can only upload 3 documents at once </small></div> 
                             
@@ -170,39 +170,42 @@
     $('#input-error-message').hide()
     $('#eror-message').hide()
     $('.add-another').addClass('disabled')
+    $('#submit').addClass('disabled')
 
     $("#file").change(function () {
       $('.add-another').removeClass('disabled')
-      $('#file').removeClass('is-invalid').addClass('is-valid')
+      $('#submit').removeClass('disabled')
+      // $('#file').removeClass('is-invalid').addClass('is-valid')
       $('#input-error-message').hide(300)
-        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             $('.add-another').addClass('disabled')
-            $('#file').addClass('is-invalid')
+            $('#submit').addClass('disabled')
+            // $('#file').addClass('is-invalid')
             $('#input-error-message').show(300)
         }
     });
 
     $("#file2").change(function () {
       $('.add-another').removeClass('disabled')
-      $('#file').removeClass('is-invalid').addClass(' is-valid')
+      // $('#file').removeClass('is-invalid').addClass(' is-valid')
       $('#input-error-message').hide(300)
-        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             $('.add-another').addClass('disabled')
-            $('#file').addClass(' is-invalid')
+            // $('#file').addClass(' is-invalid')
             $('#input-error-message').show(300)
         }
     });
 
     $("#file3").change(function () {
       $('.add-another').removeClass('disabled')
-      $('#file').removeClass('is-invalid').addClass('is-valid')
+      // $('#file').removeClass('is-invalid').addClass('is-valid')
       $('#input-error-message').hide(300)
-        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
         if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
             $('.add-another').addClass('disabled')
-            $('#file').addClass('is-invalid')
+            // $('#file').addClass('is-invalid')
             $('#input-error-message').show(300)
         }
     });
