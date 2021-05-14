@@ -29,28 +29,37 @@ function landingForm(){
             })
     }, (req, res) => {
         pool.getConnection((err, con) => {
-            if (err) throw err;
-            con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
-                const params = req.body
-                params.accountofficer = admin[0].id
-                params.regdate = (new Date()).toLocaleDateString('en-US')
-                params.status = 'new'
-                con.query('INSERT INTO leads SET ?', params, async (err, result) => {
-                    con.release()
-                    if(!err){
-                        // GENERATE DYNAMIC LINK TO CREATE PASSWORD
-                        const hashed = cryptr.encrypt(params.email);
-                        params.hash = hashed
-                        mailers.newLead(params)
-                        mailers.applied(params)
-                        res.render('./client/success')
-                        // mailers.newLead(params)
-                        
-                    }else{
-                        console.log(err)
+            con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, user) => {
+                if(user){
+                    req.flash('warning', 'Email has already been used please login or contact a Customer Support')
+                    res.redirect('/')
+                }else{
+                    con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
+                        const params = req.body
+                        params.accountofficer = admin[0].id
+                        params.regdate = (new Date()).toLocaleDateString('en-US')
+                        params.status = 'new'
+                        con.query('INSERT INTO leads SET ?', params, async (err, result) => {
+                            con.release()
+                            if(!err){
+                                // GENERATE DYNAMIC LINK TO CREATE PASSWORD
+                                const hashed = cryptr.encrypt(params.email);
+                                params.hash = hashed
+                                mailers.newLead(params)
+                                mailers.applied(params)
+                                res.render('./client/success')
+                                // mailers.newLead(params)
+                                
+                            }else{
+                                res.render('/error')
+                            }
+                        })
                     }
-                })
+                    )
+                }
+                
             })
+            
             
         })
     })

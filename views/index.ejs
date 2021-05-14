@@ -52,10 +52,12 @@
             <div class="col-sm-6 col-12">
             </div>
             <div class="col-sm-6 col-12">
+             
               <div class="bg-content">
                 <div>
                   <div style="text-align:right" class="content-line">Quick & easy<br> Education for anyone</div>
                 </div>
+                
                 <div class="contact-form">
                   <div>
                     <div class="application">Start Application</div>
@@ -88,10 +90,24 @@
                     </div>
                   </form>
                 </div>
+                
               </div>
+              
             </div>
+            <% if (message) { %>
+    
+              <% for (var key in message) { %>
+                <!-- alert message -->
+                <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
+                    <strong class="text-right"><%= message[key] %>!</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% } %>
+        <% } %>
           </div>
+          
         </div>
+        
       </header>
 
    
