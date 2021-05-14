@@ -5,6 +5,7 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 const bcrypt = require('bcryptjs')
 const passport = require('passport');
+const mailers = require("../services/mailers");
 const multer = require('multer');
 var path = require('path')
 const LocalStrategy = require('passport-local').Strategy;
@@ -97,6 +98,7 @@ function user() {
         
     })
 
+<<<<<<< HEAD
     var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
     route.post('/uploads', (req, res, next)  => {
         if(req.user){
@@ -115,6 +117,23 @@ function user() {
         }
 
     })
+=======
+    route.post('/contact', (req, res) => {
+        const details = req.body
+        if(details)  {
+            mailers.contact(details)
+            req.flash('success', 'Message sent ', )
+            res.redirect("/contact")
+        }else{
+            req.flash('danger', 'Message not sent ', )
+            res.redirect("/contact")
+        }
+       
+        
+    })
+
+
+>>>>>>> e45cf5ea778dd9a9bdbfb20d5ce900bc6675e87c
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {

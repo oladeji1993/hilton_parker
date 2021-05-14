@@ -52,11 +52,13 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/contact', (req, res) => {
+    const message = req.flash();
     const userid = req.user.id
     pool.getConnection((err, con) => {
         con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
             res.render('./Client/contactus', {
-                user: user[0]
+                user: user[0],
+                message
             })
         })
     })
