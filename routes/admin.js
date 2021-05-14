@@ -168,6 +168,33 @@ function admin() {
             })
         })
         })
+
+
+
+    // DASHBOARD NAVIGATION LINKS
+    route.get('/newApplicants', (req, res) => {
+        res.render('./admin/newapplicants')
+    })
+
+    route.get('/completereg', (req, res) => {
+        res.render('./admin/completereg')
+    })
+
+    route.get('/makepayment', (req, res) => {
+        res.render('./admin/makepayment')
+    })
+
+    route.get('/success', (req, res) => {
+        res.render('./admin/successfulapp')
+    })
+
+
+
+    route.get('/home', (req, res) => {
+        res.render('./admin/dashboard')
+    })
+       
+        
     return route
 }
 

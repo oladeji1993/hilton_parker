@@ -62,7 +62,6 @@ app.get('/contact', (req, res) => {
 })
 
 
-
 const landingForm = require('./routes/landingform');
 app.use('/landingform', landingForm);
 
