@@ -37,11 +37,10 @@ function forgot_password() {
                     mailers.forgot_password(encryptedid,mail, token)
                     console.log(user[0].id)
                     const sql = "UPDATE leads SET token = ? WHERE id = ?" 
-                    con.query(sql, [token ,user[0].id], (err, user) => {
-                        console.log(user)
-                        res.render('./Client/reset-password' , {
-                            message
-                        })
+                    con.query(sql, [token ,user[0].id], (err, response) => {
+                        console.log(response)
+                        req.flash('info', 'Password reset link sent check your mailbox')
+                        res.redirect('/forgot-password')
                     })
 
                 }else{
@@ -63,12 +62,13 @@ function forgot_password() {
                         if(user[0].id == id){}
                         try {
                             const decrptedtoken = cryptr.decrypt(token)
-                            if(user[0].token != null){
+                            if(user[0].token != 'null'){
                                 try {
                                     const dbtoken = cryptr.decrypt(user[0].token)
                                     if(decrptedtoken === dbtoken){
                                         res.render('./Client/reset-password' , {
-                                                message
+                                                message: message,
+                                                email: user[0].email
                                             })
                                     }else{
                                         req.flash('danger', 'Invalid Token')
@@ -79,6 +79,9 @@ function forgot_password() {
                                     res.redirect('/forgot-password')
                                 }
 
+                            }else{
+                                req.flash('danger', 'Invalid Token')
+                                res.redirect('/forgot-password')    
                             }
                         } catch (err) {
                             req.flash('danger', 'Invalid Token')
@@ -91,10 +94,9 @@ function forgot_password() {
                 })
             })
         }catch(err){
-            if(err){
                 req.flash('danger', 'Invalid Token')
                 res.redirect('/forgot-password')
-            }
+            
         }
     //     
         
@@ -102,8 +104,37 @@ function forgot_password() {
 
     })
 
-    route.post('/')
+    route.post('/reset', (req, res) => {
+        const newpassword = req.body.password
+        const email = req.body.email
+        console.log(email)
+        console.log(req.body)
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE email = ?',email, (err, response) => {
+                console.log(response)
+                if(response){
+                    bcrypt.hash(newpassword, 12).then(hashed => {
+                        const sql = "UPDATE leads SET password = ? WHERE email = ?" 
+                        con.query(sql, [hashed, email], (err, result) => {
+                            console.log(result)
+                            const sql2 = "UPDATE leads SET token = ? WHERE email = ?" 
+                            con.query(sql2, ['null', email], (err, result) => {
+                                console.log(result)
+                                req.flash('info', 'Password updated Please Login ', )
+                                res.redirect('/user/login')
+                            })
+                            
+                        })
+                    })
+                }else{
+                    req.flash('danger', 'An error occured please try again')
+                    res.redirect('/forgot-password')
+                }
+            })
+        })
+
+    })
     return route
 }
 
-module.exports = forgot_password();
+module.exports = forgot_password(); 

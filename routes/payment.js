@@ -3,6 +3,7 @@ const request = require('request');
 const route = express.Router();
 const _ = require('lodash');
 const { response } = require('express');
+const pool = require('../config/dbconfig');
 const {initializePayment, verifyPayment} = require('../config/paystack')(request);
 
 
@@ -10,13 +11,19 @@ function makePayment(){
 
     // render payment page
     route.get('/',(req, res) => {
-        res.render('./Client/payment');
+        const userid = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
+                res.render('./Client/payment', {
+                    user : user[0]
+                });
+            })
+        })
     });
 
     // Get details from Form
 
     route.post('/paystack', (req, res) => {
-        console.log(req.body)
         const form = _.pick(req.body,['amount','email','full_name','payment_Type']);
         form.metadata = {
             full_name : form.full_name,
@@ -31,7 +38,6 @@ function makePayment(){
                 return;
             }
             details = JSON.parse(body);
-            console.log(details)
             res.redirect(details.data.authorization_url)
         });
     });

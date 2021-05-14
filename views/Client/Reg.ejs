@@ -3,239 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+
+     <!--google font -->
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+     <!-- End of google font -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/Reg.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <title>Registration</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/Client-dahboard.css">
+    <link rel="stylesheet" href="/css/Reg.css">
 </head>
 <body>
-    
-    <div class="container m-container">
-        <div class="header">
-            <div class="application"> APPLICATION</div>
-            <p>Please give valid information</p>
+
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span>Hilton Parker</span></h2>
         </div>
-        <div class="row">
-            <form action="/user/apply" method="POST" enctype="multipart/form-data">  
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">SURNAME</label>
-                                <div class="input-group mb-4">
-                                    <input type="text" class="form-control" aria-label="name" value="<%= user.lastname %>" name="lastname">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">FIRSTNAME</label>
-                                <div class="input-group mb-4">
-                                    <input type="text"     class="form-control" aria-label="name" value="<%= user.firstname %>" name="firstname" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">OTHERNAME</label>
-                                <div class="input-group mb-4">
-                                    <input type="text"     class="form-control" name="othername"  value="<%= user.othername %>" > 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- adress and date of birth -->
-                <div class="row">
-                    <div class="col-md-8 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">ADDRESS</label>
-                                <div class="input-group mb-4">
-                                    <!-- <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span> -->
-                                    <input type="text"     class="form-control" aria-label="Address"  name='address'  value="<%= user.address %>" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">DATE OF BIRTH</label>
-                                <div class="input-group mb-4">
-                                    <input type="date"   name="dateofbirth"  class="form-control" aria-label="date of birth"  value="<%= user.dateofbirth %>" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- email/phone/place of birth -->
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">EMAIL</label>
-                                <div class="input-group mb-4">
-                                    <input type="text" name="email"    class="form-control" aria-label="Email" value="<%= user.email %>"   >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">PHONE NUMBER</label>
-                                <div class="input-group mb-4">
-                                    <input type="text"  name="phonenumber"   class="form-control" aria-label="Phone number" value="<%= user.phonenumber %>"  >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">PLACE OF BIRTH</label>
-                                <div class="input-group mb-4">
-                                    <input type="text"  name="placeofbirth"  class="form-control" aria-label="Place of birth"  value="<%= user.placeofbirth %>"  > 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-    
-                <!-- NEXT OF KIN -->
-                <div class="row">
-                    <div class="col-md-4 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">GENDER</label>
-                                <div class="input-group mb-4">
-                                    <select class="form-select" aria-label="Default select example" name="gender" value="<%= user.gender %>" > 
-                                        <% if (user.gender) {%> 
-                                            <option value="<%= user.gender %>" selected> <%= user.gender %></option>
-                                            <%} else {%> 
-                                                <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
-                                                <%}%>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-    
-                <!-- enrolment question session -->
-                <div class="row">
-                    <div class="en-container">
-                        <div class="enrolment">ENROLMENT QUESTIONS</div>
-                    </div>
-                    <div class="col-md-6 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">Marital status</label>
-                                <div class="input-group mb-4">
-                                    <select class="form-select" aria-label="Default select example" name="maritalstatus">
-                                        <% if (user.maritalstatus) {%> 
-                                            <option value="<%= user.maritalstatus %>" selected> <%= user.maritalstatus %></option>
-                                            <%} else {%> 
-                                        <option value="single">Single</option>
-                                        <option value="married">Married</option>
-                                        <option value="divorced">Divorced</option>
-                                        <%}%>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-6 col-12">
-                        <div class="input-field">
-                            <div>
-                                <label for="" class="form-label">Program</label>
-                                <div class="input-group mb-4">
-                                    <select class="form-select" name="program">
-                                        <option value="<%= user.program %>" selected> <%= user.program %></option>
-                                        <option value="diploma">Diploma Certificate</option>
-                                        <option value="Msc">Msc</option>
-                                        <option value="Bsc">Bsc</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-    
-                 <!-- Course of choice-->
-                 <div class="row">
-                    <div class="col-md-4 col-12">
-                        <label for="" class="form-label">Course of Choice</label>
-                        <div class="input-field">
-                            <div>
-                                <div class="input-group mb-4">
-                                    <input type="text"placeholder="Choice 1"     class="form-control" name="course1" value="<%= user.course1 %>" > 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-4 col-12">
-                        <div class="input-field choice">
-                            <div>
-                                <div class="input-group mb-4">
-                                    <input type="text" placeholder="Choice 2"     class="form-control" name="course2" value="<%= user.course2 %>" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-4 col-12">
-                        <div class="input-field choice">
-                            <div>
-                                <div class="input-group mb-4">
-                                    <input type="text" placeholder="Choice 3"     class="form-control" name="course3" value="<%= user.course3 %>" >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-12">
-                    <div class="row">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input"     type="checkbox" value="checked">
-                            <label class="form-check-label checkbox" for="inlineCheckbox1">I declare that all information given are valid and could be verified</label>
-                          </div>
-                    </div>
-                </div>
-                
-                <div class="d-flex">
-                    <div class="submit-btn">
-                        <button type="submit">Register</button>
-                    </div>
-                    <div class="submit-btn mt-5 mx-4">
-                        <a href="/user/dashboard">Back</a>
-                    </div>
-                </div>
-            </form>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/user/dashboard" title="Dashboard" class=""><span><i class="fas fa-id-card"></i></span> <span>Dashboard</span></a>
+                </li>
+
+                <li>
+                    <a href="/user/apply" class="active"> <span><i class="fas fa-user-edit"></i></span> <span>Complete Application</span></a>
+                </li>
+
+                <li>
+                    <a href="/user/uploads"><span><i class="fas fa-user-edit"></i></span> <span>Upload Documents</span></a>
+                </li>
+
+                <li>
+                    <a href="/pay"  title="Make payment"><span><i class="fas fa-credit-card"></i></span> <span>Make payment</span></a>
+                </li>
+
+                <li>
+                    <a href="/contact"  title="Contact Us"><span><i class="fas fa-envelope-open-text"></i></span> <span>Contact us</span></a>
+                </li>
+
+                <li>
+                    <a href="/user/logout"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
+                </li>
+            </ul>
         </div>
     </div>
-</body>
-</html>
 
+
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span><i class="fas fa-bars"></i></span>
+                </label>
+                Dashboard
+            </h2>
+
+
+            <div class="user-wrapper">
+                <small class="">Welcome</small>
+                <!-- <img src="/images/team4.jpg" width="30px" height="30px" alt=""> -->
+                <div>  
+                    <small><%= user.firstname %> <%= user.lastname %></small>
+                </div>
+            </div>
+        </header>
+
+
+        <main>
+
+<div class="container m-container">
+    <div class="text-center">
+        <hr>
+        <div class="text-center"> <h5 style="color: #f69617;;">APPLICATION</h5> </div>
+        <span>Please provide valid information</span>
+    </div>
+    <hr>
+    <div class="row">
+        <form action="/user/apply" method="POST" enctype="multipart/form-data">  
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">SURNAME</label>
+                            <div class="input-group mb-4">
+                                <input type="text" class="form-control" aria-label="name" value="<%= user.lastname %>" name="lastname">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">FIRSTNAME</label>
+                            <div class="input-group mb-4">
+                                <input type="text"     class="form-control" aria-label="name" value="<%= user.firstname %>" name="firstname" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">OTHERNAME</label>
+                            <div class="input-group mb-4">
+                                <input type="text"     class="form-control" name="othername"  value="<%= user.othername %>" > 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- adress and date of birth -->
+            <div class="row">
+                <div class="col-md-8 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">ADDRESS</label>
+                            <div class="input-group mb-4">
+                                <!-- <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span> -->
+                                <input type="text"     class="form-control" aria-label="Address"  name='address'  value="<%= user.address %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">DATE OF BIRTH</label>
+                            <div class="input-group mb-4">
+                                <input type="date"   name="dateofbirth"  class="form-control" aria-label="date of birth"  value="<%= user.dateofbirth %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- email/phone/place of birth -->
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">EMAIL</label>
+                            <div class="input-group mb-4">
+                                <input type="text" name="email"    class="form-control" aria-label="Email" value="<%= user.email %>"   >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">PHONE NUMBER</label>
+                            <div class="input-group mb-4">
+                                <input type="text"  name="phonenumber"   class="form-control" aria-label="Phone number" value="<%= user.phonenumber %>"  >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">PLACE OF BIRTH</label>
+                            <div class="input-group mb-4">
+                                <input type="text"  name="placeofbirth"  class="form-control" aria-label="Place of birth"  value="<%= user.placeofbirth %>"  > 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- NEXT OF KIN -->
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">GENDER</label>
+                            <div class="input-group mb-4">
+                                <select class="form-select" aria-label="Default select example" name="gender" value="<%= user.gender %>" > 
+                                    <% if (user.gender) {%> 
+                                        <option value="<%= user.gender %>" selected> <%= user.gender %></option>
+                                        <%} else {%> 
+                                            <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                            <%}%>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- enrolment question session -->
+            <div class="row">
+                <hr>
+                <div class="text-center">
+                    <div class="text-center"> <h5 style="color: #f69617;;">Enrolment Questions</h5> </div>
+                </div>
+                <hr>
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">Marital status</label>
+                            <div class="input-group mb-4">
+                                <select class="form-select" aria-label="Default select example" name="maritalstatus">
+                                    <% if (user.maritalstatus) {%> 
+                                        <option value="<%= user.maritalstatus %>" selected> <%= user.maritalstatus %></option>
+                                        <%} else {%> 
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="divorced">Divorced</option>
+                                    <%}%>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">Program</label>
+                            <div class="input-group mb-4">
+                                <select class="form-select" name="program">
+                                    <option value="<%= user.program %>" selected> <%= user.program %></option>
+                                    <option value="diploma">Diploma Certificate</option>
+                                    <option value="Msc">Msc</option>
+                                    <option value="Bsc">Bsc</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+             <!-- Course of choice-->
+             <div class="row">
+                <div class="col-md-4 col-12">
+                    <label for="" class="form-label">Course of Choice</label>
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text"placeholder="Choice 1"     class="form-control" name="course1" value="<%= user.course1 %>" > 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field choice">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" placeholder="Choice 2"     class="form-control" name="course2" value="<%= user.course2 %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field choice">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" placeholder="Choice 3"     class="form-control" name="course3" value="<%= user.course3 %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-12">
+                <div class="row">
+                    <div class="form-check form-check-inline">
+                        <!-- <input class="form-check-input"     type="checkbox" value="checked"> -->
+                        <label class="form-check-label checkbox" for="inlineCheckbox1">By submiting I declare that all information given are valid and could be verified</label>
+                      </div>
+                </div>
+            </div>
+            
+            <div class="d-flex">
+                <div class="submit-btn">
+                    <button type="submit">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+        </main>
+    </div>
+</body>
 
 
 

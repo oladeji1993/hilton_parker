@@ -50,7 +50,15 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/contact', (req, res) => {
-    res.render('./Client/contactus')
+    const userid = req.user.id
+    pool.getConnection((err, con) => {
+        con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
+            res.render('./Client/contactus', {
+                user: user[0]
+            })
+        })
+    })
+    
 })
 
 

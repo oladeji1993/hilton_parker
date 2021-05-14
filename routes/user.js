@@ -80,14 +80,21 @@ function user() {
     )
     
     route.get('/uploads', (req, res) => {
-        res.render('./Client/uploads')
+        const userid = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE id = ?', userid, (err, user) => {
+                res.render('./Client/uploads', {
+                    user: user[0]
+                })
+            })
+        })
+        
     })
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {
             if(err) throw err;
             con.query('SELECT * FROM leads WHERE email = ?', user.email, (err, result) => {
-                console.log(result)
                 if (err) throw err;
                 if (result.length > 0) {
                     const email = user.email
@@ -95,7 +102,6 @@ function user() {
                     bcrypt.hash(password, 12).then(hashed => {
                         const sql = "UPDATE leads SET password = ? WHERE email = ?" 
                         con.query(sql, [hashed, email], (err, result) => {
-                            console.log(result)
                             req.flash('success', 'Password created Please Login ', )
                             res.redirect('/user/login')
                         })
@@ -122,7 +128,7 @@ function user() {
                         con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
                             const all = randomProperty(allAdmins)
                             res.render('./Client/dashboard', {
-                            user : result,
+                            user : result[0],
                             admin: admin[0],
                             allAdmin : all
     
