@@ -96,9 +96,6 @@ function forgot_password() {
                 res.redirect('/forgot-password')
             }
         }
-    //     
-        
-        
 
     })
 
