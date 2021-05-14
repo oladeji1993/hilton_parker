@@ -5,6 +5,7 @@ const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 const bcrypt = require('bcryptjs')
 const passport = require('passport');
+const mailers = require("../services/mailers");
 const multer = require('multer');
 var path = require('path')
 const LocalStrategy = require('passport-local').Strategy;
@@ -90,6 +91,22 @@ function user() {
         })
         
     })
+
+    route.post('/contact', (req, res) => {
+        const details = req.body
+        if(details)  {
+            mailers.contact(details)
+            req.flash('success', 'Message sent ', )
+            res.redirect("/contact")
+        }else{
+            req.flash('danger', 'Message not sent ', )
+            res.redirect("/contact")
+        }
+       
+        
+    })
+
+
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {

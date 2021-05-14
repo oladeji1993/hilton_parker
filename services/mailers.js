@@ -91,7 +91,37 @@ async function forgot_password(result, mail,token) {
     });
 
     console.log('message sent') 
-}   
+}
+
+async function contact(details) {
+    let transporter = nodemailer.createTransport(smtpTransport({
+        host: "webmail.softnoonng.com",
+        tls:{
+            rejectUnauthorized: false
+        },
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'collinswilson@softnoonng.com',
+            pass: process.env.MAIL_PASSWORD 
+        },
+    }));
 
 
-module.exports = {newLead, applied, forgot_password};
+    let info = await transporter.sendMail({
+        from: '"HILTON PARKER" <collinswilson@softnoonng.com>',
+        to: 'collinswilson@softnoonng.com', 
+        subject: 'Contact Form',
+        text: `
+            Name : ${details.firstname + ' ' + details.lastname},
+            email: ${details.email},
+            phone number: ${details.phonenumber},
+            Message: ${details.textarea}
+        `
+    });
+
+    console.log('message sent') 
+}
+
+
+module.exports = {newLead, applied, forgot_password, contact};
