@@ -20,14 +20,15 @@ const schema = joi.object({
 
 function admin() {
 
-    // route.get('/logout', (req, res) => {
-    //     console.log(req.cookies)
-    //     res.cookie('authentication','', {expiresIn: Date.now()})
-    //     res.redirect('/admin/login')
-    // })
+    route.get('/logout', (req, res) => {
+        res.cookie('authenticate','', {expiresIn: Date.now()})
+        res.redirect('/admin/login')
+    })
+
     route.get('/',  authenticateAdmin =(req, res, next) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            console.log(req.user)
             next()
          }else{
             req.flash('danger', 'You Must Login First', )
@@ -51,15 +52,7 @@ function admin() {
         pool.getConnection((err, con) => {
             if (err) throw err;
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
-                const accountofficer = admin[0].firstname + ' ' + admin[0].lastname
-                console.log(accountofficer)
-                con.query('SELECT * FROM leads WHERE status = "new" AND accountofficer = ?', accountofficer, (err, newLeads) => {
-                    console.log(newLeads)
-                    res.render('./admin/dashboard', {
-                        admin: admin,
-                        newLeads: newLeads
-                    })
-                })
+                    res.render('./admin/dashboard')
             } )
         })
     })
@@ -90,7 +83,8 @@ function admin() {
         // CHECK FOR ERROR 
         if (valid.error){
             err = valid.error 
-            res.send(err.details[0].message)
+            // res.send(err.details[0].message)
+            res.render('error')
         }else{
             // HASH PASSWORD 
             bcrypt.hash(valid.value.password, 12)
@@ -111,9 +105,10 @@ function admin() {
                                 con.query('INSERT INTO admin SET ?', value, (err, result) => {
                                     con.release()
                                     if(!err){
+                                        req.flash('success', 'Account Created please login', )
                                         res.redirect('/admin/login')
                                     }else{
-                                        res.send(err)
+                                        res.render('error')
                                     }
                                 })
                             }else{
@@ -121,7 +116,8 @@ function admin() {
                                 res.redirect('/admin/login')
                             }
                         }else{
-                            res.send(err)
+                            // res.send(err)
+                            res.render('error')
                         }
                     })
                 })
@@ -139,7 +135,10 @@ function admin() {
             next()
         }
     }, (req, res) => {
-        res.render('./admin/login')
+        const message = req.flash() 
+        res.render('./admin/login', {
+            message
+        })
     })
 
         // POST TO ADMIN LOGIN 
@@ -154,7 +153,7 @@ function admin() {
                     bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
                         if(response){
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
-                            res.cookie('authenticate', token, {maxAge: 3000}).redirect('/admin')
+                            res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/admin')
                         }else{
                             req.flash('danger', 'Incorrect Email or Password')
                             res.redirect('/admin/login')

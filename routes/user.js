@@ -85,7 +85,6 @@ function user() {
             const userid = req.user.id
             pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ?', userid, (err, user) => {
-                mailers.document_upload(user, mail, file, link)
                 res.render('./Client/uploads', {
                     user: user[0]
                 })
