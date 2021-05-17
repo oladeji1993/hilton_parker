@@ -93,6 +93,33 @@ async function forgot_password(result, mail,token) {
     console.log('message sent') 
 }
 
+async function document_upload(result, mail, filename, link) {
+    let transporter = nodemailer.createTransport(smtpTransport({
+        host: "webmail.softnoonng.com",
+        tls:{
+            rejectUnauthorized: false
+        },
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'collinswilson@softnoonng.com', 
+            pass: process.env.MAIL_PASSWORD
+        },
+    }));
+
+
+    let info = await transporter.sendMail({
+        from: '"HILTON PARKER" <collinswilson@softnoonng.com>',
+        to: `${mail}`,
+        subject: `${result[0].firstname}  ${result[0].lastname} Just Uploaded Document(s)`,
+        text: `
+            Find Download Link below
+            Download Link : 'http://localhost:3000/admin/${filename}/${link}'
+        `
+    });
+
+    console.log('message sent') 
+}
 async function contact(details) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "webmail.softnoonng.com",
@@ -124,4 +151,4 @@ async function contact(details) {
 }
 
 
-module.exports = {newLead, applied, forgot_password, contact};
+module.exports = {newLead, applied, forgot_password, contact, document_upload};

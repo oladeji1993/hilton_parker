@@ -85,6 +85,7 @@ function user() {
             const userid = req.user.id
             pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ?', userid, (err, user) => {
+                mailers.document_upload(user, mail, file, link)
                 res.render('./Client/uploads', {
                     user: user[0]
                 })
@@ -98,7 +99,6 @@ function user() {
         
     })
 
-<<<<<<< HEAD
     var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
     route.post('/uploads', (req, res, next)  => {
         if(req.user){
@@ -117,7 +117,6 @@ function user() {
         }
 
     })
-=======
     route.post('/contact', (req, res) => {
         const details = req.body
         if(details)  {
@@ -133,7 +132,6 @@ function user() {
     })
 
 
->>>>>>> e45cf5ea778dd9a9bdbfb20d5ce900bc6675e87c
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {
