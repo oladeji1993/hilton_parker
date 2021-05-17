@@ -139,7 +139,10 @@ function admin() {
             next()
         }
     }, (req, res) => {
-        res.render('./admin/login')
+        const message = req.flash()
+        res.render('./admin/login', {
+            message
+        })
     })
 
         // POST TO ADMIN LOGIN 
@@ -156,7 +159,7 @@ function admin() {
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                             res.cookie('authenticate', token, {maxAge: 3000}).redirect('/admin')
                         }else{
-                            req.flash('danger', 'Incorrect Email or Password')
+                            req.flash('danger', 'incorrect password')
                             res.redirect('/admin/login')
                         }
                     })

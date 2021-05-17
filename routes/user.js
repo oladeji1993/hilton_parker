@@ -98,7 +98,6 @@ function user() {
         
     })
 
-<<<<<<< HEAD
     var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
     route.post('/uploads', (req, res, next)  => {
         if(req.user){
@@ -117,7 +116,6 @@ function user() {
         }
 
     })
-=======
     route.post('/contact', (req, res) => {
         const details = req.body
         if(details)  {
@@ -133,7 +131,6 @@ function user() {
     })
 
 
->>>>>>> e45cf5ea778dd9a9bdbfb20d5ce900bc6675e87c
     route.post('/set' , (req, res) => {
         const user = req.body
         pool.getConnection((err, con) => {

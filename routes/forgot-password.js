@@ -35,7 +35,6 @@ function forgot_password() {
                     const token = cryptr.encrypt(user[0].id + user[0].email)
                     const mail = user[0].email
                     mailers.forgot_password(encryptedid,mail, token)
-                    console.log(user[0].id)
                     const sql = "UPDATE leads SET token = ? WHERE id = ?" 
                     con.query(sql, [token ,user[0].id], (err, response) => {
                         console.log(response)
@@ -104,8 +103,6 @@ function forgot_password() {
     route.post('/reset', (req, res) => {
         const newpassword = req.body.password
         const email = req.body.email
-        console.log(email)
-        console.log(req.body)
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE email = ?',email, (err, response) => {
                 console.log(response)
@@ -113,7 +110,6 @@ function forgot_password() {
                     bcrypt.hash(newpassword, 12).then(hashed => {
                         const sql = "UPDATE leads SET password = ? WHERE email = ?" 
                         con.query(sql, [hashed, email], (err, result) => {
-                            console.log(result)
                             const sql2 = "UPDATE leads SET token = ? WHERE email = ?" 
                             con.query(sql2, ['null', email], (err, result) => {
                                 console.log(result)
@@ -124,7 +120,7 @@ function forgot_password() {
                         })
                     })
                 }else{
-                    req.flash('danger', 'An error occured please try again')
+                    req.flash('danger', 'An error occurred please try again')
                     res.redirect('/forgot-password')
                 }
             })
