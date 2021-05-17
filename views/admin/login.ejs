@@ -11,14 +11,7 @@
 </head>
 <body>
     <% if (message) { %>
-        <% for (var key in message) { %>
-          <!-- alert message -->
-          <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
-              <strong class="text-right"><%= message[key] %>!</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-      <% } %>
-  <% } %>
+       
     <div class="container pt-5 header">
         <div class="row">
             <div class="col-lg-6 col-12 ">

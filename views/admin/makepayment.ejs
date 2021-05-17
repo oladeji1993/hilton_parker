@@ -74,16 +74,27 @@
                             <th class="col-md-2">Status</th>
                         </tr>
                     </thead>
+                    <%
+                        if(userList.length != 0){
+                            var i=1;
+                            userList.forEach(function(data){
+                    %>
                     <tbody>
                         <tr>
-                            <td>Airi Satou</td>
-                            <td class="highlight">sattu@gmail.com</td>
-                            <td>0918876543</td>
-                            <td>20/20/2021</td>
-                            <td>Phd</td>
-                            <td>Registration</td>
+                            <td><%=data.firstname %></td>
+                            <td class="highlight"><%=data.email %></td>
+                            <td><%=data.phonenumber %></td>
+                            <td><%=data.regdate %></td>
+                            <td><%=data.program %></td>
+                            <td><%=data.status %></td>
                         </tr>
                     </tbody>
+                    <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
                 </table>
               </div>
         </main>
