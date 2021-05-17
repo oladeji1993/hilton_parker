@@ -176,7 +176,23 @@ function admin() {
 
     // DASHBOARD NAVIGATION LINKS
     route.get('/newApplicants', (req, res) => {
-        res.render('./admin/newapplicants')
+        const user = req.user;
+        console.log(user)
+        pool.getConnection((err, con) =>{
+            // const accountofficer = user.accountofficer;
+            // console.log(accountofficer)
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM leads WHERE status = "new" AND accountofficer = ?', (err, userList) =>{
+                if(userList){
+                    // console.log(userList)
+                    res.render('./admin/newapplicants')
+                }else{
+                    console.log('i am not available')
+                }
+            })
+        })
+        
+
     })
 
     route.get('/completereg', (req, res) => {
