@@ -176,8 +176,13 @@ function admin() {
 
     // DASHBOARD NAVIGATION LINKS
     route.get('/newApplicants', (req, res) => {
-        const user = req.user;
-        console.log(user)
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+            console.log(req.user)
+        }else{
+            console.log("not avalaible")
+            } 
         pool.getConnection((err, con) =>{
             // const accountofficer = user.accountofficer;
             // console.log(accountofficer)
