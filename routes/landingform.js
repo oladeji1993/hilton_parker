@@ -30,7 +30,8 @@ function landingForm(){
     }, (req, res) => {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, user) => {
-                if(user){
+                console.log(user)
+                if(user.length > 0){
                     req.flash('warning', 'Email has already been used please login or contact a Customer Support')
                     res.redirect('/')
                 }else{

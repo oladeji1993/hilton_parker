@@ -135,7 +135,7 @@ function admin() {
             next()
         }
     }, (req, res) => {
-        const message = req.flash() 
+        const message = req.flash()
         res.render('./admin/login', {
             message
         })
@@ -155,7 +155,7 @@ function admin() {
                             const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                             res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/admin')
                         }else{
-                            req.flash('danger', 'Incorrect Email or Password')
+                            req.flash('danger', 'incorrect password')
                             res.redirect('/admin/login')
                         }
                     })
@@ -172,7 +172,23 @@ function admin() {
 
     // DASHBOARD NAVIGATION LINKS
     route.get('/newApplicants', (req, res) => {
-        res.render('./admin/newapplicants')
+        const user = req.user;
+        console.log(user)
+        pool.getConnection((err, con) =>{
+            // const accountofficer = user.accountofficer;
+            // console.log(accountofficer)
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM leads WHERE status = "new" AND accountofficer = ?', (err, userList) =>{
+                if(userList){
+                    // console.log(userList)
+                    res.render('./admin/newapplicants')
+                }else{
+                    console.log('i am not available')
+                }
+            })
+        })
+        
+
     })
 
     route.get('/completereg', (req, res) => {
