@@ -16,7 +16,6 @@
   
 </head>
 <body>
-
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -61,7 +60,7 @@
                 <a style="text-decoration: none; " href="/admin/newApplicants">
                     <div style="background-color: #fff;" class="card-single">
                         <div>
-                            <h1 style="color:#212529">54</h1>
+                            <h1 style="color:#212529"><%= starter.length %></h1>
                             <div><span style="color:#8398A2">New Applicants</span></div>
                         </div>
                         <div>
@@ -74,7 +73,7 @@
                     <a style="text-decoration: none;" href="/admin/completereg">
                         <div>
                             <div style="display: flex; justify-content:space-between;">
-                                <h1 style="color:black">80</h1>
+                                <h1 style="color:black"><%=  complete.length %></h1>
                             </div>
                             <div><span>Complete Registration</span></div>
                         </div>
@@ -85,7 +84,7 @@
                 <div class="card-single">
                     <a style="text-decoration: none;" href="/admin/makepayment">
                         <div>
-                            <h1 style="color:black">80</h1>
+                            <h1 style="color:black"><%= paid.length %></h1>
                             <div><span>Make payment</span></div>
                         </div>
                         <div>
@@ -98,7 +97,7 @@
                 <div class="card-single">
                     <a style="text-decoration:none;" href="/admin/success">
                         <div>
-                            <h1>90</h1>
+                            <h1><%= success.length %></h1>
                             <div><span>Successful Applications</span></div>
                         </div>
                         <div>
