@@ -70,7 +70,7 @@ function user() {
 
     route.get('/logout', (req, res) => {
         req.logout();
-        res.redirect('/')
+        res.redirect('/user/login')
     })
     route.post('/login',
         passport.authenticate('local', { 
@@ -103,16 +103,33 @@ function user() {
         if(req.user){
             next()
         }else{
-            res.render('error')
+            req.flash('danger', 'You must login first')
+            res.redirect('/user/login')
         }
     },cpUpload ,(req, res) => {
         if(req.user){
+            const files = req.files
             const fields = req.body
-            console.log(fields)
-            console.log(req.files)
-            res.send(req.files)
+            // console.log(fields)
+            console.log(files.document[0])
+            const docs = []
+            
+            pool.getConnection((err, con) => {
+                con.query(`INSERT INTO documents SET user = ${req.user.id}`, (err, id) => {
+                    const number = files.document.length
+                    // console.log(number)
+                    for(i = 0; i < number; i++){
+                        console.log(files.document[i].filename)
+                        con.query(`UPDATE documents SET document${i} = ${files.document[i].filename}`, (err, done) => {
+                                console.log(done)
+                        })
+                        
+                    }
+                    res.redirect('/user/dashboard')
+                })
+            })
         }else{
-            res.render('error')
+            res.redirect('/user/login')
         }
 
     })
