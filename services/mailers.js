@@ -93,7 +93,7 @@ async function forgot_password(result, mail,token) {
     console.log('message sent') 
 }
 
-async function document_upload(result, mail, filename, link) {
+async function document_upload(user, accountofficer) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "webmail.softnoonng.com",
         tls:{
@@ -109,12 +109,12 @@ async function document_upload(result, mail, filename, link) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILTON PARKER" <collinswilson@softnoonng.com>',
-        to: `${mail}`,
-        subject: `${result[0].firstname}  ${result[0].lastname} Just Uploaded Document(s)`,
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
+        to: `${accountofficer.email}`,
+        subject: `${user.firstname}  ${user.lastname} Just Uploaded Document(s)`,
         text: `
             Find Download Link below
-            Download Link : 'http://localhost:3000/admin/${filename}/${link}'
+            Download Link : 'http://localhost:3000/files/${user.id}'
         `
     });
 

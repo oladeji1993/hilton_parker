@@ -70,7 +70,7 @@ function user() {
 
     route.get('/logout', (req, res) => {
         req.logout();
-        res.redirect('/')
+        res.redirect('/user/login')
     })
     route.post('/login',
         passport.authenticate('local', { 
@@ -103,19 +103,46 @@ function user() {
         if(req.user){
             next()
         }else{
-            res.render('error')
+            req.flash('danger', 'You must login first')
+            res.redirect('/user/login')
         }
     },cpUpload ,(req, res) => {
-        if(req.user){
-            const fields = req.body
-            console.log(fields)
-            console.log(req.files)
-            res.send(req.files)
-        }else{
-            res.render('error')
-        }
+        pool.getConnection((err, con => {
+            con.query('SELECT * FROM leads WHERE id = ? ', req.user.id, (err, result) => {
+                const files = req.files
+                const fields = req.body
+                const lead = result[0]
+                const accountofficerid = result[0].accountofficer
+                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, res) => {
+                    const accountofficer = res[0] 
+                    mailers.document_upload(lead, accountofficerid)
+                })
+                
+            })
+        }))
+        
 
     })
+
+    // route.post('/uploads', (req, res, next) => {
+    //     if(req.user){
+    //         next()
+    //     }else{
+    //         req.flash('danger', 'You need to login first')
+    //         res.redirect('/user/login')
+    //     }
+    // }, upload.single('document'), (req, res) => {
+    //     pool.getConnection((err, con) => {
+    //         con.query('SELECT * FROM document WHERE user = ?', req.user.id, (err, result) => {
+    //             if(result)
+    //             const current = result
+    //             con.query('UPDATE document SET ')
+    //         })
+    //     } )
+    // }
+    
+    // )
+
     route.post('/contact', (req, res) => {
         const details = req.body
         if(details)  {
