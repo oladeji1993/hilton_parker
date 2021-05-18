@@ -174,30 +174,47 @@ function admin() {
     route.get('/newApplicants', (req, res) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-            next()
-            console.log(req.user)
-        }else{
-            console.log("not avalaible")
-            } 
+            // console.log(req.user)
+        }
+        const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
-            // const accountofficer = user.accountofficer;
-            // console.log(accountofficer)
             if (err) res.redirect('/')
-            con.query('SELECT * FROM leads WHERE status = "new" AND accountofficer = ?', (err, userList) =>{
-                if(userList){
+            con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', accountofficer, (err, userList) =>{
+                if(userList.length > 0){
                     // console.log(userList)
-                    res.render('./admin/newapplicants')
+                    res.render('./admin/newapplicants', {
+                        userList
+                    })
                 }else{
-                    console.log('i am not available')
+                    res.render('./admin/newapplicants', {
+                        userList
+                    })
                 }
             })
         })
-        
-
     })
 
     route.get('/completereg', (req, res) => {
-        res.render('./admin/completereg')
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            // console.log(req.user)
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', accountofficer, (err, userList) =>{
+                if(userList.length > 0){
+                    // console.log(userList)
+                    res.render('./admin/completereg', {
+                        userList
+                    })
+                }else{
+                    res.render('./admin/completereg', {
+                        userList
+                    })
+                }
+            })
+        })
     })
 
     route.get('/makepayment', (req, res) => {
