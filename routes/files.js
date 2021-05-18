@@ -5,7 +5,7 @@ const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 
-const directory = './'
+const directory = './uploads'
 
 function files() {
 
@@ -23,15 +23,32 @@ function files() {
             } 
     }, (req, res) => {
         const act = `${path.dirname(directory)} + /uploads` 
-        fs.readdir(act, (err, files) => {
-            // files.forEach(file => {.
-            console.log(path.dirname(directory))
-              console.log(files);
-              res.send(files)
-            // })
-            ;
+        
+        fs.readdir(directory, (err, files) => {
+            const doc = []
+            files.forEach(file => {
+              doc.push(file)
+            })
+
+            function search(params) {
+                const id = req.params.id
+                const elem = params.slice(0,2).toString()
+                const stringid = id.toString()
+                if(elem == stringid){
+                    return params
+                }
+            }
+            const id = req.params.id
+            for(i=0; i<doc.length; i++){
+                const entries = []
+                entries.push(search(doc[i]))
+                return entries
+            }
+            // const entries = search(doc, id)
+            res.send(entries)
           });
-        const id = req.params.id
+        //   res.send(doc)
+        
         
     }
     

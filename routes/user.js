@@ -107,7 +107,7 @@ function user() {
             res.redirect('/user/login')
         }
     },cpUpload ,(req, res) => {
-        pool.getConnection((err, con => {
+        pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', req.user.id, (err, result) => {
                 const files = req.files
                 const fields = req.body
@@ -115,11 +115,11 @@ function user() {
                 const accountofficerid = result[0].accountofficer
                 con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, res) => {
                     const accountofficer = res[0] 
-                    mailers.document_upload(lead, accountofficerid)
+                    mailers.document_upload(lead, accountofficer)
                 })
                 
             })
-        }))
+        })
         
 
     })
