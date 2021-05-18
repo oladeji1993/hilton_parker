@@ -49,8 +49,6 @@ function landingForm(){
                                 mailers.newLead(params)
                                 mailers.applied(params)
                                 res.render('./client/success')
-                                // mailers.newLead(params)
-                                
                             }else{
                                 res.render('/error')
                             }

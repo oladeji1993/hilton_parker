@@ -79,8 +79,9 @@ app.get('/contact', (req, res) => {
 //     })
 
 // })
-    
-  
+
+const files = require('./routes/files')
+app.use('/files', files)
 
 const landingForm = require('./routes/landingform');
 app.use('/landingform', landingForm);

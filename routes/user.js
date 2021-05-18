@@ -107,32 +107,42 @@ function user() {
             res.redirect('/user/login')
         }
     },cpUpload ,(req, res) => {
-        if(req.user){
-            const files = req.files
-            const fields = req.body
-            // console.log(fields)
-            console.log(files.document[0])
-            const docs = []
-            
-            pool.getConnection((err, con) => {
-                con.query(`INSERT INTO documents SET user = ${req.user.id}`, (err, id) => {
-                    const number = files.document.length
-                    // console.log(number)
-                    for(i = 0; i < number; i++){
-                        console.log(files.document[i].filename)
-                        con.query(`UPDATE documents SET document${i} = ${files.document[i].filename}`, (err, done) => {
-                                console.log(done)
-                        })
-                        
-                    }
-                    res.redirect('/user/dashboard')
+        pool.getConnection((err, con => {
+            con.query('SELECT * FROM leads WHERE id = ? ', req.user.id, (err, result) => {
+                const files = req.files
+                const fields = req.body
+                const lead = result[0]
+                const accountofficerid = result[0].accountofficer
+                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, res) => {
+                    const accountofficer = res[0] 
+                    mailers.document_upload(lead, accountofficerid)
                 })
+                
             })
-        }else{
-            res.redirect('/user/login')
-        }
+        }))
+        
 
     })
+
+    // route.post('/uploads', (req, res, next) => {
+    //     if(req.user){
+    //         next()
+    //     }else{
+    //         req.flash('danger', 'You need to login first')
+    //         res.redirect('/user/login')
+    //     }
+    // }, upload.single('document'), (req, res) => {
+    //     pool.getConnection((err, con) => {
+    //         con.query('SELECT * FROM document WHERE user = ?', req.user.id, (err, result) => {
+    //             if(result)
+    //             const current = result
+    //             con.query('UPDATE document SET ')
+    //         })
+    //     } )
+    // }
+    
+    // )
+
     route.post('/contact', (req, res) => {
         const details = req.body
         if(details)  {
