@@ -28,7 +28,6 @@ function admin() {
     route.get('/',  authenticateAdmin =(req, res, next) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-            console.log(req.user)
             next()
          }else{
             req.flash('danger', 'You Must Login First', )
@@ -52,8 +51,22 @@ function admin() {
         pool.getConnection((err, con) => {
             if (err) throw err;
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
-                    res.render('./admin/dashboard')
-            } )
+                con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
+                    con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', id, (err, complete) =>{
+                        con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', id, (err, paid) =>{
+                            con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', id, (err, success) =>{
+
+                                res.render('./admin/dashboard', {
+                                    starter,
+                                    complete,
+                                    paid,
+                                    success
+                                })
+                            })
+                        })
+                    })
+                })
+            })
         })
     })
 
@@ -173,15 +186,13 @@ function admin() {
     // DASHBOARD NAVIGATION LINKS
     route.get('/newApplicants', (req, res) => {
         if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-            // console.log(req.user)
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
         }
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    // console.log(userList)
                     res.render('./admin/newapplicants', {
                         userList
                     })
@@ -197,14 +208,12 @@ function admin() {
     route.get('/completereg', (req, res) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-            // console.log(req.user)
         }
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    // console.log(userList)
                     res.render('./admin/completereg', {
                         userList
                     })
@@ -218,17 +227,52 @@ function admin() {
     })
 
     route.get('/makepayment', (req, res) => {
-        res.render('./admin/makepayment')
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', accountofficer, (err, userList) =>{
+                if(userList.length > 0){
+                    res.render('./admin/makepayment', {
+                        userList
+                    })
+                }else{
+                    res.render('./admin/makepayment', {
+                        userList
+                    })
+                }
+            })
+        })
     })
 
     route.get('/success', (req, res) => {
-        res.render('./admin/successfulapp')
+
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', accountofficer, (err, userList) =>{
+                if(userList.length > 0){
+                    res.render('./admin/successfulapp', {
+                        userList
+                    })
+                }else{
+                    res.render('./admin/successfulapp', {
+                        userList
+                    })
+                }
+            })
+        })
     })
 
 
 
     route.get('/home', (req, res) => {
-        res.render('./admin/dashboard')
+        res.redirect('/admin/dashboard')
     })
        
         
