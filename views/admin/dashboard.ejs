@@ -110,7 +110,7 @@
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Recent Projects</h3>
+                            <h3>ALL APPLICANTS</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -122,60 +122,41 @@
                                           <td>Status</td>    
                                         </tr>
                                     </thead>
+                                    <%
+                                    if(allUser.length != 0){
+                                        var i=1;
+                                        allUser.forEach(function(data){
+                                    %>
                                     <tbody>
                                         <tr>
-                                            <td>UI/UX design</td>
-                                            <td>UI Team</td>
+                                            <td><%=data.firstname %> <%= data.lastname %></td>
+                                            <td><%=data.phonenumber %></td>
                                             <td>
-                                                <span class="status green"></span>
-                                                successful application
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Web development</td>
-                                            <td>Frontend</td>
-                                            <td>
-                                                <span class="status yellow"></span>
-                                                complete registration
-                                            </td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td>Web development</td>
-                                            <td>Frontend</td>
-                                            <td>
-                                                <span class="status blue"></span>
-                                                make payment
-                                            </td>
-                                        </tr>
-    
-                                        <tr>
-                                            <td>Ushop app</td>
-                                            <td>UI Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                New Applicants
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Web development</td>
-                                            <td>Frontend</td>
-                                            <td>
-                                                <span class="status blue"></span>
-                                                Make payment
-                                            </td>
-                                        </tr>
-    
-                                        <tr>
-                                            <td>Ushop app</td>
-                                            <td>UI Team</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                New Applicants
+                                                <style>
+                                                    .new{
+                                                        background-color: red; 
+                                                    }                                                   
+                                                    .completeregistration{
+                                                        background-color: blue;
+                                                    }
+                                                    .paid{
+                                                        background-color: yellow;
+                                                    }
+                                                    .success{
+                                                        background-color: green;
+                                                    }
+                                                </style>
+                                                <span class="status <%=data.status %>"></span>
+                                                <%=data.status %>
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <%  i++; }) %>
+                                    <% } else{ %>
+                                        <tr>
+                                            <td colspan="10">No Data Found</td>
+                                        </tr>
+                                    <% } %>
                                 </table>
                             </div>
                         </div>

@@ -126,24 +126,7 @@ function user() {
 
     })
 
-    // route.post('/uploads', (req, res, next) => {
-    //     if(req.user){
-    //         next()
-    //     }else{
-    //         req.flash('danger', 'You need to login first')
-    //         res.redirect('/user/login')
-    //     }
-    // }, upload.single('document'), (req, res) => {
-    //     pool.getConnection((err, con) => {
-    //         con.query('SELECT * FROM document WHERE user = ?', req.user.id, (err, result) => {
-    //             if(result)
-    //             const current = result
-    //             con.query('UPDATE document SET ')
-    //         })
-    //     } )
-    // }
-    
-    // )
+  
 
     route.post('/contact', (req, res) => {
         const details = req.body
@@ -282,7 +265,6 @@ function user() {
                             email : result[0].email
                         })
                     }else{
-                        console.log(`error ${result}`)
                         res.render('error')
                     }
                 })

@@ -67,21 +67,6 @@ app.get('/contact', (req, res) => {
     
 })
 
-// app.get('/userList', (req, res) => {
-//     const message = req.flash();
-//     const users = req.body
-//     pool.getConnection((err, con) => {
-//         con.query('SELECT * FROM leads', (err, user) => {
-//           if (user){
-//               console.log(user[0])
-//           }else{
-//               console.log("i am not available")
-//             }
-//         })
-//     })
-
-// })
-
 const files = require('./routes/files')
 app.use('/files', files)
 
