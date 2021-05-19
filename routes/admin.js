@@ -52,16 +52,21 @@ function admin() {
             if (err) throw err;
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                 con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
-                    con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', id, (err, complete) =>{
+                    con.query('SELECT * FROM leads WHERE status = "completeregistration" && accountofficer = ?', id, (err, complete) =>{
                         con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', id, (err, paid) =>{
                             con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', id, (err, success) =>{
+                                con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
 
-                                res.render('./admin/dashboard', {
-                                    starter,
-                                    complete,
-                                    paid,
-                                    success
+                                    res.render('./admin/dashboard', {
+                                        starter,
+                                        complete,
+                                        paid,
+                                        success,
+                                        allUser
+
+                                    })
                                 })
+
                             })
                         })
                     })

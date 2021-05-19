@@ -567,16 +567,16 @@ h2::after {
 
  .copyright{
      margin-top:10%;
-     color:black;
+     color:white;
      padding:20px;
-     background:rgb(243, 240, 240)
+     background:#f69617
  }
 
  .reserved{
      padding:15px;
      padding-bottom:8px;
      font-size:18px;
-     color:black;
+     color:white;
  }
 
 
