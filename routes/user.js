@@ -12,9 +12,10 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './uploads')
+      cb(null, './assets/uploads')
     },
     filename: function (req, file, cb, next) {
+        // console.log(req.body.document1)
         const date = new Date().getTime()
       cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
     }
@@ -113,9 +114,10 @@ function user() {
                 const fields = req.body
                 const lead = result[0]
                 const accountofficerid = result[0].accountofficer
-                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, res) => {
-                    const accountofficer = res[0] 
+                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
+                    const accountofficer = resu[0] 
                     mailers.document_upload(lead, accountofficer)
+                    res.redirect('/user/dashboard')
                 })
                 
             })
