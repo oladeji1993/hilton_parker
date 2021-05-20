@@ -122,7 +122,7 @@ async function applied(params) {
         <html lang="en-US">
 
         <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
         <title>Reset Password Email Template</title>
         <meta name="description" content="Reset Password Email Template.">
         <style type="text/css">
@@ -358,12 +358,11 @@ async function document_upload(user, accountofficer) {
                                                 style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;"><br>
                                                 ${user.firstname}  ${user.lastname} just uploaded documents for application. <br>
-                                                Find Download Link below:<br>
+                                                Find the download link below:<br>
                                                 <a href="http://localhost:3000/files/${user.id}"
-                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
-                                                Password</a>
+                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Download Document</a><br>
 
-
+                                                <br>
                                                 Kindly check the documents.
                                             </p>
                                         </td>
