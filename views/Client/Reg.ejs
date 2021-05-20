@@ -77,7 +77,7 @@
 
 <div class="container m-container">
     <div class="text-center">
-        <a class="btn btn-info complete" id="myBtn"> Mark as complete </a>
+        <!-- <a class="btn btn-info complete" id="myBtn"> Mark as complete </a> -->
         <hr>
         <div class="text-center"> <h5 style="color: #f69617;;">APPLICATION</h5> </div>
         <span>Please provide valid information</span>
@@ -302,22 +302,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            // window.alert('ready')
-            $('.complete').click(function() {
-                var txt;
-                if (confirm("Are you sure the information(s) provided is correct and verifiable ")) {
-                    txt = "You pressed OK!";
-                    window.location.replace("http://localhost:3000/user ");
-                } else {
-                    txt = "You pressed Cancel!";
-                }
-                console.log(txt)
-                // window.confirm('Are you sure the information(s) provided is correct and verifiable ')
-            })
-        })
-    </script>
+
 </body>
 
 
