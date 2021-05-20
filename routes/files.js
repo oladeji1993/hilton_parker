@@ -20,7 +20,9 @@ function files() {
     }, (req, res) => {
         const {filename} = req.params
         const filepath = directory + '/' + filename
-        res.download(filepath)
+        const filelink = path.join(__dirname, '../assets/uploads/',filename)
+        res.sendFile(filelink)
+        // res.download(filepath)
     })
 
     route.get('/', (req, res) => {
