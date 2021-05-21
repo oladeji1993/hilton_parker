@@ -77,7 +77,6 @@ function agent() {
 
     route.post('/uploads', upload.none(), (req, res) => {
         const params = Object(req.body)
-        // console.log(params)
         const email = params.email
         pool.getConnection((err, con) => {
         con.query('SELECT * FROM agent WHERE email = ? ', email, (err, user) => {
