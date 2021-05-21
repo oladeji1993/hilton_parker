@@ -47,12 +47,22 @@ app.set('view engine', 'ejs');
 
 
 
-app.get('/' , (req, res) => {
+app.get('/2' , (req, res) => {
     res.render("index", {
         message : req.flash()
     })
 })
+app.get('/' , (req, res) => {
+    res.render("index2", {
+        message : req.flash()
+    })
+})
 
+app.get('/agent' , (req, res) => {
+    res.render("agent", {
+        message : req.flash()
+    })
+})
 app.get('/contact', (req, res) => {
     const message = req.flash();
     const userid = req.user.id

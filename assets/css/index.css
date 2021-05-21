@@ -6,118 +6,32 @@ body {
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
 
-header {
-    width: 100%;
-    height: 100vh;
-    background:linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 95%), url(https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Beautiful-Full-HD-Wallpaper-Download-Free-PIC-WPE0010098.jpg) no-repeat 50% 50%;
-    background-size: cover;
-}
-
-.content {
-    width: 94%;
-    margin: 4em auto;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: justify;
-}
-
-.logo {
-    line-height: 60px;
-    position: fixed;
-    float: left;
-    margin: 16px 46px;
-    /* padding-left: 140px; */
-    color: #fff;
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 2px;
-}
-
-.service{
-    margin:0 50%;
-}
-
-nav {
-    position: fixed;
-    width: 100%;
-    line-height: 60px;
-    z-index:1;
-}
-
-nav ul {
-    line-height: 50px;
-    list-style: none;
-    background: rgba(0, 0, 0, 0);
-    overflow: hidden;
-    color: #fff;
+.affix {
     padding: 0;
-    text-align: right;
-    margin: 0;
-    padding-right: 50px;
-    transition: 1s;
+    background-color: #111;
 }
 
-nav.black ul {
-    background: #192cc2;
+
+
+
+
+
+.myH2 {
+	text-align:center;
+	font-size: 4rem;
 }
-
-nav ul li {
-    display: inline-block;
-    padding: 16px 40px;;
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
 }
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-}
-
-.menu-icon {
-    line-height: 60px;
-    width: 100%;
-    background: linear-gradient(to right, #f69617 , #e6ee4a);
-    text-align: right;
-    box-sizing: border-box;
-    padding: 15px 24px;
-    cursor: pointer;
-    color: #fff;
-    display: none;
-}
-
-@media(max-width: 786px) {
-
-    .logo {
-          position: fixed;
-          top: 0;
-          margin-top: 16px;
-    }
-
-    nav ul {
-          max-height: 0px;
-          background: linear-gradient(to right, #f69617 , #e6ee4a);
-    }
-
-    nav.black ul {
-          background: linear-gradient(to right, #f69617 , #e6ee4a);
-    }
-
-    .showing {
-          max-height: 34em;
-    }
-
-    nav ul li {
-          box-sizing: border-box;
-          width: 100%;
-          padding: 24px;
-          text-align: center;
-    }
-
-    .menu-icon {
-          display: block;
-    }
+@media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
 
 }
-
 
 .banner-container{
     height:auto;
@@ -584,6 +498,12 @@ h2::after {
 
  
 @media (max-width: 575.98px) { 
+
+/* HERE 1 */
+
+.content{
+    margin-top: 200px;
+}
     .content-line{
         font-size:22px;
         text-align:center;
@@ -691,6 +611,9 @@ h2::after {
 
 
  @media (max-width: 768px) { 
+    .content{
+        margin-top: 200px;
+    }
     .content-line{
         font-size:22px;
         text-align:center;
@@ -783,6 +706,7 @@ h2::after {
 
  
  @media (max-width: 1500px) { 
+     
     .content-line{
         font-size:22px;
         text-align:center;
