@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     
   })
 
-const upload = multer({ storage: storage })
+  const upload = multer({ storage: storage })
 
 passport.use(new LocalStrategy({
     usernameField: 'email',

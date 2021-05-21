@@ -93,6 +93,9 @@ app.use('/pay', makePayment)
 const user = require('./routes/user')
 app.use('/user', user)
 
+const agent = require('./routes/agent')
+app.use('/agent', agent)
+
 
 const forgot_password = require('./routes/forgot-password')
 app.use('/forgot-password', forgot_password);
