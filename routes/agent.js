@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
       cb(null, './assets/uploads')
     },
     filename: function (req, file, cb, next) {
-        // console.log(req.body.document1)
         const date = new Date().getTime()
       cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
     }
@@ -62,7 +61,6 @@ function agent() {
                         })
                     }
                 }else{
-                    // req.flash('danger', 'Invalid Token')
                     res.render('./error')
                 }
             })
