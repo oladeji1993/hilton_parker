@@ -187,6 +187,12 @@ function admin() {
         })
 
 
+        route.get('/details', (req, res) => {
+            res.render('./admin/agent')
+        })
+    
+
+
 
     // DASHBOARD NAVIGATION LINKS
     route.get('/newApplicants', (req, res) => {
@@ -279,6 +285,30 @@ function admin() {
     route.get('/home', (req, res) => {
         res.redirect('/admin/dashboard')
     })
+
+
+    // agent details route
+
+    route.get('/newagents', (req, res) => {
+        res.render('./admin/newagents')
+    })
+
+    route.get('/doc_upload', (req, res) => {
+        res.render('./admin/doc_upload')
+    })
+
+    route.get('/verifiedagents', (req, res) => {
+        res.render('./admin/verifiedagents')
+    })
+
+    route.get('/activeagents', (req, res) => {
+        res.render('./admin/activeagents')
+    })
+
+    
+
+
+    
        
         
     return route
