@@ -68,37 +68,80 @@ function agent() {
 
     })
 
-
-   
-
-
-
     route.post('/uploads', upload.none(), (req, res) => {
-        const params = Object(req.body)
+        const params = Object(req.body);
+        const data = Object.values(req.body);
         const email = params.email
         pool.getConnection((err, con) => {
         con.query('SELECT * FROM agent WHERE email = ? ', email, (err, user) => {
-            if(user.length > 0){
-                console.log(user)
+            if(!user){
+                res.render('./error')    
+           
+            }else{
                 pool.getConnection((err, con) => {
+
+                    let sql = `UPDATE agent SET 
+                    firstname = ?,
+                    lastname = ?,
+                    email= ?,
+                    phonenumber= ?,
+                    nationality = ?,
+                    residentialaddress = ?,
+                    phonenumber2 = ?,
+                    officeaddress = ?,
+                    g1_fullname = ?,
+                    g1_address = ?,
+                    g1_phone = ?,
+                    g1_email = ?,
+                    g1_relationship = ?,
+                    g2_fullname = ?,
+                    g2_address = ?,
+                    g2_phone = ?,
+                    g2_email = ?,
+                    g2_relationship = ?
                     
-                    con.query( 'UPDATE agent SET firstname WHERE = ?', [params.firstname],
-                     (err, result) => {
+                    WHERE id = ${user[0].id}`;
+
+                    con.query(sql, data, (err, result) => {
                         console.log(result)
                         res.render('./agent/uploads')
                     })
                     
                 })
-           
-            }else{
-                res.render('./error')
             }
         })
     })
-        // res.render('./agent/uploads')
+
     })
 
 
+    var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
+    route.post('/uploads', (req, res, next)  => {
+        if(req.user){
+            next()
+        }else{
+            req.flash('danger', 'You must login first')
+            res.redirect('/user/login')
+        }
+    },cpUpload ,(req, res) => {
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM agent WHERE id = ? ', req.user.id, (err, result) => {
+                const files = req.files
+                const fields = req.body
+                const lead = result[0]
+                const accountofficerid = result[0].accountofficer
+                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
+                    const accountofficer = resu[0] 
+                    mailers.document_upload(lead, accountofficer)
+                    // res.redirect('/user/dashboard')
+                    console.log("working")
+                })
+                
+            })
+        })
+        
+
+    })
 
     return route
 }
