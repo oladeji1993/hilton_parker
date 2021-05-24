@@ -10,7 +10,7 @@
   }
   
   .table-hover > tbody > tr:hover {
-    background-color: #f69617;
+    background-color: #192cc2;
   }
   /* //important if we want to add ellipsis
   //to cells with content longer than width */
