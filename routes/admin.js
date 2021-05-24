@@ -160,31 +160,31 @@ function admin() {
     })
 
         // POST TO ADMIN LOGIN 
-    route.post('/login', (req, res) => {
-        const userDetails = req.body
-        pool.getConnection((err, con) => {
-            if (err) res.redirect('/')
-            con.query('SELECT * FROM admin WHERE email = ?', userDetails.email, async (err, user) => {
-                con.release()
-                if(user.length > 0){
-                    // CHECK PASSWORD 
-                    bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
-                        if(response){
-                            const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
-                            res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/admin')
-                        }else{
-                            req.flash('danger', 'incorrect password')
-                            res.redirect('/admin/login')
-                        }
-                    })
-                    
-                }else{
-                    req.flash('danger', 'Incorect Email or Password')
-                    res.redirect('/admin/login')
-                }
+        route.post('/login', (req, res) => {
+            const userDetails = req.body
+            pool.getConnection((err, con) => {
+                if (err) res.redirect('/')
+                con.query('SELECT * FROM admin WHERE email = ?', userDetails.email, async (err, user) => {
+                    con.release()
+                    if(user.length > 0){
+                        // CHECK PASSWORD 
+                        bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
+                            if(response){
+                                const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
+                                res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/admin')
+                            }else{
+                                req.flash('danger', 'incorrect password')
+                                res.redirect('/admin/login')
+                            }
+                        })
+                        
+                    }else{
+                        req.flash('danger', 'Incorect Email or Password')
+                        res.redirect('/admin/login')
+                    }
+                })
             })
-        })
-        })
+            })
 
 
         route.get('/details', (req, res) => {

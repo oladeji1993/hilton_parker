@@ -129,6 +129,11 @@ body {
   border-radius:25px
 }
 
+.submit-btn a{
+  color:#192cc2;
+  border: 1px solid #192cc2;
+}
+
 .submit-btn button:hover{
   background-color:#192cc2;
   color:#fff
