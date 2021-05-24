@@ -59,7 +59,7 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/agent' , (req, res) => {
-    res.render("agent", {
+    res.render("./agent/agent", {       
         message : req.flash()
     })
 })

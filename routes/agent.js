@@ -7,7 +7,8 @@ const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 const multer = require('multer');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const user = require('./user');
 flash = require('express-flash')
 
 
@@ -68,37 +69,111 @@ function agent() {
 
     })
 
-
-   
-
-
-
-    route.post('/uploads', upload.none(), (req, res) => {
-        const params = Object(req.body)
+    route.post('/register', upload.none(), (req, res) => {
+        const params = Object(req.body);
+        const data = Object.values(req.body);
         const email = params.email
         pool.getConnection((err, con) => {
-        con.query('SELECT * FROM agent WHERE email = ? ', email, (err, user) => {
-            if(user.length > 0){
-                console.log(user)
+        con.query('SELECT * FROM agent WHERE email = ? ', email, (err, respons) => {
+            if(!respons){
+                res.render('./error')    
+           
+            }else{
                 pool.getConnection((err, con) => {
+
+                    let sql = `UPDATE agent SET 
+                    firstname = ?,
+                    lastname = ?,
+                    email= ?,
+                    phonenumber= ?,
+                    nationality = ?,
+                    residentialaddress = ?,
+                    phonenumber2 = ?,
+                    officeaddress = ?,
+                    g1_fullname = ?,
+                    g1_address = ?,
+                    g1_phone = ?,
+                    g1_email = ?,
+                    g1_relationship = ?,
+                    g2_fullname = ?,
+                    g2_address = ?,
+                    g2_phone = ?,
+                    g2_email = ?,
+                    g2_relationship = ?
                     
-                    con.query( 'UPDATE agent SET firstname WHERE = ?', [params.firstname],
-                     (err, result) => {
-                        console.log(result)
-                        res.render('./agent/uploads')
+                    WHERE id = ${respons[0].id}`;
+
+                    con.query(sql, data, (err, result) => {
+                        if(result){
+                            res.render('./agent/createpassword', {
+                                respons: respons[0]
+                            })
+                        }
+                        
                     })
                     
                 })
-           
-            }else{
-                res.render('./error')
             }
         })
     })
-        // res.render('./agent/uploads')
+
     })
 
 
+    // var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
+    // route.post('/uploads', (req, res, next)  => {
+    //     if(req.user){
+    //         next()
+    //     }else{
+    //         req.flash('danger', 'You must login first')
+    //         res.redirect('/user/login')
+    //     }
+    // },cpUpload ,(req, res) => {
+    //     pool.getConnection((err, con) => {
+    //         con.query('SELECT * FROM agent WHERE id = ? ', req.user.id, (err, result) => {
+    //             const files = req.files
+    //             const fields = req.body
+    //             const lead = result[0]
+    //             const accountofficerid = result[0].accountofficer
+    //             con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
+    //                 const accountofficer = resu[0] 
+    //                 mailers.document_upload(lead, accountofficer)
+    //                 // res.redirect('/user/dashboard')
+    //                 console.log("working")
+    //             })
+                
+    //         })
+    //     })
+        
+
+    // })
+
+
+    route.post('/setpassword' , (req, res) => {
+        const data = req.body.email
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM agent WHERE email = ? ', data, (err, output) => {
+                if (err) throw err;
+                if(output.length > 0){
+                    const password = req.body.password
+                    bcrypt.hash(password, 12).then(secured =>{
+                        const sql = 'UPDATE agent SET password = ?'
+                        con.query(sql, [secured], (err, resu) => {
+                            const message = req.flash()
+                            req.flash('success', 'Password created Please Login ', {
+                                message: message
+                            })
+                            res.render('./agent/login', {
+                                output: output[0], message
+                            })
+                        })
+                    })
+                }else{
+                    res.render('./error')   
+                }
+            })
+        })
+    })
 
     return route
 }
