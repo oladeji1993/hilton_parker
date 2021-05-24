@@ -108,9 +108,7 @@ input[type=text] {
 }
   </style>
   <body>
-
-   
-
+  <% if (message) { %>
   <!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="height: 90vh;">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -197,8 +195,15 @@ input[type=text] {
                       Registering To Use The Hillpad Platform.</p>
 
                       <p class="btn btn-lg btn-outline-info  col-xs-6 col-md-12 text-center" data-toggle="modal" data-target="#exampleModalCenter">Register</p>
+                      <% for (var key in message) { %>
+                        <!-- alert message -->
+                        <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
+                            <strong class="text-right"><%= message[key] %>!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+                <% } %> 
                   </div>
-                 
                 </div>
               </div>
             </div>

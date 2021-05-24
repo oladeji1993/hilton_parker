@@ -150,8 +150,8 @@ function agent() {
 
 
     route.post('/setpassword' , (req, res) => {
-        const message = req.flash()
         const data = req.body.email
+        const message = req.flash()
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM agent WHERE email = ? ', data, (err, output) => {
                 if (err) throw err;
@@ -160,12 +160,9 @@ function agent() {
                     bcrypt.hash(password, 12).then(secured =>{
                         const sql = 'UPDATE agent SET password = ?'
                         con.query(sql, [secured], (err, resu) => {
-                            const message = req.flash()
-                            req.flash('success', 'Password created Please Login ', {
-                                message: message
-                            })
+                            req.flash('success', 'Password created Please Login' )
                             res.render('./agent/login', {       
-                                output: output[0], message
+                                message: message
                             })
                         })
                     })
@@ -198,7 +195,7 @@ function agent() {
                         })
                         
                     }else{
-                        req.flash('danger', 'Incorect Email or Password')
+                        req.flash('danger', 'Incorrect Email or Password')
                         res.redirect('/agent/login')
                     }
                 })
@@ -206,11 +203,8 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            const message = req.flash()
             req.logout();
-            res.redirect('/agent/login', {
-                message
-            })
+            res.redirect('/agent/login')
         })
 
     return route

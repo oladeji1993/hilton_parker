@@ -30,7 +30,7 @@ function landingForm(){
     }, (req, res) => {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, user) => {
-                console.log(user)
+                // console.log(user)
                 if(user.length > 0){
                     req.flash('warning', 'Email has already been used please login or contact a Customer Support')
                     res.redirect('/')
@@ -89,8 +89,8 @@ function landingForm(){
                 
                 if(agent.length > 0){
                     req.flash('warning', 'Email has already been used please login or contact a Customer Support')
-                    res.redirect('/')
-                    // console.log("i not am hrrr")
+                    res.redirect('/agent')
+                  
                 }else{
                     con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                        
@@ -110,6 +110,7 @@ function landingForm(){
                                         const encryptedid = cryptr.encrypt(user[0].id);
                                         const mail = user[0].email
                                         mailers.agent(params,encryptedid)
+                                        mailers.agentofficer(params)
                                         res.render('./client/success')
                                     }else{
                                         res.render('./error')

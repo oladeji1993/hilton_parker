@@ -171,6 +171,15 @@ input[type=text] {
           <div class="row h-100">
                 <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
                     <div>
+                      <% if (message) { %>
+                      <% for (var key in message) { %>
+                        <!-- alert message -->
+                        <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
+                            <strong class="text-right"><%= message[key] %>!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <% } %>
+                <% } %> 
                       <h1 class="h1 hero-text text-responsive text-primary">International  Studies, <br>
                         pay nothing until you land a great job!</h1>
                         <p class="mt-5 h5 hero-text text-2">
