@@ -150,6 +150,7 @@ function agent() {
 
 
     route.post('/setpassword' , (req, res) => {
+        const message = req.flash()
         const data = req.body.email
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM agent WHERE email = ? ', data, (err, output) => {
@@ -163,7 +164,7 @@ function agent() {
                             req.flash('success', 'Password created Please Login ', {
                                 message: message
                             })
-                            res.render('./agent/login', {
+                            res.render('./agent/login', {       
                                 output: output[0], message
                             })
                         })
@@ -174,6 +175,43 @@ function agent() {
             })
         })
     })
+
+
+    
+        // POST TO AGENT LOGIN 
+        route.post('/login', (req, res) => {
+            const userDetails = req.body
+            pool.getConnection((err, con) => {
+                if (err) res.redirect('/')
+                con.query('SELECT * FROM agent WHERE email = ?', userDetails.email, async (err, user) => {
+                    con.release()
+                    if(user.length > 0){
+                        // CHECK PASSWORD 
+                        bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
+                            if(response){
+                                const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
+                                res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/agent/dashboard')
+                            }else{
+                                req.flash('danger', 'incorrect password')
+                                res.redirect('/agent/login')
+                            }
+                        })
+                        
+                    }else{
+                        req.flash('danger', 'Incorect Email or Password')
+                        res.redirect('/agent/login')
+                    }
+                })
+            })
+        })
+
+        route.get('/logout', (req, res) => {
+            const message = req.flash()
+            req.logout();
+            res.redirect('/agent/login', {
+                message
+            })
+        })
 
     return route
 }
