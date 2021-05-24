@@ -37,7 +37,6 @@ function forgot_password() {
                     mailers.forgot_password(encryptedid,mail, token)
                     const sql = "UPDATE leads SET token = ? WHERE id = ?" 
                     con.query(sql, [token ,user[0].id], (err, response) => {
-                        console.log(response)
                         req.flash('info', 'Password reset link sent check your mailbox')
                         res.redirect('/forgot-password')
                     })

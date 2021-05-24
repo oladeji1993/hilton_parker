@@ -59,7 +59,7 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/agent' , (req, res) => {
-    res.render("agent", {
+    res.render("./agent/agent", {       
         message : req.flash()
     })
 })
@@ -92,6 +92,9 @@ app.use('/pay', makePayment)
 
 const user = require('./routes/user')
 app.use('/user', user)
+
+const agent = require('./routes/agent')
+app.use('/agent', agent)
 
 
 const forgot_password = require('./routes/forgot-password')

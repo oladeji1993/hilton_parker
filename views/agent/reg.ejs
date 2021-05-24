@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+
+     <!--google font -->
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+     <!-- End of google font -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/Client-dahboard.css">
+    <link rel="stylesheet" href="/css/Reg.css">
+</head>
+<body style="background-color: #f1f5f9;">
+
+<div class="container m-container">
+    <div class="text-center" style="padding-top: 70px;">
+        <div class="text-center"> <h5 style="color: #f69617;;">APPLICATION</h5> </div>
+        <span>Please provide valid information</span>
+    </div>
+    <hr>
+    <div class="row">
+        <form action="/agent/register" method="POST" enctype="multipart/form-data">  
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">FIRSTNAME</label>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" aria-label="name" value="<%= user.firstname %>" name="firstname" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">LASTNAME</label>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" aria-label="name" value="<%= user.lastname %>" name="lastname" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">EMAIL</label>
+                            <div class="input-group mb-4">
+                                <input type="email" required class="form-control" aria-label="email"  name='email'  value="<%= user.email %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+            </div>
+
+            <!-- adress and date of birth -->
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">PHONE NUMBER 1</label>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" aria-label="Phone number"  name='phonenumber'  value="<%= user.phonenumber %>" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">NATIONALITY</label>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" name="nationality"  value="" > 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
+
+             <!-- PHONE NUMBER -->
+             <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">RESIDENTIAL ADDRESS</label>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" aria-label="Address"  name='residentialaddress'  value="" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">PHONE NUMBER 2</label>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" aria-label="Phone number"  name='phonenumber2'  value="" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- office address -->
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="input-field">
+                        <div>
+                            <label for="" class="form-label">OFFICE ADDRESS</label>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" aria-label="Address"  name='officeaddress'  value="" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- enrolment question session -->
+            <div class="row">
+                <hr>
+                <div class="text-center">
+                    <div class="text-center"> <h5 style="color: #f69617;;">GUARANTORS</h5> </div>
+                    <div class="text-center "> <div class="text-center ">Acceptable Guarantors: Lecturers, Architect, Engineers, Teachers, Doctors, Nurses, Lawyers, Bankers,
+                        Accountants, Managers/ Deputy Managers to reputable companies, Traditional rulers and Clergy from well
+                        recognized churches/mosques, Senior Civil Servants not lower than Grade level 8 excluding uniform
+                        personnel
+                        </div> </div> 
+                </div>
+                <hr>
+            </div>
+
+
+             <!-- Course of choice-->
+             <div class="row">
+                <div class="col-md-6 col-12">
+                    <label for="" class="form-label">Guarantor (1)</label>
+                    <div class="input-field">
+                        <div class="input-field">
+                            <div>
+                                <div class="input-group mb-4">
+                                    <input type="text" required class="form-control" placeholder="FULLNAME" aria-label="name" value="" name="g1_fullname" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address"  name='g1_address'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" placeholder="TEL:" aria-label="Phone number"  name='g1_phone'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email"  name='g1_email'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g1_relationship'  value="" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <label for="" class="form-label">Guarantors (2)</label>
+                    <div class="input-field">
+                        <div class="input-field">
+                            <div>
+                                <div class="input-group mb-4">
+                                    <input type="text" required  class="form-control" placeholder="FULLNAME" aria-label="name" value="" name="g2_fullname" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address"  name='g2_address'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" placeholder="TEL:" aria-label="Phone number"  name='g2_phone'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email"  name='g2_email'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g2_relationship'  value="" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 col-12">
+                <div class="row">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" required type="checkbox" value="checked">
+                        <label class="form-check-label checkbox" for="inlineCheckbox1">I hereby indicate my willingness to engage in the business of HillPad Services
+                            as a freelance agent. I am aware that my information shall be exchanged in the course the consideration of my application and i consent to same.
+                        </label>
+                      </div>
+                </div>
+            </div>
+            
+            <div class="d-flex">
+                <div class="submit-btn">
+                    <button type="submit">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+
+
+
+

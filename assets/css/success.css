@@ -23,7 +23,7 @@ body {
 .check-container .check-background {
   width: 100%;
   height: calc(100% - 1.25rem);
-  background: linear-gradient(to bottom right, #f69617, #f69617);
+  background: linear-gradient(to bottom right, #192cc2, #192cc2);
   box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
   transform: scale(0.84);
   border-radius: 50%;
@@ -44,7 +44,7 @@ body {
   bottom: calc(-15% - 5px);
   left: 0;
   border-radius: 50%;
-  background: radial-gradient(closest-side, #f69617, transparent);
+  background: radial-gradient(closest-side, #192cc2, transparent);
   animation: animateShadow 0.75s ease-out forwards 0.75s;
 }
 
@@ -110,7 +110,7 @@ body {
     text-align: center;
     font-size:30px;
     font-weight: bold;
-    color:#f69617;
+    color:#192cc2;
     margin:0px 10px;
     font-family: "Montserrat", Arial, Tahoma, sans-serif;
 }
@@ -122,14 +122,14 @@ body {
 .submit-btn button{
   padding: 10px 70px;
   background-color:#fff;
-  border:3px solid #f69617;
+  border:3px solid #192cc2;
   /* border: hidden; */
-  color:#f69617;
+  color:#192cc2;
   text-transform: uppercase;
   border-radius:25px
 }
 
 .submit-btn button:hover{
-  background-color:#f69617;
+  background-color:#192cc2;
   color:#fff
 }
