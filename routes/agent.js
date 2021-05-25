@@ -68,7 +68,10 @@ function agent() {
                         }else if(user[0].status == 'verified'){
                             console.log('verified')
                             res.send('verified')
-                        }else{
+                        }else if(user[0].status == 'submit'){
+                            res.render('./Client/success')
+                        }
+                        else{
                             res.render('./agent/reg', {
                                 user: user[0]
                             })
@@ -106,9 +109,10 @@ function agent() {
                     residentialaddress = ?,
                     phonenumber2 = ?,
                     status = 'applied',
-                    residentialaddress = ?,
+                    officeaddress = ?,
                     agent_id = ?
                     WHERE id = ${respons[0].id}`;
+                    console.log(data)
                     con.query(sql, data, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
@@ -176,9 +180,11 @@ function agent() {
                 g2_address =?,
                 g2_phone =?,
                 g2_email =?,
-                g2_relationship =?
+                g2_relationship =?,
+                status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
+                    console.log(err)
                     res.render('./Client/success')
                 })
                 
@@ -245,8 +251,8 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            req.logout();
-            res.redirect('/agent/login')
+            res.signedCookies('agent','', {expiresIn: Date.now()})
+            res.redirect('/admin/login')
         })
     
 

@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+
+extra.html
 uploads
 *.DB_Store
 # Diagnostic reports (https://nodejs.org/api/report.html)
