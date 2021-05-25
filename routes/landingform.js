@@ -46,8 +46,8 @@ function landingForm(){
                                 // GENERATE DYNAMIC LINK TO CREATE PASSWORD
                                 const hashed = cryptr.encrypt(params.email);
                                 params.hash = hashed
-                                mailers.agent(params)
-                                mailers.agentofficer(params)
+                                mailers.newLead(params)
+                                mailers.applied(params)
                                 res.render('./client/success')
                             }else{
                                 res.render('./error')

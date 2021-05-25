@@ -205,13 +205,13 @@ function agent() {
                     const password = req.body.password
                     const email = req.body.email
                     bcrypt.hash(password, 12).then(secured =>{
-                        // const sql = 'UPDATE agent SET password = ?'
+
+                        const sql = 'UPDATE agent SET password = ?'
                         con.query(sql, [secured], (err, resu) => {
                             req.flash('success', 'Password created Please Login' )
                             res.render('./agent/login', {       
                                 message: message
                             })
-
                         })
                     })
                 }else{
