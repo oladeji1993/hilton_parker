@@ -14,7 +14,11 @@
 .container-background .welcome{
     font-size: 50px;
     font-weight:bold;
+<<<<<<< HEAD
     color: #192cc2;
+=======
+    color:#192cc2;
+>>>>>>> 2ef46232f274d89da1ad9e2c84baac21f5f02c58
 }
 
 .container-background img{

@@ -100,6 +100,11 @@ app.use('/agent', agent)
 const forgot_password = require('./routes/forgot-password')
 app.use('/forgot-password', forgot_password);
 
+
+const reset_password = require('./routes/agent_forgotpass')
+app.use('/agent_forgotpass', reset_password)
+
+
 app.listen(3000, function(){
     console.log('app running on port 3000')
 })
