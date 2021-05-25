@@ -199,18 +199,13 @@ function agent() {
                     const password = req.body.password
                     const email = req.body.email
                     bcrypt.hash(password, 12).then(secured =>{
-<<<<<<< HEAD
-                        // const sql = 'UPDATE agent SET password = ?'
-=======
 
                         const sql = 'UPDATE agent SET password = ?'
->>>>>>> 2ef46232f274d89da1ad9e2c84baac21f5f02c58
                         con.query(sql, [secured], (err, resu) => {
                             req.flash('success', 'Password created Please Login' )
                             res.render('./agent/login', {       
                                 message: message
                             })
-
                         })
                     })
                 }else{
@@ -250,13 +245,8 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-<<<<<<< HEAD
-            res.signedCookies('agent','', {expiresIn: Date.now()})
-            res.redirect('/admin/login')
-=======
             req.logout();
             res.redirect('/agent/login')
->>>>>>> 7b0f8b2b03c6b49599a20b15ece2a6676605b109
         })
     
 

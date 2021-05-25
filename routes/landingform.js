@@ -90,11 +90,7 @@ function landingForm(){
                 if(agent.length > 0){
                     req.flash('warning', 'Email has already been used please login or contact a Customer Support')
                     res.redirect('/agent')
-<<<<<<< HEAD
-                    console.log("i not am hrrr")
-=======
                   
->>>>>>> 7b0f8b2b03c6b49599a20b15ece2a6676605b109
                 }else{
                     con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                        
