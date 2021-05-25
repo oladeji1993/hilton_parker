@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-    <% if (message) { %>
+
         
     
         <nav style="background-color: #192cc2;" class="navbar navbar-expand-lg navbar-light">
@@ -67,6 +67,7 @@
             <div class="col-lg-6 col-12 mt-5">
                 <form action="/agent/login" method="POST"> 
                     <div class="login-div">
+                        <% if (message) { %>
                         <% for (var key in message) { %>
                             <!-- alert message -->
                             <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
