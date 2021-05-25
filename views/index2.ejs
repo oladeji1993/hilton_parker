@@ -66,8 +66,16 @@ hr{
 }
 
 @media only screen and (max-width: 600px) {
+  body{
+    /* background-color: red; */
+  }
     .head-pad{
-        height: 160vh;
+        /* height: 160vh; */
+      
+    }
+    .top-image{
+      /* display: none; */
+      /* visibility: hidden; */
     }
     .text-responsive {
         text-align: center;
@@ -77,16 +85,6 @@ hr{
     text-align: center;
     font-size: calc(50% + 1vw + 1vh);
 }
-
-.pix-hide{
-  display:none;
-  height: 0vh;
-}
-
-.pix-hide{
-  display:none;
-}
-
     
 }
 .bg-primary{
@@ -180,7 +178,7 @@ input[type=text] {
 
       <div class="container-fluid head-pad">
           <div class="row h-100">
-                <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
+                <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center ">
                     <div>
                       <% if (message) { %>
                       <% for (var key in message) { %>
@@ -205,176 +203,23 @@ input[type=text] {
                         </div>
                         
                 </div>
-                <div class="col-md-6 d-flex justify-content-md-center align-items-center head-pad2">
+                <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center head-pad2 top-image">
                     <img src="./images/herobg.png" alt="" class="img-fluid" width="90%"> 
                 </div>
           </div>
       </div>
 
-      
-      <div class="container-fluid head-pad">
-        <div class="row h-100">
-            <div class="col-md-6 d-flex justify-content-md-center align-items-center head-pad2 pix-hide">
-                <img src="./images/ill-one.png" alt="" class="img-fluid" width="90%"> 
-            </div>
-              <div class="col-md-6 d-flex justify-content-md-center align-items-center">
-                  <div>
-                    <p class="h2 hero-text text-primary" style="text-align: center;">WHO WE ARE</p>
-                      <p class="mt-5 h5 hero-text text-2" style="line-height: 32px;" > Hillpad services is an International Educational consultancy firm.</b> We provide top class Admission processing services to our clients
-                        that are willing to work and study in Canada.</p>
-                        <!-- <p class="h2 hero-text text-primary mt-5">Get accepted and get your terms!</p> -->
-                        <p class="mt-3 h5 hero-text text-2" style="line-height: 32px;" > Hillpad Services</b> does not charge administrative fees until student's visa application is successful.
-                          <b>In the case of a refusal, Hilllpad services will not charge the client for work done</b>. However, if the client would like to seek a 
-                          reapplication, they would have to pay the embassy's reapplication fee</p>
-
-                        <p class="h2 hero-text text-primary mt-5">Our Vision</p>
-                        <p class="mt-2 h5 hero-text text-2" >Our Vision is to raise FUTURE LEADERS through an exceptional Global education.</p>
-
-                        <p class="h2 hero-text text-primary mt-5">Our Mission</p>
-                        <p class="mt-2 h5 hero-text text-2" style="line-height: 32px;">Our mission is to be a renowned organization that will support young scholars to excel in their respective academic pursuit abroad.</p>
-                  
-                        
-                             
-                      </div>
-                      
-              </div>
-             
-        </div>
+      <div class="container">
+        <div class="row"></div>
       </div>
 
-      <div class="container" >
-        <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-primary">Here's how it works!</p>
-      </div>
-
-      <div class="container-fluid head-pad">
-        <div class="row h-100">
-              <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
-                  <div>
-                    <p class="h2 hero-text text-primary">Apply Online in less than 5 Minutes</p>
-                      <p class="mt-5 h5 hero-text text-2" > Our application is fast and simple. 
-                          Not sure what career is best for you? Use our live chat feature to chat with a career counselor.</p>
-                          <p class="h2 hero-text text-primary mt-5">Get accepted and get your terms!</p>
-                          <p class="mt-5 h5 hero-text text-2" > Our typical acceptance time is 1-2 business days, 
-                              but you could be accepted within an hour! 
-                              Once you get accepted, our immigration officer would be in touch with you  then
-                              you’re ready to start your proccess.</p>
-
-                              <p class="h2 hero-text text-primary mt-5">Get a great education,
-                                pay later!</p>
-                              <p class="mt-5 h5 hero-text text-2" > All of our partner schools provide top notch education,
-                                  and you get work permit on getting admission to enable you earn while you learn.</p>
-                        
-                             
-                      </div>
-                      
-              </div>
-
-              <div class="col-md-6 d-flex justify-content-md-center align-items-center head-pad2">
-                <img src="./images/ill-one.png" alt="" class="img-fluid" width="90%"> 
-            </div>
-             
-        </div>
-      </div>  
-    
-<div class="container-fluid bg-primary p-3 ">
-    <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-light">Ready to get started? <br>
-        Let’s fund your future! <br>
-        <button class="btn btn-lg btn-outline-light col-xs-3 col-md-2 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button></p>
-        
-</div>
-
-<div class="container-fluid bg-light p5" >
-    <p class="  hero-text text-2 text-responsive  text-center text-primary">Just a few of the benefits we offer </p>
-    <div class="p-5">
-        <div class="row">
-            <div class="col-md-6">
-                <p class="mt-5 h5 hero-text text-2 ">Flexible tuition fee payment plans</p>
-                <span>Our partner instituitions offer our students a variety of payment plans that are flexible 
-                    enough to achieve
-                </span>
-            </div>
-            <div class="col-md-6">
-                <p class="mt-5 h5 hero-text text-2 ">No service charge until visa approval</p>
-                <span>Hillpad does not charge administrative fees untill the student's visa application is successful.
-                </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <p class="mt-5 h5 hero-text text-2 "> No English test or entrance exams needed</p>
-                <span>Our partner schools already consider Nigerian students English language proficient
-                </span>
-            </div>
-            <div class="col-md-6">
-                <p class="mt-5 h5 hero-text text-2 ">Guaranteed work permit after visa is approved</p>
-                <span>Our students are guaranteed work permit after a successful visa application upon arrival in their Country of choice
-                </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <p class="mt-5 h5 hero-text text-2 "> Accommodation support</p>
-                <span>We have on ground associate ready to recieve our studentss upon arrival
-                </span>
-            </div>
-            <div class="col-md-6">
-                <!-- 1 -->
-            </div>
-        </div>
+      <div class="container-fluid bg-primary p-3 ">
+        <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-light">Ready to get started? <br>
+            Let’s fund your future! <br>
+            <button class="btn btn-lg btn-outline-light col-xs-3 col-md-2 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button></p>
+            
     </div>
-</div>
-
-
-      <div class="container-fluid bg-primary p-5">
-
-        <footer>
-            <div class="container-fluid">
-                <div class="row" >
-                    <div class="col-xs-6 col-sm-6 col-md-3">
-                        <img src="/images/whitelogo.png" alt="" class="img-fluid" width="50%">
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3">
-                        <h4 class="text-light">
-                            Contact-us
-                        </h4>
-                        <p class="text-light mt-3" >
-                            Address
-                        </p>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3">
-                        <h4 class="text-light">
-                            More
-                        </h4>
-                        <p class="text-light mt-3" >
-                            Resourcs
-                        </p>
-                        <p class="text-light mt-3" >
-                            Privacy Policy
-                        </p>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3">
-                        <h4 class="text-light">
-                            Updates
-                        </h4>
-                        <p class="text-light mt-3" >
-                            Join our mailing list
-                        </p>
-                        <p class="text-light mt-3" >
-                            Twitter
-                        </p>
-                        <p class="text-light mt-3" >
-                            Facebook
-                        </p>
-                        <p class="text-light mt-3" >
-                            Instagram
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-
-      </div>
+     
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!--Start of Tawk.to Script-->
