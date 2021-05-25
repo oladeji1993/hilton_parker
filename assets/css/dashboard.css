@@ -10,7 +10,7 @@
 }
 
 :root {
-    --main-color: #f69617;
+    --main-color: #192cc2;
     --color-dark: #1D2231;
     --text-grey:   #8398A2;
 }
@@ -516,6 +516,12 @@ tr td:last-child{
     }
    
 } 
+
+.fulldetails td a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
 
 
 

@@ -19,7 +19,7 @@
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span>Hilton Parker</span></h2>
+            <h2><span>Hillpad</span></h2>
         </div>
 
         <div class="sidebar-menu">
@@ -53,7 +53,7 @@
             <div class="user-wrapper">
                 <small>Welcome</small>
                 <div>
-                    <small>Collins</small>
+                    <small><%=admin.firstname %> <%= admin.lastname %></small>
                 </div>
             </div>
         </header>
@@ -64,7 +64,7 @@
                 <a style="text-decoration: none; " href="/admin/newagents">
                     <div style="background-color: #fff;" class="card-single">
                         <div>
-                            <h1 style="color:#212529">10</h1>
+                            <h1 style="color:#212529"><%= fresh.length %></h1>
                             <div><span style="color:#8398A2">New Agents</span></div>
                         </div>
                         <div>
@@ -77,9 +77,9 @@
                     <a style="text-decoration: none;" href="/admin/doc_upload">
                         <div>
                             <div style="display: flex; justify-content:space-between;">
-                                <h1 style="color:black">10</h1>
+                                <h1 style="color:black"><%= registered.length %></h1>
                             </div>
-                            <div><span>Document upload</span></div>
+                            <div><span>Complete registration</span></div>
                         </div>
                     </a>
                 </div>
@@ -88,8 +88,8 @@
                 <div class="card-single">
                     <a style="text-decoration: none;" href="/admin/verifiedagents">
                         <div>
-                            <h1 style="color:black">10</h1>
-                            <div><span>Verified Agents</span></div>
+                            <h1 style="color:black"><%= active.length %></h1>
+                            <div><span>Active Agents</span></div>
                         </div>
                         <div>
                           <!-- <span><i class="fas fa-user-check"></i></span>   -->
@@ -99,14 +99,12 @@
 
 
                 <div class="card-single">
-                    <a style="text-decoration:none;" href="/admin/activeagents">
                         <div>
                             <h1>10</h1>
-                            <div><span>Active Agents</span></div>
+                            <div><span>Failed verification</span></div>
                         </div>
                         <div>
-                        </div>
-                    </a>
+                        </div>     
                 </div>
             </div>
         </main>
