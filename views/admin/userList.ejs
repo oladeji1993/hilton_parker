@@ -20,7 +20,7 @@
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span>Hilton Parker</span></h2>
+            <h2><span>Hillpad</span></h2>
         </div>
 
         <div class="sidebar-menu">
@@ -40,30 +40,59 @@
                 <label for="nav-toggle">
                     <span><i class="fas fa-bars"></i></span>    
                 </label>
-                <a style="text-decoration: none; color:#000" href="#">New Agents</a>
             </h2>
 
             <div class="user-wrapper">
                 <small>Welcome</small>
                 <div>
-                    <small>Collins</small>
+                    <small><%=admin.firstname %> <%= admin.lastname %></small>
                 </div>
             </div>
         </header>
 
-
+        
         <main>
             <div class="container wrapper">
 
                 <div class="container mb-5" >
         
-                    <div class="h-100">
-                        <div style="color:#f69617" class="text-center h-100 "> <h3><B>New Agents</B></h3> </div>
-                    </div>
-            
                 </div>
+        
+                <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+                    <thead style="background-color: #192cc2;">
+                        <tr style="color:#fff;">
+                            <th class="col-md-2">Name</th>
+                            <th class="col-md-2">Email</th>
+                            <th class="col-md-2">Phone Number</th>
+                            <th class="col-md-2">Office Address</th>
+                            <th class="col-md-2">Agent ID</th>
+                        </tr>
+                    </thead>
+                    <%
+                    if(agentList.length != 0){
+                        var i=1;
+                        agentList.forEach(function(data){
+                    %>
+                    <tbody>
+                    
+                        <tr class="fulldetails">
+                            <td><a href="/admin/agentdetails"><%=data.firstname %> <%= data.lastname %></a></td>
+                            <td class="highlight"><a href="/admin/agentdetails"><%= data.email %></a></td>
+                            <td><a href="/admin/agentdetails"><%=data.phonenumber %></a></td>
+                            <td><a href="/admin/agentdetails"><%=data.officeaddress%></a></td>
+                            <td><a href="/admin/agentdetails"><%=data.agent_id %></a></td>
+                        </tr>
+                       
+                    </tbody>
+                    <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="10">No Data Found</td>
+                        </tr>
+                    <% } %>
+                </table>
               </div>
-        </main>
+        </main>   
     </div>
 </body>
 </html>

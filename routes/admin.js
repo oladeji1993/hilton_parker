@@ -12,7 +12,7 @@ flash = require('express-flash')
 const schema = joi.object({
     firstname: joi.string().alphanum().min(3).max(30).required(),
     lastname: joi.string().alphanum().min(3).max(30).required(),
-    phonenumber: joi.string().alphanum().min(3).max(30).required(),
+    phonenumber: joi.string().min(3).max(30).required(),
     password: joi.string().required(),
     email: joi.string().email({ minDomainSegments: 2, tlds: { allow:['com']}}).required()
 })
@@ -98,6 +98,8 @@ function admin() {
             password: params.password,
             email: params.email
         })
+
+        // console.log(valid)
         // CHECK FOR ERROR 
         if (valid.error){
             err = valid.error 
@@ -187,8 +189,38 @@ function admin() {
             })
 
 
-        route.get('/details', (req, res) => {
-            res.render('./admin/agent')
+        // agents details
+        route.get('/details', (req, res, next,) => {
+            if (req.cookies.authenticate){
+                req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+                next()
+            }else{
+                req.flash('danger', 'You Must Login First', )
+                res.redirect('/agent/login')
+                } 
+        }, (req, res) => {
+            const id = req.user.id
+            pool.getConnection((err, con) => {
+                if (err) throw err;
+                con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
+                    con.query('SELECT * FROM agent WHERE status = "new" && accountofficer = ?', id, (err, fresh) =>{
+                        con.query('SELECT * FROM agent WHERE status = "submit" && accountofficer = ?', id, (err, registered) =>{
+                            con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', id, (err, active) =>{    
+                                        res.render('./admin/agent', {
+                                            fresh,
+                                            registered,
+                                            active,
+                                            admin : admin[0]
+    
+                                        })
+                                   
+    
+                              
+                            })
+                        })
+                    })
+                })
+            })
         })
     
 
@@ -204,11 +236,11 @@ function admin() {
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    res.render('./admin/newapplicants', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }else{
-                    res.render('./admin/newapplicants', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }
@@ -225,11 +257,11 @@ function admin() {
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    res.render('./admin/completereg', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }else{
-                    res.render('./admin/completereg', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }
@@ -246,11 +278,11 @@ function admin() {
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    res.render('./admin/makepayment', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }else{
-                    res.render('./admin/makepayment', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }
@@ -268,11 +300,11 @@ function admin() {
             if (err) res.redirect('/')
             con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
-                    res.render('./admin/successfulapp', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }else{
-                    res.render('./admin/successfulapp', {
+                    res.render('./admin/applicants', {
                         userList
                     })
                 }
@@ -290,19 +322,92 @@ function admin() {
     // agent details route
 
     route.get('/newagents', (req, res) => {
-        res.render('./admin/newagents')
+
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM admin WHERE id = ?', accountofficer, (err, admin) => {
+                con.query('SELECT * FROM agent WHERE status = "new" && accountofficer = ?', accountofficer, (err, agentList) =>{
+                    if(agentList.length > 0){
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin: admin[0]
+                        })
+                    }else{
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin: admin[0]
+                        })
+                    }
+                })
+            })
+        })
     })
 
     route.get('/doc_upload', (req, res) => {
-        res.render('./admin/doc_upload')
+
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM admin WHERE id = ?', accountofficer, (err, admin) => {
+                con.query('SELECT * FROM agent WHERE status = "submit" && accountofficer = ?', accountofficer, (err, agentList) =>{
+                    if(agentList.length > 0){
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin: admin[0]
+                        })
+                    }else{
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin: admin[0]
+                        })
+                    }
+                })
+            })
+        })
     })
 
     route.get('/verifiedagents', (req, res) => {
-        res.render('./admin/verifiedagents')
+
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
+        }
+        const accountofficer = req.user.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+            con.query('SELECT * FROM admin WHERE id = ?', accountofficer, (err, admin) => {
+                con.query('SELECT * FROM agent WHERE status = "active" && accountofficer = ?', accountofficer, (err, agentList) =>{
+                    if(agentList.length > 0){
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin : admin[0]
+                        })
+                    }else{
+                        res.render('./admin/userList', {
+                            agentList,
+                            admin : admin[0]
+                        })
+                    }
+                })
+            })
+        })
+        // res.render('./admin/active')
     })
 
     route.get('/activeagents', (req, res) => {
-        res.render('./admin/activeagents')
+        res.render('./admin/userList', {
+            admin : admin[0]
+        })
+    })
+
+    route.get('/agentdetails', (req, res) => {
+        res.render('./admin/agentdetails')
     })
 
     
