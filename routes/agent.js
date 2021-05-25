@@ -47,6 +47,9 @@ function agent() {
     })
 
     route.get('/dashboard', (req, res) => {
+        // if(req.user){
+        //     console.
+        // }
         res.render('./agent/dashboard')
     })
 
@@ -157,13 +160,16 @@ function agent() {
                 if (err) throw err;
                 if(output.length > 0){
                     const password = req.body.password
+                    const email = req.body.email
                     bcrypt.hash(password, 12).then(secured =>{
+
                         const sql = 'UPDATE agent SET password = ?'
                         con.query(sql, [secured], (err, resu) => {
                             req.flash('success', 'Password created Please Login' )
                             res.render('./agent/login', {       
                                 message: message
                             })
+
                         })
                     })
                 }else{
@@ -206,6 +212,11 @@ function agent() {
             req.logout();
             res.redirect('/agent/login')
         })
+
+
+
+
+
 
     return route
 }
