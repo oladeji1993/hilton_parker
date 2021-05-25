@@ -10,15 +10,16 @@ const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const user = require('./user');
 flash = require('express-flash')
+var path = require('path')
 
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './assets/uploads')
+      cb(null, './assets/uploads/agent')
     },
     filename: function (req, file, cb, next) {
         const date = new Date().getTime()
-      cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
+      cb(null, req.cookies.agent_id + '-' + file.fieldname + '-' + '' + path.extname(file.originalname))
     }
     
   })
@@ -57,9 +58,19 @@ function agent() {
             con.query('SELECT * FROM agent WHERE id = ? ', id, (err, user) => {
                 if(user.length > 0){
                     if(user[0].id == id){
-                        res.render('./agent/reg', {
-                            user: user[0]
-                        })
+                        if(user[0].status == 'applied'){
+                            res.render('./agent/uploads', {
+                                respons : user[0]
+                            })
+                        }else if(user[0].status == 'verified'){
+                            console.log('verified')
+                            res.send('verified')
+                        }else{
+                            res.render('./agent/reg', {
+                                user: user[0]
+                            })
+                        }
+                        
                     }
                 }else{
                     res.render('./error')
@@ -69,7 +80,7 @@ function agent() {
 
     })
 
-    route.post('/register', upload.none(), (req, res) => {
+    route.post('/register',upload.none(), (req, res) => {
         const params = Object(req.body);
         const data = Object.values(req.body);
         const email = params.email
@@ -79,6 +90,8 @@ function agent() {
                 res.render('./error')    
            
             }else{
+                const ref = 'HPS-AG-00' + respons[0].id
+                data.push(ref)
                 pool.getConnection((err, con) => {
 
                     let sql = `UPDATE agent SET 
@@ -89,25 +102,24 @@ function agent() {
                     nationality = ?,
                     residentialaddress = ?,
                     phonenumber2 = ?,
-                    officeaddress = ?,
-                    g1_fullname = ?,
-                    g1_address = ?,
-                    g1_phone = ?,
-                    g1_email = ?,
-                    g1_relationship = ?,
-                    g2_fullname = ?,
-                    g2_address = ?,
-                    g2_phone = ?,
-                    g2_email = ?,
-                    g2_relationship = ?
-                    
+                    status = 'applied',
+                    residentialaddress = ?,
+                    agent_id = ?
                     WHERE id = ${respons[0].id}`;
-
                     con.query(sql, data, (err, result) => {
                         if(result){
-                            res.render('./agent/createpassword', {
-                                respons: respons[0]
+                            con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
+                                // res.cookie('agent_id', ref, {maxAge: 300000}).redirect('/agent/uploads', {
+                                //     respons: resp[0]
+                                // })
+
+
+                                res.cookie('agent_id', ref, {maxAge: 43200000}).redirect('/agent/uploads')
                             })
+                           
+                        }else{
+                            console.log('err')
+                            res.render('error')
                         }
                         
                     })
@@ -119,34 +131,59 @@ function agent() {
 
     })
 
+    route.get('/uploads', (req, res) =>{
+        const agent = req.cookies.agent_id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM agent WHERE agent_id = ? ', agent , (err, result) => {
+                res.render('./agent/uploads', {
+                    respons: result[0]
+                })
+            })
+        })
+    })
 
-    // var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
-    // route.post('/uploads', (req, res, next)  => {
-    //     if(req.user){
-    //         next()
-    //     }else{
-    //         req.flash('danger', 'You must login first')
-    //         res.redirect('/user/login')
-    //     }
-    // },cpUpload ,(req, res) => {
-    //     pool.getConnection((err, con) => {
-    //         con.query('SELECT * FROM agent WHERE id = ? ', req.user.id, (err, result) => {
-    //             const files = req.files
-    //             const fields = req.body
-    //             const lead = result[0]
-    //             const accountofficerid = result[0].accountofficer
-    //             con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
-    //                 const accountofficer = resu[0] 
-    //                 mailers.document_upload(lead, accountofficer)
-    //                 // res.redirect('/user/dashboard')
-    //                 console.log("working")
-    //             })
+    var cpUpload = upload.fields([{ 
+        name: 'g1_id', maxCount: 1 },
+        {
+            name:'g1_passport', maxCount: 1
+        },
+        {
+            name:'g2_id', maxCount: 1
+        },
+        {
+            name:'g2_passport', maxCount: 1
+        }
+    ])
+    route.post('/uploads/:id', cpUpload, (req, res) => {
+        pool.getConnection((err, con) => {
+            const agent = req.cookies.agent_id
+            con.query('SELECT * FROM agent WHERE agent_id = ? ', agent, (err, result) => {
+                // res.cookie('agent_id','', {expiresIn: Date.now()}).redirect('/')
+                // const files = req.files
+                const fields = Object.values(req.body);
+                const lead = result[0]
+                const accountofficerid = result[0].accountofficer
+                fields.push(agent)
+                const sql = `UPDATE agent SET g1_fullname = ?,
+                g1_address =?,
+                g1_phone =?,
+                g1_email =?,
+                g1_relationship =?,
+                g2_fullname =?,
+                g2_address =?,
+                g2_phone =?,
+                g2_email =?,
+                g2_relationship =?
+                WHERE agent_id = '${agent}'`
+                con.query(sql, fields,(err, resp) => {
+                    res.render('./Client/success')
+                })
                 
-    //         })
-    //     })
+            })
+        })
         
 
-    // })
+    })
 
 
     route.post('/setpassword' , (req, res) => {
@@ -158,7 +195,7 @@ function agent() {
                 if(output.length > 0){
                     const password = req.body.password
                     bcrypt.hash(password, 12).then(secured =>{
-                        const sql = 'UPDATE agent SET password = ?'
+                        // const sql = 'UPDATE agent SET password = ?'
                         con.query(sql, [secured], (err, resu) => {
                             const message = req.flash()
                             req.flash('success', 'Password created Please Login ', {
@@ -190,7 +227,7 @@ function agent() {
                         bcrypt.compare(userDetails.password , user[0].password, (err, response) =>{
                             if(response){
                                 const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
-                                res.cookie('authenticate', token, {maxAge: 43200000}).redirect('/agent/dashboard')
+                                res.cookie('agent', token, {maxAge: 43200000}).redirect('/agent/dashboard')
                             }else{
                                 req.flash('danger', 'incorrect password')
                                 res.redirect('/agent/login')
@@ -206,14 +243,13 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            const message = req.flash()
-            req.logout();
-            res.redirect('/agent/login', {
-                message
-            })
+            res.signedCookies('agent','', {expiresIn: Date.now()})
+            res.redirect('/admin/login')
         })
+    
 
     return route
 }
 
 module.exports = agent()
+

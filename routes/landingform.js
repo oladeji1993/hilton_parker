@@ -85,12 +85,12 @@ function landingForm(){
     }, (req, res) => {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM agent WHERE email = ? ', req.body.email, (err, agent) => {
-                // console.log(user)
+                console.log(agent)
                 
                 if(agent.length > 0){
                     req.flash('warning', 'Email has already been used please login or contact a Customer Support')
-                    res.redirect('/')
-                    // console.log("i not am hrrr")
+                    res.redirect('/agent')
+                    console.log("i not am hrrr")
                 }else{
                     con.query(`SELECT * FROM admin WHERE id = ${res.accountOfficer}`, (err, admin) => {
                        
@@ -98,7 +98,6 @@ function landingForm(){
                         params.accountofficer = admin[0].id
                         params.regdate = (new Date()).toLocaleDateString('en-US')
                         params.status = 'new'
-                        // console.log(params)
                         con.query('INSERT INTO agent SET ?', params, async (err, result) => {
                             
                             con.release()

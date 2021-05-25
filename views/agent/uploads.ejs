@@ -22,167 +22,169 @@
 </head>
 <style>
   .bg-color{
-      background-color: #f69617;
+      background-color: #192cc2;
     }
     .color{
-      color: #f69617;
+      color: #192cc2;
     }
 </style>
 <body style="background-color: #f1f5f9;">
-        <main>
-          <div class="container mt-1" >
+        
 
-            <div class="h-100">
-                <div class="text-center color h-100 "> <h3><B>UPLOAD DOCUMENTS</B></h3> </div>
-                <div class="text-center "> upload documents only in 'pdf', 'docx', 'rtf', 'jpg', 'jpeg', 'png' & 'text' format.</div> 
+  <div class="container">
+
+  
+   <!-- enrolment question session -->
+            <div class="row">
+                <hr>
+                <div class="text-center">
+                    <div class="text-center"> <h5 style="color: #192cc2;;" class="h3">GUARANTORS INFORMATION</h5> </div>
+                    <div class="text-center "> <div class="text-center ">Acceptable Guarantors: Lecturers, Architect, Engineers, Teachers, Doctors, Nurses, Lawyers, Bankers,
+                        Accountants, Managers/ Deputy Managers to reputable companies, Traditional rulers and Clergy from well
+                        recognized churches/mosques, Senior Civil Servants not lower than Grade level 8 excluding uniform
+                        personnel
+                        </div> </div> 
+                </div>
+                <hr>
             </div>
-    
-        </div>
-          <div class="container">
-            <div class="row d-flex justify-content-center">
-              <div class="col-md-10 text-center">
-                    <div class="" style="border: 3px dashed #f69617; height: 32em;">
-                      <div class="text-center color pt-1 font-italic" id="-message"> <small>NOTE: you can upload up to three(3) documents at once </small></div> 
-                      <div class="container h-100 form-container" >
-                          <div class="row h-100 justify-content-center align-items-center">
-                            <form class="col-12" action="/agent/uploads" method="POST" enctype="multipart/form-data">
-          
-                              <div class="item-1">
-                                <div class="form-group m-3" id="doc1">
-                                  <label for="formGroupExampleInput">Document Name<small class="text-danger"> (required)</small> </label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document1" placeholder=" Example  (B.S.C Certificate)">
+
+
+            <form action="/agent/uploads/<%= respons.id %>" method="POST" enctype="multipart/form-data">
+             <!-- Course of choice-->
+             <div class="row">
+                <div class="col-md-6 col-12">
+                    <label for="" class="form-label">Guarantor (1)</label>
+                    <div class="input-field">
+                        <div class="input-field">
+                            <div>
+                                <div class="input-group mb-4">
+                                    <input type="text" required class="form-control" placeholder="FULLNAME" aria-label="name" value="" name="g1_fullname" >
                                 </div>
-                                <div class="form-group m-3 ">
-                                  <label for="formGroupExampleInput2">Select File</label>
-                                  <input type="file" name="document" class="form-control"  id="file">
-                                  
-                                </div>
-                              </div>
-                              <span class="text-danger m2" id="input-error-message">Invalid File Format (uplod only ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc'])</span>
-                              
-                              <div class="item-2">
-                                <div class="form-group m-3">
-                                  <label for="formGroupExampleInput">Document Name <small class="text-danger">(required)</small> </label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document2"placeholder="Example  (H.N.D Certificate)">
-                                </div>
-                                <div class="form-group m-3" id="doc2">
-                                  <label for="formGroupExampleInput2">Select File</label>
-                                  <input type="file" name="document" class="form-control" id="file2">
-                                </div>
-                              </div>
-                              
-          
-                              <div class="item-3  ">
-                                <div class="form-group m-3 hidden">
-                                  <label for="formGroupExampleInput">Document Name <small class="text-danger">(required)</small> </label>
-                                  <input type="text" class="form-control" id="formGroupExampleInput" name="document3" placeholder="  Example  (O.N.D Certificate)">
-                                </div>
-                                <div class="form-group m-3 " id="doc1" >
-                                  <label for="formGroupExampleInput2">Select File</label>
-                                  <input type="file" name="document" class="form-control" id="file3">
-                                </div>
-                              </div>
-                                <p id="count" class="d-none">3</p><hr>
-                              <span class="btn btn-lg btn-outline-dark m-2 add-another"> <i class="fa fa-plus"></i>&nbsp;Add Another</span>
-                              <button type="submit" class="btn btn-lg btn-outline-success m-2" id="submit"><i class="fab fa-telegram-plane"></i>&nbsp;Submit</button>
-                            </form>   
-                            <div class="text-center text-danger pt-1 font-italic" id="eror-message"> <small> you can only upload 3 documents at once </small></div> 
-                            
-                          </div>
+                            </div>
                         </div>
-                      
                     </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address"  name='g1_address'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" placeholder="TEL:" aria-label="Phone number"  name='g1_phone'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email"  name='g1_email'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g1_relationship'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                      <div>
+                        <label for="g1-id" class="form-control-label">Guarantor Passport-Photograph </label>
+                          <div class="input-group mb-4">
+                              <input type="file" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g1_passport'  value="" >
+                          </div>
+                      </div>
+                  </div>
+                  <div class="input-field">
+                    <div>
+                      <label for="g1-id" class="form-control-label">Guarantor ID</label>
+                        <div class="input-group mb-4">
+                            <input type="file" required class="form-control" aria-label=""  name='g1_id'  value="" >
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <label for="" class="form-label">Guarantors (2)</label>
+                    <div class="input-field">
+                        <div class="input-field">
+                            <div>
+                                <div class="input-group mb-4">
+                                    <input type="text" required  class="form-control" placeholder="FULLNAME" aria-label="name" value="" name="g2_fullname" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address"  name='g2_address'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="number" required class="form-control" placeholder="TEL:" aria-label="Phone number"  name='g2_phone'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email"  name='g2_email'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <div>
+                            <div class="input-group mb-4">
+                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g2_relationship'  value="" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                      <div>
+                        <label for="g1-id" class="form-control-label">Guarantor Passport-Photograph </label>
+                          <div class="input-group mb-4">
+                              <input type="file" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g2_passport'  value="" >
+                          </div>
+                      </div>
+                  </div>
+                  <div class="input-field">
+                    <div>
+                      <label for="g1-id" class="form-control-label">Guarantor ID</label>
+                        <div class="input-group mb-4">
+                         
+                            <input type="file" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g2_id'  value="" >
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+               
+
+              <button class=" btn btn-outline-info col-md-4" > Submit</button>
+              </form>
+                
+            </div>
+            
           </div>
-        </main>
-    </div>
-</body>
-   
 
-
-
-
-</body>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
-<script>
-  $(document).ready( () => {
-    $('.item-2').hide()
-    $('.item-3').hide()
-    $('#input-error-message').hide()
-    $('#eror-message').hide()
-    $('.add-another').addClass('disabled')
-    $('#submit').addClass('disabled')
-
-    $("#file").change(function () {
-      $('.add-another').removeClass('disabled')
-      $('#submit').removeClass('disabled')
-      // $('#file').removeClass('is-invalid').addClass('is-valid')
-      $('#input-error-message').hide(300)
-      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            $('.add-another').addClass('disabled')
-            $('#submit').addClass('disabled')
-            // $('#file').addClass('is-invalid')
-            $('#input-error-message').show(300)
-        }
-    });
-
-    $("#file2").change(function () {
-      $('.add-another').removeClass('disabled')
-      // $('#file').removeClass('is-invalid').addClass(' is-valid')
-      $('#input-error-message').hide(300)
-      var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            $('.add-another').addClass('disabled')
-            // $('#file').addClass(' is-invalid')
-            $('#input-error-message').show(300)
-        }
-    });
-
-    $("#file3").change(function () {
-      $('.add-another').removeClass('disabled')
-      // $('#file').removeClass('is-invalid').addClass('is-valid')
-      $('#input-error-message').hide(300)
-        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'docx', 'doc']
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-            $('.add-another').addClass('disabled')
-            // $('#file').addClass('is-invalid')
-            $('#input-error-message').show(300)
-        }
-    });
-    $('.add-another').click( function(){
-      var count = document.getElementById('count').innerHTML
-      count = parseInt(count)
-      if(count > 0){
-        if(count == 3){
-          console.log(count)
-          $('.item-1').hide(500, function() {
-            $('.item-2').show(500)
-            $('.add-another').addClass('disabled')
-            count = count -1
-            console.log(count)
-            document.getElementById('count').innerHTML = count 
-          })
-          
-        }else if(count == 2){
-          console.log(count)
-          $('.item-2').hide(500, function() {
-            $('.item-3').show(500)
-
-            $('.add-another').addClass('disabled')
-            count = count -1
-            console.log(count)
-            document.getElementById('count').innerHTML = count 
-          })
-        }else if(count == 1){
-          console.log(count)
-          $('#eror-message').show(500)
-          $('.add-another').addClass('disabled')
-        }
-      }
-    } )
-  } )
-    
-    
-</script>
+          </body>
 </html>

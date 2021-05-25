@@ -41,7 +41,7 @@
     <% if (message) { %>
         
     
-        <nav style="background-color: #f69617;" class="navbar navbar-expand-lg navbar-light">
+        <nav style="background-color: #192cc2;" class="navbar navbar-expand-lg navbar-light">
             <div class="container">
               <a style="color:white" class="navbar-brand" href="#">Logo</a>
               <ul class="nav justify-content-end">
@@ -56,7 +56,7 @@
             <div class="col-lg-6 col-12 ">
                 <div class="container-background">
                     <div class="welcome-msg mb-5">
-                        <div class="welcome title">Welcome <%= output.firstname %> </div>
+                        <div class="welcome title">Welcome Agent</div>
                         <p class="instruct">Kindly use your registration details to Login</p>
                     </div>
                     <img src="/images/login.svg">
@@ -79,7 +79,7 @@
                             <div>
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-envelope"></i></span>
-                                    <input type="text" name="email" required class="form-control" placeholder="Email" value="<%= output.email %> " aria-label="email" aria-describedby="basic-addon1">
+                                    <input type="text" name="email" required class="form-control" placeholder="Email" value="" aria-label="email" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                     <div class="submit-btn">
                         <div class="btn-forget">
                             <button type="submit">Login</button>
-                            <div class="forget-password"><a href="/forgot-password">Forget password</a></div>   
+                            <div class="forget-password"><a href="/forgot-password">Forgot password</a></div>   
                         </div>
                         
                     </div>
