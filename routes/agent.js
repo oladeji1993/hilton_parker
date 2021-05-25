@@ -10,7 +10,8 @@ const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const user = require('./user');
 flash = require('express-flash')
-var path = require('path')
+var path = require('path');
+const { result } = require('lodash');
 
 
 const storage = multer.diskStorage({
@@ -31,15 +32,26 @@ const upload = multer({ storage: storage })
 function agent() {
 
     route.get('/', (req, res) => {
-        res.redirect('/agent/dashboard')
+        // res.redirect('/agent/dashboard')
+        res.render('./agent/agent')
     })
     
 
-    route.get('/login',  (req, res) => {
+    route.get('/login', auth =(req, res, next) => {
+        if (req.cookies.agent){
+            req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+         }else{
+            // req.flash('danger', 'You Must Login First', )
+            res.render('./agent/login', {
+                message : req.flash()
+            })
+            }}, (req, res) => {
         if(req.user){
             res.redirect('/agent/dashboard')
         }
         else{
+            console.log(req.cookies)
         const message = req.flash()
         res.render('./agent/login', {
             message
@@ -47,12 +59,29 @@ function agent() {
         }
     })
 
-    route.get('/dashboard', (req, res) => {
-        // if(req.user){
-        //     console.
-        // }
-        res.render('./agent/dashboard')
-    })
+    route.get('/dashboard', auth =(req, res) => {
+        if (req.cookies.agent){
+            req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            pool.getConnection((err, con) => {
+                con.query('SELECT * FROM agent WHERE id = ?', req.user.id, (err, rest) => {
+                    if(rest.length )
+                    con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
+                        console.log(err)
+                        res.render('./agent/dashboard', {
+                            agent : rest[0],
+                            accountofficer : acct[0]
+                        })
+                    })
+                    
+                
+                }    )
+            })
+         }else{
+            req.flash('danger', 'You Must Login First', )
+            res.render('./agent/login', {
+                message : req.flash()
+            })
+            }})
 
     route.get('/register/:id', (req, res) => {
         const encriptedid = req.params.id
@@ -195,7 +224,26 @@ function agent() {
     })
 
 
-    route.post('/setpassword' , (req, res) => {
+    route.get('/password/:id', (req, res) => {
+        const id = req.params.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM agent WHERE id = ?', id, (err, result) => {
+                if(err){
+                    console.log(err)
+                }
+                if(result.length > 0){
+                    const agent = result[0]
+                    res.render('./agent/createnewpass', {
+                        message : req.flash(),
+                        email: agent.email
+                    })
+                }else{
+                    res.render('error')
+                }
+            })
+        })
+    })
+    route.post('/setpassword/' , (req, res) => {
         const data = req.body.email
         const message = req.flash()
         pool.getConnection((err, con) => {
@@ -206,8 +254,8 @@ function agent() {
                     const email = req.body.email
                     bcrypt.hash(password, 12).then(secured =>{
 
-                        const sql = 'UPDATE agent SET password = ?'
-                        con.query(sql, [secured], (err, resu) => {
+                        const sql = 'UPDATE agent SET password = ? WHERE email = ?'
+                        con.query(sql, [secured, email], (err, resu) => {
                             req.flash('success', 'Password created Please Login' )
                             res.render('./agent/login', {       
                                 message: message
@@ -237,7 +285,7 @@ function agent() {
                                 const token = jwt.sign({id: user[0].id}, process.env.TOKEN_SECRET)
                                 res.cookie('agent', token, {maxAge: 43200000}).redirect('/agent/dashboard')
                             }else{
-                                req.flash('danger', 'incorrect password')
+                                req.flash('danger', 'incorrect Email or Password')
                                 res.redirect('/agent/login')
                             }
                         })
@@ -251,8 +299,9 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            res.signedCookies('agent','', {expiresIn: Date.now()})
-            res.redirect('/admin/login')
+            console.log(req.cookies)
+            res.cookie('agent','', {expiresIn: Date.now()})
+            res.redirect('/agent/login')
         })
     
 

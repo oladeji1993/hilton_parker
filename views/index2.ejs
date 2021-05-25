@@ -47,11 +47,15 @@
     font-family: 'Bree Serif', serif;
     color: #1b212c;
     /* text-align: left; */
-}
+} 
 
 .head-pad{
     padding-left: 10%;
-    height: 90vh;
+    padding-right: 10%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    /* height: 90vh; */
+    /* min-height: 90vh; */
 }
 
 .head-pad2{
@@ -71,18 +75,19 @@ hr{
   }
     .head-pad{
         /* height: 160vh; */
+        /* padding: 0px !important; */
       
     }
     .top-image{
-      /* display: none; */
-      /* visibility: hidden; */
+      display: none;
+      visibility: hidden;
     }
     .text-responsive {
         text-align: center;
   font-size: calc(200% + 1vw + 1vh);
 }
 .text-2{
-    text-align: center;
+    /* text-align: center; */
     font-size: calc(50% + 1vw + 1vh);
 }
     
@@ -97,6 +102,14 @@ hr{
 }
 
 input[type=text] {
+  border: 1px solid #192cc2;
+}
+
+input[type=email] {
+  border: 1px solid #192cc2;
+}
+
+textarea{
   border: 1px solid #192cc2;
 }
   </style>
@@ -160,7 +173,7 @@ input[type=text] {
                 <ul class="navbar-nav mr-auto w-100 justify-content-end">
                  
                   <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">About</a>
+                    <a class="nav-link text-dark" href="#about">About</a>
                     <li class="nav-item">
                       <a class="nav-link text-dark" href="#">Contact</a>
                       <li class="nav-item">
@@ -176,50 +189,242 @@ input[type=text] {
 
       
 
-      <div class="container-fluid head-pad">
-          <div class="row h-100">
-                <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center ">
-                    <div>
-                      <% if (message) { %>
-                      <% for (var key in message) { %>
-                        <!-- alert message -->
-                        <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
-                            <strong class="text-right"><%= message[key] %>!</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    <% } %>
-                <% } %> 
-                      <h1 class="h1 hero-text text-responsive text-primary">International  Studies, <br>
-                        pay nothing until you land a great job!</h1>
-                        <p class="mt-5 h5 hero-text text-2">
-                            <b>Hillpad</b> Finances your International Education, so you can focus on learning.
-                                The best part? You don’t pay back a cent until you land a great job.</p>
-                                <button class="btn btn-lg btn-outline-info  col-xs-6 col-md-6 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button>
-                               <ul style="list-style: none; padding: 0px;">
-                                   <li><i class="fas fa-check-double text-primary" ></i>&nbsp;&nbsp;No English Test or Entrance Exams Needed</li>
-                                   <li><i class="fas fa-check-double text-primary"></i>&nbsp;&nbsp;Guaranteed Work Permit After Visa is Approved</li>
-                                   <li><i class="fas fa-check-double text-primary"></i>&nbsp;&nbsp;Accomodation Support</li>
-                               </ul>
-                        </div>
-                        
-                </div>
-                <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center head-pad2 top-image">
-                    <img src="./images/herobg.png" alt="" class="img-fluid" width="90%"> 
-                </div>
+     <div class="container-fluid head-pad">
+       <div class="row">
+         <div class="col-md-6 col-xs-12">
+          <div>
+            <% if (message) { %>
+            <% for (var key in message) { %>
+              <!-- alert message -->
+              <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
+                  <strong class="text-right"><%= message[key] %>!</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          <% } %>
+        <% } %> 
+            <h1 class="h1 hero-text text-responsive text-primary">International  Studies, <br>
+              pay nothing until you land a great job!</h1>
+              <p class="mt-5 h5 hero-text text-2">
+                  <b>Hillpad</b> Finances your International Education, so you can focus on learning.
+                      The best part? You don’t pay back a cent until you land a great job.</p>
+                      <button class="btn btn-lg btn-outline-info  col-xs-6 col-md-6 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button>
+                     <ul style="list-style: none; padding: 0px;">
+                         <li><i class="fas fa-check-double text-primary" ></i>&nbsp;&nbsp;No English Test or Entrance Exams Needed</li>
+                         <li><i class="fas fa-check-double text-primary"></i>&nbsp;&nbsp;Guaranteed Work Permit After Visa is Approved</li>
+                         <li><i class="fas fa-check-double text-primary"></i>&nbsp;&nbsp;Accomodation Support</li>
+                     </ul>
+              </div>
+         </div>
+         <!-- <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center head-pad2 top-image"> -->
+           <div class="col-md-6 col-xs-12 d-flex justify-content-md-center">
+          <img src="./images/herobg.png" alt="" class="img-fluid" width="90%"> 
+      </div>
+       </div>
+     </div>
+     
+
+
+  <section id="about">
+    <div class="container" >
+      <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-primary">Who we are!</p>
+    </div>
+  
+    <div class="container-fluid head-pad">
+      <div class="row h-100">
+            <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
+                <div>
+                  <!-- <p class="h2 hero-text text-primary">Apply Online in less than 5 Minutes</p> -->
+                    <p class="mt-5 h5 hero-text text-2" > Hillpad services is an International Educational consultancy firm.</b> We provide top class Admission processing services to our clients
+                      that are willing to work and study in Canada and other International destination.</p>
+                        <!-- <p class="h2 hero-text text-primary mt-5">Get accepted and get your terms!</p> -->
+                        <p class="mt-5 h5 hero-text text-2" ><b>Hillpad Services</b> does not charge administrative fees until student's visa application is successful.
+                          <b>In the case of a refusal, Hilllpad services will not charge the client for work done</b>. However, if the client would like to seek a 
+                          reapplication, they would have to pay the embassy's reapplication fee</p>
+  
+                            <p class="h2 hero-text text-primary mt-5">Our Vision</p>
+                            <p class="mt-5 h5 hero-text text-2" >Our Vision is to raise FUTURE LEADERS through an exceptional Global education.</p>
+
+                            <p class="h2 hero-text text-primary mt-5">Our Mission</p>
+                            <p class="mt-5 h5 hero-text text-2" >Our mission is to be a renowned organization that will support young scholars to excel in their respective academic pursuit abroad.</p>
+                      
+                           
+                    </div>
+                    
+            </div>
+  
+            <div class="col-md-6 d-flex justify-content-md-center align-items-center head-pad2">
+              <img src="./images/ill-one.png" alt="" class="img-fluid" width="90%"> 
+          </div>
+           
+      </div>
+    </div>  
+  </section>
+     <div class="container-fluid bg-light p5" >
+      <p class="  hero-text text-2 text-responsive  text-center text-primary">Just a few of the benefits we offer </p>
+      <div class="p-5">
+          <div class="row">
+              <div class="col-md-6">
+                  <p class="mt-5 h5 hero-text text-2 ">Flexible tuition fee payment plans</p>
+                  <span>Our partner instituitions offer our students a variety of payment plans that are flexible 
+                      enough to achieve
+                  </span>
+              </div>
+              <div class="col-md-6">
+                  <p class="mt-5 h5 hero-text text-2 ">No service charge until visa approval</p>
+                  <span>Hillpad does not charge administrative fees untill the student's visa application is successful.
+                  </span>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <p class="mt-5 h5 hero-text text-2 "> No English test or entrance exams needed</p>
+                  <span>Our partner schools already consider Nigerian students English language proficient
+                  </span>
+              </div>
+              <div class="col-md-6">
+                  <p class="mt-5 h5 hero-text text-2 ">Guaranteed work permit after visa is approved</p>
+                  <span>Our students are guaranteed work permit after a successful visa application upon arrival in their Country of choice
+                  </span>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <p class="mt-5 h5 hero-text text-2 "> Accommodation support</p>
+                  <span>We have on ground associate ready to recieve our studentss upon arrival
+                  </span>
+              </div>
+              <div class="col-md-6">
+                  <!-- 1 -->
+              </div>
           </div>
       </div>
+  </div>
 
-      <div class="container">
-        <div class="row"></div>
-      </div>
 
-      <div class="container-fluid bg-primary p-3 ">
-        <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-light">Ready to get started? <br>
-            Let’s fund your future! <br>
-            <button class="btn btn-lg btn-outline-light col-xs-3 col-md-2 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button></p>
-            
+  <section>
+    <div class="container" >
+      <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-primary">Here's how it works!</p>
     </div>
-     
+  
+    <div class="container-fluid head-pad">
+      <div class="row h-100">
+            <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
+                <div>
+                  <p class="h2 hero-text text-primary">Apply Online in less than 5 Minutes</p>
+                    <p class="mt-5 h5 hero-text text-2" > Our application is fast and simple. 
+                        Not sure what career is best for you? Use our live chat feature to chat with a career counselor.</p>
+                        <p class="h2 hero-text text-primary mt-5">Get accepted and get your terms!</p>
+                        <p class="mt-5 h5 hero-text text-2" > Our typical acceptance time is 1-2 business days, 
+                            but you could be accepted within an hour! 
+                            Once you get accepted, our immigration officer would be in touch with you  then
+                            you’re ready to start your proccess.</p>
+  
+                            <p class="h2 hero-text text-primary mt-5">Get a great education,
+                              pay later!</p>
+                            <p class="mt-5 h5 hero-text text-2" > All of our partner schools provide top notch education,
+                                and you get work permit on getting admission to enable you earn while you learn.</p>
+                      
+                           
+                    </div>
+                    
+            </div>
+  
+            <div class="col-md-6 d-flex justify-content-md-center align-items-center head-pad2">
+              <img src="./images/howitworks.png" alt="" class="img-fluid" width="90%"> 
+          </div>
+           
+      </div>
+    </div>  
+  </section>
+
+  <section>
+    <div class="container-fluid bg-primary p-3 ">
+      <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-light">Ready to get started? <br>
+          Let’s fund your future! <br>
+          <button class="btn btn-lg btn-outline-light col-xs-3 col-md-2 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply</button></p>
+          
+    </div>
+  </section>
+
+</div>
+
+  <section class="m-3" id="contact">
+    <div class="container">
+      <div class="col-12 d-flex justify-content-md-center">
+        <div>
+          <p class="h2 hero-text text-dark mt-5 text-center">Reach out to us!</p>
+          <!-- <p class="mt-5  hero-text text-2 text-responsive  text-center text-primary">Reach out to us</p> -->
+        <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-primary">+234 700 4449 444</p>
+    
+        <p class="mt-5 h5 hero-text text-2 text-center" > All of our partner schools provide top notch education,
+          and you get work permit on getting admission to enable you earn while you learn.</p>
+
+          <form action="/contact" method="POST">
+            <div class="container-fluid form-group m-" >
+              <input type="text" class="form-control" name="name" placeholder="Your Name"> 
+            </div>
+            <div class="container-fluid form-group m-" >
+              <input type="email" class="form-control" name="name" placeholder="Your Email"> 
+            </div>
+            <div class="container-fluid form-group m-" >
+              <textarea name="message" id="" cols="30" rows="10" class="form-control"> Your Message</textarea>
+            </div>
+            <div class="container-fluid form-group m-" >
+              <button class="btn btn-outline-info"> Send Message</button>
+            </div>
+          </form>
+        </div>
+        
+        
+      </div>
+  </section>
+  <div class="container-fluid bg-primary p-5">
+
+    <footer>
+        <div class="container-fluid">
+            <div class="row" >
+                <div class="col-xs-6 col-sm-6 col-md-3">
+                    <img src="/images/whitelogo.png" alt="" class="img-fluid" width="50%">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3">
+                    <h4 class="text-light">
+                        Contact-us
+                    </h4>
+                    <p class="text-light mt-3" >
+                        Address
+                    </p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3">
+                    <h4 class="text-light">
+                        More
+                    </h4>
+                    <p class="text-light mt-3" >
+                        Resourcs
+                    </p>
+                    <p class="text-light mt-3" >
+                        Privacy Policy
+                    </p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3">
+                    <h4 class="text-light">
+                        Updates
+                    </h4>
+                    <p class="text-light mt-3" >
+                        Join our mailing list
+                    </p>
+                    <p class="text-light mt-3" >
+                        Twitter
+                    </p>
+                    <p class="text-light mt-3" >
+                        Facebook
+                    </p>
+                    <p class="text-light mt-3" >
+                        Instagram
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!--Start of Tawk.to Script-->
