@@ -59,6 +59,7 @@ function agent() {
     })
 
     route.get('/dashboard', auth =(req, res) => {
+        console.log(req.cookies)
         if (req.cookies.agent){
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             pool.getConnection((err, con) => {
