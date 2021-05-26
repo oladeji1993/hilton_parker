@@ -414,7 +414,7 @@ function admin() {
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
             con.query('SELECT * FROM admin WHERE id = ?', accountofficer, (err, admin) => {
-                con.query('SELECT * FROM agent WHERE status = "active" && accountofficer = ?', accountofficer, (err, agentList) =>{
+                con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', accountofficer, (err, agentList) =>{
                     if(agentList.length > 0){
                         res.render('./admin/userList', {
                             agentList,
@@ -464,6 +464,21 @@ function admin() {
     })
 
     
+    route.post('/verify/:id', (req, res, next) =>{
+        const id = req.params.id
+        pool.getConnection((err, con)=>{
+            con.query('SELECT * FROM agent WHERE id = ?', id, (err, agent) =>{
+                if(agent.length > 0){
+                    con.query('UPDATE agent SET status = "verified" WHERE id = ?', id, (err, resu) =>{
+                        console.log(resu)
+                    })
+                }else{
+                    console.log("not done")
+                }
+            })
+        })
+ 
+    } )
 
 
     

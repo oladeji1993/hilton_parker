@@ -65,7 +65,7 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <form action="/agent/register" method="POST" enctype="multipart/form-data">  
+                        <form action="/admin/verify/<%= info.id %>" method="POST" enctype="multipart/form-data">  
                             <div class="row">
                                 <div class="col-md-4 col-12">
                                     <div class="input-field">
@@ -262,9 +262,9 @@
             
                             
                             <div class="d-flex">
-                                <div class="submit-btn">
+                                <!-- <div class="submit-btn">
                                     <button type="submit">Back</button>
-                                </div>
+                                </div> -->
 
                                 <div class="submit-btn" style="margin-left: 20px">
                                     <button type="submit">VERIFY</button>

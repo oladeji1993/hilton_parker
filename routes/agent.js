@@ -32,7 +32,6 @@ const upload = multer({ storage: storage })
 function agent() {
 
     route.get('/', (req, res) => {
-        // res.redirect('/agent/dashboard')
         res.render('./agent/agent')
     })
     
@@ -42,7 +41,6 @@ function agent() {
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             next()
          }else{
-            // req.flash('danger', 'You Must Login First', )
             res.render('./agent/login', {
                 message : req.flash()
             })
@@ -141,11 +139,6 @@ function agent() {
                     con.query(sql, data, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
-                                // res.cookie('agent_id', ref, {maxAge: 300000}).redirect('/agent/uploads', {
-                                //     respons: resp[0]
-                                // })
-
-
                                 res.cookie('agent_id', ref, {maxAge: 43200000}).redirect('/agent/uploads')
                             })
                            
@@ -296,12 +289,6 @@ function agent() {
             res.cookie('agent','', {expiresIn: Date.now()})
             res.redirect('/agent/login')
         })
-    
-
-
-
-
-
 
     return route
 }
