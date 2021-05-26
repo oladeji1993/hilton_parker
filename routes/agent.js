@@ -32,7 +32,6 @@ const upload = multer({ storage: storage })
 function agent() {
 
     route.get('/', (req, res) => {
-        // res.redirect('/agent/dashboard')
         res.render('./agent/agent')
     })
     
@@ -42,7 +41,6 @@ function agent() {
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             next()
          }else{
-            // req.flash('danger', 'You Must Login First', )
             res.render('./agent/login', {
                 message : req.flash()
             })
@@ -51,7 +49,6 @@ function agent() {
             res.redirect('/agent/dashboard')
         }
         else{
-            console.log(req.cookies)
         const message = req.flash()
         res.render('./agent/login', {
             message
@@ -95,7 +92,6 @@ function agent() {
                                 respons : user[0]
                             })
                         }else if(user[0].status == 'verified'){
-                            console.log('verified')
                             res.send('verified')
                         }else if(user[0].status == 'submit'){
                             res.render('./Client/success')
@@ -141,20 +137,13 @@ function agent() {
                     officeaddress = ?,
                     agent_id = ?
                     WHERE id = ${respons[0].id}`;
-                    console.log(data)
                     con.query(sql, data, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
-                                // res.cookie('agent_id', ref, {maxAge: 300000}).redirect('/agent/uploads', {
-                                //     respons: resp[0]
-                                // })
-
-
                                 res.cookie('agent_id', ref, {maxAge: 43200000}).redirect('/agent/uploads')
                             })
                            
                         }else{
-                            console.log('err')
                             res.render('error')
                         }
                         
@@ -213,7 +202,6 @@ function agent() {
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
-                    console.log(err)
                     res.render('./Client/success')
                 })
                 
@@ -229,7 +217,7 @@ function agent() {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM agent WHERE id = ?', id, (err, result) => {
                 if(err){
-                    console.log(err)
+        
                 }
                 if(result.length > 0){
                     const agent = result[0]
@@ -299,16 +287,9 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            console.log(req.cookies)
             res.cookie('agent','', {expiresIn: Date.now()})
             res.redirect('/agent/login')
         })
-    
-
-
-
-
-
 
     return route
 }

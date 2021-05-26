@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
-
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0" >
      <!--google font -->
      <link rel="preconnect" href="https://fonts.gstatic.com">
      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -15,146 +14,274 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/Client-dahboard.css">
     <link rel="stylesheet" href="/css/Reg.css">
+  
 </head>
-<body style="background-color: #f1f5f9;">
+<body style="background-color: #f1f5f9">
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span>Hilton Parker</span></h2>
+        </div>
 
-<div class="container m-container">
-    <div class="text-center" style="padding-top: 70px;">
-        <div class="text-center"> <h3 style="color: #192cc2; font-weight: bold;">APPLICATION</h3> </div>
-        <span>Please provide valid information</span>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a class="active" href="#"><span><i class="fas fa-user-check"></i></span> <span>Dashboard</span></a>
+                </li>
+
+                <li>
+                    <a  href="/admin/details"><span><i class="fas fa-user-edit"></i></span> <span>Agent</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin/logout"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
+                </li>
+
+            </ul>
+        </div>
+
     </div>
-    <hr>
-    <div class="row">
-        <form action="/agent/register" method="POST" enctype="multipart/form-data">  
-            <div class="row">
-                <div class="col-md-4 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">FIRSTNAME</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="name" value="" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">LASTNAME</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="name" value="" name="lastname" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span><i class="fas fa-bars"></i></span>
+                </label>
+                Admin Dashboard
+            </h2>
 
-                <div class="col-md-4 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">EMAIL</label>
-                            <div class="input-group mb-4">
-                                <input type="email" required class="form-control" aria-label="email"  name='email'  value="" >
-                            </div>
-                        </div>
-                    </div>
+            <div class="user-wrapper">
+                <small>Welcome</small>
+                <div>
+                    <small>Collins</small>
                 </div>
-
+            </div>
+        </header>
+            <main>
+                <div class="container m-container">
+                    <div class="text-center" style="padding-top: 70px;">
+                        <div class="text-center"> <h3 style="color: #192cc2; font-weight: bold;">AGENT INFORMATIONS</h3> </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <form action="/admin/verify/<%= info.id %>" method="POST" enctype="multipart/form-data">  
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">FIRSTNAME</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="name" readonly value="<%= info.firstname %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
             
-            </div>
-
-            <!-- adress and date of birth -->
-            <div class="row">
-                <div class="col-md-6 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">PHONE NUMBER 1</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="Phone number"  name='phonenumber'  value="<%= user.phonenumber %>" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="col-md-6 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">NATIONALITY</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" name="nationality"  value="" > 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
-
-
-             <!-- PHONE NUMBER -->
-             <div class="row">
-                <div class="col-md-6 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">RESIDENTIAL ADDRESS</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="Address"  name='residentialaddress'  value="" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">PHONE NUMBER 2</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="Phone number"  name='phonenumber2'  value="" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- office address -->
-            <div class="row">
-                <div class="col-md-12 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">OFFICE ADDRESS</label>
-                            <div class="input-group mb-4">
-                                <input type="text" required class="form-control" aria-label="Address"  name='officeaddress'  value="" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-           
-            <div class="col-md-12 col-12">
-                <div class="row">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" required type="checkbox" value="checked">
-                        <label class="form-check-label checkbox" for="inlineCheckbox1">I hereby indicate my willingness to engage in the business of HillPad Services
-                            as a freelance agent. I am aware that my information shall be exchanged in the course the consideration of my application and i consent to same.
-                        </label>
-                      </div>
-                </div>
-            </div>
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">LASTNAME</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="name" readonly value="<%= info.lastname %>" name="lastname" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
             
-            <div class="d-flex">
-                <div class="submit-btn">
-                    <button type="submit">Next</button>
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">EMAIL</label>
+                                            <div class="input-group mb-4">
+                                                <input type="email" required class="form-control" aria-label="email"  name='email' readonly value="<%= info.email %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            
+                            </div>
+            
+                            <!-- adress and date of birth -->
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">PHONE NUMBER 1</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number"  name='phonenumber' readonly  value="<%= info.phonenumber %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">NATIONALITY</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" name="nationality" readonly  value="<%= info.nationality %>" > 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">RESIDENTIAL ADDRESS</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='residentialaddress' readonly  value="<%= info.residentialaddress %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+            
+            
+                            <!-- PHONE NUMBER -->
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">PHONE NUMBER 2</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number"  name='phonenumber2' readonly value="<%= info.phonenumber2 %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">OFFICE ADDRESS</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='officeaddress' readonly  value="<%= info.officeaddress %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <label for="" class="form-label">Guarantor (1)</label>
+                                    <div class="input-field">
+                                        <div class="input-field">
+                                            <div>
+                                                <div class="input-group mb-4">
+                                                    <input type="text" required class="form-control" placeholder="FULLNAME" aria-label="name" readonly value="<%= info.g1_fullname %>" name="g1_fullname" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address" readonly name='g1_address'  value="<%= info.g1_address%>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="TEL:" aria-label="Phone number" readonly  name='g1_phone'  value="<%= info.g1_phone %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email" readonly  name='g1_email'  value="<%= info.g1_email %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label=""  name='g1_relationship' readonly  value="<%= info.g1_relationship %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-6 col-12">
+                                    <label for="" class="form-label">Guarantors (2)</label>
+                                    <div class="input-field">
+                                        <div class="input-field">
+                                            <div>
+                                                <div class="input-group mb-4">
+                                                    <input type="text" required  class="form-control" placeholder="FULLNAME" aria-label="name" readonly value="<%= info.g2_fullname %>" name="g2_fullname" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="ADDRESS" aria-label="Address" readonly  name='g2_address'  value="<%= info.g2_address %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="TEL:" aria-label="Phone number"  name='g2_phone' readonly value="<%= info.g2_phone%>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="email" required class="form-control" placeholder="EMAIL" aria-label="email"  name='g2_email' readonly  value="<%= info.g2_email %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="input-field">
+                                        <div>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" placeholder="RELATIONSHIP" aria-label="" readonly name='g2_relationship'  value="<%= info.g2_relationship %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+            
+                            
+                            <div class="d-flex">
+                                <!-- <div class="submit-btn">
+                                    <button type="submit">Back</button>
+                                </div> -->
+
+                                <div class="submit-btn" style="margin-left: 20px">
+                                    <button type="submit">VERIFY</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
-</div>
-</main>
+            </main>
+
+       
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
+</html>
+
+
 
 
 
