@@ -227,10 +227,15 @@ function admin() {
 
 
     // DASHBOARD NAVIGATION LINKS
-    route.get('/newApplicants', (req, res) => {
+    route.get('/newApplicants',(req, res, next,) => {
         if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
-        }
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -248,10 +253,15 @@ function admin() {
         })
     })
 
-    route.get('/completereg', (req, res) => {
+    route.get('/completereg', (req, res, next,) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-        }
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -269,10 +279,15 @@ function admin() {
         })
     })
 
-    route.get('/makepayment', (req, res) => {
+    route.get('/makepayment', (req, res, next,) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-        }
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -290,11 +305,15 @@ function admin() {
         })
     })
 
-    route.get('/success', (req, res) => {
-
+    route.get('/success', (req, res, next,) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-        }
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -321,11 +340,15 @@ function admin() {
 
     // agent details route
 
-    route.get('/newagents', (req, res) => {
-
+    route.get('/newagents', (req, res, next,) => {
         if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
-        }
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    }, (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -347,11 +370,16 @@ function admin() {
         })
     })
 
-    route.get('/doc_upload', (req, res) => {
-
+    route.get('/doc_upload', (req, res, next,) => {
         if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
-        }
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    }, (req, res) => {
+
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -373,11 +401,15 @@ function admin() {
         })
     })
 
-    route.get('/verifiedagents', (req, res) => {
-
+    route.get('/verifiedagents', (req, res, next,) => {
         if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)   
-        }
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
@@ -397,7 +429,6 @@ function admin() {
                 })
             })
         })
-        // res.render('./admin/active')
     })
 
     route.get('/activeagents', (req, res) => {
@@ -406,8 +437,30 @@ function admin() {
         })
     })
 
-    route.get('/agentdetails', (req, res) => {
-        res.render('./admin/agentdetails')
+    route.get('/agentdetails/:id', (req, res, next,) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
+        const id = req.params.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+                con.query('SELECT * FROM agent WHERE id = ?', id, (err, info) =>{
+                    if(info.length > 0){
+                        res.render('./admin/agentdetails', {
+                            info : info[0]
+                        })
+                    }else{
+                        res.render('./admin/agentdetails', {
+                            info
+                        })
+                    }
+                })
+        })
     })
 
     

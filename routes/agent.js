@@ -51,7 +51,6 @@ function agent() {
             res.redirect('/agent/dashboard')
         }
         else{
-            console.log(req.cookies)
         const message = req.flash()
         res.render('./agent/login', {
             message
@@ -66,7 +65,6 @@ function agent() {
                 con.query('SELECT * FROM agent WHERE id = ?', req.user.id, (err, rest) => {
                     if(rest.length )
                     con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
-                        console.log(err)
                         res.render('./agent/dashboard', {
                             agent : rest[0],
                             accountofficer : acct[0]
@@ -95,7 +93,6 @@ function agent() {
                                 respons : user[0]
                             })
                         }else if(user[0].status == 'verified'){
-                            console.log('verified')
                             res.send('verified')
                         }else if(user[0].status == 'submit'){
                             res.render('./Client/success')
@@ -141,7 +138,6 @@ function agent() {
                     officeaddress = ?,
                     agent_id = ?
                     WHERE id = ${respons[0].id}`;
-                    console.log(data)
                     con.query(sql, data, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
@@ -154,7 +150,6 @@ function agent() {
                             })
                            
                         }else{
-                            console.log('err')
                             res.render('error')
                         }
                         
@@ -213,7 +208,6 @@ function agent() {
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
-                    console.log(err)
                     res.render('./Client/success')
                 })
                 
@@ -229,7 +223,7 @@ function agent() {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM agent WHERE id = ?', id, (err, result) => {
                 if(err){
-                    console.log(err)
+        
                 }
                 if(result.length > 0){
                     const agent = result[0]
@@ -299,7 +293,6 @@ function agent() {
         })
 
         route.get('/logout', (req, res) => {
-            console.log(req.cookies)
             res.cookie('agent','', {expiresIn: Date.now()})
             res.redirect('/agent/login')
         })
