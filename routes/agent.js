@@ -60,13 +60,13 @@ function agent() {
     })
 
     route.get('/dashboard', auth =(req, res) => {
+        console.log(req.cookies)
         if (req.cookies.agent){
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             pool.getConnection((err, con) => {
                 con.query('SELECT * FROM agent WHERE id = ?', req.user.id, (err, rest) => {
                     if(rest.length )
                     con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
-                        console.log(err)
                         res.render('./agent/dashboard', {
                             agent : rest[0],
                             accountofficer : acct[0]
