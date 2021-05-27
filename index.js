@@ -77,6 +77,9 @@ app.get('/contact', (req, res) => {
     
 })
 
+const agentsuserupload = require('./routes/agentuploadclientfiles')
+app.use('/agent/submit', agentsuserupload)
+
 const files = require('./routes/files')
 app.use('/files', files)
 

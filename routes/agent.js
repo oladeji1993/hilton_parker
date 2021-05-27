@@ -13,7 +13,6 @@ const mailers = require('../services/mailers');
 flash = require('express-flash')
 var path = require('path');
 const { result } = require('lodash');
-const { setMaxListeners } = require('../config/dbconfig');
 
 
 const storage = multer.diskStorage({
@@ -32,6 +31,78 @@ const upload = multer({ storage: storage })
 
 
 function agent() {
+
+    
+
+    route.post('/newclient', upload.none(),(req, res) => {
+        const fields = Object.values(req.body)
+        const sql = `
+            INSERT INTO leads SET
+            lastname = ?,
+            firstname = ?,
+            othername = ?,
+            address = ?,
+            dateofbirth = ?,
+            email = ? ,
+            phonenumber = ? ,
+            placeofbirth = ?,
+            gender = ? ,
+            maritalstatus = ? ,
+            program = ?,
+            agent_id = ?
+
+        `
+
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE email = ?', req.body.email, (err, result) => {
+                if(result.length > 0){
+                    req.flash('warning', 'This email has already been registered')
+                    res.redirect('/agent/newclient')
+                }else if(req.body.program == 'none'){
+                    req.flash('warning', 'Select a valid program')
+                    res.redirect('/agent/newclient')
+                }
+                else{
+                    con.query(sql, fields, (err, result) => {
+                        con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, cavani) => {
+                            res.cookie('agent_user', [cavani[0].agent_id,cavani[0].id] , {maxAge: 86400000})
+                        res.render('./agent/apply', {
+                            user: cavani[0]
+                        })
+                        })
+                    })
+                }
+            })
+            
+        })
+        
+    })
+    route.get('/newclient', (req, res, next) => {
+        if(req.cookies.agent){
+            req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            res.render('./agent/login', {
+                message : req.flash()
+            })
+            }
+    } , (req, res) => {
+        const user = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM agent WHERE id = ?', user, (err, agent) => {
+                if(agent.length > 0){
+
+                    res.render('./agent/newclient', {
+                        message : req.flash(),
+                        agent : agent[0]
+                    })
+                }else{
+                    res.render('error')
+                }
+            })
+        })
+        
+    })
 
     route.get('/', (req, res) => {
         res.render('./agent/agent')
@@ -59,7 +130,6 @@ function agent() {
     })
 
     route.get('/dashboard', auth =(req, res) => {
-        console.log(req.cookies)
         if (req.cookies.agent){
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             pool.getConnection((err, con) => {
@@ -94,9 +164,11 @@ function agent() {
                                 respons : user[0]
                             })
                         }else if(user[0].status == 'verified'){
-                            res.send('verified')
+                            res.redrect('agent/dashboard')
                         }else if(user[0].status == 'submit'){
-                            res.render('./Client/success')
+                            // res.render('./Client/success')
+                            req.flash('primary', 'Your application is still pending')
+                            res.redirect('/agent')
                         }
                         else{
                             res.render('./agent/reg', {
@@ -142,7 +214,7 @@ function agent() {
                     con.query(sql, data, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
-                                res.cookie('agent_id', ref, {maxAge: 43200000}).redirect('/agent/uploads')
+                                res.cookie('agent_id', ref, {maxAge: 12800000}).redirect('/agent/uploads')
                             })
                            
                         }else{
