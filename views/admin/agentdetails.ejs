@@ -14,6 +14,14 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/Client-dahboard.css">
     <link rel="stylesheet" href="/css/Reg.css">
+
+    <style>
+        @media screen and (max-width: 600px) {
+            .image img{
+                display: none;
+            }
+        }
+    </style>
   
 </head>
 <body style="background-color: #f1f5f9">
@@ -26,7 +34,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a class="active" href="#"><span><i class="fas fa-user-check"></i></span> <span>Dashboard</span></a>
+                    <a class="active" href="/admin/dashboard"><span><i class="fas fa-user-check"></i></span> <span>Dashboard</span></a>
                 </li>
 
                 <li>
@@ -51,12 +59,6 @@
                 Admin Dashboard
             </h2>
 
-            <div class="user-wrapper">
-                <small>Welcome</small>
-                <div>
-                    <small>Collins</small>
-                </div>
-            </div>
         </header>
             <main>
                 <div class="container m-container">
@@ -89,15 +91,9 @@
                                     </div>
                                 </div>
             
-                                <div class="col-md-4 col-12">
-                                    <div class="input-field">
-                                        <div>
-                                            <label for="" class="form-label">EMAIL</label>
-                                            <div class="input-group mb-4">
-                                                <input type="email" required class="form-control" aria-label="email"  name='email' readonly value="<%= info.email %>" >
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-4 col-12 image" style=" text-align: center;">
+                        
+                                    <img style="border-radius:50%; width:5rem; " src="/images/team4.jpg" alt="Avatar">
                                 </div>
             
                             
@@ -117,11 +113,11 @@
                                 </div>
                             
                                 <div class="col-md-4 col-12">
-                                    <div class="input-field">
+                                      <div class="input-field">
                                         <div>
-                                            <label for="" class="form-label">NATIONALITY</label>
+                                            <label for="" class="form-label">EMAIL</label>
                                             <div class="input-group mb-4">
-                                                <input type="text" required class="form-control" name="nationality" readonly  value="<%= info.nationality %>" > 
+                                                <input type="email" required class="form-control" aria-label="email"  name='email' readonly value="<%= info.email %>" >
                                             </div>
                                         </div>
                                     </div>
@@ -165,6 +161,18 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">NATIONALITY</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" name="nationality" readonly  value="<%= info.nationality %>" > 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         
                             <div class="row">
@@ -260,15 +268,17 @@
             
             
             
-                            
+                                
                             <div class="d-flex">
-                                <!-- <div class="submit-btn">
-                                    <button type="submit">Back</button>
-                                </div> -->
-
-                                <div class="submit-btn" style="margin-left: 20px">
+                                <% if (info.status == "verified") { %>
+                                <div class="submit-btn d-none" style="margin-left: 20px">
                                     <button type="submit">VERIFY</button>
                                 </div>
+                                <% } else{ %>
+                                    <div class="submit-btn" style="margin-left: 20px">
+                                        <button type="submit">VERIFY</button>
+                                    </div>
+                                <% } %>
                             </div>
                         </form>
                     </div>

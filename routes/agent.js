@@ -9,10 +9,10 @@ require('dotenv').config()
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const user = require('./user');
+const mailers = require('../services/mailers');
 flash = require('express-flash')
 var path = require('path');
 const { result } = require('lodash');
-const { Console } = require('console');
 
 
 const storage = multer.diskStorage({
@@ -276,6 +276,7 @@ function agent() {
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
+                    mailers.notify(lead)
                     res.render('./Client/success')
                 })
                 
