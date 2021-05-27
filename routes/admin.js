@@ -3,6 +3,7 @@ const route = express.Router();
 const pool = require('../config/dbconfig');
 const joi = require('joi')
 const bcrypt = require('bcryptjs');
+const mailers = require('../services/mailers');
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 flash = require('express-flash')
@@ -58,7 +59,7 @@ function admin() {
                                 con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
 
                                     res.render('./admin/dashboard', {
-                                        starter,
+                                        starter, 
                                         complete,
                                         paid,
                                         success,
@@ -470,10 +471,13 @@ function admin() {
             con.query('SELECT * FROM agent WHERE id = ?', id, (err, agent) =>{
                 if(agent.length > 0){
                     con.query('UPDATE agent SET status = "verified" WHERE id = ?', id, (err, resu) =>{
-                        console.log(resu)
+                        mailers.verified(agent)
+                        req.flash('success', 'Agent verified',)
+                        res.redirect('/admin/dashboard')
                     })
                 }else{
-                    console.log("not done")
+                    req.flash('danger', 'Not verified',)
+                    res.redirect('./admin/dashboard')
                 }
             })
         })
