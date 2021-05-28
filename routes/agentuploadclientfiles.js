@@ -11,8 +11,6 @@ const jwt = require('jsonwebtoken');
 const user = require('./user');
 flash = require('express-flash')
 var path = require('path');
-const { result } = require('lodash');
-const { Console } = require('console');
 
 
 const storage = multer.diskStorage({
@@ -30,6 +28,11 @@ const upload = multer({ storage: storage })
 
 
 function agentsuserupload() {
+
+
+    
+
+
     const mscfilesupload = upload.fields([
         {name: 'bsc', maxCount: 1},
         {name: 'waec', maxCount: 1},
@@ -38,16 +41,36 @@ function agentsuserupload() {
         {name: 'intent', maxCount: 1},
         {name: 'other', maxCount: 1}
     ])
+
+
     route.post('/msc/:id',mscfilesupload,  (req, res) => 
     {
         const id = req.params.id
+        const feilds = Object.values(req.body)
+        const sql = `
+            UPDATE leads SET
+            course1 = ?,
+            course2 = ?,
+            course3 = ?,
+            status = 'complete'
+            WHERE id = ${id}
+        `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
-                const user = result[0]
+                con.query(sql, feilds, (err, rest) => {
+                    const user = result[0]
+                    const message = req.flash('success', 'Documents upload successfull')
+                    res.render('./agent/photo', {
+                        message, user
+                    })
+                } )
+               
                 
             })
         })
     })
+
+
 
     const bscfilesupload = upload.fields([
         {name: 'waec', maxCount: 1},
@@ -59,8 +82,13 @@ function agentsuserupload() {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
                 const user = result[0]
-    })
-})
+                const message = req.flash('success', 'Documents upload successfull')
+                res.render('./agent/photo', {
+                    message, user
+                })
+                
+            })
+        })
     })
 
     const pgdfilesupload = upload.fields([
@@ -74,8 +102,13 @@ function agentsuserupload() {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
                 const user = result[0]
-    })
-})
+                const message = req.flash('success', 'Documents upload successfull')
+                res.render('./agent/photo', {
+                    message, user
+                })
+                
+            })
+        })
     })
 
     return route
