@@ -79,7 +79,7 @@
     <div class="text-center">
         <!-- <a class="btn btn-info complete" id="myBtn"> Mark as complete </a> -->
         <hr>
-        <div class="text-center"> <h5 style="color: #f69617;;">APPLICATION</h5> </div>
+        <div class="text-center"> <h5 style="color: #192cc2;;">APPLICATION</h5> </div>
         <span>Please provide valid information</span>
     </div>
     <hr>
@@ -91,7 +91,7 @@
                         <div>
                             <label for="" class="form-label">SURNAME</label>
                             <div class="input-group mb-4">
-                                <input type="text" class="form-control" aria-label="name" value="<%= user.lastname %>" name="lastname">
+                                <input type="text" class="form-control" aria-label="name" readonly value="<%= user.lastname %>" name="lastname">
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div>
                             <label for="" class="form-label">FIRSTNAME</label>
                             <div class="input-group mb-4">
-                                <input type="text"     class="form-control" aria-label="name" value="<%= user.firstname %>" name="firstname" >
+                                <input type="text"     class="form-control" aria-label="name" readonly value="<%= user.firstname %>" name="firstname" >
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,6 @@
                         <div>
                             <label for="" class="form-label">ADDRESS</label>
                             <div class="input-group mb-4">
-                                <!-- <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-alt"></i></span> -->
                                 <input type="text"     class="form-control" aria-label="Address"  name='address'  value="<%= user.address %>" >
                             </div>
                         </div>
@@ -151,7 +150,7 @@
                         <div>
                             <label for="" class="form-label">EMAIL</label>
                             <div class="input-group mb-4">
-                                <input type="text" name="email"    class="form-control" aria-label="Email" value="<%= user.email %>"   >
+                                <input type="text" name="email"    class="form-control" aria-label="Email" readonly value="<%= user.email %>"   >
                             </div>
                         </div>
                     </div>
@@ -161,7 +160,7 @@
                         <div>
                             <label for="" class="form-label">PHONE NUMBER</label>
                             <div class="input-group mb-4">
-                                <input type="text"  name="phonenumber"   class="form-control" aria-label="Phone number" value="<%= user.phonenumber %>"  >
+                                <input type="text"  name="phonenumber"   class="form-control" aria-label="Phone number" readonly value="<%= user.phonenumber %>"  >
                             </div>
                         </div>
                     </div>
@@ -208,7 +207,7 @@
             <div class="row">
                 <hr>
                 <div class="text-center">
-                    <div class="text-center"> <h5 style="color: #f69617;;">Enrolment Questions</h5> </div>
+                    <div class="text-center"> <h5 style="color: #192cc2;">Enrolment Questions</h5> </div>
                 </div>
                 <hr>
                 <div class="col-md-6 col-12">
@@ -284,7 +283,7 @@
             <div class="col-md-12 col-12">
                 <div class="row">
                     <div class="form-check form-check-inline">
-                        <!-- <input class="form-check-input"     type="checkbox" value="checked"> -->
+                        <input class="form-check-input" required type="checkbox" value="checked">
                         <label class="form-check-label checkbox" for="inlineCheckbox1">By submiting I declare that all information given are valid and could be verified</label>
                       </div>
                 </div>
