@@ -208,7 +208,7 @@ function admin() {
                 if (err) throw err;
                 con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                     con.query('SELECT * FROM agent WHERE status = "new" && accountofficer = ?', id, (err, fresh) =>{
-                        con.query('SELECT * FROM agent WHERE status = "complete" && accountofficer = ?', id, (err, registered) =>{
+                        con.query('SELECT * FROM agent WHERE status = "submit" && accountofficer = ?', id, (err, registered) =>{
                             con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', id, (err, active) =>{    
                                         res.render('./admin/agent', {
                                             fresh,
