@@ -55,7 +55,7 @@ function admin() {
             const message = req.flash()
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                 con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
-                    con.query('SELECT * FROM leads WHERE status = "completeregistration" && accountofficer = ?', id, (err, complete) =>{
+                    con.query('SELECT * FROM leads WHERE status = "pending" && accountofficer = ?', id, (err, complete) =>{
                         con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', id, (err, paid) =>{
                             con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', id, (err, success) =>{
                                 con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
@@ -185,7 +185,7 @@ function admin() {
                         })
                         
                     }else{
-                        req.flash('danger', 'Incorect Email or Password')
+                        req.flash('danger', 'Incorrect Email or Password')
                         res.redirect('/admin/login')
                     }
                 })
@@ -208,7 +208,7 @@ function admin() {
                 if (err) throw err;
                 con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                     con.query('SELECT * FROM agent WHERE status = "new" && accountofficer = ?', id, (err, fresh) =>{
-                        con.query('SELECT * FROM agent WHERE status = "submit" && accountofficer = ?', id, (err, registered) =>{
+                        con.query('SELECT * FROM agent WHERE status = "complete" && accountofficer = ?', id, (err, registered) =>{
                             con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', id, (err, active) =>{    
                                         res.render('./admin/agent', {
                                             fresh,
@@ -269,7 +269,7 @@ function admin() {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
-            con.query('SELECT * FROM leads WHERE status = "complete registration" && accountofficer = ?', accountofficer, (err, userList) =>{
+            con.query('SELECT * FROM leads WHERE status = "pending" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
                     res.render('./admin/applicants', {
                         userList
@@ -522,10 +522,10 @@ function admin() {
         const id = req.params.id
         const message = req.flash()
         pool.getConnection((err, con)=>{
-            con.query('SELECT * FROM leads WHERE id = ?', id, (err, agent) =>{
-                if(agent.length > 0){
+            con.query('SELECT * FROM leads WHERE id = ?', id, (err, output) =>{
+                if(output.length > 0){
                     con.query('UPDATE leads SET status = "paid" WHERE id = ?', id, (err, resp) =>{
-                        // mailers.verified(agent)
+                        mailers.application_verified(output)
                         req.flash('success', 'Application verified',)
                         res.redirect('/admin/dashboard')
                     })

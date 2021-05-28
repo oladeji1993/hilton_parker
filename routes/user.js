@@ -115,10 +115,13 @@ function user() {
                 const lead = result[0]
                 const accountofficerid = result[0].accountofficer
                 con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
+                    con.query('UPDATE leads SET status = "doc_uploaded" WHERE id = ?', req.user.id, (err, resp) =>{
                     const accountofficer = resu[0] 
                     mailers.document_upload(lead, accountofficer)
+                    req.flash('success', 'Document uploaded successdully')
                     res.redirect('/user/dashboard')
                 })
+            })
                 
             })
         })
@@ -179,18 +182,17 @@ function user() {
                 con.query('SELECT * FROM leads WHERE id = ?', user.id, (err, result) =>{
                     con.query('SELECT * FROM admin WHERE id = ?', result[0].accountofficer, (err, admin) => {
                         con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
+                            const message = req.flash()
                             const all = randomProperty(allAdmins)
                             res.render('./Client/dashboard', {
                             user : result[0],
                             admin: admin[0],
-                            allAdmin : all
+                            allAdmin : all,
+                            message : message 
     
                         })
 
-                        })
-                        
-                        
-                        
+                        })   
                     
                     })
                 })
@@ -237,11 +239,13 @@ function user() {
                 program = ?,
                 course1 = ?,
                 course2 = ?,
-                course3 = ?
+                course3 = ?,
+                status = "registered"
                 WHERE id = ${user} 
                 `
                 
                 con.query(sql, params, (err, result) => {
+                    req.flash('success', 'Information updated', )
                     res.redirect('/user/dashboard')
                 })
                 

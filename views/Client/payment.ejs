@@ -20,7 +20,7 @@
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h2><span>Hilton Parker</span></h2>
+            <h2><span>Hillpad</span></h2>
         </div>
 
         <div class="sidebar-menu">
@@ -65,7 +65,6 @@
 
             <div class="user-wrapper">
                 <small class="">Welcome</small>
-                <!-- <img src="/images/team4.jpg" width="30px" height="30px" alt=""> -->
                 <div>  
                     <small><%= user.firstname %> <%= user.lastname %></small>
                 </div>
@@ -74,20 +73,28 @@
 
 
         <main>
+            <% if (message) { %>
+                <% for (var key in message) { %>
+                    <!-- alert message -->
+                    <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
+                        <strong class="text-right"><%= message[key] %>!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <% } %>
+            <% } %>
             <div class="container">
                 <form name='myForm' action="/pay/paystack", method='POST'>
-                    <!-- <div class="text-center"><img class="img-fluid" style="width:30%;" src="/images/easy-payment.jpg"></div> -->
-                    <div class="text-center page-text text-wrap fs-5" style="font-size: 2rem; padding-bottom:30px; font-weight:bold; color:#f69617;">Kindly Provide the required information</div>
+                    <div class="text-center page-text text-wrap fs-5" style="font-size: 2rem; padding-bottom:30px; font-weight:bold; color:#192cc2;">Kindly Provide the required information</div>
                     <div class="row pb-3">
                         <div class="col col-12 pb-3">
                             <div class="input-group flex-nowrap">
-                                <input type="text" style="font-weight:bold; border:1px solid gray" class="form-control p-3" placeholder="FullName" name="full_name" aria-describedby="addon-wrapping">
+                                <input type="text" style="font-weight:bold; border:1px solid gray" required class="form-control p-3" placeholder="FullName" name="full_name" aria-describedby="addon-wrapping">
                             </div>
                         </div>
         
                         <div class="colcol-12">
                             <div class="input-group flex-nowrap">
-                                <input type="email" class="form-control p-3" style="font-weight:bold; border:1px solid gray" placeholder="Email" name="email" aria-describedby="addon-wrapping">
+                                <input type="email" class="form-control p-3" style="font-weight:bold; border:1px solid gray" placeholder="Email" name="email" readonly aria-describedby="addon-wrapping" value="<%= user.email %> ">
                             </div>
                         </div>
                     </div>
@@ -96,24 +103,23 @@
                         <div class="col col-12 pb-3">
                             <select class="form-select p-3" style="border:1px solid gray; font-weight:bold;" name="payment_Type">
                                 <option selected>Payment Type</option>
-                                <option value="Enrolment Fee">Enrolment Fee</option>
-                                <option value="Visa Fee">Visa Fee</option>
-                                <option value="Processing Fee">Processing Fee</option>
-                                <option value="Admission Fee">Admission Fee</option>
+                                <option value="Processing Fee">Application Processing Fee</option>
                             </select>
                         </div>
         
                         <div class="col col-12 pb-3">
                             <div class="input-group flex-nowrap">
-                                <input type="number" class="form-control p-3" style="font-weight:bold; border:1px solid gray" placeholder="Amount" name="amount" aria-describedby="addon-wrapping">
+                                <input type="number" class="form-control p-3" required style="font-weight:bold; border:1px solid gray" placeholder="Amount" name="amount" aria-describedby="addon-wrapping">
                             </div>
                         </div>
                     </div>
                     <div class="pt-2">
-                        <button type="submit" style="background-color:#f69617; border: none; color:#fff; padding:10px 50px" class="btn-lg">PAY</button>
+                        <button type="submit" style="background-color:#192cc2; border: none; color:#fff; padding:10px 50px" class="btn-lg">PAY</button>
                     </div>
                 </form>
             </div>
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
 </body>
