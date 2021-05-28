@@ -272,10 +272,21 @@ function user() {
         }catch (err){
             res.render('error')
         }
-        
-        
 
     })
+
+    route.post('/contactus', (req, res) =>{
+        const msg = req.body
+        if(msg)  {
+            mailers.contactus(msg)
+            req.flash('success', 'Message sent ', )
+            res.redirect("/")
+        }else{
+            req.flash('danger', 'Message not sent ', )
+            res.redirect("/")
+        }
+    })
+
     return route
 }
 

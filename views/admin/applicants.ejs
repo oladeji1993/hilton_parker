@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <title>New Applicants</title>
     <link rel="stylesheet" href="/css/dashboard.css">
-  
+    <style>
+        .fulldetails td a {
+            display: block;
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body style="background-color: #f1f5f9">
 
@@ -80,13 +86,13 @@
                         userList.forEach(function(data){
                     %>
                     <tbody>
-                        <tr>
-                            <td><%=data.firstname %> <%= data.lastname %></td>
-                            <td class="highlight"><%=data.email %></td>
-                            <td><%=data.phonenumber %></td>
-                            <td><%=data.regdate %></td>
-                            <td><%=data.program %></td>
-                            <td><%=data.status %></td>
+                        <tr class="fulldetails">
+                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.firstname %> <%= data.lastname %></a></td>
+                            <td class="highlight"><a href="/admin/clientdetails/<%=data.id %>"><%=data.email %></a></td>
+                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.phonenumber %></a></td>
+                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.regdate %></a></td>
+                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.program %></a></td>
+                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.status %></a></td>
                         </tr>
                     </tbody>
                     <%  i++; }) %>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=1.0" >
+     <!--google font -->
+     <link rel="preconnect" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+     <!-- End of google font -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/Client-dahboard.css">
+    <link rel="stylesheet" href="/css/Reg.css">
+
+    <style>
+        @media screen and (max-width: 600px) {
+            .image img{
+                display: none;
+            }
+        }
+    </style>
+  
+</head>
+<body style="background-color: #f1f5f9">
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span>Hilton Parker</span></h2>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a class="active" href="/admin/dashboard"><span><i class="fas fa-user-check"></i></span> <span>Dashboard</span></a>
+                </li>
+
+                <li>
+                    <a  href="/admin/details"><span><i class="fas fa-user-edit"></i></span> <span>Agent</span></a>
+                </li>
+
+                <li>
+                    <a href="/admin/logout"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span><i class="fas fa-bars"></i></span>
+                </label>
+                Admin Dashboard
+            </h2>
+
+        </header>
+            <main>
+                <div class="container m-container">
+                    <div class="text-center" style="padding-top: 70px;">
+                        <div class="text-center"> <h3 style="color: #192cc2; font-weight: bold;">USER INFORMATIONS</h3> </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <form action="/admin/verify_user/<%= resp.id %>" method="POST" enctype="multipart/form-data">  
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">FIRSTNAME</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="name" readonly value="<%= resp.firstname %>" name="firstname" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">LASTNAME</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="name" readonly value="<%= resp.lastname %>" name="lastname" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4 col-12 image" style=" text-align: center;">
+                        
+                                    <img style="border-radius:50%; width:5rem; " src="/images/team4.jpg" alt="Avatar">
+                                </div>
+            
+                            
+                            </div>
+            
+                            <!-- adress and date of birth -->
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">OTHER NAME</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number"  name='othername' readonly  value="<%= resp.othername %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-4 col-12">
+                                      <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">EMAIL</label>
+                                            <div class="input-group mb-4">
+                                                <input type="email" required class="form-control" aria-label="email"  name='email' readonly value="<%= resp.email %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">ADDRESS</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='address' readonly  value="<%= resp.address %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+            
+            
+                            <!-- PHONE NUMBER -->
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">DATE OF BIRTH</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number" name='dateofbirth' readonly value="<%= resp.dateofbirth %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">PLACE OF BIRTH</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='placeofbirth' readonly  value="<%= resp.placeofbirth %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">GENDER</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" name="gender" readonly  value="<%= resp.gender %>" > 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">MARITAL STATUS</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number"  name='maritalstatus' readonly value="<%= resp.maritalstatus %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">PROGRAM</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='program' readonly  value="<%= resp.program %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">STATUS</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" name="status" readonly  value="<%= resp.status %>" > 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">COURSE 1</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Phone number"  name='course1' readonly value="<%= resp.course1 %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+            
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">COURSE 2</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" aria-label="Address"  name='course2' readonly  value="<%= resp.course2 %>" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="input-field">
+                                        <div>
+                                            <label for="" class="form-label">COURSE 3</label>
+                                            <div class="input-group mb-4">
+                                                <input type="text" required class="form-control" name="course3" readonly  value="<%= resp.course3 %>" > 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+            
+                                
+                            <div class="d-flex">
+                                <% if (resp.status == "paid") { %>
+                                <div class="submit-btn d-none" style="margin-left: 20px">
+                                    <button type="submit">VERIFY</button>
+                                </div>
+                                <% } else{ %>
+                                    <div class="submit-btn" style="margin-left: 20px">
+                                        <button type="submit">VERIFY</button>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+       
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+

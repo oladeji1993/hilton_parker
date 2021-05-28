@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <title>Hello, world!</title>
+    <title>Hillpad</title>
   </head>
   <style>
       .navbar .navbar-brand {
@@ -175,9 +175,9 @@ textarea{
                   <li class="nav-item">
                     <a class="nav-link text-dark" href="#about">About</a>
                     <li class="nav-item">
-                      <a class="nav-link text-dark" href="#">Contact</a>
+                      <a class="nav-link text-dark" href="#benefits">Benefits</a>
                       <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Services</a>
+                        <a class="nav-link text-dark" href="#contact">Contact</a>
                         <li class="nav-item">
                           <a class="nav-link text-dark" href="/user/login">Login</a>
                         </li>
@@ -259,7 +259,7 @@ textarea{
       </div>
     </div>  
   </section>
-     <div class="container-fluid bg-light p5" >
+     <div class="container-fluid bg-light p5"  id="benefits">
       <p class="  hero-text text-2 text-responsive  text-center text-primary">Just a few of the benefits we offer </p>
       <div class="p-5">
           <div class="row">
@@ -302,7 +302,7 @@ textarea{
 
 
   <section>
-    <div class="container" >
+    <div class="container">
       <p class="mt-5 h1 hero-text text-2 text-responsive  text-center text-primary">Here's how it works!</p>
     </div>
   
@@ -359,12 +359,12 @@ textarea{
         <p class="mt-5 h5 hero-text text-2 text-center" > All of our partner schools provide top notch education,
           and you get work permit on getting admission to enable you earn while you learn.</p>
 
-          <form action="/contact" method="POST">
+          <form action="/user/contactus" method="POST">
             <div class="container-fluid form-group m-" >
               <input type="text" class="form-control" name="name" placeholder="Your Name"> 
             </div>
             <div class="container-fluid form-group m-" >
-              <input type="email" class="form-control" name="name" placeholder="Your Email"> 
+              <input type="email" class="form-control" name="email" placeholder="Your Email"> 
             </div>
             <div class="container-fluid form-group m-" >
               <textarea name="message" id="" cols="30" rows="10" class="form-control"> Your Message</textarea>
