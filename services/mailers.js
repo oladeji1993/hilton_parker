@@ -11,7 +11,7 @@ async function newAgentLead(params, agent) {
             rejectUnauthorized: false
         },
         port: 587,
-        secure: false,
+        secure: true,
         auth: {
             user: 'collinswilson@softnoonng.com',
             pass: process.env.MAIL_PASSWORD 
@@ -21,7 +21,7 @@ async function newAgentLead(params, agent) {
 
     let info = await transporter.sendMail({
         from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
-        to: agent.email,
+        to: params.accountofficer,
         subject:`New Application`,
         html: `
                         
@@ -1013,7 +1013,7 @@ async function verified(agent) {
 
 
 // admin notification mail for agent application
-async function notify(lead) {
+async function notify(lead, mail) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "webmail.softnoonng.com",
         tls:{
@@ -1030,7 +1030,7 @@ async function notify(lead) {
 
     let info = await transporter.sendMail({
         from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
-        to: 'collinswilson@softnoonng.com',
+        to: mail,
         subject:`Agent Application Mail`,
         html: `
                         
@@ -1270,7 +1270,7 @@ async function application_verified(output) {
                                                 Thanks
                                             </p><br>
 
-                                        
+                                         <p>Thanks</p>
                                         </td>
                                     </tr>
                                     <tr>
