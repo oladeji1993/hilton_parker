@@ -149,12 +149,21 @@ function agent() {
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
             pool.getConnection((err, con) => {
                 con.query('SELECT * FROM agent WHERE id = ?', req.user.id, (err, rest) => {
-                    if(rest.length )
+                    const earnings = 20/100 * rest[0].payment
                     con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
-                        res.render('./agent/dashboard', {
-                            agent : rest[0],
-                            accountofficer : acct[0]
+                        con.query('SELECT * FROM leads WHERE agent_id = ?', rest[0].agent_id, (err, all) => {
+                            con.query('SELECT * FROM leads WHERE status = ? AND agent_id = ? ', ['completed', rest[0].agent_id] , (err, complete) => {
+                                res.render('./agent/dashboard', {
+                                    complete,
+                                    earnings,
+                                    applicant: all,
+                                    agent : rest[0],
+                                    accountofficer : acct[0]
+                                })
+                            })
+                           
                         })
+                        
                     })
                     
                 

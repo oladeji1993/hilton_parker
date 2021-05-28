@@ -39,7 +39,6 @@ function agentsuserupload() {
             mailers.newAgentLead(user, agent)
             req.flash("success", 'Application succesfull')
             res.redirect('/agent/dashboard')
-            console.log(req.file)
           })
         })
       })

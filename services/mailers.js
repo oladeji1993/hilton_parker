@@ -11,7 +11,7 @@ async function newAgentLead(params, agent) {
             rejectUnauthorized: false
         },
         port: 587,
-        secure: true,
+        secure: false,
         auth: {
             user: 'collinswilson@softnoonng.com',
             pass: process.env.MAIL_PASSWORD 
@@ -21,7 +21,7 @@ async function newAgentLead(params, agent) {
 
     let info = await transporter.sendMail({
         from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
-        to: params.accountofficer,
+        to: agent.email,
         subject:`New Application`,
         html: `
                         
