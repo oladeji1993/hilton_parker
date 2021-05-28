@@ -40,6 +40,7 @@ function admin() {
 
     // GET ADMIN DASHBOARD 
     route.get('/dashboard', (req, res, next) => {
+        
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
             next()
@@ -51,6 +52,7 @@ function admin() {
         const id = req.user.id
         pool.getConnection((err, con) => {
             if (err) throw err;
+            const message = req.flash()
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                 con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
                     con.query('SELECT * FROM leads WHERE status = "completeregistration" && accountofficer = ?', id, (err, complete) =>{
@@ -63,7 +65,8 @@ function admin() {
                                         complete,
                                         paid,
                                         success,
-                                        allUser
+                                        allUser,
+                                        message : message 
 
                                     })
                                 })
@@ -464,6 +467,36 @@ function admin() {
         })
     })
 
+
+
+    route.get('/clientdetails/:id', (req, res, next,) => {
+        if (req.cookies.authenticate){
+            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You Must Login First', )
+            res.redirect('/agent/login')
+            } 
+    },  (req, res) => {
+        const id = req.params.id
+        pool.getConnection((err, con) =>{
+            if (err) res.redirect('/')
+                con.query('SELECT * FROM leads WHERE id = ?', id, (err, resp) =>{
+                    if(resp.length > 0){
+                        res.render('./admin/clientdetails', {
+                            resp : resp[0]
+                        })
+                    }else{
+                        res.render('./admin/clientsdetails', {
+                            resp
+                        })
+                    }
+                })
+        })
+    })
+
+
+
     
     route.post('/verify/:id', (req, res, next) =>{
         const id = req.params.id
@@ -473,6 +506,27 @@ function admin() {
                     con.query('UPDATE agent SET status = "verified" WHERE id = ?', id, (err, resu) =>{
                         mailers.verified(agent)
                         req.flash('success', 'Agent verified',)
+                        res.redirect('/admin/dashboard')
+                    })
+                }else{
+                    req.flash('danger', 'Not verified',)
+                    res.redirect('./admin/dashboard')
+                }
+            })
+        })
+ 
+    })
+
+
+    route.post('/verify_user/:id', (req, res, next) =>{
+        const id = req.params.id
+        const message = req.flash()
+        pool.getConnection((err, con)=>{
+            con.query('SELECT * FROM leads WHERE id = ?', id, (err, agent) =>{
+                if(agent.length > 0){
+                    con.query('UPDATE leads SET status = "paid" WHERE id = ?', id, (err, resp) =>{
+                        // mailers.verified(agent)
+                        req.flash('success', 'Application verified',)
                         res.redirect('/admin/dashboard')
                     })
                 }else{
