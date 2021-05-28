@@ -77,6 +77,20 @@ app.get('/contact', (req, res) => {
     
 })
 
+
+const userPassportUpload = require('./routes/userpassport')
+app.use('/user/passport', (req, res, next) => {
+    if(req.user) {
+        next()
+    }else if (req.cookies.agent_user){
+        req.user = {id : req.cookies.agent_user[1]}
+        next()
+    }else{
+        res.render('error')
+    }
+})
+app.use('/user/passport', userPassportUpload)
+
 const agentsuserupload = require('./routes/agentuploadclientfiles')
 app.use('/agent/submit', agentsuserupload)
 

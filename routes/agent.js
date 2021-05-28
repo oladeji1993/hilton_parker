@@ -49,32 +49,47 @@ function agent() {
             gender = ? ,
             maritalstatus = ? ,
             program = ?,
-            agent_id = ?
+            agent_id = ?,
+            accountofficer = ?,
+            regdate = ?, 
+            status = 'new' 
 
         `
 
         pool.getConnection((err, con) => {
-            con.query('SELECT * FROM leads WHERE email = ?', req.body.email, (err, result) => {
-                if(result.length > 0){
-                    req.flash('warning', 'This email has already been registered')
-                    res.redirect('/agent/newclient')
-                }else if(req.body.program == 'none'){
-                    req.flash('warning', 'Select a valid program')
-                    res.redirect('/agent/newclient')
-                }
-                else{
-                    con.query(sql, fields, (err, result) => {
-                        con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, cavani) => {
-                            res.cookie('agent_user', [cavani[0].agent_id,cavani[0].id] , {maxAge: 86400000})
-                        res.render('./agent/apply', {
-                            user: cavani[0]
-                        })
-                        })
+            if (req.cookies.agent){
+                req.user =jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+                con.query('SELECT * FROM agent WHERE id = ? ', req.user.id, (err, agents) => {
+                    fields.push( agents[0].accountofficer)
+                    fields.push((new Date()).toLocaleDateString('en-US'))
+                    con.query('SELECT * FROM leads WHERE email = ?', req.body.email, (err, result) => {
+                        if(result.length > 0){
+                            req.flash('warning', 'This email has already been registered')
+                            res.redirect('/agent/newclient')
+                        }else if(req.body.program == 'none'){
+                            req.flash('warning', 'Select a valid program')
+                            res.redirect('/agent/newclient')
+                        }
+                        else{
+                            con.query(sql, fields, (err, result) => {
+                                con.query('SELECT * FROM leads WHERE email = ? ', req.body.email, (err, cavani) => {
+                                    res.cookie('agent_user', [cavani[0].agent_id,cavani[0].id] , {maxAge: 86400000})
+                                res.render('./agent/apply', {
+                                    user: cavani[0]
+                                })
+                                })
+                            })
+                        }
                     })
-                }
-            })
+                    
+                })
+            }else{
+                req.flash('info', 'Session expired login again' )
+                res.redirect('/agent/login')
+            }
             
-        })
+            })
+           
         
     })
     route.get('/newclient', (req, res, next) => {
