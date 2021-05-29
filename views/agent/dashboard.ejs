@@ -32,6 +32,10 @@
                     <a href="/agent/newclient"><span><i class="fas fa-user-edit"></i></span> <span>Register New Applicant</span></a>
                 </li>
 
+                <li>
+                    <a href="/agent/pay"><span><i class="fas fa-user-edit"></i></span> <span>Pay</span></a>
+                </li>
+
                 <!-- <li>
                     <a href="/user/uploads"><span><i class="fas fa-user-edit"></i></span> <span>Upload Documents</span></a>
                 </li>
@@ -82,7 +86,7 @@
 
 
               <div class="cards">
-                <a style="text-decoration: none; " href="/admin/newApplicants">
+                <a style="text-decoration: none; " href="/agent/all">
                     <div style="background-color: #fff;" class="card-single">
                         <div>
                             <h1 style="color:#212529"><%= applicant.length %></h1>
@@ -95,7 +99,7 @@
                 </a>
 
                 <div class="card-single">
-                    <a style="text-decoration: none;" href="/admin/completereg">
+                    <a style="text-decoration: none;" href="/agent/complete">
                         <div>
                             <div style="display: flex; justify-content:space-between;">
                                 <h1 style="color:black"><%= complete.length %></h1>

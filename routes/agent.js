@@ -32,7 +32,112 @@ const upload = multer({ storage: storage })
 
 function agent() {
 
+    route.get('/pay',  (req, res, next) => {
+        if(req.cookies.agent){
+            req.user =jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You need to login first')
+            res.redirect('/agent/login')
+        }
+    }, (req, res) => {
+        pool.getConnection((err, con)=> {
+            con.query('SELEcT * FROM agent WHERE id = ?', req.user.id, (err, ret) => {
+                const ag = ret[0].agent_id
+                con.query('SELECT * FROM leads WHERE agent_id = ?', ag, (err, result) => {
+                    res.render('./agent/clients', {
+                        data: result
+                    })
+                })
+            })
+           
+        })
+    })
+    route.get('/pay/:id',(req, res, next) => {
+        if(req.cookies.agent){
+            req.user =jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You need to login first')
+            res.redirect('/agent/login')
+        }
+    }, (req, res) => {
+        const id = req.params.id
+        const userid = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE id = ? ', id, (err, user) => {
+                con.query('SELECT * FROM agent WHERE id = ?', userid, (err, agent) => {
+                    res.render('./Client/payment', {
+                        agent : agent[0],
+                        user : user[0]
+                    });
+                })
+                
+            })
+        })
+    });
+
+    route.get('/all', (req, res, next) => {
+        if(req.cookies.agent){
+            req.user =jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You need to login first')
+            res.redirect('/agent/login')
+        }
+    }, (req, res) => {
+        const sql1 = 'SELECT * FROM agent WHERE id = ?'
+        const sql2 = `
+            SELECT * FROM leads WHERE agent_id = ? AND status = ?
+        `
+        pool.getConnection((err, con) => {
+            con.query(sql1, req.user.id, (err, ag) => {
+                const agen = ag[0]
+                if(agen){
+                    con.query(sql2, [agen.agent_id, 'new'], (err, results) => {
+                        res.render('./agent/clients', {
+                            data: results
+                        })
+                    }
+                    )
+                }else{
+                    res.render('error')
+                }
+                
+            } )
+        })
+    })
     
+    route.get('/complete', (req, res, next) => {
+        if(req.cookies.agent){
+            req.user =jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)
+            next()
+        }else{
+            req.flash('danger', 'You need to login first')
+            res.redirect('/agent/login')
+        }
+    }, (req, res) => {
+        const sql1 = 'SELECT * FROM agent WHERE id = ?'
+        const sql2 = `
+            SELECT * FROM leads WHERE agent_id = ? AND status = ?
+        `
+        pool.getConnection((err, con) => {
+            con.query(sql1, req.user.id, (err, ag) => {
+                const agen = ag[0]
+                if(agen){
+                    con.query(sql2, [agen.agent_id, 'complete'], (err, results) => {
+                        res.render('./agent/clients', {
+                            data: results
+                        })
+                    }
+                    )
+                }else{
+                    res.render('error')
+                }
+                
+            } )
+        })
+    })
 
     route.post('/newclient', upload.none(),(req, res) => {
         const fields = Object.values(req.body)
@@ -153,6 +258,7 @@ function agent() {
                     con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
                         con.query('SELECT * FROM leads WHERE agent_id = ?', rest[0].agent_id, (err, all) => {
                             con.query('SELECT * FROM leads WHERE status = ? AND agent_id = ? ', ['completed', rest[0].agent_id] , (err, complete) => {
+                                
                                 res.render('./agent/dashboard', {
                                     complete,
                                     earnings,

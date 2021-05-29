@@ -16,8 +16,117 @@
     <link rel="stylesheet" href="/css/Client-dahboard.css">
 </head>
 <body>
+   
+    
+            <% if(agent){ %> 
+                 <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span>Hillpad</span></h2>
+        </div>
 
-    <input type="checkbox" id="nav-toggle">
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/agent/dashboard" title="Dashboard" class=""><span><i class="fas fa-id-card"></i></span> <span>Dashboard</span></a>
+                </li>
+
+                <li>
+                    <a href="/agent/newclient"><span><i class="fas fa-user-edit"></i></span> <span>Register New Applicant</span></a>
+                </li>
+
+                <li>
+                    <a href="/agent/pay" class="active"><span><i class="fas fa-user-edit"></i></span> <span>Pay</span></a>
+                </li>
+
+                <!-- <li>
+                    <a href="/user/uploads"><span><i class="fas fa-user-edit"></i></span> <span>Upload Documents</span></a>
+                </li>
+
+                <li>
+                    <a href="/pay"  title="Make payment"><span><i class="fas fa-credit-card"></i></span> <span>Make payment</span></a>
+                </li>
+
+                <li>
+                    <a href="/contact"  title="Contact Us"><span><i class="fas fa-envelope-open-text"></i></span> <span>Contact us</span></a>
+                </li>
+
+                <li>
+                    <a href="/agent/logout"  title="Logout"><span><i class="fas fa-sign-out-alt"></i>   </span> <span>Logout</span></a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span><i class="fas fa-bars"></i></span>
+                </label>
+                Dashboard
+            </h2>
+
+
+            <div class="user-wrapper">
+                <small class="">Welcome</small>
+                <!-- <img src="/images/team4.jpg" width="30px" height="30px" alt=""> -->
+                <div>  
+                    <small><%= agent.firstname %>&nbsp; <%= agent.lastname %></small>
+                </div>
+            </div>
+        </header>
+
+
+       
+        <main>
+                <div class="container">
+                <form name='myForm' action="/pay/paystack", method='POST'>
+                    <!-- <div class="text-center"><img class="img-fluid" style="width:30%;" src="/images/easy-payment.jpg"></div> -->
+                    <div class="text-center page-text text-wrap fs-5" style="font-size: 2rem; padding-bottom:30px; font-weight:bold; color:#1943cc;">Kindly Provide the required information</div>
+                    <div class="row pb-3">
+                        <div class="col col-12 pb-3">
+                            <div class="input-group flex-nowrap">
+                                <input type="text" style="font-weight:bold; border:1px solid gray" class="form-control p-3" placeholder="agent" name="agent_id" value="<%= agent.agent_id %>" aria-describedby="addon-wrapping" readonly>
+                            </div>
+                        </div>
+                        <div class="col col-12 pb-3">
+                            <div class="input-group flex-nowrap">
+                                <input type="text" style="font-weight:bold; border:1px solid gray" class="form-control p-3" placeholder="FullName" name="full_name" aria-describedby="addon-wrapping" value="<%= user.firstname %>&nbsp;<%= user.lastname %>" readonly>
+                            </div>
+                        </div>
+        
+                        <div class="colcol-12">
+                            <div class="input-group flex-nowrap">
+                                <input type="email" class="form-control p-3" style="font-weight:bold; border:1px solid gray" placeholder="Email" name="email" aria-describedby="addon-wrapping" value="<%= user.email %>" readonly> 
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col col-12 pb-3">
+                            <select class="form-select p-3" style="border:1px solid gray; font-weight:bold;" name="payment_Type">
+                                <option selected>Admission proccessing fee</option>
+                                
+                            </select>
+                        </div>
+        
+                        <div class="col col-12 pb-3">
+                            <div class="input-group flex-nowrap">
+                                <input type="number" class="form-control p-3" style="font-weight:bold; border:1px solid gray" placeholder="Amount" name="amount" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-2">
+                        <button type="submit" style="background-color:#1943cc; border: none; color:#fff; padding:10px 50px" class="btn-lg">PAY</button>
+                    </div>
+                </form>
+            </div>
+                <%} else {%>
+
+                    <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
             <h2><span>Hilton Parker</span></h2>
@@ -67,17 +176,17 @@
                 <small class="">Welcome</small>
                 <!-- <img src="/images/team4.jpg" width="30px" height="30px" alt=""> -->
                 <div>  
-                    <small><%= user.firstname %> <%= user.lastname %></small>
                 </div>
             </div>
         </header>
 
 
         <main>
+
             <div class="container">
                 <form name='myForm' action="/pay/paystack", method='POST'>
                     <!-- <div class="text-center"><img class="img-fluid" style="width:30%;" src="/images/easy-payment.jpg"></div> -->
-                    <div class="text-center page-text text-wrap fs-5" style="font-size: 2rem; padding-bottom:30px; font-weight:bold; color:#f69617;">Kindly Provide the required information</div>
+                    <div class="text-center page-text text-wrap fs-5" style="font-size: 2rem; padding-bottom:30px; font-weight:bold; color:#1943cc;">Kindly Provide the required information</div>
                     <div class="row pb-3">
                         <div class="col col-12 pb-3">
                             <div class="input-group flex-nowrap">
@@ -95,11 +204,8 @@
                     <div class="row">
                         <div class="col col-12 pb-3">
                             <select class="form-select p-3" style="border:1px solid gray; font-weight:bold;" name="payment_Type">
-                                <option selected>Payment Type</option>
-                                <option value="Enrolment Fee">Enrolment Fee</option>
-                                <option value="Visa Fee">Visa Fee</option>
-                                <option value="Processing Fee">Processing Fee</option>
-                                <option value="Admission Fee">Admission Fee</option>
+                                <option selected>Admission proccessing fee</option>
+                                
                             </select>
                         </div>
         
@@ -109,10 +215,13 @@
                             </div>
                         </div>
                     </div>
+                   
                     <div class="pt-2">
-                        <button type="submit" style="background-color:#f69617; border: none; color:#fff; padding:10px 50px" class="btn-lg">PAY</button>
+                        <button type="submit" style="background-color:#1943cc; border: none; color:#fff; padding:10px 50px" class="btn-lg">PAY</button>
                     </div>
                 </form>
+
+                <% } %>
             </div>
         </main>
     </div>

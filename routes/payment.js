@@ -24,13 +24,28 @@ function makePayment(){
     // Get details from Form
 
     route.post('/paystack', (req, res) => {
-        const form = _.pick(req.body,['amount','email','full_name','payment_Type']);
-        form.metadata = {
-            full_name : form.full_name,
-            payment_Type : form.payment_Type,
-
-        }
-        form.amount *= 100
+        if(req.body.agent_id){
+            const form = _.pick(req.body,['amount','email','full_name','payment_Type', 'agent_id']);
+            pool.getConnection((err, con) => {
+                const sql1 = 'SELECT * FROM leads WHERE email = ?'
+                const sql2 = 'SELECT * FROM agent WHERE agent_id = ?'
+                const sql3 = 'UPDATE leads SET status = ? WHERE id = ?'
+                const sql4 = 'UPDATE agent SET payment = ? WHERE id = ?'
+                con.query(sql1, form.email, (err, users) => {
+                    const user = users[0]
+                    con.query(sql2, form.agent_id, (err, agents) => {
+                        const agent = agents[0]
+                        con.query(sql3, ['paid', user.id], (err, result) => {
+                            const dbamount = parseInt(agent.payment)
+                            const formamount = parseInt(form.amount)
+                            const amount = parseInt(dbamount + formamount)
+                            console.log(amount)
+                            con.query(sql4, [amount, agent.id], (err, result) => {
+                                form.metadata = {
+                                    full_name : form.full_name,
+                                    payment_Type : form.payment_Type,
+                    
+                            }
         initializePayment(form, (error, body)=>{
             if(error){
                 //handle errors
@@ -40,6 +55,31 @@ function makePayment(){
             details = JSON.parse(body);
             res.redirect(details.data.authorization_url)
         });
+                            })
+                        })
+                    })
+                })
+            })
+            
+        }else{
+        const form = _.pick(req.body,['amount','email','full_name','payment_Type']);
+        form.metadata = {
+            full_name : form.full_name,
+            payment_Type : form.payment_Type,
+
+            
+        }
+    
+        initializePayment(form, (error, body)=>{
+            if(error){
+                //handle errors
+                console.log(error);
+                return;
+            }
+            details = JSON.parse(body);
+            res.redirect(details.data.authorization_url)
+        });}
+        
     });
 
 
