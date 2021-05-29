@@ -406,8 +406,17 @@ function agent() {
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
-                    mailers.notify(lead)
-                    res.render('./Client/success')
+                    console.log(accountofficerid)
+                    con.release()
+                    pool.getConnection((err, con) => {
+                        con.query('SELECT * FROM admin WHERE id =?', accountofficerid, (err, admin)  => {
+                            const email = admin[0].email
+                            mailers.notify(lead, email)
+                            res.render('./Client/success')
+                        })
+                    })
+                  
+                   
                 })
                 
             })

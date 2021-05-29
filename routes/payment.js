@@ -10,12 +10,22 @@ const {initializePayment, verifyPayment} = require('../config/paystack')(request
 function makePayment(){
 
     // render payment page
-    route.get('/',(req, res) => {
+    route.get('/', (req, res, next)  => {
+        if(req.user){
+            next()
+        }else{
+            req.flash('danger', 'You must login first')
+            res.redirect('/user/login')
+        }
+    },(req, res, ) => {
+        const message = req.flash()     
         const userid = req.user.id
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
                 res.render('./Client/payment', {
-                    user : user[0]
+                    user : user[0],
+                    message
+            
                 });
             })
         })
@@ -72,14 +82,30 @@ function makePayment(){
     
         initializePayment(form, (error, body)=>{
             if(error){
-                //handle errors
-                console.log(error);
+
                 return;
             }
+<<<<<<< HEAD
             details = JSON.parse(body);
             res.redirect(details.data.authorization_url)
         });}
         
+=======
+            pool.getConnection((err, con)=>{
+                con.query('UPDATE leads SET status = "pending" WHERE email = ?', email, (err, output)=>{
+                    con.query('SELECT * FROM leads WHERE email = ? ', email, (err, resu) => {
+                    if(resu.length > 0){
+                        details = JSON.parse(body);
+                        res.redirect(details.data.authorization_url)
+                    }else{
+                        req.flash('danger', 'Payment Failed')
+                        res.redirect('/pay')
+                    }
+                })
+            })
+            })
+        });
+>>>>>>> 334d4808d58b7c0eced7fe83eea9394ebb6ac08d
     });
 
 
