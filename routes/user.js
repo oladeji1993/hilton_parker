@@ -115,12 +115,12 @@ function user() {
                 const lead = result[0]
                 const accountofficerid = result[0].accountofficer
                 con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
-                    con.query('UPDATE leads SET status = "doc_uploaded" WHERE id = ?', req.user.id, (err, resp) =>{
+                    // con.query('UPDATE leads SET status = "pending" WHERE id = ?', req.user.id, (err, resp) =>{  
                     const accountofficer = resu[0] 
                     mailers.document_upload(lead, accountofficer)
-                    req.flash('success', 'Document uploaded successdully')
+                    req.flash('success', 'Document uploaded successfully')
                     res.redirect('/user/dashboard')
-                })
+                // })
             })
                 
             })
