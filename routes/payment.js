@@ -24,7 +24,8 @@ function makePayment(){
             con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
                 res.render('./Client/payment', {
                     user : user[0],
-                    message
+                    message,
+                    agent: false
             
                 });
             })
