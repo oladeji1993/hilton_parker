@@ -24,12 +24,13 @@ function makePayment(){
             con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
                 res.render('./Client/payment', {
                     user : user[0],
-                    message,
-                    agent: false
+                    agent: false,
+                    message
+
             
                 });
             })
-        })
+            })
     });
 
     // Get details from Form
@@ -57,6 +58,7 @@ function makePayment(){
                                     payment_Type : form.payment_Type,
                     
                             }
+        form.amount *= 100;
         initializePayment(form, (error, body)=>{
             if(error){
                 //handle errors
@@ -77,20 +79,28 @@ function makePayment(){
         form.metadata = {
             full_name : form.full_name,
             payment_Type : form.payment_Type,
-
-            
         }
-    
-        initializePayment(form, (error, body)=>{
-            if(error){
-
-                return;
-            }
-            details = JSON.parse(body);
-            res.redirect(details.data.authorization_url)
-        });}
+        form.amount *= 100;
+        const email = form.email
+        pool.getConnection((err, con)=>{
+            con.query('UPDATE leads SET status = "pending" WHERE email = ?', email, (err, output) =>{
+                
+                initializePayment(form, (error, body)=>{
+                    if(error){
         
+                        return;
+                    }
+                    details = JSON.parse(body);
+                    res.redirect(details.data.authorization_url)
+                });
+            })
+        })
+     
+        }
     });
+
+       
+ 
 
 
     route.get('/paystack/callback', (req,res) => {
