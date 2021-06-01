@@ -288,7 +288,7 @@ function admin() {
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
             next()
         }else{
-            req.flash('danger', 'You Must Login First', )
+            req.flash('danger', 'You Must Login First',)
             res.redirect('/agent/login')
             } 
     },  (req, res) => {
