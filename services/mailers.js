@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport')
 const bcrypt = require('bcryptjs');
+require('dotenv').config()
 
 
 //  NEW CLIENT FROM AGENT 
@@ -266,7 +267,7 @@ async function applied(params) {
                                                 password has been generated for you. To create your password, click the
                                                 following link.
                                             </p>
-                                            <a href="http://localhost:3000/user/${params.hash}"
+                                            <a href="${process.env.DOMAIN}/user/${params.hash}"
                                             style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Create
                                             Password</a>
                                         </td>
@@ -370,7 +371,7 @@ async function forgot_password(result, mail,token) {
                                                 password has been generated for you. To reset your password, click the
                                                 following link and follow the instructions.
                                             </p>
-                                            <a href="http://localhost:3000/forgot-password/${result}/${token}"
+                                            <a href="${process.env.DOMAIN}/forgot-password/${result}/${token}"
                                                 style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                                 Password</a>
                                         </td>
@@ -471,7 +472,7 @@ async function document_upload(user, accountofficer) {
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;"><br>
                                                 ${user.firstname}  ${user.lastname} just uploaded documents for application. <br>
                                                 Find the download link below:<br>
-                                                <a href="http://localhost:3000/files/${user.id}"
+                                                <a href="${process.env.DOMAIN}/files/${user.id}"
                                                 style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Download Document</a><br>
 
                                                 <br>
@@ -677,7 +678,7 @@ async function agent(params,encryptedid ) {
                                                 <br>
 
                                                 Use this link to complete and upload your document:<br> 
-                                                <a href="http://localhost:3000/agent/register/${encryptedid}}"
+                                                <a href="${process.env.DOMAIN}/agent/register/${encryptedid}}"
                                                 style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Complete Registration</a><br>
 
                                                 <br>
@@ -879,7 +880,7 @@ async function agent_reset_password(encryptedid, mail,token) {
                                                 password has been generated for you. To reset your password, click the
                                                 following link and follow the instructions.
                                             </p>
-                                            <a href="http://localhost:3000/agent_forgotpass/${encryptedid}/${token}"
+                                            <a href="${process.env.DOMAIN}/agent_forgotpass/${encryptedid}/${token}"
                                                 style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                                 Password</a>
                                         </td>
@@ -977,7 +978,7 @@ async function verified(agent) {
                                                 Dear ${agent[0].firstname + ' ' + agent[0].lastname}, Your application with HillPad Services has been accepted and verified. A unique link to access your
                                                 dashboard has been generated for you. Click the link below to access your dashboard.
                                             </p>
-                                            <a href="http://localhost:3000/agent/password/${agent[0].id}"
+                                            <a href="${process.env.DOMAIN}/agent/password/${agent[0].id}"
                                             style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">
                                             Go To Dashboard</a>
                                         </td>
