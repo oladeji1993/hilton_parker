@@ -205,11 +205,21 @@ function user() {
 
     route.get('/apply', (req, res ) => {
         if(req.user){
-            const user = req.user.id
+            const userid = req.user.id
             pool.getConnection((err, con) => {
-                con.query('SELECT * FROM leads WHERE id = ?', user, (err, result) => {
+                con.query('SELECT * FROM leads WHERE id = ?', userid, (err, result) => {
+                    const user = result[0]
+                    if(user.status == 'paid'){
+                        res.send('completed')
+                    }else if( user.status == 'new') { 
+                        res.render('./Client/Reg' , {
+                            user
+                        })
+                    }else if ( user.status == 'complete'){
+                        res.send('upload')
+                    }
                     res.render('./Client/Reg' , {
-                        user: result[0]
+                        user
                     })
                 })
                 
