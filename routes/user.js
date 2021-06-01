@@ -217,10 +217,11 @@ function user() {
                         })
                     }else if ( user.status == 'complete'){
                         res.send('upload')
-                    }
+                    }else{
                     res.render('./Client/Reg' , {
                         user
                     })
+                }
                 })
                 
             })
