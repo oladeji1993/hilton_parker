@@ -296,7 +296,6 @@ function agent() {
                         }else if(user[0].status == 'verified'){
                             res.redrect('agent/dashboard')
                         }else if(user[0].status == 'submit'){
-                            // res.render('./Client/success')
                             req.flash('primary', 'Your application is still pending')
                             res.redirect('/agent')
                         }
@@ -325,7 +324,7 @@ function agent() {
                 res.render('./error')    
            
             }else{
-                const ref = 'HPS-AG-00' + respons[0].id
+                const ref = 'HPSAG00' + respons[0].id
                 data.push(ref)
                 pool.getConnection((err, con) => {
 
@@ -371,19 +370,19 @@ function agent() {
         })
     })
 
-    var cpUpload = upload.fields([{ 
-        name: 'g1_id', maxCount: 1 },
-        {
-            name:'g1_passport', maxCount: 1
-        },
-        {
-            name:'g2_id', maxCount: 1
-        },
-        {
-            name:'g2_passport', maxCount: 1
-        }
-    ])
-    route.post('/uploads/:id', cpUpload, (req, res) => {
+    // var cpUpload = upload.fields([{ 
+    //     name: 'g1_id', maxCount: 1 },
+    //     {
+    //         name:'g1_passport', maxCount: 1
+    //     },
+    //     {
+    //         name:'g2_id', maxCount: 1
+    //     },
+    //     {
+    //         name:'g2_passport', maxCount: 1
+    //     }
+    // ])
+    route.post('/uploads/:id', upload.none(), (req, res) => {
         pool.getConnection((err, con) => {
             const agent = req.cookies.agent_id
             con.query('SELECT * FROM agent WHERE agent_id = ? ', agent, (err, result) => {
@@ -406,7 +405,6 @@ function agent() {
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
-                    console.log(accountofficerid)
                     con.release()
                     pool.getConnection((err, con) => {
                         con.query('SELECT * FROM admin WHERE id =?', accountofficerid, (err, admin)  => {
