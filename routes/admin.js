@@ -5,9 +5,12 @@ const joi = require('joi')
 const bcrypt = require('bcryptjs');
 const mailers = require('../services/mailers');
 require('dotenv').config()
-const jwt = require('jsonwebtoken')
+const fs = require('fs')
+const jwt = require('jsonwebtoken');
+const { entries } = require('lodash');
 flash = require('express-flash')
 
+const directory = './assets/uploads/academics'
 
 
 const schema = joi.object({
@@ -55,7 +58,7 @@ function admin() {
             const message = req.flash()
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                 con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
-                    con.query('SELECT * FROM leads WHERE status = "pending" && accountofficer = ?', id, (err, complete) =>{
+                    con.query('SELECT * FROM leads WHERE status = "registered" && accountofficer = ?', id, (err, complete) =>{
                         con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', id, (err, paid) =>{
                             con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', id, (err, success) =>{
                                 con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
@@ -269,15 +272,13 @@ function admin() {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
-            con.query('SELECT * FROM leads WHERE status = "pending" && accountofficer = ?', accountofficer, (err, userList) =>{
+            con.query('SELECT * FROM leads WHERE status = "registered" && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
                     res.render('./admin/applicants', {
                         userList
                     })
                 }else{
-                    res.render('./admin/applicants', {
-                        userList
-                    })
+                    res.render('error')
                 }
             })
         })
@@ -479,20 +480,42 @@ function admin() {
             } 
     },  (req, res) => {
         const id = req.params.id
-        pool.getConnection((err, con) =>{
-            if (err) res.redirect('/')
-                con.query('SELECT * FROM leads WHERE id = ?', id, (err, resp) =>{
-                    if(resp.length > 0){
-                        res.render('./admin/clientdetails', {
-                            resp : resp[0]
-                        })
-                    }else{
-                        res.render('./admin/clientsdetails', {
-                            resp
-                        })
-                    }
-                })
-        })
+
+        fs.readdir(directory, (err, files) => {
+            const doc = []
+            files.forEach(file => {
+              doc.push(file)
+            })
+
+            const id = req.params.id
+            const entries = []
+            const counter = id.length
+            for (var i =0; i<doc.length; i++){
+                const j = doc[i].slice(0,counter)
+                if(j == id){
+                    entries.push(doc[i])
+                }
+            }
+            pool.getConnection((err, con) =>{
+                console.log(entries)
+                if (err) res.redirect('/')
+                    con.query('SELECT * FROM leads WHERE id = ?', id, (err, resp) =>{
+                        if(resp.length > 0){
+                            res.render('./admin/clientdetails', {
+                                resp : resp[0],
+                                files: entries
+                            })
+                        }else{
+                            res.render('./admin/clientsdetails', {
+                                resp
+                            })
+                        }
+                    })
+            })
+        }
+        )
+
+        
     })
 
 
