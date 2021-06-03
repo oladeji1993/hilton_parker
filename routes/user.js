@@ -12,18 +12,28 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './assets/uploads')
+      cb(null, './assets/uploads/academics')
     },
     filename: function (req, file, cb, next) {
-        // console.log(req.body.document1)
-        const date = new Date().getTime()
-      cb(null, req.user.id + '-' + file.fieldname + '-' + date + '' + path.extname(file.originalname))
+      cb(null, req.user.id + '-' + file.fieldname + path.extname(file.originalname))
     }
     
   })
 
   const upload = multer({ storage: storage })
 
+ 
+  const Pstorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './assets/uploads/passports')
+    },
+    filename: function (req, file, cb, next) {
+      cb(null, req.user.id + '-' + file.fieldname + path.extname(file.originalname))
+    }
+    
+  })
+
+  const Pupload = multer({ storage: Pstorage })
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
@@ -86,9 +96,15 @@ function user() {
             const userid = req.user.id
             pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ?', userid, (err, user) => {
-                res.render('./Client/uploads', {
-                    user: user[0]
-                })
+                if(user[0].status == 'paid'){
+                    req.flash('success', 'Your Application is Complete')
+                    res.redirect('/user/dashboard')
+                }else{
+                    res.render('./Client/uploads', {
+                        user: user[0]
+                    })
+                }
+               
             })
         })
         }else{
@@ -99,35 +115,103 @@ function user() {
         
     })
 
-    var cpUpload = upload.fields([{ name: 'document', maxCount: 3 }])
-    route.post('/uploads', (req, res, next)  => {
+    const bscupload = upload.fields([
+        {name : 'waec', maxCount: 1},
+        {name : 'passport', maxCount: 1},
+        {name : 'other', maxCount: 1}
+    ])
+    route.post('/submit/bsc/', (req, res, next) => {
         if(req.user){
             next()
         }else{
-            req.flash('danger', 'You must login first')
+            req.flash('warning', 'Session expired please log-in')
             res.redirect('/user/login')
         }
-    },cpUpload ,(req, res) => {
-        pool.getConnection((err, con) => {
-            con.query('SELECT * FROM leads WHERE id = ? ', req.user.id, (err, result) => {
-                const files = req.files
-                const fields = req.body
-                const lead = result[0]
-                const accountofficerid = result[0].accountofficer
-                con.query('SELECT * FROM admin WHERE id = ? ', accountofficerid, (err, resu) => {
-                    con.query('UPDATE leads SET status = "pending" WHERE id = ?', req.user.id, (err, resp) =>{  
-                    const accountofficer = resu[0] 
-                    mailers.document_upload(lead, accountofficer)
-                    req.flash('success', 'Document uploaded successfully')
-                    res.redirect('/user/dashboard')
+    },bscupload,  (req, res) => {
+        if(req.user){
+            const userid = req.user.id
+            pool.getConnection((err, con) => {
+                con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, users) => {
+                    if(users.length > 0){
+                        const user = users[0]
+                        const data = Object.values(req.body)
+                        data.push('pending')
+                        data.push(user.id)
+                        con.query('UPDATE leads SET course1 = ? , course2 = ?, course3 = ?, status = ? WHERE id = ?', data , (err, result ) => {
+                            console.log(err)
+                            console.log(result)
+                            req.flash('success', 'Document Uploaded successful')
+                            res.redirect('/user/dashboard')
+                        })
+                    }else{
+                        res.render('error')
+                    }
+
                 })
             })
-                
-            })
-        })
-        
+        }else{
+            res.redirect('/user/login')
+        }
+    } )
 
-    })
+    const pgdupload = upload.fields([
+        {name : 'waec', maxCount: 1},
+        {name : 'passport', maxCount: 1},
+        {name : 'other', maxCount: 1}
+    ])
+    route.post('/submit/pgd/', pgdupload,  (req, res) => {
+        if(req.user){
+            const userid = req.user.id
+            pool.getConnection((err, con) => {
+                con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, users) => {
+                    if(users.length < 0){
+                        const user = users[0]
+                        const data = Object.values(req.body)
+                        data.push('pending')
+                        data.push(user.id)
+                        con.query('UPDATE leads SET course1 = ? , course2 = ?, course3 = ? WHERE id = ?', data , (err, result ) => {
+                            req.flash('success', 'Document Uploaded successful')
+                            res.redirect('/user/dashboard')
+                        })
+                    }
+
+                })
+            })
+        }else{
+            res.redirect('/user/login')
+        }
+    } )
+
+
+    const mscupload = upload.fields([
+        {name : 'waec', maxCount: 1},
+        {name : 'passport', maxCount: 1},
+        {name : 'other', maxCount: 1}
+    ])
+    route.post('/submit/msc/', mscupload,  (req, res) => {
+        if(req.user){
+            const userid = req.user.id
+            pool.getConnection((err, con) => {
+                con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, users) => {
+                    if(users.length < 0){
+                        const user = users[0]
+                        const data = Object.values(req.body)
+                        data.push('pending')
+                        data.push(user.id)
+                        con.query('UPDATE leads SET course1 = ? , course2 = ?, course3 = ? WHERE id = ?', data , (err, result ) => {
+                            req.flash('success', 'Document Uploaded successful')
+                            res.redirect('/user/dashboard')
+                        })
+                    }
+
+                })
+            })
+        }else{
+            res.redirect('/user/login')
+        }
+    } )
+
+
 
   
 
@@ -210,16 +294,20 @@ function user() {
                 con.query('SELECT * FROM leads WHERE id = ?', userid, (err, result) => {
                     const user = result[0]
                     if(user.status == 'paid'){
-                        res.send('completed')
+                        req.flash('success', 'Your Application is Complete')
+                        res.redirect('/user/dashboard')
                     }else if( user.status == 'new') { 
-                        res.render('./Client/Reg' , {
+                        res.render('./Client/Reg'  , {
                             user
                         })
-                    }else if ( user.status == 'complete'){
-                        res.send('upload')
+                    }else if ( user.status == 'registered'){
+                        res.render('./Client/uploads'  , {
+                            user
+                        })
                     }else{
-                    res.render('./Client/Reg' , {
-                        user
+                        res.render('./Client/payment' , {
+                            agent: false,
+                            user
                     })
                 }
                 })
@@ -231,8 +319,11 @@ function user() {
         }
     })
     
-    route.post('/apply',  upload.none(),(req, res) => {
+
+    route.post('/apply',  Pupload.single('passport') , (req, res) => {
         if(req.user){
+            console.log(req.file)
+            console.log(req.file.filename)
             const params = Object.values(req.body)
             const user = req.user.id
             pool.getConnection((err, con) => {
@@ -248,13 +339,11 @@ function user() {
                 gender = ?,
                 maritalstatus = ?,
                 program = ?,
-                course1 = ?,
-                course2 = ?,
-                course3 = ?,
+                passport = ?, 
                 status = "registered"
                 WHERE id = ${user} 
                 `
-                
+                params.push(req.file.filename)
                 con.query(sql, params, (err, result) => {
                     req.flash('success', 'Information updated', )
                     res.redirect('/user/dashboard')

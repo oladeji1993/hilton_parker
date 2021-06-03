@@ -74,7 +74,6 @@
         </header>
         <main>
             
-
 <div class="container m-container">
     <div class="text-center">
         <!-- <a class="btn btn-info complete" id="myBtn"> Mark as complete </a> -->
@@ -205,24 +204,20 @@
 
             <!-- enrolment question session -->
             <div class="row">
-                <hr>
+                <!-- <hr> -->
                 <div class="text-center">
                     <div class="text-center"> <h5 style="color: #f69617;">Enrolment Questions</h5> </div>
                 </div>
-                <hr>
+                <!-- <hr> -->
                 <div class="col-md-6 col-12">
                     <div class="input-field">
                         <div>
                             <label for="" class="form-label">Marital status</label>
                             <div class="input-group mb-4">
                                 <select class="form-select" aria-label="Default select example" name="maritalstatus">
-                                    <% if (user.maritalstatus) {%> 
-                                        <option value="<%= user.maritalstatus %>" selected> <%= user.maritalstatus %></option>
-                                        <%} else {%> 
                                     <option value="single">Single</option>
                                     <option value="married">Married</option>
                                     <option value="divorced">Divorced</option>
-                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -235,10 +230,10 @@
                             <label for="" class="form-label">Program</label>
                             <div class="input-group mb-4">
                                 <select class="form-select" name="program">
-                                    <option value="<%= user.program %>" selected> <%= user.program %></option>
-                                    <option value="diploma">Diploma Certificate</option>
-                                    <option value="Msc">Msc</option>
-                                    <option value="Bsc">Bsc</option>
+                                    <option value="none" selected>Select Program</option>
+                                    <option value="bsc">Bsc / Certificate Program</option>
+                                    <option value="msc">Msc</option>
+                                    <option value="pgd">PGD</option>
                                 </select>
                             </div>
                         </div>
@@ -247,39 +242,25 @@
             </div>
 
 
-             <!-- Course of choice-->
-             <div class="row">
-                <div class="col-md-4 col-12">
-                    <label for="" class="form-label">Course of Choice</label>
-                    <div class="input-field">
-                        <div>
-                            <div class="input-group mb-4">
-                                <input type="text"placeholder="Choice 1"     class="form-control" name="course1" value="<%= user.course1 %>" > 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                    <div class="input-field choice">
-                        <div>
-                            <div class="input-group mb-4">
-                                <input type="text" placeholder="Choice 2"     class="form-control" name="course2" value="<%= user.course2 %>" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                    <div class="input-field choice">
-                        <div>
-                            <div class="input-group mb-4">
-                                <input type="text" placeholder="Choice 3"     class="form-control" name="course3" value="<%= user.course3 %>" >
-                            </div>
-                        </div>
-                    </div>
+            <div class="text-center">
+                <!-- <a class="btn btn-info complete" id="myBtn"> Mark as complete </a> -->
+                <hr>
+                <div class="text-center"> <h5 style="color: #192cc2;;">Passport Photograph</h5> </div>
+                <span class="text-danger">Upload clear front facing Jpg or Png image</span>
+            </div>
+            
+            <div class="col-md-12 col-12">
+                <div class="row">
+                    <div class="form-check form-check-inline">
+                        <input class="form-file form-control" required type="file" name="passport">
+                        <!-- <label class="form-check-label checkbox" for="inlineCheckbox1">By submiting I declare that all information given are valid and could be verified</label> -->
+                      </div>
                 </div>
             </div>
+
+            <hr>
+
+
             <div class="col-md-12 col-12">
                 <div class="row">
                     <div class="form-check form-check-inline">
