@@ -263,13 +263,12 @@ async function applied(params) {
                                             <span
                                                 style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                Dear ${params.firstname + ' ' + params.lastname}, You just opened an application with HillPad Services. A unique link to create your
-                                                password has been generated for you. To create your password, click the
-                                                following link.
+                                                Dear ${params.firstname + ' ' + params.lastname}, You just opened an application with HillPad Services. A unique link to continue your
+                                                application has been generated for you. To continue<br> click the
+                                                link below.
                                             </p>
                                             <a href="${process.env.DOMAIN}/user/${params.hash}"
-                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Create
-                                            Password</a>
+                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Continue Application</a>
                                         </td>
                                     </tr>
                                     <tr>

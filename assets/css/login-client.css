@@ -14,7 +14,7 @@
 .container-background .welcome{
     font-size: 50px;
     font-weight:bold;
-    color:#192cc2;
+    color:#f69617;
 }
 
 .container-background img{
@@ -75,7 +75,7 @@
 
 .submit-btn button{
     padding: 10px 70px;
-    background-color:#192cc2;
+    background-color:#f69617;
     border: hidden;
     color:white;
     text-transform: uppercase;
