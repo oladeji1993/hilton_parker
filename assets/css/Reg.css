@@ -21,7 +21,7 @@ label{
 
 .header .application{
     font-size:35px;
-    color:#192cc2;
+    color:#f69617;
     font-weight:bold
 }
 
@@ -45,7 +45,7 @@ label{
 
 .enrolment{
     font-weight:bold;
-    color:#192cc2;
+    color:#f69617;
     font-size:25px;
     text-decoration: underline;
     padding-top: 15px;
@@ -77,15 +77,15 @@ label{
 .submit-btn button{
     padding: 10px 70px;
     background-color:#fff;
-    border:2px solid #192cc2;
+    border:2px solid #f69617;
     /* border: hidden; */
-    color:#192cc2;
+    color:#f69617;
     text-transform: uppercase;
     border-radius:25px
 }
 
 .submit-btn button:hover{
-    background-color:#192cc2;
+    background-color:#f69617;
     color:#fff
 }
 
@@ -94,16 +94,16 @@ label{
     /* margin-top:20%; */
     padding: 10px 70px;
     background-color:#fff;
-    border:2px solid #192cc2;
+    border:2px solid #f69617;
     /* border: hidden; */
-    color:#192cc2;
+    color:#f69617;
     text-transform: uppercase;
     border-radius:25px;
     text-decoration: none;
 }
 
 .submit-btn a:hover{
-    background-color:#192cc2;
+    background-color:#f69617;
     color:#fff
 }
 

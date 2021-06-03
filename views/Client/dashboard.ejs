@@ -138,7 +138,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Registration</td>
-                                            <% if(user.status == "registered" || user.status == "doc_uploaded" || user.status == "pending" || user.status == "paid"  ){ %>
+                                            <% if(user.status == "registered" || user.status == "pending" || user.status == "paid"  ){ %>
                                                 <td>
                                                     <span class="status green"></span>
                                                     completed
@@ -152,7 +152,7 @@
                                         </tr>
                                         <tr>
                                             <td>Document Upload</td>
-                                            <% if (user.status == "doc_uploaded" || user.status == "pending" || user.status == "paid"   ) { %>
+                                            <% if ( user.status == "pending" || user.status == "paid"   ) { %>
                                                 <td>
                                                     <span class="status green"></span>
                                                     completed
@@ -168,19 +168,26 @@
 
                                         <tr>
                                             <td>Make Payment</td>
-                                            <% if (user.status == "pending" || user.status == "new" || user.status == "registered" || user.status == "doc_uploaded"  ){%>
+                                            <% if (user.status == "new" || user.status == "registered"  ){%>
                                                 <td>
                                                     <span class="status orange"></span>
-                                                    pending
+                                                    Incomplete
                                                 </td>
                                                 <% } else{ %>
-                                                    <% if (user.status == "paid" ) { %>
+                                                    <% if (user.status == "pending" ) { %>
                                                         <td>
-                                                            <span class="status green"></span>
-                                                            completed
+                                                            <span class="status orange"></span>
+                                                            pending
                                                         </td>
                                                         <% } else{ %>
-                                                          
+                                                            <% if (user.status == "paid" ) { %>
+                                                                <td>
+                                                                    <span class="status green"></span>
+                                                                    completed
+                                                                </td>
+                                                                <% } else{ %>
+                                                                  
+                                                                <% } %>
                                                         <% } %>
                                                 <% } %>
                                         </tr>
