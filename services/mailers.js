@@ -128,80 +128,165 @@ async function newLead(admin, params,) {
         html: `
                         
         <!doctype html>
-        <html lang="en-US">
-
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Reset Password Email Template</title>
-        <meta name="description" content="Reset Password Email Template.">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
-
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Application Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                ${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services. <br>
-                                                Find below applicants information:<br>
-                                                NAME: ${params.firstname + ' ' + params.lastname},<br>
-                                                EMAIL: ${params.email},<br>
-                                                PHONE: ${params.phonenumber}
-                                                <br>
-                                                Kindly contact the applicant.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
+        <html>
+          <head>
+            <meta name="viewport" content="width=device-width">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Simple Transactional Email</title>
+            <style>
+            /* -------------------------------------
+                INLINED WITH htmlemail.io/inline
+            ------------------------------------- */
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+              table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+              }
+              table[class=body] p,
+                    table[class=body] ul,
+                    table[class=body] ol,
+                    table[class=body] td,
+                    table[class=body] span,
+                    table[class=body] a {
+                font-size: 16px !important;
+              }
+              table[class=body] .wrapper,
+                    table[class=body] .article {
+                padding: 10px !important;
+              }
+              table[class=body] .content {
+                padding: 0 !important;
+              }
+              table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+              }
+              table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+              }
+              table[class=body] .btn table {
+                width: 100% !important;
+              }
+              table[class=body] .btn a {
+                width: 100% !important;
+              }
+              table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+              }
+            }
+        
+            /* -------------------------------------
+                PRESERVE THESE STYLES IN THE HEAD
+            ------------------------------------- */
+            @media all {
+              .ExternalClass {
+                width: 100%;
+              }
+              .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                line-height: 100%;
+              }
+              .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+              }
+              #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+              }
+              .btn-primary table td:hover {
+                background-color: #34495e !important;
+              }
+              .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+              }
+            }
+            </style>
+          </head>
+          <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Application Mail</span>
+            <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+              <tr>
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                  <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+        
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+        
+                      <!-- START MAIN CONTENT AREA -->
+                      <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi,</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services. <br>
+                                  Find below applicants information:<br>
+                                  NAME: ${params.firstname + ' ' + params.lastname},<br>
+                                  EMAIL: ${params.email},<br>
+                                  PHONE: ${params.phonenumber}
+                                  <br>
+                          
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Kindly contact the applicant..</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+        
+                    <!-- END MAIN CONTENT AREA -->
                     </table>
+        
+                    <!-- START FOOTER -->
+                    <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                        <tr>
+                          <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- END FOOTER -->
+        
+                  <!-- END CENTERED WHITE CONTAINER -->
+                  </div>
                 </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
-
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+              </tr>
+            </table>
+          </body>
         </html>
         `
     });
 
 }
-
-// END OF ADMIN MAILER
-
 
 // CLIENT MAILER
 async function applied(params) {
@@ -226,82 +311,181 @@ async function applied(params) {
         html: `
                         
         <!doctype html>
-        <html lang="en-US">
-
+        <html>
         <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-        <title>Application Mail</title>
-        <meta name="description" content="Application Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+            <meta name="viewport" content="width=device-width">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Simple Transactional Email</title>
+            <style>
+            /* -------------------------------------
+                INLINED WITH htmlemail.io/inline
+            ------------------------------------- */
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                    table[class=body] ul,
+                    table[class=body] ol,
+                    table[class=body] td,
+                    table[class=body] span,
+                    table[class=body] a {
+                font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                    table[class=body] .article {
+                padding: 10px !important;
+            }
+            table[class=body] .content {
+                padding: 0 !important;
+            }
+            table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+            table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+                width: 100% !important;
+            }
+            table[class=body] .btn a {
+                width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+            }
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
+            /* -------------------------------------
+                PRESERVE THESE STYLES IN THE HEAD
+            ------------------------------------- */
+            @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+            .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                line-height: 100%;
+            }
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+            #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+            }
+            .btn-primary table td:hover {
+                background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+            }
+            }
+            </style>
+        </head>
+        <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Application Notification Mail</span>
+            <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
             <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.firstname + ' ' + params.lastname},</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just opened an application with HillPad Services. A unique link to continue your
+                                application has been generated for you. <br> Click the link below to continue your Application.</p>
+                                <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                                <tbody>
                                     <tr>
-                                        <td style="height:40px;">&nbsp;</td>
+                                    <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                        <tbody>
+                                            <tr>
+                                            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                            border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/user/${params.hash}" target="_blank" 
+                                            style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                            border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                            font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                            border-color: #3498db;">Continue Application</a> </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </td>
                                     </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Application Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                Dear ${params.firstname + ' ' + params.lastname}, You just opened an application with HillPad Services. A unique link to continue your
-                                                application has been generated for you. To continue<br> click the
-                                                link below.
-                                            </p>
-                                            <a href="${process.env.DOMAIN}/user/${params.hash}"
-                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Continue Application</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
+                                </tbody>
                                 </table>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
                             </td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+
+                    <!-- END MAIN CONTENT AREA -->
+                    </table>
+
+                    <!-- START FOOTER -->
+                    <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                         <tr>
-                            <td style="height:20px;">&nbsp;</td>
+                        <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                        </td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
+                        <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                        </td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+                    </div>
+                    <!-- END FOOTER -->
 
+                <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+                </td>
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+            </tr>
+            </table>
+        </body>
         </html>
+        
         `
     });
 
 } 
-
-// END OF CLIENT MAILER
 
 
 
@@ -328,78 +512,178 @@ async function forgot_password(result, mail,token) {
         html: `
                         
         <!doctype html>
-        <html lang="en-US">
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Simple Transactional Email</title>
+    <style>
+    /* -------------------------------------
+        INLINED WITH htmlemail.io/inline
+    ------------------------------------- */
+    /* -------------------------------------
+        RESPONSIVE AND MOBILE FRIENDLY STYLES
+    ------------------------------------- */
+    @media only screen and (max-width: 620px) {
+      table[class=body] h1 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+      }
+      table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+        font-size: 16px !important;
+      }
+      table[class=body] .wrapper,
+            table[class=body] .article {
+        padding: 10px !important;
+      }
+      table[class=body] .content {
+        padding: 0 !important;
+      }
+      table[class=body] .container {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      table[class=body] .main {
+        border-left-width: 0 !important;
+        border-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
+      table[class=body] .btn table {
+        width: 100% !important;
+      }
+      table[class=body] .btn a {
+        width: 100% !important;
+      }
+      table[class=body] .img-responsive {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+    }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Reset Password</title>
-        <meta name="description" content="Reset Password.">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+    /* -------------------------------------
+        PRESERVE THESE STYLES IN THE HEAD
+    ------------------------------------- */
+    @media all {
+      .ExternalClass {
+        width: 100%;
+      }
+      .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+        line-height: 100%;
+      }
+      .apple-link a {
+        color: inherit !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        text-decoration: none !important;
+      }
+      #MessageViewBody a {
+        color: inherit;
+        text-decoration: none;
+        font-size: inherit;
+        font-family: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+      }
+      .btn-primary table td:hover {
+        background-color: #34495e !important;
+      }
+      .btn-primary a:hover {
+        background-color: #34495e !important;
+        border-color: #34495e !important;
+      }
+    }
+    </style>
+  </head>
+  <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+    <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">You have
+      requested to reset your password</span>
+    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+      <tr>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
+            <!-- START CENTERED WHITE CONTAINER -->
+            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                    <tr>
+                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> We cannot simply send you your old password. A unique link to reset your
+                          password has been generated for you. To reset your password, click the
+                          following link and follow the instructions.</p>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                          <tbody>
+                            <tr>
+                              <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                  <tbody>
                                     <tr>
-                                        <td style="height:40px;">&nbsp;</td>
+                                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                      border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/forgot-password/${result}/${token}" target="_blank" 
+                                      style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                      border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                      font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                      border-color: #3498db;">Reset Password</a> </td>
                                     </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">You have
-                                                requested to reset your password</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                We cannot simply send you your old password. A unique link to reset your
-                                                password has been generated for you. To reset your password, click the
-                                                following link and follow the instructions.
-                                            </p>
-                                            <a href="${process.env.DOMAIN}/forgot-password/${result}/${token}"
-                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
-                                                Password</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
+                                  </tbody>
                                 </table>
-                            </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+              </tr>
 
-        </html>
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+
+            <!-- START FOOTER -->
+            <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+              <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                <tr>
+                  <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>
         `
     });
 
@@ -432,73 +716,178 @@ async function document_upload(user, accountofficer) {
         html: `
                         
         <!doctype html>
-        <html lang="en-US">
-
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Document Upload</title>
-        <meta name="description" content="Document Upload">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
-
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Document Upload</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;"><br>
-                                                ${user.firstname}  ${user.lastname} just uploaded documents for application. <br>
-                                                Find the download link below:<br>
-                                                <a href="${process.env.DOMAIN}/files/${user.id}"
-                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Download Document</a><br>
-
-                                                <br>
-                                                Kindly check the documents.
-                                            </p>
+        <html>
+          <head>
+            <meta name="viewport" content="width=device-width">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Simple Transactional Email</title>
+            <style>
+            /* -------------------------------------
+                INLINED WITH htmlemail.io/inline
+            ------------------------------------- */
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+              table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+              }
+              table[class=body] p,
+                    table[class=body] ul,
+                    table[class=body] ol,
+                    table[class=body] td,
+                    table[class=body] span,
+                    table[class=body] a {
+                font-size: 16px !important;
+              }
+              table[class=body] .wrapper,
+                    table[class=body] .article {
+                padding: 10px !important;
+              }
+              table[class=body] .content {
+                padding: 0 !important;
+              }
+              table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+              }
+              table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+              }
+              table[class=body] .btn table {
+                width: 100% !important;
+              }
+              table[class=body] .btn a {
+                width: 100% !important;
+              }
+              table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+              }
+            }
+        
+            /* -------------------------------------
+                PRESERVE THESE STYLES IN THE HEAD
+            ------------------------------------- */
+            @media all {
+              .ExternalClass {
+                width: 100%;
+              }
+              .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                line-height: 100%;
+              }
+              .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+              }
+              #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+              }
+              .btn-primary table td:hover {
+                background-color: #34495e !important;
+              }
+              .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+              }
+            }
+            </style>
+          </head>
+          <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Document Upload</span>
+            <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+              <tr>
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                  <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+        
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+        
+                      <!-- START MAIN CONTENT AREA -->
+                      <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                              <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${user.firstname}  ${user.lastname} just uploaded documents for application. <br>
+                                  <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                                    <tbody>
+                                      <tr>
+                                        <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                          <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                            <tbody>
+                                              <tr>
+                                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                                border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/files/${user.id}" target="_blank" 
+                                                style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                                border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                                font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                                border-color: #3498db;">Download Document</a> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <br>
+                          
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Kindly check the documents....</p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+        
+                    <!-- END MAIN CONTENT AREA -->
                     </table>
+        
+                    <!-- START FOOTER -->
+                    <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                        <tr>
+                          <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- END FOOTER -->
+        
+                  <!-- END CENTERED WHITE CONTAINER -->
+                  </div>
                 </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
-
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+              </tr>
+            </table>
+          </body>
         </html>
+        
         `
     });
 
@@ -529,75 +918,164 @@ async function contact(details) {
         html: `
                         
         <!doctype html>
-        <html lang="en-US">
+            <html>
+                <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                    table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                    }
+                    table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                    }
+                    table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                    }
+                    table[class=body] .content {
+                    padding: 0 !important;
+                    }
+                    table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                    }
+                    table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                    }
+                    table[class=body] .btn table {
+                    width: 100% !important;
+                    }
+                    table[class=body] .btn a {
+                    width: 100% !important;
+                    }
+                    table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                    }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Contact us Mail</title>
-        <meta name="description" content="Contact us Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                    .ExternalClass {
+                    width: 100%;
+                    }
+                    .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                    }
+                    .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                    }
+                    #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                    }
+                    .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                    }
+                    .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                    }
+                }
+                </style>
+                </head>
+                <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Contact us Mail</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                    <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                        <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Contact us Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;"><br>
-                                                This is a contact us message.<br>
-                                                Find the contact information below:<br>
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
 
-                                                NAME : ${details.firstname + ' ' + details.lastname},<br>
-                                                EMAIL: ${details.email},<br>
-                                                PHONE NUMBER: ${details.phonenumber},<br>
-                                                MESSAGE: ${details.textarea}<br>
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is a contact us message.<br>
+                                        Find the contact information below:<br>
 
-                                                Kindly act upon
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
+                                        NAME : ${details.firstname + ' ' + details.lastname},<br>
+                                        EMAIL: ${details.email},<br>
+                                        PHONE NUMBER: ${details.phonenumber},<br>
+                                        MESSAGE: ${details.textarea}<br>
+
+                                
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Kindly act upon...</p>
+                                    </td>
+                                </tr>
                                 </table>
                             </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+                            </tr>
 
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                                <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                        <!-- END CENTERED WHITE CONTAINER -->
+                        </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    </tr>
+                </table>
+            </body>
         </html>
+
         `
     });
 
@@ -627,90 +1105,179 @@ async function agent(params,encryptedid ) {
         from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
         to: `${params.email}`,
         subject:`You just registered`,
-        html: `
-                        
-        <!doctype html>
-        <html lang="en-US">
+        html: `                       
+                <!doctype html>
+                <html>
+                <head>
+                    <meta name="viewport" content="width=device-width">
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <title>Simple Transactional Email</title>
+                    <style>
+                    /* -------------------------------------
+                        INLINED WITH htmlemail.io/inline
+                    ------------------------------------- */
+                    /* -------------------------------------
+                        RESPONSIVE AND MOBILE FRIENDLY STYLES
+                    ------------------------------------- */
+                    @media only screen and (max-width: 620px) {
+                    table[class=body] h1 {
+                        font-size: 28px !important;
+                        margin-bottom: 10px !important;
+                    }
+                    table[class=body] p,
+                            table[class=body] ul,
+                            table[class=body] ol,
+                            table[class=body] td,
+                            table[class=body] span,
+                            table[class=body] a {
+                        font-size: 16px !important;
+                    }
+                    table[class=body] .wrapper,
+                            table[class=body] .article {
+                        padding: 10px !important;
+                    }
+                    table[class=body] .content {
+                        padding: 0 !important;
+                    }
+                    table[class=body] .container {
+                        padding: 0 !important;
+                        width: 100% !important;
+                    }
+                    table[class=body] .main {
+                        border-left-width: 0 !important;
+                        border-radius: 0 !important;
+                        border-right-width: 0 !important;
+                    }
+                    table[class=body] .btn table {
+                        width: 100% !important;
+                    }
+                    table[class=body] .btn a {
+                        width: 100% !important;
+                    }
+                    table[class=body] .img-responsive {
+                        height: auto !important;
+                        max-width: 100% !important;
+                        width: auto !important;
+                    }
+                    }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-        <title>Agent registration Mail</title>
-        <meta name="description" content="Agent registration Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                    /* -------------------------------------
+                        PRESERVE THESE STYLES IN THE HEAD
+                    ------------------------------------- */
+                    @media all {
+                    .ExternalClass {
+                        width: 100%;
+                    }
+                    .ExternalClass,
+                            .ExternalClass p,
+                            .ExternalClass span,
+                            .ExternalClass font,
+                            .ExternalClass td,
+                            .ExternalClass div {
+                        line-height: 100%;
+                    }
+                    .apple-link a {
+                        color: inherit !important;
+                        font-family: inherit !important;
+                        font-size: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+                        text-decoration: none !important;
+                    }
+                    #MessageViewBody a {
+                        color: inherit;
+                        text-decoration: none;
+                        font-size: inherit;
+                        font-family: inherit;
+                        font-weight: inherit;
+                        line-height: inherit;
+                    }
+                    .btn-primary table td:hover {
+                        background-color: #34495e !important;
+                    }
+                    .btn-primary a:hover {
+                        background-color: #34495e !important;
+                        border-color: #34495e !important;
+                    }
+                    }
+                    </style>
+                </head>
+                <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                    <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Agent registration Mail</span>
+                    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                    <tr>
+                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                        <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
+                            <!-- START CENTERED WHITE CONTAINER -->
+                            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                                     <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Agent registration Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                Dear ${params.firstname + ' ' + params.lastname}, You just register with HillPad Services. One of our officials will get back to you soon
-                                                <br>
-                                                To further your application, kindly complete your application by submitting your information with the following scanned document:<br>
-
-                                                1) Valid id<br>
-                                                2)  2 guarantor<br>
-                                                3) passport<br>
-                                                <br>
-
-                                                Use this link to complete and upload your document:<br> 
-                                                <a href="${process.env.DOMAIN}/agent/register/${encryptedid}}"
-                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Complete Registration</a><br>
-
-                                                <br>
-                                                <br>
-                                                Thank you.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
+                                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${params.firstname + ' ' + params.lastname}</p>
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just register with HillPad Services. One of our officials will get back to you soon,
+                                        <br>
+                                        To further your application, kindly use this link to complete your registration:<br> 
+                                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                                            <tbody>
+                                            <tr>
+                                                <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                                        border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/agent/register/${encryptedid}" target="_blank" 
+                                                        style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                                        border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                                        font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                                        border-color: #3498db;">Complete Registration</a> </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you.</p>
+                                    </td>
                                     </tr>
                                 </table>
-                            </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+                                </td>
+                            </tr>
 
-        </html>
+                            <!-- END MAIN CONTENT AREA -->
+                            </table>
+
+                            <!-- START FOOTER -->
+                            <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                    <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                </td>
+                                </tr>
+                            </table>
+                            </div>
+                            <!-- END FOOTER -->
+
+                        <!-- END CENTERED WHITE CONTAINER -->
+                        </div>
+                        </td>
+                        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    </tr>
+                    </table>
+                </body>
+                </html>
         `
     });
 
@@ -739,74 +1306,164 @@ async function agentofficer(params) {
         subject:`Agent Application Mail`,
         html: `
                         
-        <!doctype html>
-        <html lang="en-US">
+            <!doctype html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                }
+                table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                }
+                table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                }
+                table[class=body] .content {
+                    padding: 0 !important;
+                }
+                table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+                table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                }
+                table[class=body] .btn table {
+                    width: 100% !important;
+                }
+                table[class=body] .btn a {
+                    width: 100% !important;
+                }
+                table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Agent Application Mail</title>
-        <meta name="description" content="Agent Application Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                .ExternalClass {
+                    width: 100%;
+                }
+                .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                }
+                .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                }
+                #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                }
+                .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                }
+                .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                }
+                }
+                </style>
+            </head>
+            <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Agent Application Mail</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                    <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                        <!-- START MAIN CONTENT AREA -->
                         <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Agent Application Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                ${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services as an agent. <br>
-                                                Find below applicants information:<br>
-                                                NAME: ${params.firstname + ' ' + params.lastname},<br>
-                                                EMAIL: ${params.email},<br>
-                                                PHONE: ${params.phonenumber}
-                                                <br>
-                                                Kindly contact the applicant.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services as an agent. <br>
+                                    Find below applicant's information:<br>
+                                    NAME: ${params.firstname + ' ' + params.lastname},<br>
+                                    EMAIL: ${params.email},<br>
+                                    PHONE: ${params.phonenumber}
+                                    <br>
+
+                            
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Kindly check your dashboard...</p>
+                                </td>
+                                </tr>
+                            </table>
                             </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
 
-        </html>
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                    </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                </tr>
+                </table>
+            </body>
+            </html>
+
         `
     });
 
@@ -835,80 +1492,180 @@ async function agent_reset_password(encryptedid, mail,token) {
         to: `${mail}`,
         subject:`Password reset mail`,
         html: `
-                        
-        <!doctype html>
-        <html lang="en-US">
+                                    
+            <!doctype html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                }
+                table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                }
+                table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                }
+                table[class=body] .content {
+                    padding: 0 !important;
+                }
+                table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+                table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                }
+                table[class=body] .btn table {
+                    width: 100% !important;
+                }
+                table[class=body] .btn a {
+                    width: 100% !important;
+                }
+                table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Reset Password</title>
-        <meta name="description" content="Reset Password.">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                .ExternalClass {
+                    width: 100%;
+                }
+                .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                }
+                .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                }
+                #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                }
+                .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                }
+                .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                }
+                }
+                </style>
+            </head>
+            <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">You have
+                requested to reset your password</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                    <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                        <!-- START MAIN CONTENT AREA -->
                         <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">You have
-                                                requested to reset your password</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                We cannot simply send you your old password. A unique link to reset your
-                                                password has been generated for you. To reset your password, click the
-                                                following link and follow the instructions.
-                                            </p>
-                                            <a href="${process.env.DOMAIN}/agent_forgotpass/${encryptedid}/${token}"
-                                                style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
-                                                Password</a>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> We cannot simply send you your old password. A unique link to reset your
+                                    password has been generated for you. To reset your password, click the
+                                    following link and follow the instructions.</p>
+                                    <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                                    <tbody>
+                                        <tr>
+                                        <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                            <tbody>
+                                                <tr>
+                                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                                border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/agent_forgotpass/${encryptedid}/${token}" target="_blank" 
+                                                style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                                border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                                font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                                border-color: #3498db;">Reset Password</a> </td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
+                                </td>
+                                </tr>
+                            </table>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
 
-        </html>
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                    </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                </tr>
+                </table>
+            </body>
+            </html>
         `
     });
 
@@ -935,77 +1692,176 @@ async function verified(agent) {
         to: `${agent[0].email}`,
         subject:`Application Verified`,
         html: `
-                        
         <!doctype html>
-        <html lang="en-US">
-
+        <html>
         <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-        <title>Application Mail</title>
-        <meta name="description" content="Application Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+            <meta name="viewport" content="width=device-width">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>Simple Transactional Email</title>
+            <style>
+            /* -------------------------------------
+                INLINED WITH htmlemail.io/inline
+            ------------------------------------- */
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+            table[class=body] p,
+                    table[class=body] ul,
+                    table[class=body] ol,
+                    table[class=body] td,
+                    table[class=body] span,
+                    table[class=body] a {
+                font-size: 16px !important;
+            }
+            table[class=body] .wrapper,
+                    table[class=body] .article {
+                padding: 10px !important;
+            }
+            table[class=body] .content {
+                padding: 0 !important;
+            }
+            table[class=body] .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+            table[class=body] .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+            table[class=body] .btn table {
+                width: 100% !important;
+            }
+            table[class=body] .btn a {
+                width: 100% !important;
+            }
+            table[class=body] .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+            }
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
+            /* -------------------------------------
+                PRESERVE THESE STYLES IN THE HEAD
+            ------------------------------------- */
+            @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+            .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                line-height: 100%;
+            }
+            .apple-link a {
+                color: inherit !important;
+                font-family: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+                text-decoration: none !important;
+            }
+            #MessageViewBody a {
+                color: inherit;
+                text-decoration: none;
+                font-size: inherit;
+                font-family: inherit;
+                font-weight: inherit;
+                line-height: inherit;
+            }
+            .btn-primary table td:hover {
+                background-color: #34495e !important;
+            }
+            .btn-primary a:hover {
+                background-color: #34495e !important;
+                border-color: #34495e !important;
+            }
+            }
+            </style>
+        </head>
+        <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Application Verification Mail</span>
+            <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
             <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
+
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                    <!-- START MAIN CONTENT AREA -->
+                    <tr>
+                        <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${agent[0].firstname + ' ' + agent[0].lastname}, </p>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with HillPad Services has been accepted and verified. A unique link to access your
+                                dashboard has been generated for you. Click the link below to access your dashboard.
+                                <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
+                                    <tbody>
                                     <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Application Verification Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                Dear ${agent[0].firstname + ' ' + agent[0].lastname}, Your application with HillPad Services has been accepted and verified. A unique link to access your
-                                                dashboard has been generated for you. Click the link below to access your dashboard.
-                                            </p>
-                                            <a href="${process.env.DOMAIN}/agent/password/${agent[0].id}"
-                                            style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">
-                                            Go To Dashboard</a>
+                                        <td align="left" style="font-family: sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 15px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;">
+                                            <tbody>
+                                            <tr>
+                                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; background-color: #3498db; 
+                                                border-radius: 5px; text-align: center;"> <a href="${process.env.DOMAIN}/agent/password/${agent[0].id}" target="_blank" 
+                                                style="display: inline-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498db; 
+                                                border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decoration: none; font-size: 14px; 
+                                                font-weight: bold; margin: 0; padding: 12px 25px; text-transform: capitalize; 
+                                                border-color: #3498db;">Go To Dashboard</a> </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
+                                    </tbody>
                                 </table>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you</p>
                             </td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+
+                    <!-- END MAIN CONTENT AREA -->
+                    </table>
+
+                    <!-- START FOOTER -->
+                    <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
                         <tr>
-                            <td style="height:20px;">&nbsp;</td>
+                        <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                        </td>
                         </tr>
                         <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
+                        <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                        </td>
                         </tr>
                     </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+                    </div>
+                    <!-- END FOOTER -->
 
+                <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+                </td>
+                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+            </tr>
+            </table>
+        </body>
         </html>
         `
     });
@@ -1034,75 +1890,161 @@ async function notify(lead, mail) {
         to: mail,
         subject:`Agent Application Mail`,
         html: `
-                        
-        <!doctype html>
-        <html lang="en-US">
+            <!doctype html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                }
+                table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                }
+                table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                }
+                table[class=body] .content {
+                    padding: 0 !important;
+                }
+                table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+                table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                }
+                table[class=body] .btn table {
+                    width: 100% !important;
+                }
+                table[class=body] .btn a {
+                    width: 100% !important;
+                }
+                table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Agent Application Mail</title>
-        <meta name="description" content="Agent Application Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                .ExternalClass {
+                    width: 100%;
+                }
+                .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                }
+                .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                }
+                #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                }
+                .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                }
+                .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                }
+                }
+                </style>
+            </head>
+            <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Agent Registration Mail</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                    <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+                        <!-- START MAIN CONTENT AREA -->
                         <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Agent Registration Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                ${lead.firstname + ' ' + lead.lastname} just completed registration for verification. <br>
-                                                Find below agent information:<br>
-                                                NAME: ${lead.firstname + ' ' + lead.lastname},<br>
-                                                EMAIL: ${lead.email},<br>
-                                                PHONE: ${lead.phonenumber}
-                                                <br>
-                                                Kindly check your Dashboard to verify.
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${lead.firstname + ' ' + lead.lastname} just completed registration for verification. <br>
+                                    Find below agent information:<br>
+                                    NAME: ${lead.firstname + ' ' + lead.lastname},<br>
+                                    EMAIL: ${lead.email},<br>
+                                    PHONE: ${lead.phonenumber}
+                                    <br>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;"> Kindly check your Dashboard to verify...</p>
+                                </td>
+                                </tr>
+                            </table>
                             </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
 
-        </html>
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                    </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                </tr>
+                </table>
+            </body>
+            </html>
         `
     });
 
@@ -1129,77 +2071,164 @@ async function contactus(msg) {
         from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
         to: 'collinswilson@softnoonng.com', 
         subject: 'Contact us form',
-        html: `
-                        
-        <!doctype html>
-        <html lang="en-US">
+        html: `        
+            <!doctype html>
+            <html>
+                <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                    table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                    }
+                    table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                    }
+                    table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                    }
+                    table[class=body] .content {
+                    padding: 0 !important;
+                    }
+                    table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                    }
+                    table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                    }
+                    table[class=body] .btn table {
+                    width: 100% !important;
+                    }
+                    table[class=body] .btn a {
+                    width: 100% !important;
+                    }
+                    table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                    }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>Contact us Mail</title>
-        <meta name="description" content="Contact us Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                    .ExternalClass {
+                    width: 100%;
+                    }
+                    .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                    }
+                    .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                    }
+                    #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                    }
+                    .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                    }
+                    .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                    }
+                }
+                </style>
+                </head>
+                <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Contact us Mail</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                    <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                        <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Contact us Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;"><br>
-                                                This is a contact us message.<br>
-                                                Find the contact information below:<br>
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
 
-                                                NAME : ${msg.name},<br>
-                                                EMAIL: ${msg.email},<br>
-                                                MESSAGE: ${msg.message}<br>
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">This is a contact us message.<br>
+                                        Find the contact information below:<br>
 
-                                                Kindly act upon
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
+                                        NAME : ${msg.name},<br>
+                                        EMAIL: ${msg.email},<br>
+                                        MESSAGE: ${msg.message}<br>
+
+                                
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Kindly act upon...</p>
+                                    </td>
+                                </tr>
                                 </table>
                             </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
+                            </tr>
 
-        </html>
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                                <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                        <!-- END CENTERED WHITE CONTAINER -->
+                        </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    </tr>
+                </table>
+            </body>
+            </html>
         `
     });
 
@@ -1226,78 +2255,157 @@ async function application_verified(output) {
         to: `${output[0].email}`,
         subject:`Application Verified`,
         html: `
-                        
-        <!doctype html>
-        <html lang="en-US">
+            <!doctype html>
+            <html>
+            <head>
+                <meta name="viewport" content="width=device-width">
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <title>Simple Transactional Email</title>
+                <style>
+                /* -------------------------------------
+                    INLINED WITH htmlemail.io/inline
+                ------------------------------------- */
+                /* -------------------------------------
+                    RESPONSIVE AND MOBILE FRIENDLY STYLES
+                ------------------------------------- */
+                @media only screen and (max-width: 620px) {
+                table[class=body] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                }
+                table[class=body] p,
+                        table[class=body] ul,
+                        table[class=body] ol,
+                        table[class=body] td,
+                        table[class=body] span,
+                        table[class=body] a {
+                    font-size: 16px !important;
+                }
+                table[class=body] .wrapper,
+                        table[class=body] .article {
+                    padding: 10px !important;
+                }
+                table[class=body] .content {
+                    padding: 0 !important;
+                }
+                table[class=body] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+                table[class=body] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                }
+                table[class=body] .btn table {
+                    width: 100% !important;
+                }
+                table[class=body] .btn a {
+                    width: 100% !important;
+                }
+                table[class=body] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                }
+                }
 
-        <head>
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-        <title>Application Mail</title>
-        <meta name="description" content="Application Mail">
-        <style type="text/css">
-            a:hover {text-decoration: underline !important;}
-        </style>
-        </head>
+                /* -------------------------------------
+                    PRESERVE THESE STYLES IN THE HEAD
+                ------------------------------------- */
+                @media all {
+                .ExternalClass {
+                    width: 100%;
+                }
+                .ExternalClass,
+                        .ExternalClass p,
+                        .ExternalClass span,
+                        .ExternalClass font,
+                        .ExternalClass td,
+                        .ExternalClass div {
+                    line-height: 100%;
+                }
+                .apple-link a {
+                    color: inherit !important;
+                    font-family: inherit !important;
+                    font-size: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important;
+                    text-decoration: none !important;
+                }
+                #MessageViewBody a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                }
+                .btn-primary table td:hover {
+                    background-color: #34495e !important;
+                }
+                .btn-primary a:hover {
+                    background-color: #34495e !important;
+                    border-color: #34495e !important;
+                }
+                }
+                </style>
+            </head>
+            <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+                <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">Application Verification Mail</span>
+                <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+                <tr>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                    <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
+                    <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
-        <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-        <!--100% body table-->
-        <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
-            style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
-            <tr>
-                <td>
-                    <table style="background-color: #f2f3f8; max-width:670px;  margin:0 auto;" width="100%" border="0"
-                        align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
-                                    style="max-width:670px;background:#fff; border-radius:3px; text-align:center;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);">
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:0 35px;">
-                                            <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Application Verification Mail</h1>
-                                            <span
-                                                style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
-                                            <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                                Dear ${output[0].firstname + ' ' + output[0].lastname}, Your application with HillPad Services has been accepted and verified. Expect further instructions from your immigration officer.
-                                                <br><br>
-                                                Thanks
-                                            </p><br>
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
 
-                                         <p>Thanks</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:40px;">&nbsp;</td>
-                                    </tr>
-                                </table>
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                                <tr>
+                                <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${output[0].firstname + ' ' + output[0].lastname}</p>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with HillPad Services has been accepted and verified. Expect further instructions from your immigration officer.
+                                    <br>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you</p>
+                                </td>
+                                </tr>
+                            </table>
                             </td>
-                        <tr>
-                            <td style="height:20px;">&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td style="text-align:center;">
-                                <p style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">&copy; <strong>www.hillpad.com</strong></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height:80px;">&nbsp;</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <!--/100% body table-->
-        </body>
 
-        </html>
+                        <!-- END MAIN CONTENT AREA -->
+                        </table>
+
+                        <!-- START FOOTER -->
+                        <div class="footer" style="clear: both; Margin-top: 10px; text-align: center; width: 100%;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                            <tr>
+                            <td class="content-block" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;">1 Rahman Adeboyejo St, Lekki Phase I, Lagos</span>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <!-- END FOOTER -->
+
+                    <!-- END CENTERED WHITE CONTAINER -->
+                    </div>
+                    </td>
+                    <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+                </tr>
+                </table>
+            </body>
+            </html>
         `
     });
 

@@ -36,7 +36,7 @@
   /* margin-left: 10px; */
 }
 .fa-bars {
-  color: #f69617;
+  color: wheat;
   font-size: 30px;
 }
 
@@ -127,6 +127,9 @@ textarea{
 .font{
   font-family: 'Montserrat', sans-serif;
 }
+.apply:hover{
+  background-color: #f69617;
+}
   </style>
   <body>
 
@@ -177,7 +180,6 @@ textarea{
         <nav class="navbar sticky-top navbar-expand-lg ">
             <div class="container-fluid">
               <a class="navbar-brand text-dark" href="#">
-                <!-- <img src="./images/hilton logo.png" alt="" width="60%" height="" class="d-inline-block align-text-top"> -->
      
               </a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,13 +190,15 @@ textarea{
                 <ul class="navbar-nav mr-auto w-100 justify-content-end">
                  
                   <li class="nav-item">
-                    <a class="nav-link text-light" href="#about">About</a>
+                    <a class="nav-link text-light" style="margin: 0px 20px;" href="#about">About</a>
                     <li class="nav-item">
-                      <a class="nav-link text-light" href="#benefits">Benefits</a>
+                      <a class="nav-link text-light" style="margin: 0px 20px;"  href="#benefits">Benefits</a>
                       <li class="nav-item">
-                        <a class="nav-link text-light" href="#contact">Contact</a>
+                        <a class="nav-link text-light" style="margin: 0px 20px;"  href="#contact">Contact</a>
                         <li class="nav-item">
-                          <a class="nav-link text-light" href="/user/login">Login</a>
+                          <a class="nav-link text-light" style="margin: 0px 20px;"  style="text-decoration: underline;" href="/user/login">sign In</a>
+                          <li class="nav-item">
+                            <a class="nav-link text-light btn btn-outline-light apply" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 0px 20px;">Apply Now</a>
                         </li>
                 </ul>
               </div>
@@ -219,11 +223,11 @@ textarea{
         <% } %> 
             <h1 class="h1 hero-text text-responsive text-light">International  Studies, <br>
               pay nothing until you land a great job!</h1>
-              <p class="mt-5 h5  text-2 text-light" style="font-family: 'Montserrat',sans-serif;">
+              <p class="mt-5 h5  text-2 text-light" style="font-family: 'Montserrat',sans-serif; line-height: 35px;">
                   Hilton Parker Finances your International Education, so you can focus on learning.
                       The best part? You don’t pay back a cent until you land a great job.</p>
                       <button class="btn btn-lg btn-outline-light  col-xs-6 col-md-6 mt-3 mb-3" data-toggle="modal" data-target="#exampleModalCenter">Apply Now</button>
-                     <ul style="list-style: none; padding: 0px;">
+                     <ul style="list-style: none; padding: 0px; line-height: 35px;">
                          <li class="font"><i class="fas fa-check-double text-light" ></i>&nbsp;&nbsp;No English Test or Entrance Exams Needed</li>
                          <li class="font"><i class="fas fa-check-double text-light"></i>&nbsp;&nbsp;Guaranteed Work Permit After Visa is Approved</li>
                          <li class="font"> <i class="fas fa-check-double text-light"></i>&nbsp;&nbsp;Accomodation Support</li>
@@ -232,7 +236,7 @@ textarea{
          </div>
          <!-- <div class="col-md-6 col-xs-12 d-flex justify-content-md-center align-items-center head-pad2 top-image"> -->
            <div class="col-md-6 col-xs-12 d-flex justify-content-md-center">
-          <img src="./images/herobg.png" alt="" class="img-fluid" width="90%"> 
+          <img src="./images/hps.png" alt="" class="img-fluid" width="90%" style="padding-left:50px"> 
       </div>
        </div>
      </div>
@@ -255,18 +259,18 @@ textarea{
             <div class="col-md-6 d-flex justify-content-md-center align-items-center ">
                 <div>
                   <!-- <p class="h2 hero-text text-primary">Apply Online in less than 5 Minutes</p> -->
-                    <p class="mt-5 h5 hero-text text-2 font" > Hilton Parker services is an International Educational consultancy firm.</b> We provide top class Admission processing services to our clients
+                    <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;" > Hilton Parker services is an International Educational consultancy firm.</b> We provide top class Admission processing services to our clients
                       that are willing to work and study in Canada and other International destination.</p>
                         <!-- <p class="h2 hero-text text-primary mt-5">Get accepted and get your terms!</p> -->
-                        <p class="mt-5 h5 hero-text text-2 font" ><b>Hilton Parker Services</b> does not charge administrative fees until student's visa application is successful.
+                        <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;" ><b>Hilton Parker Services</b> does not charge administrative fees until student's visa application is successful.
                           <b>In the case of a refusal, Hilllpad services will not charge the client for work done</b>. However, if the client would like to seek a 
                           reapplication, they would have to pay the embassy's reapplication fee</p>
   
                             <p class="h2 hero-text text-primary mt-5">Our Vision</p>
-                            <p class="mt-5 h5 hero-text text-2 font" >Our Vision is to raise FUTURE LEADERS through an exceptional Global education.</p>
+                            <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;">Our Vision is to raise FUTURE LEADERS through an exceptional Global education.</p>
 
                             <p class="h2 hero-text text-primary mt-5">Our Mission</p>
-                            <p class="mt-5 h5 hero-text text-2 font" >Our mission is to be a renowned organization that will support young scholars to excel in their respective academic pursuit abroad.</p>
+                            <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;">Our mission is to be a renowned organization that will support young scholars to excel in their respective academic pursuit abroad.</p>
                       
                            
                     </div>
@@ -294,8 +298,8 @@ textarea{
                     </div>
                 <div class="col-8  d-flex justify-content-md-center align-items-center" >
                 <div>
-                  <span class=" h5 hero-text text-2 ">Flexible tuition fee payment plans</span><br>
-                  <span class="font">Our partner instituitions offer our students a variety of payment plans that are flexible 
+                  <span class=" h5 hero-text text-2 " style="line-height: 32px;">Flexible tuition fee payment plans</span><br>
+                  <span class="font" style="line-height: 32px;">Our partner instituitions offer our students a variety of payment plans that are flexible 
                       enough to achieve
                   </span>
                 </div>  
@@ -345,7 +349,7 @@ textarea{
                   <div class="col-8  d-flex justify-content-md-center align-items-center" >
                     <div>
                       <span class="mt-5 h5 hero-text text-2 ">Guaranteed work permit after visa is approved</span> <br>
-                  <span class="font">Our students are guaranteed work permit after a successful visa application upon arrival in their Country of choice
+                  <span class="font" style="line-height: 32px;">Our students are guaranteed work permit after a successful visa application upon arrival in their Country of choice
                   </span>
                     </div>  
                   </div>
@@ -390,18 +394,18 @@ textarea{
                 <div>
                     
                     <p class="h2 hero-text text-primary"> <i class="fas fa-check-circle"></i> &nbsp; &nbsp;Apply Online in less than 5 Minutes</p>
-                    <p class="mt-5 h5 hero-text text-2 font" > Our application is fast and simple. 
+                    <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;"> Our application is fast and simple. 
                         Not sure what career is best for you? Use our live chat feature to chat with a career counselor.</p>
                   
                         <p class="h2 hero-text text-primary mt-5"><i class="fas fa-check-circle"></i> &nbsp; &nbsp; Get accepted and get your terms!</p>
-                        <p class="mt-5 h5 hero-text text-2 font" > Our typical acceptance time is 1-2 business days, 
+                        <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;"> Our typical acceptance time is 1-2 business days, 
                             but you could be accepted within an hour! 
                             Once you get accepted, our immigration officer would be in touch with you  then
-                            you’re ready to start your proccess.</p>
+                            you’re ready to start your process.</p>
   
                             <p class="h2 hero-text text-primary mt-5"> <i class="fas fa-check-circle"></i> &nbsp; &nbsp;Get a great education,
                               pay later!</p>
-                            <p class="mt-5 h5 hero-text text-2 font" > All of our partner schools provide top notch education,
+                            <p class="mt-5 h5 hero-text text-2 font" style="line-height: 32px;" > All of our partner schools provide top notch education,
                                 and you get work permit on getting admission to enable you earn while you learn.</p>
                       
                            
