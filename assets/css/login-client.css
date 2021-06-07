@@ -12,7 +12,7 @@
 }
 
 .container-background .welcome{
-    font-size: 50px;
+    font-size: 40px;
     font-weight:bold;
     color:#f69617;
 }
@@ -81,6 +81,46 @@
     text-transform: uppercase;
     border-radius:25px
 }
+
+
+@media screen and (max-width: 600px) {
+    .mt-5{
+        margin-top: 0px !important;
+    }
+
+    .container-background img{
+        margin-bottom:20px;
+        width: 150px;
+    }
+    .header{
+        margin-top: 0px;
+    }
+
+    .login-div{
+        margin-top: 0px;
+    }
+
+    .welcome title{
+        font-size:10px;
+    }
+
+    .form-control {
+        padding: 10px;
+    }
+
+    .submit-btn button {
+        padding: 7px 45px;
+    }
+
+    .forget-password a {
+        text-decoration: none;
+        color: black;
+        font-size: 12px;
+    }
+    
+}
+
+
 
 
 
