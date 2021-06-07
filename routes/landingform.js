@@ -48,7 +48,7 @@ function landingForm(){
                                 params.hash = hashed
                                 mailers.newLead(admin[0], params)
                                 mailers.applied(params)
-                                res.render('./client/success')
+                                res.render('./success')
                             }else{
                                 res.render('./error')
                             }
@@ -110,7 +110,7 @@ function landingForm(){
                                         const mail = user[0].email
                                         mailers.agent(params,encryptedid)
                                         mailers.agentofficer(params)
-                                        res.render('./client/success')
+                                        res.render('./success')
                                     }else{
                                         res.render('./error')
                                     }
