@@ -58,7 +58,7 @@ function admin() {
             const message = req.flash()
             con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                 con.query('SELECT * FROM leads WHERE status = "new" && accountofficer = ?', id, (err, starter) =>{
-                    con.query('SELECT * FROM leads WHERE status = "registered" && accountofficer = ?', id, (err, complete) =>{
+                    con.query('SELECT * FROM leads WHERE status IN("registered", "pending") && accountofficer = ?', id, (err, complete) =>{
                         con.query('SELECT * FROM leads WHERE status = "paid" && accountofficer = ?', id, (err, paid) =>{
                             con.query('SELECT * FROM leads WHERE status = "success" && accountofficer = ?', id, (err, success) =>{
                                 con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
@@ -272,7 +272,7 @@ function admin() {
         const accountofficer = req.user.id
         pool.getConnection((err, con) =>{
             if (err) res.redirect('/')
-            con.query('SELECT * FROM leads WHERE status = "registered" && accountofficer = ?', accountofficer, (err, userList) =>{
+            con.query('SELECT * FROM leads WHERE status IN("registered", "pending") && accountofficer = ?', accountofficer, (err, userList) =>{
                 if(userList.length > 0){
                     res.render('./admin/applicants', {
                         userList

@@ -22,7 +22,7 @@ async function newAgentLead(params, agent) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: params.accountofficer,
         subject:`New Application`,
         html: `
@@ -67,7 +67,7 @@ async function newAgentLead(params, agent) {
                                                 style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
                                             <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
                                                 ${agent.firstname + ' ' + agent.lastname} just opened an application for <br>
-                                                ${params.firstname + ' ' + params.lastname} with HillPad Services. <br>
+                                                ${params.firstname + ' ' + params.lastname} with Hilton Parker Services. <br>
                                                 Find below applicants information:<br>
                                                 NAME: ${params.firstname + ' ' + params.lastname},<br>
                                                 EMAIL: ${params.email},<br>
@@ -122,7 +122,7 @@ async function newLead(admin, params,) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${admin.email}`,
         subject:`Application Mail`,
         html: `
@@ -241,7 +241,7 @@ async function newLead(admin, params,) {
                             <tr>
                               <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi,</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services. <br>
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with Hilton Parker Services. <br>
                                   Find below applicants information:<br>
                                   NAME: ${params.firstname + ' ' + params.lastname},<br>
                                   EMAIL: ${params.email},<br>
@@ -305,7 +305,7 @@ async function applied(params) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${params.email}`,
         subject:`You just applied`,
         html: `
@@ -424,7 +424,7 @@ async function applied(params) {
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.firstname + ' ' + params.lastname},</p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just opened an application with HillPad Services. A unique link to continue your
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just opened an application with Hilton Parker Services. A unique link to continue your
                                 application has been generated for you. <br> Click the link below to continue your Application.</p>
                                 <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
                                 <tbody>
@@ -506,7 +506,7 @@ async function forgot_password(result, mail,token) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${mail}`,
         subject:`Password reset mail`,
         html: `
@@ -912,7 +912,7 @@ async function contact(details) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: 'collinswilson@softnoonng.com', 
         subject: 'Contact Form',
         html: `
@@ -1102,7 +1102,7 @@ async function agent(params,encryptedid ) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${params.email}`,
         subject:`You just registered`,
         html: `                       
@@ -1220,7 +1220,7 @@ async function agent(params,encryptedid ) {
                                     <tr>
                                     <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${params.firstname + ' ' + params.lastname}</p>
-                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just register with HillPad Services. One of our officials will get back to you soon,
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just register with Hilton Parker Services. One of our officials will get back to you soon,
                                         <br>
                                         To further your application, kindly use this link to complete your registration:<br> 
                                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
@@ -1301,7 +1301,7 @@ async function agentofficer(params) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: 'collinswilson@softnoonng.com',
         subject:`Agent Application Mail`,
         html: `
@@ -1420,7 +1420,7 @@ async function agentofficer(params) {
                                 <tr>
                                 <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there,</p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with HillPad Services as an agent. <br>
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">${params.firstname + ' ' + params.lastname} just opened an application with Hilton Parker Services as an agent. <br>
                                     Find below applicant's information:<br>
                                     NAME: ${params.firstname + ' ' + params.lastname},<br>
                                     EMAIL: ${params.email},<br>
@@ -1488,7 +1488,7 @@ async function agent_reset_password(encryptedid, mail,token) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${mail}`,
         subject:`Password reset mail`,
         html: `
@@ -1688,7 +1688,7 @@ async function verified(agent) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${agent[0].email}`,
         subject:`Application Verified`,
         html: `
@@ -1806,7 +1806,7 @@ async function verified(agent) {
                             <tr>
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${agent[0].firstname + ' ' + agent[0].lastname}, </p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with HillPad Services has been accepted and verified. A unique link to access your
+                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with Hilton Parker Services has been accepted and verified. A unique link to access your
                                 dashboard has been generated for you. Click the link below to access your dashboard.
                                 <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
                                     <tbody>
@@ -1886,7 +1886,7 @@ async function notify(lead, mail) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: mail,
         subject:`Agent Application Mail`,
         html: `
@@ -2068,7 +2068,7 @@ async function contactus(msg) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: 'collinswilson@softnoonng.com', 
         subject: 'Contact us form',
         html: `        
@@ -2251,7 +2251,7 @@ async function application_verified(output) {
 
 
     let info = await transporter.sendMail({
-        from: '"HILLPAD SERVICES" <collinswilson@softnoonng.com>',
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
         to: `${output[0].email}`,
         subject:`Application Verified`,
         html: `
@@ -2369,7 +2369,7 @@ async function application_verified(output) {
                                 <tr>
                                 <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${output[0].firstname + ' ' + output[0].lastname}</p>
-                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with HillPad Services has been accepted and verified. Expect further instructions from your immigration officer.
+                                    <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Your application with Hilton Parker Services has been accepted and verified. Expect further instructions from your immigration officer.
                                     <br>
                                     <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you</p>
                                 </td>
