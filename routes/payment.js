@@ -47,7 +47,7 @@ function makePayment(){
                     const user = users[0]
                     con.query(sql2, form.agent_id, (err, agents) => {
                         const agent = agents[0]
-                        con.query(sql3, ['paid', user.id], (err, result) => {
+                        con.query(sql3, ['pending', user.id], (err, result) => {
                             const dbamount = parseInt(agent.payment)
                             const formamount = parseInt(form.amount)
                             const amount = parseInt(dbamount + formamount)

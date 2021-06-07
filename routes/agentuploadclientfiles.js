@@ -52,7 +52,7 @@ function agentsuserupload() {
             course1 = ?,
             course2 = ?,
             course3 = ?,
-            status = 'complete'
+            status = 'pending'
             WHERE id = ${id}
         `
         pool.getConnection((err, con) => {
@@ -79,12 +79,23 @@ function agentsuserupload() {
     ])
     route.post('/bsc/:id' , bscfilesupload,(req,res) => {
         const id = req.params.id
+        const feilds = Object.values(req.body)
+        const sql = `
+            UPDATE leads SET
+            course1 = ?,
+            course2 = ?,
+            course3 = ?,
+            status = 'pending'
+            `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
-                const user = result[0]
-                const message = req.flash('success', 'Documents upload successfull')
-                res.render('./agent/photo', {
-                    message, user
+                con.query(sql, feilds, (err, rest) => {
+                    const user = result[0]
+                    const message = req.flash('success', 'Documents upload successfull')
+                    res.render('./agent/photo', {
+                        message, user
+                    })
+
                 })
                 
             })
@@ -99,13 +110,23 @@ function agentsuserupload() {
     ])
     route.post('/pgd/:id' , pgdfilesupload,(req,res) => {
         const id = req.params.id
+        const sql = `
+            UPDATE leads SET
+            course1 = ?,
+            course2 = ?,
+            course3 = ?,
+            status = 'pending'
+            `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
-                const user = result[0]
+                con.query(sql, feilds, (err, rest) => {
+                    const user = result[0]
                 const message = req.flash('success', 'Documents upload successfull')
                 res.render('./agent/photo', {
                     message, user
                 })
+                })
+                
                 
             })
         })
