@@ -67,7 +67,7 @@ function agent() {
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, user) => {
                 con.query('SELECT * FROM agent WHERE id = ?', userid, (err, agent) => {
-                    res.render('./user/payment', {
+                    res.render('/payment', {
                         agent : agent[0],
                         user : user[0]
                     });
@@ -410,7 +410,7 @@ function agent() {
                         con.query('SELECT * FROM admin WHERE id =?', accountofficerid, (err, admin)  => {
                             const email = admin[0].email
                             mailers.notify(lead, email)
-                            res.render('./user/success')
+                            res.render('/success')
                         })
                     })
                   

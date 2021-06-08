@@ -72,7 +72,7 @@ function user() {
         }
         else{
         const message = req.flash()
-        res.render('./user/login', {
+        res.render('/login', {
             message
         })
         }
@@ -100,7 +100,7 @@ function user() {
                     req.flash('success', 'Your Application is Complete')
                     res.redirect('/user/dashboard')
                 }else{
-                    res.render('./user/uploads', {
+                    res.render('/uploads', {
                         user: user[0]
                     })
                 }
@@ -268,7 +268,7 @@ function user() {
                         con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
                             const message = req.flash()
                             const all = randomProperty(allAdmins)
-                            res.render('./user/dashboard', {
+                            res.render('/dashboard', {
                             user : result[0],
                             admin: admin[0],
                             allAdmin : all,
@@ -297,15 +297,15 @@ function user() {
                         req.flash('success', 'Your Application is Complete')
                         res.redirect('/user/dashboard')
                     }else if( user.status == 'new') { 
-                        res.render('./user/Reg'  , {
+                        res.render('/Reg'  , {
                             user
                         })
                     }else if ( user.status == 'registered'){
-                        res.render('./user/uploads'  , {
+                        res.render('/uploads'  , {
                             user
                         })
                     }else{
-                        res.render('./user/payment' , {
+                        res.render('/payment' , {
                             agent: false,
                             user
                     })
@@ -365,7 +365,7 @@ function user() {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
                     if (result.length > 0) {
-                        res.render('./user/setPassword', {
+                        res.render('/setPassword', {
                             email : result[0].email
                         })
                     }else{
