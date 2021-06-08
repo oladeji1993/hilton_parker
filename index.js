@@ -67,15 +67,26 @@ app.get('/agent' , (req, res) => {
 })
 app.get('/contact', (req, res) => {
     const message = req.flash();
-    const userid = req.user.id
-    pool.getConnection((err, con) => {
-        con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
-            res.render('./client/contactus', {
-                user: user[0],
-                message
+    
+    if (req.user){
+        const userid = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
+                if(user){
+                    res.render('./contactus', {
+                        user: user[0],
+                        message
+                    })
+                }else{
+                    res.redirect('/#contact')
+                }
+                
             })
         })
-    })
+    }else{
+        res.redirect('/#contact')
+    }
+   
     
 })
 
