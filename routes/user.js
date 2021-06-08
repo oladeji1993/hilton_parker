@@ -365,7 +365,7 @@ function user() {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
                     if (result.length > 0) {
-                        res.render('./setPassword', {
+                        res.render('./setpassword', {
                             email : result[0].email
                         })
                     }else{
