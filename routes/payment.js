@@ -22,7 +22,7 @@ function makePayment(){
         const userid = req.user.id
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
-                res.render('./Client/payment', {
+                res.render('./client/payment', {
                     user : user[0],
                     agent: false,
                     message

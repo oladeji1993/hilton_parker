@@ -72,7 +72,7 @@ function user() {
         }
         else{
         const message = req.flash()
-        res.render('./client/login', {
+        res.render('/client/login', {
             message
         })
         }
@@ -100,7 +100,7 @@ function user() {
                     req.flash('success', 'Your Application is Complete')
                     res.redirect('/user/dashboard')
                 }else{
-                    res.render('./client/uploads', {
+                    res.render('/client/uploads', {
                         user: user[0]
                     })
                 }
@@ -297,7 +297,7 @@ function user() {
                         req.flash('success', 'Your Application is Complete')
                         res.redirect('/user/dashboard')
                     }else if( user.status == 'new') { 
-                        res.render('./client/Reg'  , {
+                        res.render('/client/Reg'  , {
                             user
                         })
                     }else if ( user.status == 'registered'){
@@ -365,7 +365,7 @@ function user() {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
                     if (result.length > 0) {
-                        res.render('./client/setPassword', {
+                        res.render('/client/setPassword', {
                             email : result[0].email
                         })
                     }else{
