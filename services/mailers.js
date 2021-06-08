@@ -268,7 +268,7 @@ async function newLead(admin, params,) {
                         </tr>
                         <tr>
                           <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                           </td>
                         </tr>
                       </table>
@@ -466,7 +466,7 @@ async function applied(params) {
                         </tr>
                         <tr>
                         <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                         </td>
                         </tr>
                     </table>
@@ -669,7 +669,7 @@ async function forgot_password(result, mail,token) {
                 </tr>
                 <tr>
                   <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                   </td>
                 </tr>
               </table>
@@ -872,7 +872,7 @@ async function document_upload(user, accountofficer) {
                         </tr>
                         <tr>
                           <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                           </td>
                         </tr>
                       </table>
@@ -1060,7 +1060,7 @@ async function contact(details) {
                             </tr>
                             <tr>
                                 <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>
                                 </td>
                             </tr>
                             </table>
@@ -1263,7 +1263,7 @@ async function agent(params,encryptedid ) {
                                 </tr>
                                 <tr>
                                 <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                    <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                                 </td>
                                 </tr>
                             </table>
@@ -1448,7 +1448,7 @@ async function agentofficer(params) {
                             </tr>
                             <tr>
                             <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                             </td>
                             </tr>
                         </table>
@@ -1651,7 +1651,7 @@ async function agent_reset_password(encryptedid, mail,token) {
                             </tr>
                             <tr>
                             <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                             </td>
                             </tr>
                         </table>
@@ -1848,7 +1848,7 @@ async function verified(agent) {
                         </tr>
                         <tr>
                         <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                            <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                         </td>
                         </tr>
                     </table>
@@ -2030,7 +2030,7 @@ async function notify(lead, mail) {
                             </tr>
                             <tr>
                             <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                             </td>
                             </tr>
                         </table>
@@ -2214,7 +2214,7 @@ async function contactus(msg) {
                             </tr>
                             <tr>
                                 <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                                 </td>
                             </tr>
                             </table>
@@ -2391,7 +2391,7 @@ async function application_verified(output) {
                             </tr>
                             <tr>
                             <td class="content-block powered-by" style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hitonparkerng.com</a>.
+                                <a href="www.hiltonparkerng.com" style="color: #999999; font-size: 12px; text-align: center; text-decoration: none;">www.hiltonparkerng.com</a>.
                             </td>
                             </tr>
                         </table>
