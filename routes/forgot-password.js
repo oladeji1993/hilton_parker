@@ -19,7 +19,7 @@ function forgot_password() {
 
     route.get('/',  (req, res) => {
        const message = req.flash()
-        res.render('./Client/recovery', {
+        res.render('./client/recovery', {
             message: message
         }) 
     }
@@ -64,7 +64,7 @@ function forgot_password() {
                                 try {
                                     const dbtoken = cryptr.decrypt(user[0].token)
                                     if(decrptedtoken === dbtoken){
-                                        res.render('./Client/reset-password' , {
+                                        res.render('./client/reset-password' , {
                                                 message: message,
                                                 email: user[0].email
                                             })

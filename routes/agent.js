@@ -410,7 +410,7 @@ function agent() {
                         con.query('SELECT * FROM admin WHERE id =?', accountofficerid, (err, admin)  => {
                             const email = admin[0].email
                             mailers.notify(lead, email)
-                            res.render('./Client/success')
+                            res.render('./client/success')
                         })
                     })
                   
