@@ -72,7 +72,7 @@ function user() {
         }
         else{
         const message = req.flash()
-        res.render('./Client/login', {
+        res.render('./client/login', {
             message
         })
         }
@@ -100,7 +100,7 @@ function user() {
                     req.flash('success', 'Your Application is Complete')
                     res.redirect('/user/dashboard')
                 }else{
-                    res.render('./Client/uploads', {
+                    res.render('./client/uploads', {
                         user: user[0]
                     })
                 }
@@ -268,7 +268,7 @@ function user() {
                         con.query('SELECT * FROM admin WHERE id <> ?',  result[0].accountofficer,(err, allAdmins) => {
                             const message = req.flash()
                             const all = randomProperty(allAdmins)
-                            res.render('./Client/dashboard', {
+                            res.render('./client/dashboard', {
                             user : result[0],
                             admin: admin[0],
                             allAdmin : all,
@@ -297,15 +297,15 @@ function user() {
                         req.flash('success', 'Your Application is Complete')
                         res.redirect('/user/dashboard')
                     }else if( user.status == 'new') { 
-                        res.render('./Client/Reg'  , {
+                        res.render('./client/Reg'  , {
                             user
                         })
                     }else if ( user.status == 'registered'){
-                        res.render('./Client/uploads'  , {
+                        res.render('./client/uploads'  , {
                             user
                         })
                     }else{
-                        res.render('./Client/payment' , {
+                        res.render('./client/payment' , {
                             agent: false,
                             user
                     })
@@ -365,7 +365,7 @@ function user() {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
                     if (result.length > 0) {
-                        res.render('./Client/setPassword', {
+                        res.render('./client/setPassword', {
                             email : result[0].email
                         })
                     }else{
@@ -377,6 +377,8 @@ function user() {
             res.render('error')
         }
 
+
+    // another change 
     })
 
     route.post('/contactus', (req, res) =>{
