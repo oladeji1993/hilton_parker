@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <title>HPS C-panel</title>
+      </head>
+<style>
+    *{
+        font-family: 'Poppins', sans-serif;
+        
+    }
+
+    li{
+        list-style-type: none;
+    }
+
+    a{
+        text-decoration: none !important;
+    }
+
+    li a{
+        text-decoration: none;
+        color: whitesmoke;
+    }
+
+    /* li a:hover{
+        
+    }  */
+    body{
+        height: 100vh;
+    }
+
+    .nav{
+        height: 100vh;
+        background-color: #f69617;
+        position: fixed;
+        left:0; top:0; z-index:1;
+    }
+    .card{
+        height: 100px;
+        background-color: white;
+        /* box-shadow: 0.8px 1.5px #f695177c; */
+    }
+    
+    .card:hover{
+        box-shadow: 2.5px 4px #f6951723;
+    }
+
+.overlay{
+    display: none;
+    visibility: hidden;
+}
+    @media only screen and (max-width: 600px) {
+ .overlay {
+            display: block;
+            visibility: visible;
+            position: fixed; /* Sit on top of the page content */
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100vh; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgb(0, 0, 0); /* Black background with opacity */
+            z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */
+    }
+    }
+</style>
+
+<body> 
+    <div id="overlay" class="overlay text-light " >
+        <div class="container" >
+            <div class="row">
+                <hr>
+                <h1 class="text-center p-2">
+                    <hr>
+                    Please use a Computer to access this page
+                </h1>
+            </div>
+        </div>
+    </div>    
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-3 nav">
+                <div>
+                    <div class="container pt-2">
+                        <img src="./images/HPS LOGO.png" alt="" width="100"  class="d-inline-block align-text-top logo">
+                    </div>
+
+                    <div class="container mt-5 text-light">
+                        <h5 style="color: #e9caa2">Main</h5>
+                        <ul>
+                            <li>
+                                <a href="/support"> Dashboard</a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="col-9 " style="margin-left: auto;" >
+               <div class="container pt-5">
+               
+                <h2>Dashboard</h2> 
+                <span class="text-right" style="color:rgb(168, 163, 163);"> Welcome {FirstName Lastname}</span>
+                
+                <script>
+                   $(document).ready(() => {
+                    //    alert('loading....')
+                    let link = window.location.href
+                    let step1 = link.split('=')[1]
+                    let form = step1.split('&')[0]
+                    const display = $('.target')
+                    // const div = document.getElementsByClassName(div)
+                    console.log($('.target'))
+                    for(let i = 0; i < display.length ; i++){
+
+                        // console.log(display[i])
+                        const elem = display[i]
+                        console.log(elem.className)
+
+                        const n = elem.className.search(form)
+                        console.log(n)
+                        if(n > 1){
+                            const div = $(`.${form}`)
+                            div.removeClass('hidden')
+                        }
+                    }
+                   
+                   }) 
+                </script>
+            </div>
+            <hr>
+            <style>
+                .hidden{
+                    visibility: hidden;
+                    display: none;
+                }
+            </style>
+            <div class="container" >
+              
+                <div class="col-12 admin hidden target" id="display">
+                
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Change Password for <%= result[0].firstname %>&nbsp;<%= result[0].lastname %> </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action='/support/update/password?table=admin&id=<%= result[0].id %>'> 
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Enter New Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="newpassword" required>
+                                  </div>
+                                 
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <span class="id hidden"><%= result[0].id %></span>
+                    <form name="admin" id="adminform" action="/support/update?table=admin&id=<%= result[0].id %>" method="POST">
+                        <legend>ADMIN</legend>
+                        <div class="container">
+                            <div class="row">
+                                <!-- <div class="col-12"> -->
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">First Name</label>
+                                            <input type="text" class="form-control" id="" aria-describedby="emailHelp" name="firstname" value="<%= result[0].firstname %>">
+                                            </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Last Name</label>
+                                            <input type="text" class="form-control" id="" value="<%= result[0].lastname %>" name="lastname">
+                                          </div>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="email" class="form-control" id="" name="email" value="<%= result[0].email %>">
+                                        </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email</label>
+                                        <input type="text" class="form-control" id="" name="phonenumber" value="<%= result[0].phonenumber %>">
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <button type="submit" class="btn btn-info ml-3 update">Update</button>
+                        <a href="" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter"> Change Password</a>
+                        <span class="btn btn-danger" id="warning"> Delete</span>
+
+                        <script>
+                            $('document').ready(() => {
+                                
+                                $('span.cancel').click(() => {
+                                    $('.signal').hide()
+                                })
+                                $('.signal').hide()
+                            })
+                            $('#warning').click(() => {
+                                // console.log(alert('Warning'))
+                                const firstname = $('input[name=firstname]').val().toUpperCase()
+                                const lastname = $('input[name=lastname]').val().toUpperCase()
+                                const fullname = firstname + ' ' + lastname
+                                const name = window.prompt('Are you sure you want to delete this account?' , ' Enter Account name to continue').toUpperCase()
+                                if(fullname == name){
+                                    console.log(true)
+                                    $('.signal').hide()
+                                    let xhr = new XMLHttpRequest
+                                    const id = $('.id').text()
+                                    xhr.open('POST', `/support/delete?table=admin&id=${id}`)
+                                    console.log(xhr.responseText)
+                                    xhr.addEventListener( "load", function(event) {
+                                        $('.signal').show()
+                                        $('.signalText').html( "Acount deleted <a href='/support'><u>Back</u></a>" )
+                                        // alert( event.target.responseText );
+                                        const path = this.location.origin + '/support/'
+                                        window.location.href = path
+                                        } );
+                                        
+                                    xhr.addEventListener( "error", function( event ) {
+                                            alert( 'Oops! Something went wrong.' );
+                                            } );
+                                    xhr.send()
+                                }else{
+                                    $('.signal').show()
+                                    $('.signalText').html( 'Invalid Input.' )
+
+                                }
+                            })
+                        </script>
+                            <hr>
+                            <div class=" p-3 signal" style="background-color: rgba(205, 92, 92, 0.254); border-radius: 10px;">
+                                <span class="float-right cancel" style="cursor: pointer;">&times;</span>
+                                <span class="text-danger mt-5 signalText" style="font-size: larger;" >
+                                    Error Invalid Input 
+                                </span>
+                                
+                            </div>
+                        
+                      </form> 
+                      
+                </div>
+                <div class="col-12 leads hidden target" id="display">
+                    leads
+                    <%= result[0].firstname %>
+                </div>
+                <div class="col-12 agent hidden target" id="display">
+                    agent
+                    <%= result[0].firstname %>
+                </div>
+                
+            </div>
+            </div>
+            
+        </div>
+
+       
+       
+    </div>
+
+</body>
+</html>

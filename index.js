@@ -107,6 +107,9 @@ app.use('/user/passport', userPassportUpload)
 const agentsuserupload = require('./routes/agentuploadclientfiles')
 app.use('/agent/submit', agentsuserupload)
 
+const support = require('./routes/support')
+app.use('/support', support)
+
 const files = require('./routes/files')
 app.use('/files', files)
 
