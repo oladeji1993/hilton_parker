@@ -205,7 +205,7 @@
 
             <div class="col-9 " style="margin-left: auto;" id="col-9">
                 <div class="container pt-5">
-                    <h2>Dashboard</h2> 
+                    <h2>Dashboard  <img src="/images/ajax-loader.gif" alt="loader" class="loading"></label></h2> 
                     <% if (message) { %>
                         <% for (var key in message) { %>
                           <!-- alert message -->
@@ -284,6 +284,7 @@
     </div>
 
     <script>
+        $(".loading").hide()
         const tbody = document.getElementById('tbody')
          const div = document.getElementById('container')
         const clear = document.getElementById('clear')
@@ -292,6 +293,7 @@
         })
        
         window.addEventListener('hashchange', () => {
+            $(".loading").show()
             // console.log(this.location.href)
             var fulllink = this.location.href.split('#')[1]
             const link = fulllink.split('?')[0]
@@ -307,6 +309,7 @@
                 // console.log(xhr.response)
                 xhr.onreadystatechange = () => {
                     if(xhr.readyState == 4){
+                        $(".loading").hide()
                         const kill = document.getElementById('col-9')
                         // kill.innerHTML = ''
                         // kill.innerHTML = xhr.response.message
@@ -329,8 +332,7 @@
                     console.log('loading.....')
                     // div.innerHTML = 'loading.....'
                 }else if(xhr.readyState == 4){
-                    console.log(typeof(xhr.response))
-                    console.log(xhr.response.results.length)
+                    $(".loading").hide()
                     tbody.innerHTML = ''
                     // div.innerHTML = xhr.response.results[0].id
                     for (let i = 0; i < xhr.response.results.length; i++) {
