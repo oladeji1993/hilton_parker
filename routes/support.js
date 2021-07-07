@@ -2,10 +2,47 @@ const express = require('express');
 const route = express.Router();
 const pool = require('../config/dbconfig');
 const bcrypt = require('bcryptjs');
-const { response } = require('express');
 
 function support(){
 
+    route.use((req, res, next) => {
+        if(req.cookies.suppauth == 200){
+            next()
+        }else{
+            res.render('./support/login', {
+                message: req.flash()
+            })
+        }
+    })
+
+    route.post('/login', (req, res) => {
+        res.cookie('suppauth',200);
+        res.send('login page')
+    })
+
+    route.get('/logout', (req, res) => {
+        res.cookie('suppauth','');
+        res.redirect('/support')
+    })
+
+    route.post('/updateuser', (req, res) => {
+        const status = req.body.status
+        const accountofficer = req.body.accountofficer
+        const id = req.query.id
+        pool.getConnection((err, con) => {
+            const sql = `UPDATE leads SET status = '${status}', accountofficer = '${accountofficer}' WHERE id = ${id}`
+            con.query(sql, (err, result) => {
+                if(err){
+                    console.log(err)
+                    res.send(err)
+                }else{
+
+                    req.flash('success', 'Data updated successfully')
+                            res.redirect('/support')
+                }
+            })
+        })
+    })
     route.get('/', (req, res) => {
         
         pool.getConnection((err, con) => {
@@ -24,6 +61,30 @@ function support(){
             })
         })
         
+    })
+
+    route.post('/updateagent', (req, res) => {
+        const data = req.body.accountofficer
+        const id = req.query.id
+        if(data != undefined){
+
+            pool.getConnection((err, con) => {
+                const sql = `UPDATE agent SET accountofficer = ${data} WHERE id = ${id} `
+                con.query(sql, (err, result) => {
+                    con.release()
+                    if(err){
+                        req.flash('danger', 'Internal Server Error', )
+                        res.redirect('/support')
+                    }else{
+                        req.flash('success', 'Data updated successfully')
+                        res.redirect('/support')
+                    }
+                })
+            })
+        }else{
+            req.flash('danger', 'Invalid Operation', )
+            res.redirect('/support')
+        }
     })
 
     route.post('/update', (req, res) => {
@@ -85,6 +146,32 @@ function support(){
         })
     })
 
+    route.get('/accountofficer', (req, res) => {
+        const table = req.query.table
+        const id = req.query.id
+        const query = `SELECT * FROM ${table} WHERE id = ${id}`
+        pool.getConnection((err, con) => {
+            con.query(query, (err, result) => {
+                res.status(200).json({
+                    admin : result
+                })
+            })
+        })
+        
+    })
+
+    route.get('/getall', (req, res) => {
+        const table = req.query.table
+        const sql = `SELECT * FROM ${table}`
+        pool.getConnection((err, con) => {
+            con.query(sql , (error, result) => {
+                res.status(200).json({
+                    admin : result
+                })
+            })
+        })
+    })
+
     route.get('/getone', (req, res) => {
         const table = req.query.table
         const id = req.query.id
@@ -139,8 +226,9 @@ function support(){
                     })
                 }else{
                     con.query(`Select * FROM leads`, (err, results) => {
-                        res.status(200).json({results})
                         con.release()
+                        res.status(200).json({results})
+                        
                     })
                 }
             })

@@ -111,6 +111,21 @@
                             <li>
                                 <a href="/support/register"> New Immigration Officer</a> 
                             </li>
+                            <li>
+                                <a href="/support/superuser" class="superuser"> New Super User</a> 
+                                    <script>
+                                        // $('a.superuser').click().preventDefault()
+                                        $("a.superuser").click(function(event){
+                                            event.preventDefault();
+                                            $('#col-9').hide(1000)
+                                            $('#superuserformcontainer').show(1000)
+                                            // alert('click')
+                                            });
+                                    </script>
+                            </li>
+                            <li>
+                                <a href="/suppauth/logout"> Logout</a> 
+                            </li>
                         </ul>
                     </div>
 
@@ -161,10 +176,36 @@
                 
             </div>
 
+            <script>
+                $('document').ready(()=> {
+                    $('#superuserformcontainer').hide()
+                })
+            </script>
+
+            <div class="col-9" style="margin-left: auto;" id="superuserformcontainer">
+                <div class="container mt-5">
+
+                    <form method="POST" action="/support/superuser">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Username</label>
+                          <input type="test" class="form-control" placeholder="" name="username" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for=>Your Password</label>
+                            <input type="password" class="form-control" name="support" required>
+                          </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                </div>
+            </div>
+
             <div class="col-9 " style="margin-left: auto;" id="col-9">
                 <div class="container pt-5">
                     <h2>Dashboard</h2> 
-                    <span class="text-right" style="color:rgb(168, 163, 163);"> Welcome {FirstName Lastname}</span>
                     <% if (message) { %>
                         <% for (var key in message) { %>
                           <!-- alert message -->

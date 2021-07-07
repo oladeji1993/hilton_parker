@@ -83,6 +83,8 @@
 </style>
 
 <body> 
+
+
     <div id="overlay" class="overlay text-light " >
         <div class="container" >
             <div class="row">
@@ -118,7 +120,7 @@
                <div class="container pt-5">
                
                 <h2>Dashboard</h2> 
-                <span class="text-right" style="color:rgb(168, 163, 163);"> Welcome {FirstName Lastname}</span>
+                <!-- <span class="text-right" style="color:rgb(168, 163, 163);"> Welcome {FirstName Lastname}</span> -->
                 
                 <script>
                    $(document).ready(() => {
@@ -127,13 +129,10 @@
                     let step1 = link.split('=')[1]
                     let form = step1.split('&')[0]
                     const display = $('.target')
-                    // const div = document.getElementsByClassName(div)
-                    console.log($('.target'))
                     for(let i = 0; i < display.length ; i++){
 
                         // console.log(display[i])
                         const elem = display[i]
-                        console.log(elem.className)
 
                         const n = elem.className.search(form)
                         console.log(n)
@@ -155,6 +154,7 @@
             </style>
             <div class="container" >
               
+                <!-- ADMIN SECTION  -->
                 <div class="col-12 admin hidden target" id="display">
                 
                     <!-- Modal -->
@@ -223,7 +223,7 @@
 
                         <script>
                             $('document').ready(() => {
-                                
+                                $('.loading').hide()
                                 $('span.cancel').click(() => {
                                     $('.signal').hide()
                                 })
@@ -273,13 +273,274 @@
                       </form> 
                       
                 </div>
+
+                <!-- USER SECTION  -->
                 <div class="col-12 leads hidden target" id="display">
-                    leads
-                    <%= result[0].firstname %>
-                </div>
+
+                    <form action="/support/updateuser?id=<%= result[0].id %>" method="POST">
+                        <div class="container">
+                            <div class="row">
+                                <span class="userid hidden"> <%= result[0].id %>  </span>
+                                <div class="form-group col-6">
+                                  <label for="exampleInputEmail1">First Name</label>
+                                  <input type="text" class="form-control" value="<%= result[0].firstname %> ">
+                                  </div>
+                                <div class="form-group col-6" >
+                                  <label for="exampleInputPassword1">Last Name</label>
+                                  <input type="text" class="form-control" value=" <%= result[0].lastname %> ">
+                                </div>
+                                <div class="form-group col-6" >
+                                    <label for="exampleInputPassword1">Email</label>
+                                    <input type="text" class="form-control" value=" <%= result[0].email %> ">
+                                  </div>
+                                  <div class="form-group col-6" >
+                                    <label for="exampleInputPassword1">Phone Number</label>
+                                    <input type="text" class="form-control" value=" <%= result[0].phonenumber %> ">
+                                  </div>
+                                  <div class="form-group col-6" >
+                                    <label for="exampleInputPassword1">Status</label>
+                                    <input type="text" class="form-control" value=" <%= result[0].status %> " name="status">
+                                  </div>
+                                  <div class="form-group col-6" >
+                                    <label for="exampleInputPassword1">Account Officer &nbsp; &nbsp; 
+                                        <img src="/images/ajax-loader.gif" alt="loader" class="loading"></label>
+                                    <div class="row">
+                                        <div class="col-8" >
+                                            <div class="row">
+                                                <div class="col-11" id="useraccountofficercontainer">
+                                                    <input type="text" class="form-control" value="<%= result[0].accountofficer %> " placeholder="View Account Officer" id="useraccountofficer" accountofficer='<%= result[0].accountofficer %>' readonly name="accountofficer"> 
+                                                
+                                                </div>
+
+                                                <div class="col-1">
+                                                </div>
+                                               
+                                            </div> 
+                                        </div>
+                                        <script>
+                                            $('#useraccountofficer').click(()=> {
+                                            $('.loading').show()
+                                            var id = $('#useraccountofficer').attr('accountofficer')
+                                            // alert(id)
+                                            const xhr = new XMLHttpRequest
+                                            xhr.open('GET', `/support/accountofficer?table=admin&id=${id}`, true)
+                                            xhr.responseType = 'json';
+                                            xhr.onreadystatechange = () => {
+                                                if(xhr.readyState == 4){
+                                                    $('.loading').hide()
+                                                    const firstname = xhr.response.admin[0].firstname
+                                                    const lastname = xhr.response.admin[0].lastname
+                                                    const fullname = firstname + ' ' + lastname
+                                                    $('#useraccountofficer').val(fullname)
+                                            }
+                                            }
+                                            xhr.send()
+                                       })
+                                        </script>
+                                        <div class="col">
+                                            <span class="btn btn-primary" id="changebtn">Change</span> 
+                                            <script>
+                                                $('#changebtn').click(() => {
+                                           $(".loading").show()
+                                        $('#useraccountofficercontainer').children().remove()
+                                           const xhr = new XMLHttpRequest
+                                           xhr.open('GET', '/support/getall?table=admin', true)
+                                           xhr.responseType = 'json'
+                                            xhr.onreadystatechange = () => {
+                                                if(xhr.readyState == 4){
+                                                    $(".loading").hide()
+                                                    $('#useraccountofficercontainer').children('input').remove()
+                                                    $('#useraccountofficercontainer').append(`<select class="form-control" name='accountofficer'></select>`)
+                                                    for(var i = 0; i < xhr.response.admin.length; i++){
+                                                        $('#useraccountofficercontainer').children('select').append(`<option value='${xhr.response.admin[i].id}'>${xhr.response.admin[i].firstname}&nbsp;${xhr.response.admin[i].lastname}</option>`)
+                                                    }
+                                                    $('#changebtn').hide()
+                                                
+                                            }}
+                                            xhr.send()
+                                       })
+                                            </script>
+                                        </div>
+
+                                    </div>
+                                  </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <span class="btn btn-danger ml-3" id="userwarning" name='leads'> Delete</span>
+                                <script>
+                                    $('#userwarning').click(() => {
+                                // console.log(alert('Warning'))
+                                const firstname = $('input[name=firstname]').val().toUpperCase()
+                                const lastname = $('input[name=lastname]').val().toUpperCase()
+                                const fullname = firstname + ' ' + lastname
+                                const name = window.prompt('Are you sure you want to delete this account?' , ' Enter Account name to continue').toUpperCase()
+                                if(fullname == name){
+                                    var table = $('#userwarning').attr('name')
+                                    console.log(true)
+                                    let xhr = new XMLHttpRequest
+                                    const id = $('.userid').text()
+                                    xhr.open('POST', `/support/delete?table=${table}&id=${id}`)
+                                    console.log(xhr.responseText)
+                                    xhr.addEventListener( "load", function(event) {
+                                        $('.signal').show()
+                                        $('.signalText').html( "Acount deleted <a href='/support'><u>Back</u></a>" )
+                                        $('.signal').show()
+                                        $('.signalText').html( "Acount deleted <a href='/support'><u>Back</u></a>" )
+                                        // const path = this.location.origin + '/support/'
+                                        } );
+                                        
+                                    xhr.addEventListener( "error", function( event ) {
+                                            alert( 'Oops! Something went wrong.' );
+                                            } );
+                                    xhr.send()
+                                }else{
+                                   alert( 'Invalid Input.' )
+
+                                }
+                            })
+                                </script>
+                            </div>
+                            <div class=" p-3 signal" style="background-color: rgba(205, 92, 92, 0.254); border-radius: 10px;">
+                                <span class="float-right cancel" style="cursor: pointer;">&times;</span>
+                                <span class="text-danger mt-5 signalText" style="font-size: larger;" >
+                                    Error Invalid Input 
+                                </span>
+                                
+                            </div>
+                        </div>
+                      </form>
+                     </div>
+
+                <!-- AGENT SECTION  -->
                 <div class="col-12 agent hidden target" id="display">
-                    agent
-                    <%= result[0].firstname %>
+                    <form method="POST" action="/support/updateagent?id=<%= result[0].id %>" name="agentform">
+                        <legend>Agent&nbsp; <%= result[0].agent_id %></legend>
+                        <span class="agentid hidden"><%= result[0].id %></span>
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="exampleInputEmail1">First Name </label>
+                                    <input type="text" class="form-control" value="<%= result[0].firstname %>" name="firstname" readonly>
+                                   
+                                  </div>
+                                  <div class="form-group col-6">
+                                    <label for="exampleInputPassword1">Last Name</label>
+                                    <input type="text" class="form-control" value="<%= result[0].lastname %>" name="lastname" readonly>
+                                  </div>
+                                  <div class="form-group col-6">
+                                    <label for="exampleInputPassword1">Email</label>
+                                    <input type="text" class="form-control" value="<%= result[0].email %>" placeholder="" name="email" readonly>
+                                  </div>
+                                  <div class="form-group col-6">
+                                    <label for="exampleInputPassword1">Phone Number</label>
+                                    <input type="text" class="form-control" value="<%= result[0].phonenumber %>" placeholder="Password" readonly>
+                                  </div>
+                                  
+                                  <div class="form-group col-12">
+                                    <label for="exampleInputPassword1">Acoount Officer &nbsp;&nbsp;
+                                        <img src="/images/ajax-loader.gif" alt="loader"  class="loading"></label>
+                                    <div class="row">
+                                        <div class="col-8" >
+                                            <div class="row">
+                                                <div class="col-11" id="agentaccountofficercontainer">
+                                                    <input type="text" class="form-control" value="<%= result[0].accountofficer %> " placeholder="View Account Officer" id="agentaccountofficer" accountofficer='<%= result[0].accountofficer %>' readonly>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col">
+                                            <span class="btn btn-primary" id="agentchangebtn">Change</span> 
+                                        </div>
+
+                                    </div>
+                                   <script>
+                                       
+                                       $('#agentchangebtn').click(() => {
+                                           $(".loading").show()
+                                        $('#accountofficercontainer').children().remove()
+                                           const xhr = new XMLHttpRequest
+                                           xhr.open('GET', '/support/getall?table=admin', true)
+                                           xhr.responseType = 'json'
+                                            xhr.onreadystatechange = () => {
+                                                if(xhr.readyState == 4){
+                                                    $(".loading").hide()
+                                                    $('#agentaccountofficercontainer').children('input').remove()
+                                                    $('#agentaccountofficercontainer').append(`<select class="form-control" name='accountofficer'></select>`)
+                                                    for(var i = 0; i < xhr.response.admin.length; i++){
+                                                        $('#agentaccountofficercontainer').children('select').append(`<option value='${xhr.response.admin[i].id}'>${xhr.response.admin[i].firstname}&nbsp;${xhr.response.admin[i].lastname}</option>`)
+                                                    }
+                                                    $('#agentchangebtn').hide()
+                                                
+                                            }}
+                                            xhr.send()
+                                       })
+                                       $('#agentaccountofficer').click(()=> {
+                                            $(".loading").show()
+                                            var id = $('#agentaccountofficer').attr('accountofficer')
+                                            // alert(id)
+                                            const xhr = new XMLHttpRequest
+                                            xhr.open('GET', `/support/accountofficer?table=admin&id=${id}`, true)
+                                            xhr.responseType = 'json';
+                                            xhr.onreadystatechange = () => {
+                                                if(xhr.readyState == 4){
+                                                    $(".loading").hide()
+                                                    const firstname = xhr.response.admin[0].firstname
+                                                    const lastname = xhr.response.admin[0].lastname
+                                                    const fullname = firstname + ' ' + lastname
+                                                    $('#agentaccountofficer').val(fullname)
+                                            }
+                                            }
+                                            xhr.send()
+                                       })
+                                    </script>
+                                  </div>
+                            </div>
+                        </div> 
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <span class="btn btn-danger ml-3" id="agentwarning" name='agent'> Delete</span>
+                        <hr>
+                        <div class=" p-3 signal" style="background-color: rgba(205, 92, 92, 0.254); border-radius: 10px;">
+                            <span class="float-right cancel" style="cursor: pointer;">&times;</span>
+                            <span class="text-danger mt-5 signalText" style="font-size: larger;" >
+                                Error Invalid Input 
+                            </span>
+                            
+                        </div>
+                        <script>
+                             $('#agentwarning').click(() => {
+                                // console.log(alert('Warning'))
+                                const firstname = $('input[name=firstname]').val().toUpperCase()
+                                const lastname = $('input[name=lastname]').val().toUpperCase()
+                                const fullname = firstname + ' ' + lastname
+                                const name = window.prompt('Are you sure you want to delete this account?' , ' Enter Account name to continue').toUpperCase()
+                                if(fullname == name){
+                                    var table = $('#agentwarning').attr('name')
+                                    console.log(true)
+                                    let xhr = new XMLHttpRequest
+                                    const id = $('.agentid').text()
+                                    xhr.open('POST', `/support/delete?table=${table}&id=${id}`)
+                                    console.log(xhr.responseText)
+                                    xhr.addEventListener( "load", function(event) {
+                                        $('.signal').show()
+                                        $('.signalText').html( "Acount deleted <a href='/support'><u>Back</u></a>" )
+                                        // alert( event.target.responseText );
+                                        $('.signal').show()
+                                        $('.signalText').html( "Acount deleted <a href='/support'><u>Back</u></a>" )
+                                        // const path = this.location.origin + '/support/'
+                                        } );
+                                        
+                                    xhr.addEventListener( "error", function( event ) {
+                                            alert( 'Oops! Something went wrong.' );
+                                            } );
+                                    xhr.send()
+                                }else{
+                                   alert( 'Invalid Input.' )
+
+                                }
+                            })
+                        </script>
+                      </form>
                 </div>
                 
             </div>

@@ -10,8 +10,6 @@ const mailers = require('./services/mailers')
 const passport = require('passport');
 const cookiePasser = require('cookie-parser')
 
-// rubish comment
-
 app.use(session({ secret: process.env.TOKEN_SECRET }));
 app.use(cookiePasser(process.env.TOKEN_SECRET));
 app.use(flash());
@@ -90,6 +88,8 @@ app.get('/contact', (req, res) => {
     
 })
 
+const suppauth = require('./routes/suppauth')
+app.use('/suppauth', suppauth)
 
 const userPassportUpload = require('./routes/userpassport')
 app.use('/user/passport', (req, res, next) => {
