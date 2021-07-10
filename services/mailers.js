@@ -425,7 +425,7 @@ async function applied(params) {
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.firstname + ' ' + params.lastname},</p>
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just opened an application with Hilton Parker Services. A unique link to continue your
-                                application has been generated for you. <br> Click the link below to continue your Application.</p>
+                                application has been generated for you. <br> Click the link below to further your Application.</p>
                                 <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
                                 <tbody>
                                     <tr>
@@ -1220,7 +1220,7 @@ async function agent(params,encryptedid ) {
                                     <tr>
                                     <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Dear ${params.firstname + ' ' + params.lastname}</p>
-                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just register with Hilton Parker Services. One of our officials will get back to you soon,
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">You just registered with Hilton Parker Services. One of our officials will get back to you soon,
                                         <br>
                                         To further your application, kindly use this link to complete your registration:<br> 
                                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
