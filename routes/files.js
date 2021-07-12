@@ -19,7 +19,7 @@ function files() {
             } 
     }, (req, res) => {
         const {filename} = req.params
-        const filepath = directory + '/' + filename
+        // const filepath = directory + '/' + filename
         const filelink = path.join(__dirname, '../assets/uploads/academics',filename)
         res.sendFile(filelink)
         // res.download(filepath)

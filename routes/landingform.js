@@ -11,7 +11,7 @@ const cryptr = new Cryptr(process.env.TOKEN_SECRET);
 function landingForm(){
     route.post('/', (req, res, next) => {
         pool.getConnection((err, con) => {
-            if(err) throw err;
+            if(err) {console.log(err)}
             con.query('SELECT * FROM admin', (err, results) => {
                 results.sort((a, b) => {
                     return a.client - b.client;

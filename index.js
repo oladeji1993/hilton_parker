@@ -10,8 +10,6 @@ const mailers = require('./services/mailers')
 const passport = require('passport');
 const cookiePasser = require('cookie-parser')
 
-// rubish comment
-
 app.use(session({ secret: process.env.TOKEN_SECRET }));
 app.use(cookiePasser(process.env.TOKEN_SECRET));
 app.use(flash());
@@ -67,18 +65,31 @@ app.get('/agent' , (req, res) => {
 })
 app.get('/contact', (req, res) => {
     const message = req.flash();
-    const userid = req.user.id
-    pool.getConnection((err, con) => {
-        con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
-            res.render('./client/contactus', {
-                user: user[0],
-                message
+    
+    if (req.user){
+        const userid = req.user.id
+        pool.getConnection((err, con) => {
+            con.query('SELECT * FROM leads WHERE id = ? ', userid, (err, user) => {
+                if(user){
+                    res.render('./contactus', {
+                        user: user[0],
+                        message
+                    })
+                }else{
+                    res.redirect('/#contact')
+                }
+                
             })
         })
-    })
+    }else{
+        res.redirect('/#contact')
+    }
+   
     
 })
 
+const suppauth = require('./routes/suppauth')
+app.use('/suppauth', suppauth)
 
 const userPassportUpload = require('./routes/userpassport')
 app.use('/user/passport', (req, res, next) => {
@@ -95,6 +106,9 @@ app.use('/user/passport', userPassportUpload)
 
 const agentsuserupload = require('./routes/agentuploadclientfiles')
 app.use('/agent/submit', agentsuserupload)
+
+const support = require('./routes/support')
+app.use('/support', support)
 
 const files = require('./routes/files')
 app.use('/files', files)
