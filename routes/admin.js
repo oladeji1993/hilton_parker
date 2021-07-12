@@ -82,17 +82,7 @@ function admin() {
         })
     })
 
-    // GET /ADMIN/REGISTER ROUTE 
-    route.get('/register', (req, res, next) => {
-        if (req.cookies.authenticate){
-            req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
-            res.redirect('/admin/dashboard')
-         }else{
-             next()
-            }
-    } , (req,res) => {
-        res.render('./admin/sign-up')
-    })
+    
 
     // POST TO /ADMIN/REGISTER ROUTE 
     route.post('/register', async(req, res) => {
@@ -129,18 +119,21 @@ function admin() {
                         if(!err){
                             const st = result.length
                             if(st == 0){
-                                con.query('INSERT INTO admin SET ?', value, (err, result) => {
-                                    con.release()
-                                    if(!err){
-                                        req.flash('success', 'Account Created please login', )
-                                        res.redirect('/admin/login')
-                                    }else{
-                                        res.render('error')
-                                    }
+                                con.query('UPDATE admin SET clients = 0', (err, resu) => {
+                                    con.query('INSERT INTO admin SET ?', value, (err, result) => {
+                                        con.release()
+                                        if(!err){
+                                            req.flash('success', 'Account Created please login', )
+                                            res.redirect('/support')
+                                        }else{
+                                            res.render('error')
+                                        }
+                                    })
                                 })
+                                
                             }else{
-                                req.flash('danger', 'Email already exists Login Insteads', )
-                                res.redirect('/admin/login')
+                                req.flash('danger', 'Email already exists')
+                                res.redirect('/support')
                             }
                         }else{
                             // res.send(err)

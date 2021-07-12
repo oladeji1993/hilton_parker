@@ -15,10 +15,10 @@ var path = require('path');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './assets/uploads/agent/clients')
+      cb(null, './assets/uploads/academics')
     },
     filename: function (req, file, cb, next) {
-      cb(null, req.cookies.agent_user[0] + '-' +  req.cookies.agent_user[1] + '-' + file.fieldname + '-' + '' + path.extname(file.originalname))
+      cb(null,  req.cookies.agent_user[1] + '-' + file.fieldname + '-' + '' + path.extname(file.originalname))
     }
     
   })
