@@ -27,7 +27,7 @@
     <div class="row">
         <form action="/agent/register" method="POST" enctype="multipart/form-data">  
             <div class="row">
-                <div class="col-md-4 col-12">
+                <div class="col-md-6 col-12">
                     <div class="input-field">
                         <div>
                             <label for="" class="form-label">FIRSTNAME</label>
@@ -38,23 +38,12 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-12">
+                <div class="col-md-6 col-12">
                     <div class="input-field">
                         <div>
                             <label for="" class="form-label">LASTNAME</label>
                             <div class="input-group mb-4">
                                 <input type="text" required class="form-control" aria-label="name" readonly value="<%= user.lastname %>" name="lastname" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                    <div class="input-field">
-                        <div>
-                            <label for="" class="form-label">EMAIL</label>
-                            <div class="input-group mb-4">
-                                <input type="email" required class="form-control" aria-label="email" readonly  name='email'  value="<%= user.email %>" >
                             </div>
                         </div>
                     </div>
@@ -68,7 +57,7 @@
                 <div class="col-md-6 col-12">
                     <div class="input-field">
                         <div>
-                            <label for="" class="form-label">PHONE NUMBER 1</label>
+                            <label for="" class="form-label">PHONE NUMBER </label>
                             <div class="input-group mb-4">
                                 <input type="text" required class="form-control" aria-label="Phone number" readonly  name='phonenumber'  value="<%= user.phonenumber %>" >
                             </div>
@@ -77,25 +66,25 @@
                 </div>
                
                 <div class="col-md-6 col-12">
-                    <!-- <div class="input-field">
+                    <div class="input-field">
                         <div>
-                            <label for="" class="form-label">NATIONALITY</label>
+                            <label for="" class="form-label">EMAIL</label>
                             <div class="input-group mb-4">
-                                <input type="text" required class="form-control" name="nationality"  value="" > 
+                                <input type="email" required class="form-control" aria-label="email" readonly  name='email'  value="<%= user.email %>" >
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                
             </div>
 
 
              <!-- PHONE NUMBER -->
-             <div class="row">
+             <!-- <div class="row">
                 <div class="col-md-6 col-12">
                     <div class="input-field">
                         <div>
-                            <label for="" class="form-label">CONTACT ADDRESS 1</label>
+                            <label for="" class="form-label">CONTACT ADDRESS</label>
                             <div class="input-group mb-4">
                                 <input type="text" required class="form-control" aria-label="Address"  name='residentialaddress'  value="" >
                             </div>
@@ -113,14 +102,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <!-- office address -->
+            <!-- address -->
             <div class="row">
                 <div class="col-md-12 col-12">
                     <div class="input-field">
                         <div>
-                            <label for="" class="form-label">CONTACT ADDRESS 2</label>
+                            <label for="" class="form-label">CONTACT ADDRESS </label>
                             <div class="input-group mb-4">
                                 <input type="text" required class="form-control" aria-label="Address"  name='officeaddress'  value="" >
                             </div>
