@@ -258,7 +258,6 @@ function agent() {
                     con.query(`SELECT * FROM admin WHERE id = ${rest[0].accountofficer}`, (err, acct) => {
                         con.query('SELECT * FROM leads WHERE agent_id = ?', rest[0].agent_id, (err, all) => {
                             con.query('SELECT * FROM leads WHERE status = ? AND agent_id = ? ', ['completed', rest[0].agent_id] , (err, complete) => {
-                                
                                 res.render('./agent/dashboard', {
                                     complete,
                                     earnings,
@@ -335,9 +334,7 @@ function agent() {
                     phonenumber= ?,
                     nationality = ?,
                     residentialaddress = ?,
-                    phonenumber2 = ?,
                     status = 'applied',
-                    officeaddress = ?,
                     agent_id = ?
                     WHERE id = ${respons[0].id}`;
                     con.query(sql, data, (err, result) => {
@@ -346,8 +343,11 @@ function agent() {
                                 res.cookie('agent_id', ref, {maxAge: 12800000}).redirect('/agent/uploads')
                             })
                            
+                        }else if(err){
+                            res.render('error')
                         }else{
                             res.render('error')
+
                         }
                         
                     })
