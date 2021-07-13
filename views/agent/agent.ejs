@@ -185,6 +185,9 @@ input[type=text] {
                               <li class="nav-item">
                                 <a class="nav-link text-light" href="/agent/login">Login</a>
                               </li>
+                              <li class="nav-item">
+                                <a class="nav-link text-light" href="/agent/login" data-toggle="modal" data-target="#exampleModalCenter">Register</a>
+                              </li>
                       </ul>
                     </div>
                   </div>
@@ -200,7 +203,7 @@ input[type=text] {
                     <p class=" h3 hero-text text-2 text-light text-center">
                       Registering To Use The Hilton Parker  Platform.</p>
 
-                      <p class="btn btn-lg btn-outline-warning  col-xs-6 col-md-12 text-center" data-toggle="modal" data-target="#exampleModalCenter">Register</p>
+
                       <% for (var key in message) { %>
                         <!-- alert message -->
                         <div class="alert alert-<%= key%> alert-dismissible fade show alert-box" role="alert">
