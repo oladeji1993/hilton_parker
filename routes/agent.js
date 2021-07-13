@@ -330,9 +330,8 @@ function agent() {
                     let sql = `UPDATE agent SET 
                     firstname = ?,
                     lastname = ?,
-                    email= ?,
                     phonenumber= ?,
-                    nationality = ?,
+                    email= ?,
                     residentialaddress = ?,
                     status = 'applied',
                     agent_id = ?
