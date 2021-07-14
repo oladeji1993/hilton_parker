@@ -57,7 +57,11 @@ function agentsuserupload() {
         `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
+                console.log(err)
+                console.log(result)
                 con.query(sql, feilds, (err, rest) => {
+                    console.log(`second statement ${err}`)
+                    console.log(`second statement ${result}`)
                     const user = result[0]
                     const message = req.flash('success', 'Documents upload successfull')
                     res.render('./agent/photo', {
@@ -86,6 +90,7 @@ function agentsuserupload() {
             course2 = ?,
             course3 = ?,
             status = 'pending'
+            WHERE id = ${id}
             `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {
@@ -116,6 +121,7 @@ function agentsuserupload() {
             course2 = ?,
             course3 = ?,
             status = 'pending'
+            WHERE id = ${id}
             `
         pool.getConnection((err, con) => {
             con.query('SELECT * FROM leads WHERE id = ? ', id, (err, result) => {

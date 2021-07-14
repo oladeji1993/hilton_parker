@@ -109,7 +109,7 @@ function landingForm(){
                                         const encryptedid = cryptr.encrypt(user[0].id);
                                         const mail = user[0].email
                                         mailers.agent(params,encryptedid)
-                                        mailers.agentofficer(params)
+                                        mailers.agentofficer(params , admin[0].email)
                                         res.render('./success')
                                     }else{
                                         res.render('./error')

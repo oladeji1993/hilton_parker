@@ -1111,7 +1111,7 @@ async function agent(params,encryptedid ) {
                 <head>
                     <meta name="viewport" content="width=device-width">
                     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                    <title>Simple Transactional Email</title>
+                    <title></title>
                     <style>
                     /* -------------------------------------
                         INLINED WITH htmlemail.io/inline
@@ -1285,7 +1285,7 @@ async function agent(params,encryptedid ) {
 
 
 // agent registration mailer for agent
-async function agentofficer(params) {
+async function agentofficer(params, accountOfficer) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "webmail.softnoonng.com",
         tls:{

@@ -249,6 +249,7 @@ function agent() {
         }
     })
 
+    
     route.get('/dashboard', auth =(req, res) => {
         if (req.cookies.agent){
             req.user = jwt.verify(req.cookies.agent, process.env.TOKEN_SECRET)

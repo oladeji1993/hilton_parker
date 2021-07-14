@@ -64,6 +64,7 @@ function admin() {
                                 con.query('SELECT * FROM leads WHERE accountofficer = ?', id, (err, allUser) =>{
 
                                     res.render('./admin/dashboard', {
+                                        admin, 
                                         starter, 
                                         complete,
                                         paid,
