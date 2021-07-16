@@ -386,8 +386,6 @@ function agent() {
         pool.getConnection((err, con) => {
             const agent = req.cookies.agent_id
             con.query('SELECT * FROM agent WHERE agent_id = ? ', agent, (err, result) => {
-                // res.cookie('agent_id','', {expiresIn: Date.now()}).redirect('/')
-                // const files = req.files
                 const fields = Object.values(req.body);
                 const lead = result[0]
                 const accountofficerid = result[0].accountofficer
@@ -396,12 +394,10 @@ function agent() {
                 g1_address =?,
                 g1_phone =?,
                 g1_email =?,
-                g1_relationship =?,
                 g2_fullname =?,
                 g2_address =?,
                 g2_phone =?,
                 g2_email =?,
-                g2_relationship =?,
                 status = 'submit'
                 WHERE agent_id = '${agent}'`
                 con.query(sql, fields,(err, resp) => {
@@ -410,6 +406,7 @@ function agent() {
                         con.query('SELECT * FROM admin WHERE id =?', accountofficerid, (err, admin)  => {
                             const email = admin[0].email
                             mailers.notify(lead, email)
+                            mailers.received(result[0])
                             res.render('./success')
                         })
                     })

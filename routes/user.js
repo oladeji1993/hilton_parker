@@ -345,7 +345,7 @@ function user() {
                 `
                 params.push(req.file.filename)
                 con.query(sql, params, (err, result) => {
-                    req.flash('success', 'Information updated', )
+                    req.flash('success', 'Information updated',)
                     res.redirect('/user/dashboard')
                 })
                 
@@ -357,6 +357,41 @@ function user() {
         }
     })
 
+
+
+    route.post('/applicant', (req, res) => {
+            const params = Object.values(req.body)
+            pool.getConnection((err, con) => {
+                const sql = ` UPDATE leads SET 
+                lastname = ?,
+                firstname = ?,
+                othername = ? ,
+                address = ? ,
+                dateofbirth = ? ,
+                email = ? ,
+                phonenumber = ?,
+                placeofbirth = ?,
+                gender = ?,
+                maritalstatus = ?,
+                program = ?,
+                status = "registered"
+                WHERE email = ${params.email} 
+                `
+                con.query(sql, params, (err, result) => {
+                    
+                    console.log(data)
+                    // mailers.Invitation()
+                    res.render('./user/success')
+                })
+                
+            })
+    })
+
+
+
+
+
+
     route.get('/:email', (req, res) => {
         const email = req.params.email
         try{
@@ -365,8 +400,8 @@ function user() {
                 if(err) throw err;
                 con.query('SELECT * FROM leads WHERE email = ?', decryptedString, (err, result) => {
                     if (result.length > 0) {
-                        res.render('./setpassword', {
-                            email : result[0].email
+                        res.render('./user/freshreg', {
+                            user : result[0]
                         })
                     }else{
                         res.render('error')
