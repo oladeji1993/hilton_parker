@@ -80,6 +80,65 @@ hr{
     margin: 50px 0px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+
+.join{
+  text-align:center;
+  margin:10px 0;
+}
+.overlay {
+  display:none;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.overlay .modal__locked {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 50vw;
+  height: 50vh; */
+  background: white;
+  border-radius: 20px;
+}
+.overlay .modal__locked .modal-body {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+.overlay .modal__locked .modal-body center {
+  margin: 20px;
+}
+.overlay .modal__locked .modal-body center strong {
+  font-size: 25px;
+  position: relative;
+  top: -30px;
+}
+
+.overlay .modal__locked .modal-body center p {
+  position: relative;
+  top: -10px;
+  font-size: 13px;
+}
+
+.overlay .modal__locked .modal-buttons {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}
+.overlay .modal__locked .modal-buttons button.btn-purple {
+  background: rgba(150, 39, 234, 1);
+  color: white;
+}
+
+
 @media only screen and (max-width: 650px) {
   .logo{
     width: 120px;
@@ -420,6 +479,23 @@ textarea{
   </div>
 
   
+  <div class="overlay">
+          <div class="modal__locked">
+            <img src="./images/promo.jpg" class="img-fluid" alt="">
+            <!-- <div class="modal-body p-5">
+              <center>
+                <strong>Locked Feature</strong>
+                <p>
+                  This offer is not valid for your plan. Please upgrade your account to enjoy more features.
+                </p>
+              </center>
+            </div> -->
+            <div class="modal-buttons">
+              <button class="btn btn-footer btn-danger close-btn">Cancel</button>
+              <a href="/agent"><button class="btn btn-footer btn-outline-dark">Apply</button></a>
+            </div>
+          </div>
+        </div> 
 
 </div>
 
@@ -542,5 +618,26 @@ textarea{
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(
+        setTimeout(() => {
+          // alert('timer')
+          modal.style.display="block"
+        }, 3000)
+      )
+const modal = document.querySelector(".overlay");
+const close = document.querySelector(".close-btn");
+
+close.addEventListener("click",function(){
+  modal.style.display="none"
+})
+
+document.body.addEventListener("click",function(e){
+  if(e.target.classList[0]=="overlay") {
+    modal.style.display="none" 
+  }
+})
+    </script>
+
   </body>
 </html>

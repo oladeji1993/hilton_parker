@@ -2,22 +2,47 @@ const express = require('express');
 const route = express.Router();
 const pool = require('../config/dbconfig');
 const bcrypt = require('bcryptjs');
+// require('dotenv').config()
+const jwt = require('jsonwebtoken')
 
 function support(){
 
     route.use((req, res, next) => {
-        if(req.cookies.suppauth == 200){
-            next()
-        }else{
+       
+        if (req.cookies.suppauth ){
+            const techie  = jwt.verify(req.cookies.suppauth, process.env.TOKEN_SECRET)
+            pool.getConnection((err, con) => {
+                if(err){
+                    res.render('error')
+                }else{
+                    con.query('SELECT * FROM support WHERE id = ?', techie.id, (err, result) => {
+                        con.release()
+                        if(result.length > 0.5){
+                            next()
+                        }else{
+                            req.flash('danger', 'You Must Login First', )
+                            res.render('./support/login', {
+                                message: req.flash()
+                            })
+                        }
+                    })
+                }
+            })
+            }else{
+            req.flash('danger', 'You Must Login First', )
             res.render('./support/login', {
                 message: req.flash()
             })
-        }
+            } 
     })
 
-    route.post('/login', (req, res) => {
-        res.cookie('suppauth',200);
-        res.send('login page')
+    route.get('/regbdo', (req, res) => {
+        res.render('./bdo/sign-up')
+    })
+
+    route.post('/regbdo', (req, res) => {
+        const details = req.body
+        res.send(details)
     })
 
     route.get('/logout', (req, res) => {

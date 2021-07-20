@@ -107,6 +107,12 @@ app.use('/user/passport', userPassportUpload)
 const agentsuserupload = require('./routes/agentuploadclientfiles')
 app.use('/agent/submit', agentsuserupload)
 
+const bdo = require('./routes/bdo')
+app.use('/bdo', bdo)
+
+const staff = require('./routes/staff')
+app.use('/staff', staff)
+
 const support = require('./routes/support')
 app.use('/support', support)
 

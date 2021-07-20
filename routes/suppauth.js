@@ -30,8 +30,8 @@ function suppauth(){
                         bcrypt.compare(data[1], result[0].password , function(err, resul) {
                             // res === true
                             if(resul === true){
-                                res.cookie('suppauth',200);
-                                res.redirect('/support')
+                                const token = jwt.sign({id: result[0].id}, process.env.TOKEN_SECRET)
+                                res.cookie('suppauth', token, {maxAge: 11510000}).redirect('/support')
                                 
                             }else{
                                 req.flash('warning', 'Incorect Login Details')
