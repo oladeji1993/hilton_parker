@@ -300,8 +300,11 @@ function agent() {
                             res.redirect('/agent')
                         }
                         else{
-                            res.render('./agent/reg', {
-                                user: user[0]
+                            con.query(`SELECT * FROM agentofficer `, (err, agofficer) => {
+                                res.render('./agent/reg', {
+                                    agofficer,
+                                    user: user[0]
+                                })
                             })
                         }
                         
@@ -316,28 +319,23 @@ function agent() {
 
     route.post('/register',upload.none(), (req, res) => {
         const params = Object(req.body);
-        const data = Object.values(req.body);
         const email = params.email
         pool.getConnection((err, con) => {
         con.query('SELECT * FROM agent WHERE email = ? ', email, (err, respons) => {
-            if(!respons){
+            if(respons.length < 0.5){
                 res.render('./error')    
            
             }else{
                 const ref = 'HPSAG00' + respons[0].id
-                data.push(ref)
                 pool.getConnection((err, con) => {
 
-                    let sql = `UPDATE agent SET 
-                    firstname = ?,
-                    lastname = ?,
-                    phonenumber= ?,
-                    email= ?,
-                    residentialaddress = ?,
+                    let sql = `UPDATE agent SET
+                    residentialaddress = '${req.body.officeaddress}',
                     status = 'applied',
-                    agent_id = ?
+                    agent_id = '${ref}',
+                    agofficer = '${req.body.agofficer}'
                     WHERE id = ${respons[0].id}`;
-                    con.query(sql, data, (err, result) => {
+                    con.query(sql, (err, result) => {
                         if(result){
                             con.query('SELECT * FROM agent WHERE id = ? ', respons[0].id, (err, resp) => {
                                 res.cookie('agent_id', ref, {maxAge: 12800000}).redirect('/agent/uploads')

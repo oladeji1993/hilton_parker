@@ -3,7 +3,8 @@ const route = express.Router();
 const pool = require('../config/dbconfig');
 const bcrypt = require('bcryptjs');
 // require('dotenv').config()
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { constant } = require('lodash');
 
 function support(){
 
@@ -40,9 +41,93 @@ function support(){
         res.render('./bdo/sign-up')
     })
 
+    //GET REGISTER AGENT OFFICER FORM
+    route.get('/agofficer', (req, res) => {
+        pool.getConnection((err, con) => {
+            if (err) {
+                res.render('./error')
+            }else{
+                con.query('SELECT * FROM bdo', (err, bdo) => {
+                    if(err){
+                        res.render('./error')
+                    }else{
+                        if(bdo.length < 0.5){
+                            req.flash('danger', 'Agent Officers are supposed to be with BDO, register BDO first')
+                            res.redirect('/support')
+                        }else{
+                            res.render('./agentofficer/sign-up', {
+                                bdo
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    })
+
+      //POST REGISTER BDO OFFICER FORM
     route.post('/regbdo', (req, res) => {
-        const details = req.body
-        res.send(details)
+        const details = Object.values(req.body)
+        pool.getConnection( (err, con) => {
+            if(err){
+                res.status(500).render('./error')
+            }else{
+                con.query('SELECT * FROM bdo WHERE email = ?', req.body.email, async(err, result) => {
+                    if(result.length > 0.5){
+                        req.flash('warning', 'Email already exists')
+                        res.redirect('/support')
+                    }else{
+                        const hashedpassword = await bcrypt.hash(req.body.password, 12)
+                        const sql = `INSERT INTO bdo SET 
+                        firstname = '${req.body.firstName}',
+                        lastname = '${req.body.lastName}',
+                        email = '${req.body.email}',
+                        phonenumber = '${req.body.phonenumber}',
+                        password = '${hashedpassword}'
+                         `
+                        con.query(sql, details, (err, done) => {
+                            if(err){
+                                console.log(err)
+                                req.flash('danger', 'Internal Server Error')
+                                res.status(500).redirect('/support')
+                            }else{
+                                req.flash('success', 'User Added')
+                                res.redirect('/support')
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    })
+
+          //POST REGISTER AGENT OFFICER FORM
+    route.post('/regagofficer',  (req, res) => {
+        pool.getConnection( async (err, con) => {
+            if(err){
+                res.status(500).render('./error')
+            }else{
+                const password = req.body.password
+                const passwordhash = await bcrypt.hash(password, 12)
+                const sql = `INSERT INTO agentofficer SET 
+                firstname = '${req.body.firstName}',
+                lastname = '${req.body.lastName}',
+                email = '${req.body.email}',
+                phonenumber = '${req.body.phonenumber}',
+                password = '${passwordhash}',
+                bdo = '${req.body.bdo}'
+                 `
+                con.query(sql, (err, done) => {
+                    if(err){
+                        console.log(err)
+                        res.status(500).render('./error')
+                    }else{
+                        req.flash('success', 'User Added')
+                        res.redirect('/support')
+                    }
+                })
+            }
+        })
     })
 
     route.get('/logout', (req, res) => {
@@ -74,12 +159,18 @@ function support(){
             con.query(`SELECT * FROM admin`, (err, admins) => {
                 con.query(`SELECT * FROM agent` , (err, agents) => {
                     con.query(`SELECT * FROM leads`, (err, leads) => {
-                        con.release()
-                        res.render('./support/index', {
-                            admins,
-                            agents,
-                            leads,
-                            message : req.flash()
+                        con.query(`Select * FROM bdo`, (err, bdo) => {
+                            con.query(`Select * FROM agentofficer`, (err, agofficer) => {
+                                con.release()
+                                res.render('./support/index', {
+                                    admins,
+                                    agents,
+                                    leads,
+                                    bdo,
+                                    agofficer,
+                                    message : req.flash()
+                                })
+                            })
                         })
                     })
                 }) 
@@ -227,7 +318,20 @@ function support(){
                     })
                 }
             })
-            
+        }else if (variable == 'bdo'){
+            //query agents table
+            pool.getConnection((err, con ) => {
+                if(err){
+                    res.status(500).json({
+                        message: 'An Error occoured'
+                    })
+                }else{
+                    con.query(`Select * FROM bdo`, (err, results) => {
+                        res.status(200).json({results})
+                        con.release()
+                    })
+                }
+            })
         }else if (variable == 'agent'){
             //query agents table
             pool.getConnection((err, con ) => {

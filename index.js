@@ -110,6 +110,9 @@ app.use('/agent/submit', agentsuserupload)
 const bdo = require('./routes/bdo')
 app.use('/bdo', bdo)
 
+const agofficer = require('./routes/agentofficer')
+app.use('/agofficer', agofficer)
+
 const staff = require('./routes/staff')
 app.use('/staff', staff)
 

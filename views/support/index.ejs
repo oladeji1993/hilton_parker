@@ -115,6 +115,9 @@
                                 <a href="/support/regbdo"> New Business Development Officer</a> 
                             </li>
                             <li>
+                                <a href="/support/agofficer"> New Agent Officer</a> 
+                            </li>
+                            <li>
                                 <a href="/support/superuser" class="superuser"> New Super User</a> 
                                     <script>
                                         // $('a.superuser').click().preventDefault()
@@ -225,6 +228,14 @@
                 <div class="container mt-5 mb-5 ">
                     <div class="row">
                         <div class="col-3 p-1" >
+                            <a href="#bdo" class="text-dark">
+                            <div class="card p-3">
+                                <h1 class="text-right "><%= bdo.length %> </h1>
+                                <span class="text-right" style="color: grey;"> BDO</span>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-3 p-1" >
                             <a href="#admin" class="text-dark">
                             <div class="card p-3">
                                 <h1 class="text-right "><%= admins.length %> </h1>
@@ -248,7 +259,7 @@
                             </div>
                             </a>
                         </div>
-                        <div class=" col-3 p-1" id="clear" >
+                        <div class=" col-3 p-1 d-none" id="clear" >
                             <a href="#" class="">
                             <div class="card p-3"  style="background-color:#f69617;">
                                 <h1 class="text-right " style="color: #f69617;"> <%= admins.length %> </h1>
@@ -301,15 +312,11 @@
             var fulllink = this.location.href.split('#')[1]
             const link = fulllink.split('?')[0]
             const query = fulllink.split('?')[1]
-            
             const xhr = new XMLHttpRequest()
             if (link == 'getone'){
                 const path = this.location.origin + '/support/' + link + '?' + query
-                console.log(path)
-                console.log(this.location.origin)
                 xhr.open('GET', path , true)
                 xhr.responseType = 'json';
-                // console.log(xhr.response)
                 xhr.onreadystatechange = () => {
                     if(xhr.readyState == 4){
                         $(".loading").hide()
