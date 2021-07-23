@@ -85,7 +85,7 @@
                 </a>
 
                 <div class="card-single">
-                    <a style="text-decoration: none;" href="#agents">
+                    <a style="text-decoration: none;" href="/bdo/showagents">
                         <div>
                             <div style="display: flex; justify-content:space-between;">
                                 <h1 style="color:black"></h1>
@@ -133,17 +133,32 @@
                                 <table width="100%">
                                     <thead>
                                         <tr>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Phone</th>
+                                            <th scope="col">FirstName</th>
+                                            <th scope="col">LastName</th>
+                                            <th scope="col">Phone Number</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">OP</th>
+                                            <!-- <th scope="col">OP</th> -->
                                         </tr>
                                     </thead>
+                                    <%
+                                    if(agentofficer.length != 0){
+                                        var i=1;
+                                        agentofficer.forEach(function(data){
+                                    %>
                                     <tbody id="tbody">
-                          
-                          
+                                        <tr>
+                                            <td><%=data.firstname %> </td>
+                                            <td><%= data.lastname %></td>
+                                            <td><%=data.phonenumber %></td>
+                                            <td><%=data.email %></td>
+                                        </tr>
                                     </tbody>
+                                    <%  i++; }) %>
+                                    <% } else{ %>
+                                        <tr>
+                                            <td colspan="10">No Data Found</td>
+                                        </tr>
+                                    <% } %>
                                     <script>
                                         $(document).ready(()=>{
                                             $(".loading").hide()

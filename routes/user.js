@@ -375,12 +375,11 @@ function user() {
                 maritalstatus = ?,
                 program = ?,
                 status = "registered"
-                WHERE email = ${params.email} 
+                WHERE email = "${req.body.email}"
                 `
+                const data = req.body
                 con.query(sql, params, (err, result) => {
-                    
-                    console.log(data)
-                    // mailers.Invitation()
+                    mailers.Invitation(data)
                     res.render('./user/success')
                 })
                 
