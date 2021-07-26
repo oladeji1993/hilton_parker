@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken')
 
 function bdo(){
 
+    // BDO ROUTE
+
     route.use((req, res, next) => {
         if (req.cookies.bdo ){
             const techie  = jwt.verify(req.cookies.bdo, process.env.TOKEN_SECRET)
