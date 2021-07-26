@@ -624,14 +624,14 @@ async function Invitation(params) {
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.firstname + ' ' + params.lastname},</p>
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for opening an application with Hilton Parker Services. Your application has been received, 
-                                To further your admission process, you are hereby invited our office (1 Rahman Adeboyejo St, Lekki Phase I, Lagos) with your valid credentials for documentation and 
-                                verification on the 19th of July 2021.
-                                
-                                 
-                                 Please come along with your nose mask.
-                                 <div style="text-align: right !important;   font-style: italic;">For enquiry, Please call: <span style="color:#f69617; font-weight:500">+2347004449444</span></div>
-                                </p>
-                                <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
+                                To further your admission process, you are hereby invited to our office (1 Rahman Adeboyejo St, Lekki Phase I, Lagos) with your valid credentials for documentation and 
+                                verification.<br><br>  
+                                DATE: 19th of July 2021.<br>
+                                TIME: 9AM. <br>
+                                 Please come along with your nose mask.<br>
+                                 </p>
+                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
+                                 <div style="text-align: right !important;   font-style: italic;">For further enquiry, Please call: <span style="color:#f69617; font-weight:500">+2347004449444</span></div>
                             </td>
                             </tr>
                         </table>
