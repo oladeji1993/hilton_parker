@@ -187,6 +187,20 @@ textarea{
   background-color: #f69617;
 }
   </style>
+        <script>  
+          function validateform(){  
+          var firstname=document.myform.firstname.value;  
+          var phonenumber=document.myform.phonenumber.value;  
+            
+          if (firstname==null || firstname==""){
+            document.getElementById("firstnameError").innerHTML = "FirstName can't be blank"
+            return false;  
+          }else if(phonenumber.length<11 || phonenumber.length>11 ){  
+            document.getElementById("error").innerHTML = "Phone number must be 11 digits." 
+            return false;  
+            }  
+          }  
+        </script>  
   <body>
 
    
@@ -202,11 +216,12 @@ textarea{
           </button>
         </div>
         <div class="modal-body">
-            <form method="post" action="/landingform">
+            <form method="post" name="myform"  action="/landingform" onsubmit="return validateform()">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
                       <input type="text" name="firstname" class="form-control mt-3" placeholder="First Name" value="" required/>
+                      <p style="color:red" id="firstnameError"></p>
                     </div>
                     <div class="col-md-6">
                       <input type="text" name="lastname" class="form-control mt-3" placeholder="Last Name" value="" required/>
@@ -215,7 +230,8 @@ textarea{
                       <input type="text" name="email" class="form-control mt-3" placeholder="Email Address" value="" required />
                     </div>
                     <div class="col-md-6">
-                      <input type="text" name="phonenumber" class="form-control mt-3" placeholder="Phone Number" value="" required />
+                      <input type="number" name="phonenumber" class="form-control mt-3" placeholder="Phone Number" value="" required />
+                      <p style="color:red;" id="error"></p>
                     </div>
                     <div class="col-md-6">
                         <!-- <input type="button" value="Submit" class="btn btn-info form-control mt-3 w-50"> -->
