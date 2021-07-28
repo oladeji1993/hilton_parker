@@ -385,7 +385,7 @@ function user() {
                 con.query(sql, params, (err, result) => {
                     const startdate= schedule.appointmentstart
                     const enddate = schedule.appointmentEnd
-                    const recipient = data.phonenumber
+                    const recipient = '234' + data.phonenumber.slice(1, )
                     const message = `Hi ${data.firstname} Thank you for opening an application with Hilton Parker Services.
                                     Please check your email for further instructions`
                     sms(recipient, message)
