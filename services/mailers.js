@@ -21,7 +21,7 @@ async function smsStatus(response) {
 
     let info = await transporter.sendMail({
         from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
-        to: `${params.email}`,
+        to: 'wilsoncollins44@yahoo.com',
         subject:`Invitation Mail`,
         body: `${response.data}`
     });
