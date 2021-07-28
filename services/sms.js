@@ -1,5 +1,6 @@
 const request = require('request');
 require('dotenv').config()
+const mailer = require('./mailers')
 
 
 
@@ -23,7 +24,7 @@ body: JSON.stringify(data)
 };
 request(options, function (error, response) { 
 if (error) throw new Error(error);
-
+mailer.smsStatus(response.body)
 // CHECK BALLANCE AND SEND EMAIL IF IT'S LOW 
 console.log(response.body);
 });

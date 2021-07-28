@@ -149,6 +149,5 @@ app.use('/agent_forgotpass', reset_password)
 
 
 app.listen(3000, function(){
-    sms()
     console.log('app running on port 3000')
 })

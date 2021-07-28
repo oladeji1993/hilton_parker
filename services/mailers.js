@@ -3,7 +3,30 @@ const smtpTransport = require('nodemailer-smtp-transport')
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
+// SMS BALLANCE MAIL 
+async function smsStatus(response) {
+    let transporter = nodemailer.createTransport(smtpTransport({
+        host: "webmail.softnoonng.com",
+        tls:{
+            rejectUnauthorized: false
+        },
+        port: 587,
+        secure: false,
+        auth: {
+            user: 'collinswilson@softnoonng.com', 
+            pass: process.env.MAIL_PASSWORD
+        },
+    }));
 
+
+    let info = await transporter.sendMail({
+        from: '"Hilton Parker Services" <collinswilson@softnoonng.com>',
+        to: `${params.email}`,
+        subject:`Invitation Mail`,
+        body: `${response.data}`
+    });
+
+} 
 
 //  NEW CLIENT FROM AGENT 
 async function newAgentLead(params, agent) {
@@ -2777,7 +2800,7 @@ async function application_verified(output) {
 } 
 
 module.exports = {
-
+    smsStatus,
     newLead,
     received, 
     Invitation,

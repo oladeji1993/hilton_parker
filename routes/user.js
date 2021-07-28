@@ -383,8 +383,13 @@ function user() {
                 const data = req.body
                 const schedule = extracts()
                 con.query(sql, params, (err, result) => {
-                    sms()
-                    mailers.Invitation(data, startdate= schedule.appointmentstart, enddate = schedule.appointmentEnd)
+                    const startdate= schedule.appointmentstart
+                    const enddate = schedule.appointmentEnd
+                    const recipient = data.phonenumber
+                    const message = `Hi ${data.firstname} Thank you for opening an application with Hilton Parker Services.
+                                    Please check your email for further instructions`
+                    sms(recipient, message)
+                    mailers.Invitation(data, startdate, enddate)
                     res.render('./user/success')
                 })
                 
