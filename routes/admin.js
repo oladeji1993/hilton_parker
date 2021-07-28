@@ -9,6 +9,8 @@ const fs = require('fs')
 const jwt = require('jsonwebtoken');
 const { entries } = require('lodash');
 flash = require('express-flash')
+const search = require('../middlewares/search');
+const { Router } = require('express');
 
 const directory = './assets/uploads/academics'
 
@@ -23,6 +25,32 @@ const schema = joi.object({
 
 
 function admin() {
+
+    route.use('/search', (req, res, next) => {
+        search(req, res, next)
+    })
+
+    route.get('/search', (req, res) => {
+        res.render('./admin/search')
+    })
+
+    route.post('/search', (req, res) => {
+        // const data = await res.locals
+        const userList = req.app.locals.result
+        const table = req.app.locals.table
+        if(table == 'agent'){
+            res.render('./admin/userList', {
+                agentList: userList,
+                admin: []
+            })
+        }else if(table == 'leads'){
+            res.render('./admin/applicants', {
+                userList
+            })
+        }else{
+            res.render('./error')
+        }
+    })
 
     route.get('/logout', (req, res) => {
         res.cookie('authenticate','', {expiresIn: Date.now()})
@@ -206,14 +234,19 @@ function admin() {
                 con.query('SELECT * FROM admin WHERE id = ?', id, (err, admin) => {
                     con.query('SELECT * FROM agent WHERE status = "new" && accountofficer = ?', id, (err, fresh) =>{
                         con.query('SELECT * FROM agent WHERE status = "submit" && accountofficer = ?', id, (err, registered) =>{
-                            con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', id, (err, active) =>{    
-                                        res.render('./admin/agent', {
-                                            fresh,
-                                            registered,
-                                            active,
-                                            admin : admin[0]
-    
-                                        })
+                            con.query('SELECT * FROM agent WHERE status = "verified" && accountofficer = ?', id, (err, active) =>{   
+                                con.query(`SELECT * FROM agent WHERE accountofficer = ? ` , id, (err, all) => {
+                                    console.log(err)
+                                    con.release()
+                                    res.render('./admin/agent', {
+                                        userList : all,
+                                        fresh,
+                                        registered,
+                                        active,
+                                        admin : admin[0]
+
+                                    })
+                                }) 
                                    
     
                               

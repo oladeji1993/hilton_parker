@@ -29,4 +29,8 @@ mailer.smsStatus(response)
 
 }
 
-module.exports = sendsms
+sendEmail = () => {
+  console.log('vhgfhgfhg')
+}
+
+module.exports = {sendsms, sendEmail}

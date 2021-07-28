@@ -386,9 +386,8 @@ function user() {
                     const startdate= schedule.appointmentstart
                     const enddate = schedule.appointmentEnd
                     const recipient = '234' + data.phonenumber.slice(1, )
-                    const message = `Hi ${data.firstname} Thank you for opening an application with Hilton Parker Services.
-                                    Please check your email for further instructions`
-                    sms(recipient, message)
+                    const message = `Hi ${data.firstname} Thank you for opening an application with Hilton Parker Services. Please check your email for further instructions`
+                    sms.sendsms(recipient, message)
                     mailers.Invitation(data, startdate, enddate)
                     res.render('./user/success')
                 })

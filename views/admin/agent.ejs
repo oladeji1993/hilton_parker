@@ -100,11 +100,73 @@
 
                 <div class="card-single">
                         <div>
-                            <h1>10</h1>
-                            <div><span>Failed verification</span></div>
+                            <!-- <h1>10</h1>
+                            <div><span>Failed verification</span></div> -->
                         </div>
                         <div>
                         </div>     
+                </div>
+            </div>
+
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>ALL APPLICANTS</h3>
+                            <form action="/admin/search?table=agent" method="POST">
+                                <input type="text" name="term" placeholder="Search by Email" style="padding: 3px; border: coral; border-radius: 2px;">
+                                <button type="submit"> submit</button>
+                            </form>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                          <td>Name</td>
+                                          <td>Phone number</td>  
+                                          <td>Status</td>    
+                                        </tr>
+                                    </thead>
+                                    <%
+                                    if(userList.length != 0){
+                                        var i=1;
+                                        userList.forEach(function(data){
+                                    %>
+                                    <tbody>
+                                        <tr>
+                                            <td><%=data.firstname %> <%= data.lastname %></td>
+                                            <td><%=data.phonenumber %></td>
+                                            <td>
+                                                <style>
+                                                    .new{
+                                                        background-color: red; 
+                                                    }                                                   
+                                                    .completeregistration{
+                                                        background-color: blue;
+                                                    }
+                                                    .paid{
+                                                        background-color: yellow;
+                                                    }
+                                                    .success{
+                                                        background-color: green;
+                                                    }
+                                                </style>
+                                                <span class="status <%=data.status %>"></span>
+                                                <%=data.status %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <%  i++; }) %>
+                                    <% } else{ %>
+                                        <tr>
+                                            <td colspan="10">No Data Found</td>
+                                        </tr>
+                                    <% } %>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
