@@ -2,13 +2,14 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const app = express();
-const sql = require('mysql');
 const pool = require('./config/dbconfig');
 const flash = require('express-flash')
 require('dotenv').config()
 const mailers = require('./services/mailers')
 const passport = require('passport');
-const cookiePasser = require('cookie-parser')
+const cookiePasser = require('cookie-parser');
+const sms = require('./services/sms')
+
 
 app.use(session({ secret: process.env.TOKEN_SECRET }));
 app.use(cookiePasser(process.env.TOKEN_SECRET));
@@ -148,5 +149,6 @@ app.use('/agent_forgotpass', reset_password)
 
 
 app.listen(3000, function(){
+    sms()
     console.log('app running on port 3000')
 })

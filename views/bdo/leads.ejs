@@ -52,7 +52,7 @@
             <div class="user-wrapper">
                 <small>Welcome</small>
                 <div>
-                    <small>Collins</small>
+                    <!-- <small>Collins</small> -->
                 </div>
             </div>
         </header>
@@ -72,17 +72,17 @@
                         
                         <tr style="color:#fff;">
                             <th>Name</th>
-                            <th class="col-md-2">Email</th>
-                            <th class="col-md-2">Phone Number</th>
-                            <th class="col-md-2">Status</th>
-                            <th class="col-md-2">No of leads</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Status</th>
+                            <th>No of leads</th>
                         </tr>
                     </thead>
 
                     <%
-                    if(agents.length != 0){
+                    if(leads.length != 0){
                         var i=1;
-                        agents.forEach(function(data){
+                        leads.forEach(function(data){
                     %>
                     <tbody>
                         <tr class="fulldetails">
@@ -90,7 +90,7 @@
                             <td class="highlight"><%=data.email %></td>
                             <td><%=data.phonenumber %></td>
                             <td><%=data.status %></td>
-                            <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.leads %></a></td>
+                            <!-- <td><a href="/admin/clientdetails/<%=data.id %>"><%=data.regdate %></a></td> -->
           
                         </tr>
                     </tbody>

@@ -9,6 +9,9 @@ const mailers = require("../services/mailers");
 const multer = require('multer');
 var path = require('path')
 const LocalStrategy = require('passport-local').Strategy;
+const extracts = require('../config/extracts')
+const sms = require('../services/sms')
+
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -378,8 +381,10 @@ function user() {
                 WHERE email = "${req.body.email}"
                 `
                 const data = req.body
+                const schedule = extracts()
                 con.query(sql, params, (err, result) => {
-                    mailers.Invitation(data)
+                    sms()
+                    mailers.Invitation(data, startdate= schedule.appointmentstart, enddate = schedule.appointmentEnd)
                     res.render('./user/success')
                 })
                 
