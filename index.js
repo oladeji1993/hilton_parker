@@ -8,8 +8,8 @@ require('dotenv').config()
 const mailers = require('./services/mailers')
 const passport = require('passport');
 const cookiePasser = require('cookie-parser');
-const extracts = require('./config/extracts')
-const message = require('./services/api')
+const sms = require('./services/sms')
+
 
 app.use(session({ secret: process.env.TOKEN_SECRET }));
 app.use(cookiePasser(process.env.TOKEN_SECRET));
@@ -149,7 +149,6 @@ app.use('/agent_forgotpass', reset_password)
 
 
 app.listen(3000, function(){
-    message
-    console.log(extracts())
+    sms()
     console.log('app running on port 3000')
 })

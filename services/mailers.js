@@ -488,7 +488,7 @@ async function applied(params) {
 } 
 
 // CLIENT INVITATION MAILER
-async function Invitation(params) {
+async function Invitation(params, startdate, enddate) {
     let transporter = nodemailer.createTransport(smtpTransport({
         host: "webmail.softnoonng.com",
         tls:{
@@ -624,10 +624,10 @@ async function Invitation(params) {
                             <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi ${params.firstname + ' ' + params.lastname},</p>
                                 <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thank you for opening an application with Hilton Parker Services. Your application has been received, 
-                                To further your admission process, you are hereby invited to our office (1 Rahman Adeboyejo St, Lekki Phase I, Lagos) with your valid credentials for documentation and 
+                                To further your admission process, you are hereby invited to our office between ${startdate} and ${enddate} at (1 Rahman Adeboyejo St, Lekki Phase I, Lagos) with your valid credentials for documentation and 
                                 verification.<br><br>  
-                                DATE: 19th of July 2021.<br>
-                                TIME: 9AM. <br>
+                                .<br>
+                                 <br>
                                  Please come along with your nose mask.<br>
                                  </p>
                                  <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Thanks.</p>
