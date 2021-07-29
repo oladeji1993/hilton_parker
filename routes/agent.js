@@ -88,13 +88,13 @@ function agent() {
     }, (req, res) => {
         const sql1 = 'SELECT * FROM agent WHERE id = ?'
         const sql2 = `
-            SELECT * FROM leads WHERE agent_id = ? AND status = ?
+            SELECT * FROM leads WHERE agent_id  = ?
         `
         pool.getConnection((err, con) => {
             con.query(sql1, req.user.id, (err, ag) => {
                 const agen = ag[0]
                 if(agen){
-                    con.query(sql2, [agen.agent_id, 'new'], (err, results) => {
+                    con.query(sql2, agen.agent_id, (err, results) => {
                         res.render('./agent/clients', {
                             data: results
                         })

@@ -115,6 +115,7 @@ function agentsuserupload() {
     ])
     route.post('/pgd/:id' , pgdfilesupload,(req,res) => {
         const id = req.params.id
+        const feilds = Object.values(req.body)
         const sql = `
             UPDATE leads SET
             course1 = ?,
