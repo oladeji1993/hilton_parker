@@ -507,30 +507,14 @@ function admin() {
             } 
     },  (req, res) => {
         const id = req.params.id
-
-        fs.readdir(directory, (err, files) => {
-            const doc = []
-            files.forEach(file => {
-              doc.push(file)
-            })
-
-            const id = req.params.id
-            const entries = []
-            const counter = id.length
-            for (var i =0; i<doc.length; i++){
-                const j = doc[i].slice(0,counter)
-                if(j == id){
-                    entries.push(doc[i])
-                }
-            }
+        console.log(id)
             pool.getConnection((err, con) =>{
-                console.log(entries)
                 if (err) res.redirect('/')
                     con.query('SELECT * FROM leads WHERE id = ?', id, (err, resp) =>{
                         if(resp.length > 0){
                             res.render('./admin/clientdetails', {
                                 resp : resp[0],
-                                files: entries
+                               
                             })
                         }else{
                             res.render('./admin/clientsdetails', {
@@ -539,8 +523,8 @@ function admin() {
                         }
                     })
             })
-        }
-        )
+        // }
+        // )
 
         
     })
