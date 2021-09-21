@@ -497,6 +497,7 @@ function admin() {
 
 
 
+
     route.get('/clientdetails/:id', (req, res, next,) => {
         if (req.cookies.authenticate){
             req.user = jwt.verify(req.cookies.authenticate, process.env.TOKEN_SECRET)
@@ -507,14 +508,31 @@ function admin() {
             } 
     },  (req, res) => {
         const id = req.params.id
-        console.log(id)
+
+        fs.readdir(directory, (err, files) => {
+            const doc = []
+            files.forEach(file => {
+              console.log(file)  
+              doc.push(file)
+            })
+
+            const id = req.params.id
+            const entries = []
+            const counter = id.length
+            for (var i =0; i<doc.length; i++){
+                const j = doc[i].slice(0,counter)
+                if(j == id){
+                    entries.push(doc[i])
+                }
+            }
             pool.getConnection((err, con) =>{
+                console.log(entries)
                 if (err) res.redirect('/')
                     con.query('SELECT * FROM leads WHERE id = ?', id, (err, resp) =>{
                         if(resp.length > 0){
                             res.render('./admin/clientdetails', {
                                 resp : resp[0],
-                               
+                                files: entries
                             })
                         }else{
                             res.render('./admin/clientsdetails', {
@@ -523,11 +541,13 @@ function admin() {
                         }
                     })
             })
-        // }
-        // )
+        }
+        )
 
         
     })
+
+
 
 
 
