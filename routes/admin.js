@@ -305,7 +305,9 @@ function admin() {
                         userList
                     })
                 }else{
-                    res.render('error')
+                    res.render('./admin/applicants', {
+                        userList
+                    })
                 }
             })
         })
@@ -591,11 +593,7 @@ function admin() {
         })
  
     } )
-
-
-    
        
-        
     return route
 }
 
