@@ -2055,7 +2055,7 @@ async function verified(agent) {
             rejectUnauthorized: false
         },
         port: 465,
-        secure: false,
+        secure: true,
         auth: {
             user: 'support@hiltonparkerng.com', 
             pass: process.env.MAIL_PASSWORD
@@ -2252,8 +2252,8 @@ async function notify(lead, mail) {
         tls:{
             rejectUnauthorized: false
         },
-        port: 587,
-        secure: false,
+        port: 465,
+        secure: true,
         auth: {
             user: 'support@hiltonparkerng.com',
             pass: process.env.MAIL_PASSWORD 
