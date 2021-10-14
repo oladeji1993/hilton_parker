@@ -538,7 +538,9 @@ function admin() {
                             })
                         }else{
                             res.render('./admin/clientsdetails', {
-                                resp
+                                resp,
+                                files: entries
+
                             })
                         }
                     })
